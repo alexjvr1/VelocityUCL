@@ -131,9 +131,9 @@ cutadapt version 3.4
 
 Run the following scripts to generate the submission script
 
-[01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/UKButterflies/blob/master/01a_museum_cutadapt_filtering_trimming.sh)
+[01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/01a_museum_cutadapt_filtering_trimming.sh)
 
-[01a_modern_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01a_modern_cutadapt_filtering_trimming.sh)
+[01a_modern_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/01a_modern_cutadapt_filtering_trimming.sh)
 
 
 ##### Submission script
