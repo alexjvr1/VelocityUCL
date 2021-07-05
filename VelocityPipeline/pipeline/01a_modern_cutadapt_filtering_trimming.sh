@@ -15,7 +15,7 @@
 
 
 
-/panfs/panasas01/bisc/aj18951/bristol-velocity/AJvR_VelocityPipeline/tools/01a_parallel_cutadapt_bluecp3.sh \
+/SAN/ugi/LepGenomics/VelocityPipeline/tools/01a_parallel_cutadapt_bluecp3.sh \
 -i /panfs/panasas01/bisc/aj18951/Pararge_aegeria/PA-01-2016 \
 -o /panfs/panasas01/bisc/aj18951/Pararge_aegeria/PA-01-2016/01a_filtered_reads_modern -n 1 -t 8 -m 8 -ph 33 \
 -fwad1 AGATCGGAAGAGCACACGTCTGAACTCCAGTC -rvad1 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT \
