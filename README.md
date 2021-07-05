@@ -12,7 +12,7 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 
 ### 1. Raw to cleaned and processed data
 
-   1a. [Trim adapter sequence using cutadapt](README.md#1a-demultiplex-and-adapter-trimming)
+   1a. [Trim adapter sequence using cutadapt](https://github.com/alexjvr1/VelocityUCL/tree/main#1a-demultiplex-and-adapter-trimming)
         
    1b. [Concatenate resequenced museum data](README.md#1b-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
         
