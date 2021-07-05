@@ -10,31 +10,37 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 
 ## Software required
 
-Cutadapt
+Cutadapt /share/apps/python/bin/cutadapt or /share/apps/genomics/cutadapt-2.5/bin/cutadapt
 
-python3 
+python3 /share/apps/python/bin/python3
 
-BBtools
+BBtools ? (but for bbmap /share/apps/genomics/bbmap-38.59/bbmap.sh)
 
-BWA
+BWA /share/apps/genomics/bwa-0.7.17/bwa
 
-MapDamage
+MapDamage /share/apps/genomics/mapDamage-2.1.1/bin/mapDamage
 
-ANGSD
+ANGSD 
 
-bcftools
+bcftools /share/apps/genomics/bcftools-1.9/bin/bcftools
 
-vcftools
+vcftools /share/apps/genomics/vcftools-0.1.13/bin/vcftools
 
-samtools
+samtools /share/apps/genomics/samtools-1.9/bin/samtools
 
-bamtools
+bamtools /share/apps/genomics/bamtools-2.5.1/bin/bamtools
 
-R
+R /share/apps/R-4.0.3/bin/R
 
 python
 
-plink2
+plink2 /share/apps/genomics/plink-2.0/bin/plink2
+
+picard /share/apps/genomics/picard-2.20.3/bin/picard.jar (cannot execute binary file)
+
+vcflib /share/apps/genomics/vcflib-1.0.0/bin (this is a directory)
+
+fastQc /share/apps/genomics/FastQC-0.11.8/fastqc
 
 
 ## Pipeline
@@ -160,9 +166,9 @@ cutadapt version 3.4
 
 Run the following scripts to generate the submission script
 
-[01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01a_museum_cutadapt_filtering_trimming.sh)
+[01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/01a_museum_cutadapt_filtering_trimming.sh)
 
-[01a_modern_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01a_modern_cutadapt_filtering_trimming.sh)
+[01a_modern_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/01a_modern_cutadapt_filtering_trimming.sh)
 
 
 ##### Submission script
@@ -194,7 +200,7 @@ Edit this submission script to submit from your home directory:
 
 A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using these scripts: 
 
-[1b_concat_fastq_R1.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01b_concat_fastq_R1.sh) and [1b_concat_fastq_R2.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01b_concat_fastq_R2.sh)
+[1b_concat.fastq.R1.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R1.sh) and [1b_concat.fastq.R2.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R2.sh)
 
 Reseq data are kept in the following folders:
 ```
