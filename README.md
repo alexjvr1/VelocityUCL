@@ -71,6 +71,24 @@ scp -P 2222 *fastq.gz ajansen@localhost:/SAN/ugi/LepGenomics/C3_Aricia_agestis
 This will copy the file data.txt in the user alice’s home directory on their local machine to their home directory on the cluster, via the machine tails.
 ```
 
+### Check that files have transferred properly
+
+We can use md5sum to check if files are the same at origin and destination: 
+```
+#Create md5sum hashes for files at origin
+
+md5sum file1.txt file2.txt file3.txt > hashes
+
+#copy the hashes file to the destination (either cut and paste or cat)
+#check that the hashes are the same
+
+md5sum --check hashes
+file1.txt: OK
+file2.txt: OK
+file3.txt: OK
+
+```
+
 
 
 ## Software required
