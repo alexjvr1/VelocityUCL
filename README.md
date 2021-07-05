@@ -8,6 +8,35 @@ Here I'll curate the variant calling pipeline and analyses undertaken using the 
 
 Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeoflife/darwintreeoflife.data/tree/master/species)
 
+## Software required
+
+Cutadapt
+
+python3 
+
+BBtools
+
+BWA
+
+MapDamage
+
+ANGSD
+
+bcftools
+
+vcftools
+
+samtools
+
+bamtools
+
+R
+
+python
+
+plink2
+
+
 ## Pipeline
 
 ### 1. Raw to cleaned and processed data
