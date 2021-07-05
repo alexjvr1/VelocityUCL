@@ -62,11 +62,11 @@ Once you have set this up, anything you send to local port 2222 will be forwarde
 
 At this point, leave the previous command (ssh -L) running, and open another terminal. You can now scp your data by doing the following:
 
-scp -P 2222 /path/to/file <username>@localhost:~/path/to/destination
+scp -P 2222 /path/to/file <user name>@localhost:~/path/to/destination
 
-e.g.
+e.g. copy to the shared folder
 
-scp -P 2222 /home/alice/data.txt alice@localhost:~/home/alice/data_directory
+scp -P 2222 *fastq.gz ajansen@localhost:/SAN/ugi/LepGenomics/C3_Aricia_agestis
 
 This will copy the file data.txt in the user alice’s home directory on their local machine to their home directory on the cluster, via the machine tails.
 ```
