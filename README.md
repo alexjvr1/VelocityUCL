@@ -38,6 +38,8 @@ plink2 /share/apps/genomics/plink-2.0/bin/plink2
 
 picard /share/apps/genomics/picard-2.20.3/bin/picard.jar (cannot execute binary file)
 
+java /share/apps/java/bin/java
+
 vcflib /share/apps/genomics/vcflib-1.0.0/bin (this is a directory)
 
 fastQc /share/apps/genomics/FastQC-0.11.8/fastqc
