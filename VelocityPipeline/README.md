@@ -1,4 +1,4 @@
-#Pipeline for Velocity project: From raw data to filtered variants. 
+# Pipeline for Velocity project: From raw data to filtered variants. 
 
 Use this pipeline by running scripts in the pipeline/ folder in the numbered order. These scripts generate submission scripts for 
 each step that can be submitted to the server queue (i.e. qsub script.sh). 
