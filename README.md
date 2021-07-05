@@ -74,6 +74,8 @@ This will copy the file data.txt in the user alice’s home directory on their l
 ### Check that files have transferred properly
 
 We can use md5sum to check if files are the same at origin and destination: 
+
+*mac uses md5 instead of md5sum. We can use an alias to use the md5sum commands below: alias md5sum='md5 -r'*
 ```
 #Create md5sum hashes for files at origin
 
