@@ -2,8 +2,10 @@
 ##################################
 # Alexandra Jansen van Rensburg
 # alexjvr@gmail.com
-# Last modified 24/10/2018 14:28
+# Last modified 05/07/2021 14:28
 ##################################
+# v1 - Modified paths to tools scripts
+
 
 # Creates submission script to use cutadapt to remove adapters from demultiplexed Illumina libraries. 
 # Poly-A and -T filters have been removed as we decided that these would be dropped due to mapping quality by bwa mem. 
