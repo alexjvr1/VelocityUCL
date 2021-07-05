@@ -189,6 +189,8 @@ fastQc /share/apps/genomics/FastQC-0.11.8/fastqc
 
 Aphantopus hyperantus (Ringlet) was the first genome available ([NCBI link](https://www.ncbi.nlm.nih.gov/assembly/GCA_902806685.1)), so the pipeline will be set up with this species. 
 
+Aricia agests genome and annotation. 
+
 ## DATA: WGS
 
 Whole genome resequencing data was generated for 38 & 40 modern individuals (sampled 2016-2017 & 2019) from a core and expanding population. Museum data was generated from 48 individuals + resequencing of a subset of individuals to increase read coverage. 
