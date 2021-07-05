@@ -8,7 +8,45 @@ Here I'll curate the variant calling pipeline and analyses undertaken using the 
 
 Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeoflife/darwintreeoflife.data/tree/master/species)
 
+
+## General information for working on the UCL server
+
+See [here](https://hpc.cs.ucl.ac.uk/full-guide/) for a general guide of the CS server
+
+For support email: cluster-support [at] ucl.ac.uk
+
+We're in Biosciences, so we're using the pchuckle node. 
+
+Script examples
+```
+/share/apps/examples
+```
+
+
+Shared storage folder - location of all data and shared scripts
+
+```
+/SAN/ugi/LepGenomics (3Tb)
+
+#If you add any files to this shared folder please make sure you change permissions so that everyone can access them: 
+chmod g+wr filename 
+chmod g+wr folder
+```
+
+We're in Biosciences, so we're using the pchuckle node. 
+
+Copy data to the server
+```
+#1. From your computer
+#Because we're using node forwarding we need to set up 
+
+```
+
+
+
 ## Software required
+
+*Most software can be found in /share/apps OR /share/apps/genomics*
 
 Cutadapt /share/apps/python/bin/cutadapt or /share/apps/genomics/cutadapt-2.5/bin/cutadapt
 
