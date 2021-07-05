@@ -194,7 +194,7 @@ Edit this submission script to submit from your home directory:
 
 A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using these scripts: 
 
-[1b_concat.fastq.R1.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R1.sh) and [1b_concat.fastq.R2.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R2.sh)
+[1b_concat_fastq_R1.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01b_concat_fastq_R1.sh) and [1b_concat_fastq_R2.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01b_concat_fastq_R2.sh)
 
 Reseq data are kept in the following folders:
 ```
