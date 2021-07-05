@@ -44,7 +44,6 @@ chmod g+wr filename
 chmod g+wr folder
 ```
 
-We're in Biosciences, so we're using the pchuckle node. 
 
 Copy data to the server
 ```
