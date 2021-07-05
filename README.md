@@ -15,7 +15,15 @@ See [here](https://hpc.cs.ucl.ac.uk/full-guide/) for a general guide of the CS s
 
 For support email: cluster-support [at] ucl.ac.uk
 
-We're in Biosciences, so we're using the pchuckle node. 
+Login
+```
+#We're biosciences so we're working on the pchuckle node
+#staff=tails
+#students=knuckles
+
+ssh -l username -J username@tails.cs.ucl.ac.uk pchuckle
+
+```
 
 Script examples
 ```
@@ -28,6 +36,9 @@ Shared storage folder - location of all data and shared scripts
 ```
 /SAN/ugi/LepGenomics (3Tb)
 
+#Scripts for Velocity pipeline (you'll be working with the scripts in the pipeline folder)
+/SAN/ugi/LepGenomics/VelocityPipeline
+
 #If you add any files to this shared folder please make sure you change permissions so that everyone can access them: 
 chmod g+wr filename 
 chmod g+wr folder
@@ -38,8 +49,27 @@ We're in Biosciences, so we're using the pchuckle node.
 Copy data to the server
 ```
 #1. From your computer
-#Because we're using node forwarding we need to set up 
+#Port Forwarding with scp (from https://hpc.cs.ucl.ac.uk/ssh-scp/)
 
+If you are trying to copy data to and from the cluster from outside the Computer Science department, it might be necessary to set up a port forward so that you connect to a login node via a jump node.  The command to set this up is
+
+ssh -L 2222:<login node>:22 <username>@<gateway>
+
+For example, if your username was alice and you wanted to connect to the login node called ‘pchuckle’ via the tails gateway server, the command would be:
+
+ssh -L 2222:pchuckle.cs.ucl.ac.uk:22 alice@tails.cs.ucl.ac.uk
+
+Once you have set this up, anything you send to local port 2222 will be forwarded to port 22 on comic via tails (port 22 being the standard port for ssh).
+
+At this point, leave the previous command (ssh -L) running, and open another terminal. You can now scp your data by doing the following:
+
+scp -P 2222 /path/to/file <username>@localhost:~/path/to/destination
+
+e.g.
+
+scp -P 2222 /home/alice/data.txt alice@localhost:~/home/alice/data_directory
+
+This will copy the file data.txt in the user alice’s home directory on their local machine to their home directory on the cluster, via the machine tails.
 ```
 
 
