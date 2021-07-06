@@ -1,6 +1,7 @@
 # e-labbook
 
-## editing scripts to suit UCL server
+## Tuesday 06/07/2021
+### editing scripts to suit UCL server
 Things to change:
 
 - path to wrapper or tools script
@@ -23,3 +24,16 @@ Things to change:
 #### 01c_bbtools_repair_museum_ARRAY.sh and 01d_bbtools_merge_museum_ARRAY.sh
 - same run job in work directory code as before (unsure what to change this to)
 - commented out running java for now '#/share/apps/java/bin/java', not sure if it's the right thing to replace 'module load...' with
+
+#### 02a_MapwithBWAmem.ARRAY.sh
+- commented out running bwa for now '#/share/apps/genomics/bwa-0.7.17/bwa', not sure if it's the right thing to replace 'module load...' with
+
+#### 03a_variant_calling_bluecp.sh and 03a_call_SNVs_bluecp3.sh in wrapper
+- edited paths of module versions to be loaded
+- changed the path of CALLER to UCL server tools
+- commented out path to samtools as not sure if it replaces SAMTOOLS='samtools'
+- edited UCL server options 
+- trying to run in home directory:
+ERROR: You must specify an input directory
+ERROR: You must specify an output directory
+ERROR: You must specify a reference file
