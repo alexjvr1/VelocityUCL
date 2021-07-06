@@ -30,10 +30,24 @@ Things to change:
 
 #### 03a_variant_calling_bluecp.sh and 03a_call_SNVs_bluecp3.sh in wrapper
 - edited paths of module versions to be loaded
-- changed the path of CALLER to UCL server tools
+- changed the path of 'CALLER' to UCL server tools
 - commented out path to samtools as not sure if it replaces SAMTOOLS='samtools'
 - edited UCL server options 
 - trying to run in home directory:
 ERROR: You must specify an input directory
 ERROR: You must specify an output directory
 ERROR: You must specify a reference file
+
+#### 03b_summary_variant_calling.sh and 03b_call_SNVs_summarize_bluecp3.sh
+- edited definitions of modules to be loaded
+- did not add VMEM as no other memory variable was present (maybe it's not needed)
+
+Have now edited all pathways from pipeline that directly lead to tools & wrapper but there are still files in both tools & wrapper because wrapper can lead to tools:
+
+#### 04_fst_scans_etc_SNP_based.sh in wrapper 
+the path to tools script has already been changed
+
+#### popgenstats.pl
+- edited paths to external programs (don't know what estpEM software is or whether its current path is correct)
+- permission denied to run
+
