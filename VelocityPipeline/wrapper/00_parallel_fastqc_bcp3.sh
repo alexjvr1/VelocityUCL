@@ -15,7 +15,7 @@
 #Look into core options
 
 VERSION='1.1-2018.10.06'
-CMD="fastqc"
+CMD="/share/apps/genomics/FastQC-0.11.8/fastqc"
 
 # Default values for optional variables
 EXTRA=''
