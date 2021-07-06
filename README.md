@@ -131,6 +131,8 @@ vcflib /share/apps/genomics/vcflib-1.0.0/bin (this is a directory)
 
 fastQc /share/apps/genomics/FastQC-0.11.8/fastqc
 
+perl /share/apps/perl/bin/perl
+
 
 ## Pipeline
 
