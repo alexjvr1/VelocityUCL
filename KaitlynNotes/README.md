@@ -20,6 +20,6 @@ Things to change:
 #### 01b_modern_trimmomatic_filtering_trimming.sh 
 - cannot find file parallel_trimmomatic_bluecp3.sh which this file should run to
 
-#### 01c_bbtools_repair_museum_ARRAY.sh
+#### 01c_bbtools_repair_museum_ARRAY.sh and 01d_bbtools_merge_museum_ARRAY.sh
 - same run job in work directory code as before (unsure what to change this to)
-- commented out running java for now 
+- commented out running java for now '#/share/apps/java/bin/java', not sure if it's the right thing to replace 'module load...' with
