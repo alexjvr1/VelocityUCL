@@ -9,6 +9,6 @@ Things to change:
 - remove 'module load ..'
 - VMEM added
 
-### 01a_modern_cutadapt_filtering_trimming.sh
+#### 01a_modern_cutadapt_filtering_trimming.sh and 01a_parallel_cutadapt_UCL.sh
 - made relevant changes with no syntax errors (using./) 
 - unsure how to submit script using qsub to check it's correct
