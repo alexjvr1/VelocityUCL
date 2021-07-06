@@ -17,5 +17,9 @@ Things to change:
 - probably need to change cd $PBS_O_WORKDIR but not sure what to
 - is /newhome etc correct?
 
-#### 01b_modern_trimmomatic_filtering_trimming.sh and 
+#### 01b_modern_trimmomatic_filtering_trimming.sh 
+- cannot find file parallel_trimmomatic_bluecp3.sh which this file should run to
 
+#### 01c_bbtools_repair_museum_ARRAY.sh
+- same run job in work directory code as before (unsure what to change this to)
+- commented out running java for now 
