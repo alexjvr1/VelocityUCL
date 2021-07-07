@@ -51,7 +51,7 @@ quota -s
 
 Copy data to the server from computer
 
-*see TransferData.sh for transfer from UoB to UCL server*
+*see TransferData.md for transfer from UoB to UCL server*
 ```
 #1. From your computer
 #Port Forwarding with scp (from https://hpc.cs.ucl.ac.uk/ssh-scp/)
