@@ -52,9 +52,10 @@ the path to tools script has already been changed
 - permission denied to run
 
 ## Wednesday 07/07/2021
--Edited 01a_modern_cutadapt_filtering_trimming.sh by comparing to museum script, no errors using ./ in the home directory but cannot submit yet as we need to upload data 
--Edits made to 01b_concat_fastq_R1.sh include:
-    - changed from running to the work directory of UoB to running to the home directory of UCL server pchuckle
+- Edited 01a_modern_cutadapt_filtering_trimming.sh by comparing to museum script, no errors using ./ in the home directory but cannot submit yet as we need to upload data 
+- Edits made to 01b_concat_fastq_R1.sh include:
+   
+   - changed from running to the work directory of UoB to running to the home directory of UCL server pchuckle
     - edited the scheduler directives to $ instead of PBS
     - removed nodes scheduler directive and added -l vmem and -S /bin/bash 
     - changed from -j oe to -j y in scheduler directives
