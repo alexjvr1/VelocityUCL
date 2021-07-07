@@ -51,3 +51,13 @@ the path to tools script has already been changed
 - edited paths to external programs (don't know what estpEM software is or whether its current path is correct)
 - permission denied to run
 
+## Wednesday 07/07/2021
+-Edited 01a_modern_cutadapt_filtering_trimming.sh by comparing to museum script, no errors using ./ in the home directory but cannot submit yet as we need to upload data 
+-Edits made to 01b_concat_fastq_R1.sh include:
+    - changed from running to the work directory of UoB to running to the home directory of UCL server pchuckle
+    - edited the scheduler directives to $ instead of PBS
+    - removed nodes scheduler directive and added -l vmem and -S /bin/bash 
+    - changed from -j oe to -j y in scheduler directives
+    - changed the definition of SPECIESDIR to the current pathway to the E3_Aphantopus_hyperantus directory
+    - changed the array job submissions to {SGE_TASK_ID}, current form is sed "${SGE_TASK_ID}q;d" but may need to change to sed -n ${SGE_TASK_ID}'{p;q}' input.data form
+    -NOTE: when running using ./ I get ther error cat: //SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/01a_museum_cutadapt_reads/: No such file or directory , so maybe it's because the data hasn't been uploaded yet or is it because 01a_museum_cutadapt_reads is in a different folder
