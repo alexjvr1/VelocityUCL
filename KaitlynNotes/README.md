@@ -113,3 +113,5 @@ the path to tools script has already been changed
    - load bwa module 
    - change array jobs to SGE_TASK_ID
    - NOTE: error 'demultiplexed/': No such file or directory
+
+- [Created a pipeline script for museum2 samples to use cutadapt](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/01a_museum2_cutadapt_filtering_trimming.sh) 
