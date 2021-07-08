@@ -67,3 +67,11 @@ the path to tools script has already been changed
   
   - same as above for 01b_concat_fastq_R1.sh
   - NOTE: syntax error looking for missing " , but it is written in the same way as R1 which doesn't have this syntax error ??
+
+### Thursday 08/07/2021
+- Edits made to 01b_concat_fastq_R1.sh include:
+   
+   - change vmem to h_vmem for compatibility to UCL server
+   - changed the pathway for 01a_museum_catadapt_reads to local/... but error of No such file or directory still for 01a_museum2_catadapt_reads
+   - changed walltime to h_rt in the scheduler descriptive
+   - qsub the job after deleting path for 01a_museum2_catadapt_reads which does create 33 sample files but no log files nano
