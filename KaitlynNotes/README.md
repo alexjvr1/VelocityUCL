@@ -95,5 +95,10 @@ the path to tools script has already been changed
    - changed path to load java
    - NOTE: errors of invalid maximum heap size and could not create the Java Virtual Machine
    - changed maximum heap size using export _JAVA_OPTIONS="-Xmx2g but still the same error occurs of invalid max heap size
-   - 
+
+- Edits made to 01d_bbtools_merge_museum_ARRAY.sh include:
+
+   - same as above for 01c_bbtools_repair_museum_ARRAY.sh for all the scheduler descriptives
+   - edited array jobs to SGE_TASK_ID
+   - edited path to bbmerge
    - 
