@@ -101,4 +101,4 @@ the path to tools script has already been changed
    - same as above for 01c_bbtools_repair_museum_ARRAY.sh for all the scheduler descriptives
    - edited array jobs to SGE_TASK_ID
    - edited path to bbmerge
-   - 
+   - NOTE: can't read R1.museum.names.repaired: No such file or directory
