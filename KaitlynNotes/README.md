@@ -94,3 +94,6 @@ the path to tools script has already been changed
    - define path to bbrepair through bbmap
    - changed path to load java
    - NOTE: errors of invalid maximum heap size and could not create the Java Virtual Machine
+   - changed maximum heap size using export _JAVA_OPTIONS="-Xmx2g but still the same error occurs of invalid max heap size
+   - 
+   - 
