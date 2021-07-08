@@ -91,3 +91,5 @@ the path to tools script has already been changed
    - change mem to tmem, oe to y and walltime to h_rt
    - add /bin/bash descriptive
    - changed work directory to SGE_O_WORKDIR
+   - define path to bbrepair through bbmap
+   - changed path to load java but error occurs when running in home directory using./ that that module is unknown
