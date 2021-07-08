@@ -1,4 +1,3 @@
-
 #!/bin/bash
 ##################################
 # Kaitlyn Louth supervised by Alexandra Jansen van Rensburg
