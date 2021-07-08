@@ -64,4 +64,6 @@ the path to tools script has already been changed
     -NOTE: when running using ./ I get the error cat: //SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/01a_museum_cutadapt_reads/: No such file or directory , so maybe it's because the data hasn't been uploaded yet or is it because 01a_museum_cutadapt_reads is in a different folder
 
 - Edits made to 01b_concat_fastq_R2.sh include:
-- 
+  
+  - same as above for 01b_concat_fastq_R1.sh
+  - NOTE: syntax error looking for missing " , but it is written in the same way as R1 which doesn't have this syntax error ??
