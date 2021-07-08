@@ -115,3 +115,5 @@ the path to tools script has already been changed
    - NOTE: error 'demultiplexed/': No such file or directory
 
 - [Created a pipeline script for museum2 samples to use cutadapt](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/01a_museum2_cutadapt_filtering_trimming.sh) 
+- [Created a pipeline script for modern_exp to use cutadapt](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/01a_modern_exp_cutadapt_filtering_trimming.sh)
+- 
