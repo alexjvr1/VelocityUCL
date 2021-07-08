@@ -75,9 +75,19 @@ the path to tools script has already been changed
    - changed the pathway for 01a_museum_catadapt_reads to local/... but error of No such file or directory still for 01a_museum2_catadapt_reads
    - changed walltime to h_rt in the scheduler descriptive
    - qsub the job after deleting path for 01a_museum2_catadapt_reads which does create 33 sample files but no log files 
+   - changed work directory to SGE_O_WORKDIR
 
 - Edits made to 01b_concat_fastq_R2.sh include:
 
    - changed walltime to h_rt in scheduler descriptive
    - changed pathway for 01a_museum_catadapt_reads and 01a_museum2_catadapt_read to local/...
    - NOTE: still the same syntax error but cannot identify where as it is the exact same as 01b_concat_fastq_R1.sh but with 1 changed to 2
+   - changed work directory to SGE_O_WORKDIR
+
+- Edits made to 01c_bbtools_repair_museum_ARRAY.sh include:
+
+   - changed scheduler descriptives from #PBS to #$
+   - deleting nodes descriptive and added h_vmem descriptive
+   - change mem to tmem, oe to y and walltime to h_rt
+   - add /bin/bash descriptive
+   - changed work directory to SGE_O_WORKDIR
