@@ -10,4 +10,4 @@
 /SAN/ugi/LepGenomics/VelocityPipeline/wrapper/00_parallel_fastqc_UCL.sh
 -i 00_raw_reads_museum2/
 -o /00_raw_reads_museum2/
--n 1 -t 8 -m 4 -v 4;
+-t 8 -m 4 -v 4;
