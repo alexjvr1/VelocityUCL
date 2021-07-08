@@ -102,3 +102,14 @@ the path to tools script has already been changed
    - edited array jobs to SGE_TASK_ID
    - edited path to bbmerge
    - NOTE: can't read R1.museum.names.repaired: No such file or directory
+
+- Edits made to 02a_MapwithBWAmem.ARRAY.sh include:
+
+   - change from #PBS to #$
+   - delete nodes descriptive and add h_vmem descriptive
+   - change mem, walltime and oe to tmem, h_rt and y
+   - add -S /bin/bash descriptive
+   - change working directory
+   - load bwa module 
+   - change array jobs to SGE_TASK_ID
+   - NOTE: error 'demultiplexed/': No such file or directory
