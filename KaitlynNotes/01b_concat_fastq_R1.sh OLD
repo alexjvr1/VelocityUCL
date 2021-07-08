@@ -1,0 +1,22 @@
+
+#create files with sample names listed for the 33 samples
+ls ../01a_museum2_cutadapt_reads/*R1*gz > samplenames.museum2.R1
+ls ../01a_museum2_cutadapt_reads/*R2*gz > samplenames.museum2.R2
+ls ../01a_museum_cutadapt_reads/*R1*gz >> samplenames.museum1.R1
+ls ../01a_museum_cutadapt_reads/*R2*gz >> samplenames.museum1.R2
+#remove all the extra sample names from the last two files. Make sure the sample names are i$
+#remove path before sample names
+
+NAMEMUS1R1=$(sed "${SGE_TASK_ID}q;d" samplenames.museum1.R1)
+#NAMEMUS1R2=$(sed "${SGE_TASK_ID}q;d" samplenames.museum1.R2)
+NAMEMUS2R1=$(sed "${SGE_TASK_ID}q;d" samplenames.museum2.R1)
+#NAMEMUS2R2=$(sed "${SGE_TASK_ID}q;d" samplenames.museum2.R2)
+
+
+##Concat R1 fastq files
+
+echo "[concatenating] ${NAMEMUS1R1} and ${NAMEMUS2R1}"
+printf "\n"
+echo "time cat local/01a_museum_cutadapt_reads/${NAMEMUS1R1} local/01a_museum2_cutadapt_read$
+time cat local/01a_museum_cutadapt_reads/${NAMEMUS1R1} local/01a_museum2_cutadapt_reads/${NA$
+
