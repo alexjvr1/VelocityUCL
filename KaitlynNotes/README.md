@@ -118,3 +118,9 @@ the path to tools script has already been changed
 - [Created a pipeline script for modern_exp to use cutadapt](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/01a_modern_exp_cutadapt_filtering_trimming.sh)
 - [Created a pipeline script for museum 2 sample to use fastqc](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/00_fastqc_raw_museum2.sh)
 - Successfully ran concat script (I think....!)
+
+### Friday 09/07/2021
+- Edits made to 03a_variant_calling_bluecp.sh include:
+
+   - renaming file to 03a_variant_calling_UCL.sh
+   - 
