@@ -122,5 +122,23 @@ the path to tools script has already been changed
 ### Friday 09/07/2021
 - Edits made to 03a_variant_calling_bluecp.sh include:
 
-   - renaming file to 03a_variant_calling_UCL.sh
-   - 
+   - renamed file to 03a_variant_calling_UCL.sh
+   - edited path to samtools
+   - changed definition of working directory
+   - NOTE: will need to change input and output files 
+
+- Changed all thw permissions in VelocityPipeline folders so that everyone can execute all files
+- Edits made to 03a_call_SNVs_bluecp.sh include:
+
+   - renamed file to 03a_call_SNVs_UCL.sh
+   - edited UCL server options such that
+
+echo '#$ -S /bin/bash' >> $SMSJOB
+echo '#$ -N '$JOBNAME'' >> $SMSJOB
+echo '#$ -l tmem='$MEM'G' >> $SMSJOB
+echo '#$ -l h_vmem='$VMEM'G' >> $SMSJOB
+echo '#$ -l h_rt='$HRS'1:00:00' >> $SMSJOB
+echo '#$ -j y' >> $SMSJOB #concatenates error and output files (with prefix job1)
+echo '#$ -t 1-'$N >> $SMSJOB
+echo '#$ -o '$LOG >> $SMSJOB
+
