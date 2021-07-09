@@ -133,10 +133,8 @@ the path to tools script has already been changed
    - renamed file to 03a_call_SNVs_UCL.sh
    - edited UCL server options such that
 
-echo '#$ -S /bin/bash' >> $SMSJOB
-
-echo '#$ -N '$JOBNAME'' >> $SMSJOB
-
+echo '#$ -S /bin/bash' >> $SMSJOB\
+echo '#$ -N '$JOBNAME'' >> $SMSJOB\
 echo '#$ -l tmem='$MEM'G' >> $SMSJOB
 
 echo '#$ -l h_vmem='$VMEM'G' >> $SMSJOB
