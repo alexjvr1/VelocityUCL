@@ -134,11 +134,18 @@ the path to tools script has already been changed
    - edited UCL server options such that
 
 echo '#$ -S /bin/bash' >> $SMSJOB
+
 echo '#$ -N '$JOBNAME'' >> $SMSJOB
+
 echo '#$ -l tmem='$MEM'G' >> $SMSJOB
+
 echo '#$ -l h_vmem='$VMEM'G' >> $SMSJOB
+
 echo '#$ -l h_rt='$HRS'1:00:00' >> $SMSJOB
+
 echo '#$ -j y' >> $SMSJOB #concatenates error and output files (with prefix job1)
+
 echo '#$ -t 1-'$N >> $SMSJOB
+
 echo '#$ -o '$LOG >> $SMSJOB
 
