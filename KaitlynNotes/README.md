@@ -142,3 +142,9 @@ echo '#$ -j y' >> $SMSJOB #concatenates error and output files (with prefix job1
 echo '#$ -t 1-'$N >> $SMSJOB\
 echo '#$ -o '$LOG >> $SMSJOB
 
+- Edits made to 01c_bbtools_repair_museum_ARRAY.sh include:
+
+   - added a PATH variable for a newly created folder containing the concatenated files 
+   - changed the infiles to include $PATH
+   - created a new folder in my local directory called 01c_musPERepaired which will be where the outfiles of 01c_bbtools_repair_museum_ARRAY.sh will go
+   - 
