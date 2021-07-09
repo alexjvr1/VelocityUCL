@@ -135,8 +135,7 @@ the path to tools script has already been changed
 
 echo '#$ -S /bin/bash' >> $SMSJOB\
 echo '#$ -N '$JOBNAME'' >> $SMSJOB\
-echo '#$ -l tmem='$MEM'G' >> $SMSJOB
-
+echo '#$ -l tmem='$MEM'G' >> $SMSJOB\
 echo '#$ -l h_vmem='$VMEM'G' >> $SMSJOB
 
 echo '#$ -l h_rt='$HRS'1:00:00' >> $SMSJOB
