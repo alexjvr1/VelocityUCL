@@ -154,5 +154,13 @@ echo '#$ -o '$LOG >> $SMSJOB
 - Edits made to 01c_bbtools_repair_museum_ARRAY.sh include:
 
    - moved R2 concat files to 01a,mus.concat.cutadapt folder
-   - added code to create files in the home directory to repair
+   - coded for the creation of sample files
+   - NOTE: now successfully running
+
+- Edits made to 01d_bbtools_merge_museum_ARRAY.sh include:
+
+   - added variables for the infile and outfile paths
+   - created a new folder in local for the outfile
+   - coded for the creation of sample names files
+   - edited the PREFIX for the outfiles
    - 
