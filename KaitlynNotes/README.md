@@ -172,6 +172,8 @@ echo '#$ -o '$LOG >> $SMSJOB
    - hashed out NAME2 and deleted R2 paths 
    - NOTE: takes a long time to run. UPDATE: finished running with a total size of 7.3G
 
-- Running all scripts through from the start and transferring files across to shared folder:
+- Running scripts through from the start and transferring files across to shared folder:
 
    - Succesfully ran 00_fastqc_raw_museum.sh and 00_fastqc_raw_museum2.sh
+   - succesfully ran 01a_museum_cutadapt_filtering_trimming.sh and 01a_museum2_cutadapt_filtering_trimming.sh
+   - 
