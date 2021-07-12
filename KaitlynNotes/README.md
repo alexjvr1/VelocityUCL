@@ -176,4 +176,5 @@ echo '#$ -o '$LOG >> $SMSJOB
 
    - Succesfully ran 00_fastqc_raw_museum.sh and 00_fastqc_raw_museum2.sh
    - succesfully ran 01a_museum_cutadapt_filtering_trimming.sh and 01a_museum2_cutadapt_filtering_trimming.sh
+   - successfully ran 01b_concat_fastq_R1.sh and 01b_concat_fastq_R2.sh but manually move both sets of outfiles into a folder called 01a.mus.concat.cutadapt
    - 
