@@ -163,4 +163,10 @@ echo '#$ -o '$LOG >> $SMSJOB
    - created a new folder in local for the outfile
    - coded for the creation of sample names files
    - edited the PREFIX for the outfiles
-   - created a new folder in local called 02a_mapped_museum
+  
+  - Edits made to 02a_MapwithBWAmem.ARRAY_museum.sh
+
+   - changed job name and walltime in scheduler descriptive
+   - edited paths to the reference, and input and output directories
+   - coded for the creation of sample file names to map
+   - hashed out NAME2 and deleted R2 paths 
