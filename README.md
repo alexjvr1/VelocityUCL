@@ -103,43 +103,28 @@ file3.txt: OK
 
 *Most software can be found in /share/apps OR /share/apps/genomics*
 
-Cutadapt /share/apps/python/bin/cutadapt or /share/apps/genomics/cutadapt-2.5/bin/cutadapt
+|Software|version|path|
+|--------|--------|--------|
+|ANGSD||| 
+|bamtools|2.5.1| /share/apps/genomics/bamtools-2.5.1/bin/bamtools|
+|BBmap|38.59| /share/apps/genomics/bbmap-38.59/bbmap.sh|
+|bcftools|1.9| /share/apps/genomics/bcftools-1.9/bin/bcftools|
+|BWA|0.7.17| /share/apps/genomics/bwa-0.7.17/bwa|
+|Cutadapt | |/share/apps/python/bin/cutadapt| 
+|Cutadapt|2.5|/share/apps/genomics/cutadapt-2.5/bin/cutadapt|
+|fastQC|0.11.8| /share/apps/genomics/FastQC-0.11.8/fastqc|
+|GenomeAnalysisTK.jar|3.7| /share/apps/genomics/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar|
+|java|| /share/apps/java/bin/java|
+|MapDamage|2.1.1| /share/apps/genomics/mapDamage-2.1.1/bin/mapDamage|
+|perl ||/share/apps/perl/bin/perl|
+|picard |2.20.3|/share/apps/genomics/picard-2.20.3/bin/picard.jar|
+|plink2 |v.2|/share/apps/genomics/plink-2.0/bin/plink2|
+|python3 |3|/share/apps/python/bin/python3|
+|R|4.0.3| /share/apps/R-4.0.3/bin/R|
+|samtools|1.9| /share/apps/genomics/samtools-1.9/bin/samtools|
+|vcflib|1.0.0| /share/apps/genomics/vcflib-1.0.0/bin|
+|vcftools|0.1.13| /share/apps/genomics/vcftools-0.1.13/bin/vcftools|
 
-python3 /share/apps/python/bin/python3
-
-BBtools ? (but for bbmap /share/apps/genomics/bbmap-38.59/bbmap.sh)
-
-BWA /share/apps/genomics/bwa-0.7.17/bwa
-
-MapDamage /share/apps/genomics/mapDamage-2.1.1/bin/mapDamage
-
-ANGSD 
-
-bcftools /share/apps/genomics/bcftools-1.9/bin/bcftools
-
-vcftools /share/apps/genomics/vcftools-0.1.13/bin/vcftools
-
-samtools /share/apps/genomics/samtools-1.9/bin/samtools
-
-bamtools /share/apps/genomics/bamtools-2.5.1/bin/bamtools
-
-R /share/apps/R-4.0.3/bin/R
-
-python
-
-plink2 /share/apps/genomics/plink-2.0/bin/plink2
-
-picard /share/apps/genomics/picard-2.20.3/bin/picard.jar (cannot execute binary file)
-
-java /share/apps/java/bin/java
-
-GenomeAnalysisTK.jar: /share/apps/genomics/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar
-
-vcflib /share/apps/genomics/vcflib-1.0.0/bin (this is a directory)
-
-fastQc /share/apps/genomics/FastQC-0.11.8/fastqc
-
-perl /share/apps/perl/bin/perl
 
 
 ## Pipeline
