@@ -171,3 +171,7 @@ echo '#$ -o '$LOG >> $SMSJOB
    - coded for the creation of sample file names to map
    - hashed out NAME2 and deleted R2 paths 
    - NOTE: takes a long time to run. UPDATE: finished running with a total size of 7.3G
+
+- Running all scripts through from the start and transferring files across to shared folder:
+
+   - Succesfully ran 00_fastqc_raw_museum.sh and 00_fastqc_raw_museum2.sh
