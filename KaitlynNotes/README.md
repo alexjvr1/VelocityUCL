@@ -148,3 +148,9 @@ echo '#$ -o '$LOG >> $SMSJOB
    - changed the infiles to include $PATH
    - created a new folder in my local directory called 01c_musPERepaired which will be where the outfiles of 01c_bbtools_repair_museum_ARRAY.sh will go
    - NOTE: outfile appears empty after 'qsub'bing the script 
+
+### Monday 12/07/2021
+
+- Edits made to 01c_bbtools_repair_museum_ARRAY.sh include:
+
+   - moved R2 concat files to 01a,mus.concat.cutadapt folder
