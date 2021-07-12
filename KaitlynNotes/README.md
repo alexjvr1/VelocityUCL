@@ -170,3 +170,4 @@ echo '#$ -o '$LOG >> $SMSJOB
    - edited paths to the reference, and input and output directories
    - coded for the creation of sample file names to map
    - hashed out NAME2 and deleted R2 paths 
+   - NOTE: takes a long time to run 
