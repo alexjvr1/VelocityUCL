@@ -179,3 +179,5 @@ echo '#$ -o '$LOG >> $SMSJOB
    - successfully ran 01b_concat_fastq_R1.sh and 01b_concat_fastq_R2.sh but manually move both sets of outfiles into a folder called 01a.mus.concat.cutadapt
    - 01c_bbtools_repair_museum_ARRAY.sh does not seem to be running after submitting the job; UPDATE: it simply takes quite a while to run
    - succesfully ran 01c_bbtools_repair_museum_ARRAY.sh
+   - succesffuly ran 01d_bbtools_merge_museum_ARRAY.sh
+   - 
