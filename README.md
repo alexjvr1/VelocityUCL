@@ -126,6 +126,36 @@ file3.txt: OK
 |vcftools|0.1.13| /share/apps/genomics/vcftools-0.1.13/bin/vcftools|
 
 
+### Note on renaming files
+
+Liverpool raw data is named with digits and a dash before the sample names. e.g. 33-AH-01-1900-47_191121_L001_R2.fastq.gz
+The easiest way to rename them is with the Perl rename (note that the native linux rename works the same as mv and is not so useful in this case). 
+Create a copy of the [prename.pl](https://gist.github.com/rocarvaj/6abf7dd1e083963a596430ac43f88e34) script in a folder in your home directory called "scripts". 
+```
+cd
+mkdir scripts
+nano prename.pl
+#paste a copy of the script found at the link above
+```
+
+Run the script using perl installed in the shared server folder: 
+```
+/share/apps/perl-5.30.0/bin/perl5.30.0 ../../prename.pl --help
+```
+
+
+This works with the sed syntax. e.g. this will remove numbers plus dash from the start of the file names: 
+
+Replace USERNAME with your username
+```
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/^[0-9]+-//' *
+
+#e.g. This will delete all leading numbers and the dash:
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/ajansen/prename.pl 's/^[0-9]+-//' *
+```
+
+
+
 
 ## Pipeline
 
@@ -190,17 +220,7 @@ Aricia agests genome and annotation.
 
 Whole genome resequencing data was generated for 38 & 40 modern individuals (sampled 2016-2017 & 2019) from a core and expanding population. Museum data was generated from 48 individuals + resequencing of a subset of individuals to increase read coverage. 
 
-### Note on renaming files
 
-Liverpool raw data is named with digits and a dash before the sample names. e.g. 33-AH-01-1900-47_191121_L001_R2.fastq.gz
-The easiest way to rename them is with the Perl rename (note that the native linux rename works the same as mv and is not so useful in this case). 
-Install the perl script (a version curated [here](https://github.com/subogero/rename)). On bluecp3 I've installed this in my software folder: /newhome/aj18951/software/rename-master/rename.
-
-This works with the sed syntax. e.g. this will remove numbers plus dash from the start of the file names: 
-
-```
-../../software/rename-master/rename 's/^[0-9]+-//' *
-```
 
 ## Pipeline for Velocity project from raw data to mapped reads:
 
