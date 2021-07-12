@@ -163,4 +163,4 @@ echo '#$ -o '$LOG >> $SMSJOB
    - created a new folder in local for the outfile
    - coded for the creation of sample names files
    - edited the PREFIX for the outfiles
-   - 
+   - created a new folder in local called 02a_mapped_museum
