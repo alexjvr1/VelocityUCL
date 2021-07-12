@@ -133,6 +133,8 @@ picard /share/apps/genomics/picard-2.20.3/bin/picard.jar (cannot execute binary 
 
 java /share/apps/java/bin/java
 
+GenomeAnalysisTK.jar: /share/apps/genomics/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar
+
 vcflib /share/apps/genomics/vcflib-1.0.0/bin (this is a directory)
 
 fastQc /share/apps/genomics/FastQC-0.11.8/fastqc
