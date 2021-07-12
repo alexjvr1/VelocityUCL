@@ -164,7 +164,7 @@ echo '#$ -o '$LOG >> $SMSJOB
    - coded for the creation of sample names files
    - edited the PREFIX for the outfiles
   
-  - Edits made to 02a_MapwithBWAmem.ARRAY_museum.sh
+- Edits made to 02a_MapwithBWAmem.ARRAY_museum.sh
 
    - changed job name and walltime in scheduler descriptive
    - edited paths to the reference, and input and output directories
