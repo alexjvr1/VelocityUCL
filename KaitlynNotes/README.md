@@ -186,3 +186,6 @@ echo '#$ -o '$LOG >> $SMSJOB
 - Running all scripts on the full museum dataset:
 
    - Successfully ran 00_fastqc_raw_museum.sh and 00_fastqc_raw_museum2.sh
+   - created a folder in the shared directory called 00_raw_reads_museum_FINAL
+   - successfully ran 01b_concat_fast1_R1.sh and 01b_concat_fastq.R2.sh on the files which were sequences twice
+   - moved all the files that were sequenced once to 00_raw_reads_museum_FINAL
