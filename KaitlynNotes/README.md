@@ -181,3 +181,8 @@ echo '#$ -o '$LOG >> $SMSJOB
    - succesfully ran 01c_bbtools_repair_museum_ARRAY.sh
    - succesfully ran 01d_bbtools_merge_museum_ARRAY.sh
    - succesfully ran 02a_MapwithBWAmem.ARRAY_museum.sh 
+
+*** Tuesday 13/07/2021
+- Running all scripts on the full museum dataset:
+
+   - Successfully ran 00_fastqc_raw_museum.sh and 00_fastqc_raw_museum2.sh
