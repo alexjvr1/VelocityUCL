@@ -179,17 +179,17 @@ for i in $(cat museum1.toconcat); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_
 
 ##Move all the samples that were sequenced once to the 00_raw_reads_museum_concat
 
-ls 00_raw_reads_museum/*R1*gz | awk -F "/" '{print $1}' | awk -F "_" '{print $1}' > museum1.names
-ls 00_raw_reads_museum_concat/*R1*gz | awk -F "/" '{print $1}' |
+ls 00_raw_reads_museum/*R1*gz | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > museum1.names
+ls 00_raw_reads_museum/ALLSAMPLES/*R1*gz | awk -F "/" '{print $NF}' |
 awk -F "_" '{print $1}' > museumconcat.names
 
 
-diff museum1.names museumconcat.names | grep '^<' | sed 's/^<\ //'> museum1.tomove
+diff museum1.names museumconcat.names | grep 'AAg' | sed 's/^>\ //'> museum1.tomove
 
 wc -l museum1.tomove > count
 echo "number of samples to move:" $count
 
-for i in $(cat museum1.tomove); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_raw_reads_museum_concat; done
+for i in $(cat museum1.tomove); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_raw_reads_museum_FINAL; done
 
 
 ```
