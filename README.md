@@ -155,6 +155,46 @@ Replace USERNAME with your username
 ```
 
 
+## Concatenate samples before starting pipeline
+
+1. Create a directory for the final raw museum data. 
+
+2. Concat all 33 samples that were sequenced twice
+
+3. Move all samples that were sequenced only once from museum1 to the 00_raw_reads_FINAL
+```
+##
+mkdir 00_raw_reads_museum_FINAL/
+
+##list all samples that were sequenced twice
+
+ls 00_raw_reads_museum/ALLSAMPLES/*R1*gz |awk -F "/" '{print $NF}'|awk -F "_" '{print $1}' > museum1.names
+ls 00_raw_reads_museum2/ALLSAMPLES/*R1*gz |awk -F "/" '{print $NF}' |awk -F "_" '{print $1}' > museum2.names
+
+cat museum1.names museum2.names |sort |uniq --repeated > museum1.toconcat
+
+for i in $(cat museum1.toconcat); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_raw_reads_museum/; done
+
+
+
+##Move all the samples that were sequenced once to the 00_raw_reads_museum_concat
+
+ls 00_raw_reads_museum/*R1*gz | awk -F "/" '{print $1}' | awk -F "_" '{print $1}' > museum1.names
+ls 00_raw_reads_museum_concat/*R1*gz | awk -F "/" '{print $1}' |
+awk -F "_" '{print $1}' > museumconcat.names
+
+
+diff museum1.names museumconcat.names | grep '^<' | sed 's/^<\ //'> museum1.tomove
+
+wc -l museum1.tomove > count
+echo "number of samples to move:" $count
+
+for i in $(cat museum1.tomove); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_raw_reads_museum_concat; done
+
+
+```
+
+
 
 
 ## Pipeline
