@@ -190,4 +190,4 @@ echo '#$ -o '$LOG >> $SMSJOB
    - successfully ran 01b_concat_fast1_R1.sh and 01b_concat_fastq.R2.sh on the files which were sequences twice
    - moved all the files that were sequenced once to 00_raw_reads_museum_FINAL
    - successfully ran 01a_museum_cutadapt_filtering_trimming.sh
-   - 
+   - successfully ran 01c_bbtools_repair_museum_ARRAY.sh
