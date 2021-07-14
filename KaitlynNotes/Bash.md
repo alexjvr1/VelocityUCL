@@ -33,6 +33,7 @@
 - use CTRL+A to navigate to the start of the command
 - **$@** &#8594; refers to all of a shell script’s command-line arguments
 - **$1** &#8594; refers to the first command-line argument
-- 
+- **grep -w** &#8594; can find lines in a file that contain a certain word
+- **grep -n** &#8594; can find the number of the lines in a file that contain a certain word
 
 
