@@ -157,7 +157,7 @@ echo '#$ -o '$LOG >> $SMSJOB
      - successfully ran **02a_MapwithBWAmem.ARRAY_museum.sh**
 - Reading on selective sweeps and made handwritten notes on models for selective sweeps and tests for sweep detection
 
-## Wednesday 14/07/2021 :octocat:
+## Wednesday 14/07/2021 🦋:
 - Re-ran **01c_bbtools_repair_museum_ARRAY.sh** but with the lines in the script to create the sample file names hashed out which now seems to run successfully with no files missing
 - Successfully re-ran **01d_bbtools_merge_museum_ARRAY.sh** and **02a_MapwithBWAmem.ARRAY_museum.sh** without any missing files
 - [Created a markdown file of useful bash commands](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/Bash.md) which I will continuously add to
