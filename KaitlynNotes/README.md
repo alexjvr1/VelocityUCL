@@ -163,7 +163,20 @@ echo '#$ -o '$LOG >> $SMSJOB
 - [Created a markdown file of useful bash commands](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/Bash.md) which I will continuously add to
 - Edited README.md so that it is more readable
 - Create an array to obtain mapping stats
-     - ls /SAN/ugi/LepGenomics/C3_Aricia_agestis/02a_mapped_museum/** | awk -F "/" '{print $NF}' > museum.toflagstat\
-     NAME=$(sed "${SGE_TASK_ID}q;d" museum.toflagstat)\
-     samtools flagstat ${NAME}.sorted.bam >> flagstat.log
-     
+     - ls /SAN/ugi/LepGenomics/C3_Aricia_agestis/02a_mapped_museum/*.gz* | awk -F "/" '{print $NF}' > museum.toflagstat
+     - NAME=$(sed "${SGE_TASK_ID}q;d" museum.toflagstat)
+     - /share/apps/genomics/samtools-1.9/bin/samtools flagstat ${NAME}.sorted.bam >> flagstat.log
+- Check size of sam file size in **02a_MapwithBWAmem.ARRAY_museum.sh**
+     - export PATH=/share/apps/genomics/bcftools-1.9/bin:$PATH
+     - export LD_LIBRARY_PATH=/share/apps/genomics/bcftools-1.9/lib:$LD_LIBRARY_PATH
+     - **ERROR**: unknown file type
+     - **NOTE**: in main README it checks the size of bam files but we have sam files outputted here
+- Load samtools module to gather statistics from **02a_MapwithBWAmem.ARRAY_museum.sh** data:
+     - export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
+     - export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH 
+     - samtools flagstat file.sam
+- Running modern data through the scripts:
+     - successfully ran **01a_modern_cutadapt_filtering_trimming.sh**
+     - successfully ran 
+- Running modern exp data through the scripts:
+     -  successfully ran **01a_modern_exp_cutadapt_filtering_trimming.sh**
