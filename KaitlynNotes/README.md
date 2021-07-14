@@ -180,8 +180,9 @@ echo '#$ -o '$LOG >> $SMSJOB
           - samtools view -S -b file.sam > file.bam
           - samtools flagstat file.bam
           - **NOTE**: again returning all variables as 0 + 0  
+     - made a flagstat log file for all of the samples
+          - for i in $(ls *bam); do ls $i >>flagstat.log && samtools flagstat $i >> flagstat.log; done    
 - Running modern data through the scripts:
      - successfully ran **01a_modern_cutadapt_filtering_trimming.sh**
-     - successfully ran 
 - Running modern exp data through the scripts:
      -  successfully ran **01a_modern_exp_cutadapt_filtering_trimming.sh**
