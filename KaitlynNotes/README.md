@@ -162,3 +162,8 @@ echo '#$ -o '$LOG >> $SMSJOB
 - Successfully re-ran **01d_bbtools_merge_museum_ARRAY.sh** and **02a_MapwithBWAmem.ARRAY_museum.sh** without any missing files
 - [Created a markdown file of useful bash commands](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/Bash.md) which I will continuously add to
 - Edited README.md so that it is more readable
+- Create an array to obtain mapping stats
+     - ls /SAN/ugi/LepGenomics/C3_Aricia_agestis/02a_mapped_museum/** | awk -F "/" '{print $NF}' > museum.toflagstat\
+     NAME=$(sed "${SGE_TASK_ID}q;d" museum.toflagstat)\
+     samtools flagstat ${NAME}.sorted.bam >> flagstat.log
+     
