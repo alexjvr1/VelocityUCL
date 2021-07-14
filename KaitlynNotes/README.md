@@ -174,7 +174,12 @@ echo '#$ -o '$LOG >> $SMSJOB
 - Load samtools module to gather statistics from **02a_MapwithBWAmem.ARRAY_museum.sh** data:
      - export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
      - export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH 
-     - samtools flagstat file.sam
+     - samtools flagstat file.sam 
+          - **NOTE**: returning 0 + 0 for all variables
+     - converting sam file to bam file and then running flagstat:
+          - samtools view -S -b file.sam > file.bam
+          - samtools flagstat file.bam
+          - **NOTE**: again returning all variables as 0 + 0  
 - Running modern data through the scripts:
      - successfully ran **01a_modern_cutadapt_filtering_trimming.sh**
      - successfully ran 
