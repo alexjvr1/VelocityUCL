@@ -1,6 +1,6 @@
-# e-labbook
+# e-labbook 🦋
 
-## Tuesday 06/07/2021
+## Tuesday 06/07/2021 🦋
 - Editing scripts to suit UCL server
      - Things to change in the current scripts:
           - path to wrapper or tools script
@@ -38,7 +38,7 @@
      - edited paths to external programs (don't know what estpEM software is or whether its current path is correct)
      - permission denied to run
 
-## Wednesday 07/07/2021
+## Wednesday 07/07/2021 🦋
 - Edited **01a_modern_cutadapt_filtering_trimming.sh** by comparing to museum script
      - no errors using ./ in the home directory but cannot submit yet as we need to upload data 
 - Edits made to **01b_concat_fastq_R1.sh** include:
@@ -53,7 +53,7 @@
      - same as above for **01b_concat_fastq_R1.sh**
      - **NOTE:** syntax error looking for missing " , but it is written in the same way as R1 which doesn't have this syntax error ??
 
-## Thursday 08/07/2021
+## Thursday 08/07/2021 🦋
 - Edits made to **01b_concat_fastq_R1.sh** include:
      - change *vmem* to *h_vmem* for compatibility to UCL server
      - changed the pathway for 01a_museum_catadapt_reads to *local/...* but error of *No such file or directory* still for 01a_museum2_catadapt_reads
@@ -94,7 +94,7 @@
 - [Created a pipeline script for museum 2 sample to use fastqc](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/00_fastqc_raw_museum2.sh)
 - Successfully ran concat script (I think....!)
 
-## Friday 09/07/2021
+## Friday 09/07/2021 🦋
 - Edits made to **03a_variant_calling_bluecp.sh** include:
      - renamed file to **03a_variant_calling_UCL.sh**
      - edited path to samtools
@@ -118,7 +118,7 @@ echo '#$ -o '$LOG >> $SMSJOB
      - created a new folder in my local directory called 01c_musPERepaired which will be where the outfiles of **01c_bbtools_repair_museum_ARRAY.sh** will go
      - **NOTE:** outfile appears empty after 'qsub'bing the script 
 
-## Monday 12/07/2021
+## Monday 12/07/2021 🦋
 - Edits made to **01c_bbtools_repair_museum_ARRAY.sh** include:
      - moved R2 concat files to 01a.mus.concat.cutadapt folder
      - coded for the creation of sample files
@@ -145,7 +145,7 @@ echo '#$ -o '$LOG >> $SMSJOB
      - succesfully ran **01d_bbtools_merge_museum_ARRAY.sh**
      - succesfully ran **02a_MapwithBWAmem.ARRAY_museum.sh** 
 
-## Tuesday 13/07/2021
+## Tuesday 13/07/2021 🦋
 - Running all scripts on the full museum dataset:
      - Successfully ran **00_fastqc_raw_museum.sh** and **00_fastqc_raw_museum2.sh**
      - created a folder in the shared directory called **00_raw_reads_museum_FINAL**
