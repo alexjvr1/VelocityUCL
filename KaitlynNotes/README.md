@@ -206,4 +206,15 @@ echo '#$ -o '$LOG >> $SMSJOB
           - do indexing step separately /share/apps/genomics/bwa-0.7.17/bwa index /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomics.fna 
 - Mapping the test files straight from the raw data:
      - with the old reference genome mapping rates were ~75%
-     - 
+     - with the new reference genome mapping rates were also ~75%
+- (ALWAYS USING NEW REF GENOME FROM NOW)
+- Mapping the test files from raw data &#8594; cutadapt data:
+     -  mapping rates were between 60-66%
+- Mapping the test files from raw data &#8594; cutadapt data &#8594; concat data: (JOB ID 3564892)
+     - mapping rates were
+- Mapping the test files from raw data &#8594; concat data: (JOB ID 3564895)
+     - mapping rates were
+- Mapping the test files from raw data &#8594; concat data &#8594; cutadapt data: (JOB ID 3564897)
+     - mapping rates were   
+
+     -  
