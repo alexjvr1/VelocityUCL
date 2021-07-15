@@ -211,10 +211,13 @@ echo '#$ -o '$LOG >> $SMSJOB
 - Mapping the test files from raw data &#8594; cutadapt data:
      -  mapping rates were between 60-66%
 - Mapping the test files from raw data &#8594; cutadapt data &#8594; concat data: (JOB ID 3564892)
-     - mapping rates were
+     - mapping rates were ranging from 74-88%
 - Mapping the test files from raw data &#8594; concat data: (JOB ID 3564895)
-     - mapping rates were
+     - mapping rates were ~75%
 - Mapping the test files from raw data &#8594; concat data &#8594; cutadapt data: (JOB ID 3564897)
-     - mapping rates were   
-
-     -  
+     - mapping rates were ranging from 74-88% (exactly the same as above)
+- Running overnight **02a_MapwithBWAmem.ARRAY_modern.sh.save** with the new reference genome
+- Running overnight **02a_MapwithBWAmem.ARRAY_modern.sh.save** for the modern_exp data 
+- Run sample files of E3 species to check for any errors along the pipeline in terms of mapping rates:
+     - Added 3 samples that needed concatenating from mus and mus2 to separate directories
+     - Successfully ran **01b_concat_fastq_R1.sh** and **01b_concat_fastq_R2.sh**
