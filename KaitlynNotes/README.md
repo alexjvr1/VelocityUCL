@@ -188,7 +188,7 @@ echo '#$ -o '$LOG >> $SMSJOB
      -  successfully ran **01a_modern_exp_cutadapt_filtering_trimming.sh**
 
 ## Thursday 15/07/2021 🦋
-- Edits made to **02a_MapwithBWAmem.ARRAY_modern.sh** include:
+- Edits made to **02a_MapwithBWAmem.ARRAY_modern.sh.save** include:
      - edited the input and output paths
      - defined array names
      - coded for the ls of the R1 and 42 cutadapt files 
@@ -198,4 +198,12 @@ echo '#$ -o '$LOG >> $SMSJOB
      - export samtools module into script
 - Created a new directory in C3_Aricia_agestis called 02a_mapped_modern
 - **NOTE**: flagstat showing a really low mapping rate of the museum data to the reference genome
-- 
+- Successfully ran **02a_MapwithBWAmem.ARRAY_modern.sh.save** and flagstat showed that the mapping rates were very good >95%
+- Edits made to **02a_MapwithBWAmem.ARRAY_museum.sh** include:
+     - write output to bam instead of sam
+     - export samtools module into script
+     - new reference genome path
+          - do indexing step separately /share/apps/genomics/bwa-0.7.17/bwa index /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomics.fna 
+- Mapping the test files straight from the raw data:
+     - with the old reference genome mapping rates were ~75%
+     - 
