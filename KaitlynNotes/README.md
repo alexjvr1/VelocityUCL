@@ -186,3 +186,16 @@ echo '#$ -o '$LOG >> $SMSJOB
      - successfully ran **01a_modern_cutadapt_filtering_trimming.sh**
 - Running modern exp data through the scripts:
      -  successfully ran **01a_modern_exp_cutadapt_filtering_trimming.sh**
+
+## Thursday 15/07/2021 🦋
+- Edits made to **02a_MapwithBWAmem.ARRAY_modern.sh** include:
+     - edited the input and output paths
+     - defined array names
+     - coded for the ls of the R1 and 42 cutadapt files 
+     - added *${NAME2}* to line 52 starting *echo*
+     - write output to bam instead of sam
+          - bwa mem $ref input1 input2 | samtools sort -o output.bam
+     - export samtools module into script
+- Created a new directory in C3_Aricia_agestis called 02a_mapped_modern
+- **NOTE**: flagstat showing a really low mapping rate of the museum data to the reference genome
+- 
