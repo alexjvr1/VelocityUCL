@@ -221,3 +221,17 @@ echo '#$ -o '$LOG >> $SMSJOB
 - Run sample files of E3 species to check for any errors along the pipeline in terms of mapping rates:
      - Added 3 samples that needed concatenating from mus and mus2 to separate directories
      - Successfully ran **01b_concat_fastq_R1.sh** and **01b_concat_fastq_R2.sh**
+     - Successfully ran **01a_museum_cutadapt_filtering_trimming.sh**
+
+## Friday 16/07/2021 🦋
+- Continuing to run the sample files for the E3 species through the scripts:
+     - Successfully ran **01c_bbtools_repair_museum_ARRAY.sh**
+     - Successfully ran **01d_bbtools_merge_museum_ARRAY.sh**
+     - Successfully ran **02a_MapwithBWAmem.ARRAY_museum.sh**
+          - exported samtools 
+          - used flagstat to check the mapping rates which were 90-95%, and so far better than those from the C3 museum data suggesting that the pipeline scripts are working as expected and so the quality of the C3 data is comparatively low
+- Checked flagstat mapping rates for modern and modern_exp bam files obtained fro the new ref genome
+     - mapping rates were good ~99%
+     - some files had 0 reads so re-running those 
+     - some samples had multiple temp files meaning bwa was not completed so re-running those 
+     - collected data in shared excel sheet of number of reads and read quality at this step  
