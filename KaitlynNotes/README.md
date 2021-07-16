@@ -230,8 +230,9 @@ echo '#$ -o '$LOG >> $SMSJOB
      - Successfully ran **02a_MapwithBWAmem.ARRAY_museum.sh**
           - exported samtools 
           - used flagstat to check the mapping rates which were 90-95%, and so far better than those from the C3 museum data suggesting that the pipeline scripts are working as expected and so the quality of the C3 data is comparatively low
-- Checked flagstat mapping rates for modern and modern_exp bam files obtained fro the new ref genome
+- Checked flagstat mapping rates for modern and modern_exp bam files obtained from the new ref genome
      - mapping rates were good ~99%
      - some files had 0 reads so re-running those 
      - some samples had multiple temp files meaning bwa was not completed so re-running those 
-     - collected data in shared excel sheet of number of reads and read quality at this step  
+     - collected data in shared excel sheet of number of reads and read quality at this step
+- Updated my bash commands list 
