@@ -238,3 +238,34 @@ echo '#$ -o '$LOG >> $SMSJOB
      - some samples had multiple temp files meaning bwa was not completed so re-running those 
      - collected data in shared excel sheet of number of reads and read quality at this step
 - Updated my bash commands list 
+
+## Monday 19/07/2021 🦋
+- Request installation of ANGSD 
+- Missing 13, 15 modern mapped files, so re-running those
+- Missing 33, 36, & 40 modern exp mapped files, so re-running those
+- Filling in the missing statistics from the sample files that were showing 0 reads last time after having re-run them 
+- Edits made to **03a_variant_calling_UCL.sh** include:
+     - updating the input and output paths
+     - updating the reference 
+     - added -m and -l (MEM and VMEM) variable conditions 
+     - specified all new variables
+          - SHAREDFOLDER="/SAN/ugi/LepGenomics"\
+SPECIES="C3_Aricia_agestis"\
+INPUT="02a_mapped_modern"\
+OUTPUT="03.2_Variant_calling_museum"\
+REF="RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna"
+SAMTOOLS="/share/apps/genomics/samtools-1.9/bin/samtools"
+JOBNAME="C3_mod_mpileup"
+CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
+- ran **03a_variant_calling_UCL.sh*:
+     - **NOTE:** indexing step takes a while
+     - **ERROR:** script was calling a UCL.pl file which we hadn't re-named yet in the UCL pipeline, so I renamed that .pl file
+     -  
+- added ANGSD path to main README markdown
+- ran *samtools flagstat* on the modern exp files that needed re-running and updated excel sheet with statistics
+- Set-up the ANGSD analysis:
+     - Find all the regions (i.e. all chromosomes and contigs) from the reference index file (.fasta.fai):
+          - awk '{print $1}' ../RefGenome/*.fna.fai >> regions
+          - cat regions |wc -l 
+          - there are 28 regions
+          - 
