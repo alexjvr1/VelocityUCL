@@ -113,6 +113,7 @@ file3.txt: OK
 |Cutadapt | |/share/apps/python/bin/cutadapt| 
 |Cutadapt|2.5|/share/apps/genomics/cutadapt-2.5/bin/cutadapt|
 |fastQC|0.11.8| /share/apps/genomics/FastQC-0.11.8/fastqc|
+|gcc|9.2.0|/share/apps/gcc-9.2.0/bin/gcc|
 |GenomeAnalysisTK.jar|3.7| /share/apps/genomics/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar|
 |java|| /share/apps/java/bin/java|
 |MapDamage|2.1.1| /share/apps/genomics/mapDamage-2.1.1/bin/mapDamage|
