@@ -257,10 +257,9 @@ REF="RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna"
 SAMTOOLS="/share/apps/genomics/samtools-1.9/bin/samtools"
 JOBNAME="C3_mod_mpileup"
 CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
-- ran **03a_variant_calling_UCL.sh*:
+- ran **03a_variant_calling_UCL.sh**:
      - **NOTE:** indexing step takes a while
      - **ERROR:** script was calling a UCL.pl file which we hadn't re-named yet in the UCL pipeline, so I renamed that .pl file
-     -  
 - added ANGSD path to main README markdown
 - ran *samtools flagstat* on the modern exp files that needed re-running and updated excel sheet with statistics
 - Set-up the ANGSD analysis:
@@ -268,4 +267,19 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
           - awk '{print $1}' ../RefGenome/*.fna.fai >> regions
           - cat regions |wc -l 
           - there are 28 regions
-          - 
+
+## Tuesday 20/07/2021 🦋
+- Running new version of **03a_variant_calling_UCL.sh**:
+     - several syntax error to be corrected 
+     - compare and contrast with old version of the script
+     - replicated the new script under a new name which didn't result in any syntax errors even though it's exactly the same ??
+- Edits made to **03a_variant_calling_UCL.sh**:
+     - removed *module1 $SAMTOOLS* from the variables list
+- **ERROR:** cannot locate Parallel/ForkManager or Term/ProgressBar (maybe need to be installed on the server)
+- Added export paths to perl package and library to **03a_call_SNVs_UCL.sh** but still getting the same error of cannot locate the perl modules
+- Added the last sample's (40 of modern exp) statistics to the excel sheet using *samtools flagstat*
+- Added *gcc* path to main README markdown doc
+- Requsted installation of perl modules *Parallel:ForkManager* and *Term:ProgressBar*
+- Estimate SAF for each population (unfolded):
+     - mod core population:
+          - */share/apps/genomics/angsd-0.935/bin/angsd -b 02a_mapped_modern -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 0 -r LR761675.1: -GL 1 -doSaf 1 -anc /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -ref /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -doCounts 1 -setMinDepthInd 2 -setMaxDepth 144 -doMajorMinor 4 -out MUS -C 50 -baq 1*
