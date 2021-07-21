@@ -1,0 +1,37 @@
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N C3.estimateSAF  ##job name
+#$ -l tmem=16G #RAM
+#$ -l h_vmem=16G #enforced limit on shell memory usage
+#$ -l h_rt=1:00:00 ##wall time.
+#$ -j y  #concatenates error and output files (with prefix job1)
+
+#Path to software
+ANGSD="/share/apps/genomics/angsd-0.935/bin/angsd"
+
+#Set filters
+#N="40"
+N="3"
+MININD="1"
+MINMAF=""
+MINQ="20"
+minMAPQ="20"
+minDP="2"
+maxDP="621"
+POP="MODC"
+C="50"
+POPLIST="MODCTEST.poplist"
+SPECIESDIR="/SAN/ugi/LepGenomics/C3_Aricia_agestis"
+PP=1 #use all reads. Flag 1 uses only proper pairs, but MODC has merged reads. NB to filter for proper pair reads in the bamfiles using samtools before this point
+
+#run job in working directory
+cd $SPECIESDIR
+
+#Define variables
+REGION="LR990278.1"
+
+#estimate SAF for modern core population using ANGSD
+
+time $ANGSD -b MODCTEST.poplist -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs $PP -r $REGION \
+-GL 1 -doSaf 1 -anc $SPECIESDIR/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -ref $SPECIESDIR/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -doCounts 1 -setMinDepthInd $minDP -s$
+ -out $SPECIESDIR/MODCTEST -C $C -baq 1 -dumpCounts 2 -doDepth 1 -doGlf 2 -minInd $MININD
