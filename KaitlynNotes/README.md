@@ -288,9 +288,12 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
      - commands taking very long time to run and cat on the arg files are resulting as empty
 
 ## Wednesday 21/07/2021 🦋
-- Created new directory in 02a_mapped_modern containing some test bam files to run ANSGD on
+- Created new directory in 02a_mapped_modern containing four test bam files to run ANSGD on
 - Created a script called **03a_estimateSAF** to estimate SAF for each population
 - Edits made to **03a_estimateSAF** include:
      - change *-only_proper_pairs* to 1 for modern populations
      - use the smallest chromosome
-     - 
+- Export ANSGD into the server:
+     - *export PATH=/share/apps/genomics/angsd-0.935/bin:$PATH*
+     - *export LD_LIBRARY_PATH=/share/apps/genomics/angsd-0.935/lib:$LD_LIBRARY_PATH*
+- Created new directory in 02a_mapped_modern_exp containing four test bam files to run ANSGD on
