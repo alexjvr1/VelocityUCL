@@ -285,4 +285,6 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
           - */share/apps/genomics/angsd-0.935/bin/angsd -b 02a_mapped_modern -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 0 -r LR9902457.1: -GL 1 -doSaf 1 -anc /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -ref /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -doCounts 1 -setMinDepthInd 2 -setMaxDepth 144 -doMajorMinor 4 -out MODC -C 50 -baq 1*
      - mod exp population:
           - - */share/apps/genomics/angsd-0.935/bin/angsd -b 02a_mapped_modern -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 0 -r LR9902457.1: -GL 1 -doSaf 1 -anc /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -ref /SAN/ugi/LepGenomics/C3_Aricia_agestis/RefGenome/GCA_905147365.1_ilAriAges1.1_genomic.fna -doCounts 1 -setMinDepthInd 2 -setMaxDepth 144 -doMajorMinor 4 -out MODE -C 50 -baq 1*
-          
+     - commands taking very long time to run and cat on the arg files are resulting as empty
+
+## Wednesday 21/07/2021 🦋
