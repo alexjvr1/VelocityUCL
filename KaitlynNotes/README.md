@@ -297,3 +297,6 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
      - *export PATH=/share/apps/genomics/angsd-0.935/bin:$PATH*
      - *export LD_LIBRARY_PATH=/share/apps/genomics/angsd-0.935/lib:$LD_LIBRARY_PATH*
 - Created new directory in 02a_mapped_modern_exp containing four test bam files to run ANSGD on
+- created a file called MODCTEST.poplist containing a list of the test bam files to run through ANGSD
+- used *samtools index [filename]* on the samples I moved into new file
+- 
