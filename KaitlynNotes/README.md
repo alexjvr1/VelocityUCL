@@ -289,7 +289,7 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
 
 ## Wednesday 21/07/2021 🦋
 - Created new directory in 02a_mapped_modern containing four test bam files to run ANSGD on
-- Created a script called **03a_estimateSAF** to estimate SAF for each population
+- Created a script called [**03a_estimateSAF**](https://github.com/alexjvr1/VelocityUCL/blob/main/KaitlynNotes/03a_estimateSAF) to estimate SAF for each population
 - Edits made to **03a_estimateSAF** include:
      - change *-only_proper_pairs* to 1 for modern populations
      - use the smallest chromosome
@@ -297,6 +297,11 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
      - *export PATH=/share/apps/genomics/angsd-0.935/bin:$PATH*
      - *export LD_LIBRARY_PATH=/share/apps/genomics/angsd-0.935/lib:$LD_LIBRARY_PATH*
 - Created new directory in 02a_mapped_modern_exp containing four test bam files to run ANSGD on
-- created a file called MODCTEST.poplist containing a list of the test bam files to run through ANGSD
+- created files called MODCTEST.poplist and MODETEST.poplist containing a list of the test bam files to run through ANGSD
+     - *ls /SAN/ugi/LepGenomics/C3_Aricia_agestis/02a_mapped_modern_exp/TEST/*bam* >> MODETEST.poplist*
 - used *samtools index [filename]* on the samples I moved into new file
-- 
+- successfully ran **03a_estimateSAF** for both MODC and MODE populations
+- unfolded SAF used to produce folded 2D SFS:
+     - generates the folded SFS for each population pair per chromosome
+     - [INSERT CODE HERE]
+- Request installation of ANGSD program RealSFS
