@@ -301,7 +301,77 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
      - *ls /SAN/ugi/LepGenomics/C3_Aricia_agestis/02a_mapped_modern_exp/TEST/*bam* >> MODETEST.poplist*
 - used *samtools index [filename]* on the samples I moved into new file
 - successfully ran **03a_estimateSAF** for both MODC and MODE populations
-- unfolded SAF used to produce folded 2D SFS:
+- Next step is for unfolded SAF to be used to produce folded 2D SFS:
      - generates the folded SFS for each population pair per chromosome
      - [INSERT CODE HERE]
 - Request installation of ANGSD program RealSFS
+
+## Thursday 22/07/2021 🦋
+- 13 individuals in the 01d_musALL_merged didn't run properly with file sizes of ~32K 
+     - individuals to re-run are 07, 09, 11, 13, 14, 15, 19, 20, 22, 23, 25, 27, 31 
+     - re-ran successfully with file sizes as expected
+- Read articles on population genomic analyses for modern and museum samples
+- Re-run **02a_MapwithBWAmem.ARRAY_museum.sh** to include the newly merged samples
+- Example code to un-zip and view red .gz files created after running **03a_estimateSf**:
+     - *gunzip MODCTEST.beagle.gz |head*
+     - *head MOCTEST.beagle*
+- Compute estimates of mean depths of the BAM files in each population:
+     - export *samtools* first
+     - example of one file:
+          - samtools depth AAg-19-2016-01_L002_cutadapt_filtered_R1.fastq.gz.bam | awk '{sum+=$3} END { print "Average = ",sum/NR}'
+     - for loop:
+          - for i in $(ls *bam); do ls $i >>depth.log && samtools depth $i |awk '{sum+=$3} END { print "Average = ",sum/NR}' >> depth.log; done
+- Perform PCA using ANGSD on the BAM files for each population:
+     - Export R 
+          - export PATH=/share/apps/R-4.0.3/bin:$PATH
+          - export LD_LIBRARY_PATH=/share/apps/R-4.0.3/lib64:$LD_LIBRARY_PATH
+     - Find the number of loci and number of chromosomes in each population:
+          ```
+          MODCTEST <- read.table(gzfile("MODCTEST.beagle.gz"), header=T)
+          dim(MODCTEST)
+          [1] 7347910      15
+          MODETEST <- read.table(gzfile("MODETEST.beagle.gz"), header=T)
+          dim(MODETEST)
+          [1] 7123055      15
+          ```
+     - Identify loci within MODE population that have <80% genotyping rate and remove them:
+          ```
+          library(reshape2)
+          imiss_MODETEST <- MODETEST
+          imiss_MODETEST[imiss_MODETEST=="0.333333"] <- NA
+          mean(is.na(imiss_MODETEST)) ## calculates the overall proportion of missingness
+          [1] 0.2663371
+          
+          MODE.loci.propNA <- rowMeans(is.na(imiss_MODETEST))*100 #calculates the proportion of NA in each row, i.e. for each locus
+          melt.MODE.loci.propNA <- melt(MODE.loci.propNA)
+          melt.MODE.loci.propNA$marker <- MODETEST$marker
+          dim(melt.MODE.loci.propNA[which(melt.MODE.loci.propNA$value>20),]) #loci with >20% missingness
+          [1] 2956687       2
+          
+          MODETEST.clean <- MODETEST[which(!MODETEST$marker %in% MODE.markerstoremove$marker),] #remove problematic loci
+          dim(MODETEST.clean)
+          [1] 4166368      15
+          
+          imiss_MODETEST <- MODETEST.clean
+          imiss_MODETEST[imiss_MODETEST=="0.333333"] <- NA
+          MODE.indiv.propNA <- colMeans(is.na(imiss_MODETEST))*100 #calculates the proportion of NA in each column, i.e. for each individual
+          melt.MODE.indiv.propNA <- melt(MODE.indiv.propNA)  #plotting is easier with long data
+          melt.MODE.indiv.propNA$Indiv <- rownames(melt.MODE.indiv.propNA)
+          melt.MODE.indiv.propNA.new <- melt.MODE.indiv.propNA[seq(4,nrow(melt.MODE.indiv.propNA),3)] #get rid of the first 3 lines, and keep only one row per indiv. 
+          melt.MODE.indiv.propNA.new[which(melt.MODE.indiv.propNA.new$value>20),]
+          [1] value Indiv
+          <0 rows> (or 0-length row.names)
+          
+          melt.MODE.indiv.propNA.new
+          value Indiv
+          Ind0 16.475645  Ind0
+          Ind1  9.640435  Ind1
+          Ind2 11.484079  Ind2
+          Ind3 18.728974  Ind3
+          ```
+          - Only 4 individuals with more than 20% missing data so keep these in for now
+     - Identify loci within MODC population that have <80% genotyping rate and remove them:
+          - Same code as for the MODE population, but replace MODE with MODC 
+          - loci with 20% missingness: 2685671
+          - loci remaining about problematic loci removed: 4662239
+          - four indivs with over 20% missing data 
