@@ -375,3 +375,40 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
           - loci with 20% missingness: 2685671
           - loci remaining about problematic loci removed: 4662239
           - four indivs with over 20% missing data 
+
+## Friday 23/07/2021
+- Updated the excel sheet:
+     - with average depth statistics for all populations
+     - with reads and mapping rates for museum BAM files
+- Re-ran same 13 missing samples as before but outputted to 02a_mapped_museum.new
+- Continute to perform PCA using ANGSD on the BAM files for modern populations:
+     - **ERROR:** 'Cannot allocate memory'
+     - Continue code on a development cluster *qrsh -l tmem=62G,h_vmem=62G*
+     - Join the cleaned data by site and allele
+          - ```
+          library(dplyr)
+          MODE.marker <- as.data.frame(MODETEST.clean$marker)
+          colnames(MODE.marker) <- "marker"
+          MODC.marker <- as.data.frame(MODCTEST.clean$marker)
+          colnames(MODC.marker) <- "marker"
+          POP2clean.markers <- intersect(MODC.marker, MODE.marker)
+          dim(POP2clean.markers)
+          [1] 3241513       1
+          
+          ##Subset each dataset to keep only the overlapping markers
+          MODC.clean.sub  <- MODCTEST.clean[which(MODCTEST.clean$marker %in% POP2clean.markers$marker),] 
+          MODE.clean.sub  <- MODETEST.clean[which(MODETEST.clean$marker %in% POP2clean.markers$marker),]
+           
+          ##Join datasets together
+          pops2.clean <- left_join(MODC.clean.sub, MODE.clean.sub, by="marker", suffix=c(".c", ".e"))
+          cols.toremove <- as.data.frame(grep("allele", colnames(pops2.clean)))[-(1:2),]
+          cols.toremove
+          [1] 16 17
+          pops2.clean2 <- pops2.clean[-cols.toremove]
+          ncol(pops2.clean2)
+          [1] 27
+          ```
+     - Need to join with the museum data too (skip this for now)
+     -  
+
+              
