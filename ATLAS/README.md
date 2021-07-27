@@ -89,8 +89,13 @@ A script for each of the populations. The input files and RG information is chan
 
 Then mark duplicates
 
+[02b.1_MarkDup_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.1_MarkDup_MUS.sh)
 
-[02b.1_MarkDup_MUS.sh]()
+[02b.1_MarkDup_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.1_MarkDup_MODC.sh)
+
+[02b.1_MarkDup_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.1_MarkDup_MODE.sh)
+
+
 
 
 ### 5. Local realignment using GATK3.8
@@ -112,12 +117,26 @@ java -jar $PICARD CreateSequenceDictionary R=GCA_902806685.1_iAphHyp1.1_genomic.
 ```
 
 
-Use GATK3.8 for local realignment using [02b.2_LocalRealignment.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment.sh)
+Use GATK3.8 for local realignment using:
+
+[02b.2_LocalRealignment_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment_MUS.sh)
+
+[02b.2_LocalRealignment_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment_MODC.sh)
+
+[02b.2_LocalRealignment_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment_MODE.sh)
 
 
 
 ### 6. Validate with PicardTools ValidateSamFile
 
+```
+qrsh -l tmem=34G,h_vmem=34G
+
+cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus
+
+
+
+```
 
 
 
