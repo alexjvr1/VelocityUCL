@@ -24,6 +24,26 @@ cd $SGE_O_WORKDIR
 SPECIESDIR=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus
 PATH1=00_raw_reads_museum
 PATH2=00_raw_reads_museum2
+OUTPUT=$SPECIESDIR/00_raw_reads_museum_FINAL
+
+##Create output directory if it doesn't exist
+if 
+  ! ls $OUTPUT; 
+then 
+  mkdir -p $OUTPUT; 
+fi
+
+
+#Find all samples that were sequenced twice and move mus1 samples to the expected input folder
+
+ls 00_raw_reads_museum/ALLSAMPLES/*R1*gz |awk -F "/" '{print $NF}'|awk -F "_" '{print $1}' > museum1.names
+ls 00_raw_reads_museum2/ALLSAMPLES/*R1*gz |awk -F "/" '{print $NF}' |awk -F "_" '{print $1}' > museum2.names
+
+cat museum1.names museum2.names |sort |uniq --repeated > museum1.toconcat
+
+for i in $(cat museum1.toconcat); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_raw_reads_museum/; done
+
+
 
 #create files with sample names listed for the 33 samples
 ##R1
@@ -66,9 +86,28 @@ NAMEMUS1=$(sed "${SGE_TASK_ID}q;d" mus1_toconcat)
 NAMEMUS2=$(sed "${SGE_TASK_ID}q;d" mus2_toconcat)
 
 
+
 ##Concat fastq files
 
 echo "[concatenating] ${NAMEMUS1} and ${NAMEMUS2}"
 printf "\n"
-echo "time cat $SPECIESDIR/$PATH1/${NAMEMUS1} $SPECIESDIR/$PATH2/${NAMEMUS2} > ${START1}.concat.fastq.gz" >> concat.mus.R1.log
-time cat $SPECIESDIR/$PATH1/${NAMEMUS1} $SPECIESDIR/$PATH2/${NAMEMUS2} > ${START1}.concat.fastq.gz
+echo "time cat $SPECIESDIR/$PATH1/${NAMEMUS1} $SPECIESDIR/$PATH2/${NAMEMUS2} > $OUTPUT/${START1}.concat.fastq.gz" >> concat.mus.log
+time cat $SPECIESDIR/$PATH1/${NAMEMUS1} $SPECIESDIR/$PATH2/${NAMEMUS2} > $OUTPUT/${START1}.concat.fastq.gz
+
+
+
+##Move all the samples that were sequenced once to the output directory
+
+ls $SPECIESDIR/PATH1/*R1*gz | awk -F "/" '{print $1}' | awk -F "_" '{print $1}' > museum1.names
+ls $OUTPUT/*R1*gz | awk -F "/" '{print $1}' |
+awk -F "_" '{print $1}' > museumconcat.names
+
+
+diff museum1.names museumconcat.names | grep '^<' | sed 's/^<\ //'> museum1.tomove
+
+wc -l museum1.tomove > count
+echo "number of samples to move:" $count >> concat.mus.log
+
+for i in $(cat museum1.tomove); do cp $SPECIESDIR/$PATH1/ALLSAMPLES/$i*gz $OUTPUT; done
+
+
