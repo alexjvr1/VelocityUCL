@@ -99,7 +99,7 @@ time cat $SPECIESDIR/$PATH1/${NAMEMUS1} $SPECIESDIR/$PATH2/${NAMEMUS2} > $OUTPUT
 
 ##Move all the samples that were sequenced once to the output directory
 
-ls $SPECIESDIR/PATH1/*R1*gz | awk -F "/" '{print $1}' | awk -F "_" '{print $1}' > museum1.names
+ls $SPECIESDIR/$PATH1/*R1*gz | awk -F "/" '{print $1}' | awk -F "_" '{print $1}' > museum1.names
 ls $OUTPUT/*R1*gz | awk -F "/" '{print $1}' |
 awk -F "_" '{print $1}' > museumconcat.names
 
