@@ -140,6 +140,48 @@ This can be run interactively if there are only a few samples. Or use these scri
 [02b.3_ValidateSamFile_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.3_ValidateSamFile_MODE.sh)
 
 
+Outputs are written to the 02a_mapped_* folders, and are names ${NAME}.validatesam. If there are no errors they'll simply say: "No errors found"
+
+
+```
+cd 02a_mapped_museum
+cat *validatesam
+
+No errors found
+No errors found
+No errors found
+
+```
+
+
+
+### 7. ATLAS: SplitMerge
+
+
+
+
+
+### 8. ATLAS: PMD
+
+
+
+### 9. ATLAS: recal
+
+
+
+### 10. ATLAS: global diversity
+
+
+
+### 11. ATLAS: Individual heterozygosity
+
+
+
+
+#### 12. ATLAS: Output ANGSD input
+
+
+
 
 
 
