@@ -22,7 +22,7 @@ SPECIES=E3_Aphantopus_hyperantus
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
 INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern_exp
 OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern_exp
-TAIL="R1.repaired.fastq.gz.repaired.merged.fastq.gz.bam"
+TAIL=`ls 02a_mapped_modern_exp/*bam | awk -F "/" '{print $NF}' | awk '{print substr($0,14)}' | head -n1`
 
 #Set up ARRAY job
 ls 02a_mapped_modern_exp/*bam | awk -F "/" '{print $NF}' | awk -F "." '{print $1}' > mode.names 
