@@ -5,7 +5,7 @@
 #$ -l h_vmem=32G #enforced limit on shell memory usage
 #$ -l h_rt=1:00:00 ##wall time.  
 #$ -j y  #concatenates error and output files (with prefix job1)
-#$ -t 1-38
+#$ -t 1-40
 
 #Run on working directory
 cd $SGE_O_WORKDIR 
@@ -19,8 +19,8 @@ export LD_LIBRARY_PATH=/share/apps/jdk1.8.0_131/lib:$LD_LIBRARY_PATH
 SHAREDFOLDER=/SAN/ugi/LepGenomics
 SPECIES=E3_Aphantopus_hyperantus
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
-OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
+INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern_exp
+OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern_exp
 
 GenomeAnalysisTK.jar=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
 
