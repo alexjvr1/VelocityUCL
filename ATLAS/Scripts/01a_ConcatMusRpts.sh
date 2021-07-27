@@ -5,9 +5,10 @@
 ###########################################
 
 ## Concatenates fastq reads from a list of file names
-## R1 and R2 are processed separately
-## Check that sample order is the same in both input files. 
-## Check log files that the correct samples were concatenated together. 
+## Checks that sample order is the same in both input files. 
+## Writes concatenated samples to 00_raw_reads_museum_FINAL
+## Moves samples that were sequenced once to 00_raw_reads_museum_FINAL
+### Manually check log files that the correct samples were concatenated together. 
 
 #$ -S /bin/bash ##shell to be used
 #$ -N C3.mus.concat.cutadapt  ##job name
