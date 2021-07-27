@@ -15,7 +15,7 @@ I'm testing the raw data pre-processing and ATLAS pipeline on the UCL server (CS
 
 ## Pre-processing: 
 
-1. Concat raw museum samples that were sequenced twice, and move all samples to a folder called raw_museum_FINAL
+
 
 2. Remove adapter sequence using Cutadapt
 
@@ -43,6 +43,11 @@ What is the state of the art with poolseq data? Should we use these approaches i
 
 
 ## Running Pipeline: 
+### 1. Concat raw museum samples 
+
+33 individuals from each museum species has been sequenced twice to increase sequence depth. We're concatenating these raw data together, then moving all samples to a folder called raw_museum_FINAL
+
+
 
 ### 4. Add RG, remove duplicates
 
