@@ -26,19 +26,19 @@ GenomeAnalysisTK.jar=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysi
 
 
 #Set up ARRAY job
-#ls *bam | awk -F "." '{print $1}' >> mode.names
+ls $INPUT/*rmdup.bam |awk -F "/" '{print $NF}' | awk -F "." '{print $1}' > mode.names
 NAME=$(sed "${SGE_TASK_ID}q;d" mode.names)
 
 
 # Identify targets to realign
-java -jar GenomeAnalysisTK.jar -T RealignerTargetCreator \
+java -jar $GenomeAnalysisTK.jar -T RealignerTargetCreator \
 -R $REF \
 -o $OUTPUT/${NAME}.intervals \
 -I $INPUT/${NAME}.rmdup.bam
 
 
 # use IndelRealigner to realign the regions found in the RealignerTargetCreator step
-java -jar GenomeAnalysisTK.jar -T IndelRealigner \
+java -jar $GenomeAnalysisTK.jar -T IndelRealigner \
 -R $REF \
 -targetIntervals $INPUT/${NAME}.intervals \
 -I $INPUT/${NAME}.rmdup.bam \
