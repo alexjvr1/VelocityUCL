@@ -87,6 +87,11 @@ A script for each of the populations. The input files and RG information is chan
 [02b.0_AddRG_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.0_AddRG_MODE.sh)
 
 
+Then mark duplicates
+
+
+[02b.1_MarkDup_MUS.sh]()
+
 
 ### 5. Local realignment using GATK3.8
 
