@@ -32,7 +32,7 @@ NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
 ##Add readgroups
 
 echo "java -jar $PICARD AddOrReplaceReadGroups \
-       I=$INPUT/${NAME}.$TAIL \
+       I=$INPUT/${NAME}$TAIL \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3mus \
        RGLB=museum0204 \
@@ -42,7 +42,7 @@ echo "java -jar $PICARD AddOrReplaceReadGroups \
 
 
 time java -jar $PICARD AddOrReplaceReadGroups \
-       I=$INPUT/${NAME}.$TAIL \
+       I=$INPUT/${NAME}$TAIL \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3mus \
        RGLB=museum0204 \
