@@ -26,7 +26,7 @@ OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum
 TAIL="RG.bam"
 
 #Set up ARRAY job
-#ls *bam | awk -F "." '{print $1}' >> mus.names
+ls $INPUT/*RG.bam | awk -F "." '{print $1}' > mus.names
 NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
 
 echo "java -jar $PICARD MarkDuplicates \
