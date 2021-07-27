@@ -14,7 +14,7 @@ I'm testing the raw data pre-processing and ATLAS pipeline on the UCL server (CS
 
 
 
-4. Add RG & Remove duplicates  
+
 
 5. Local realignment using GATK3.8
 
@@ -77,6 +77,10 @@ ATLAS has an in-built function to annotate and merge these reads after mapping, 
 
 We'll use PicardTools and GATK to add read group information to the bam files, and then to mark any PCR duplicates. 
 
+
+A script for each of the populations. The input files and RG information is changed for each: 
+
+[02b.0_AddRG.sh]()
 
 
 
