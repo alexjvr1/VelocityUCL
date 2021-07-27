@@ -22,7 +22,7 @@ SPECIES=E3_Aphantopus_hyperantus
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
 INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
 OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
-TAIL=`ls 02a_mapped_modern/*bam | awk -F "/" '{print $NF}' | awk '{print substr($0,14)}' | head -n1`
+TAIL=`ls 02a_mapped_modern/*bam | awk -F "/" '{print $NF}' | awk '{print substr($0,14)}' | head -n 1`
 
 
 
@@ -36,7 +36,7 @@ NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 ##Add readgroups
 
 echo "java -jar $PICARD AddOrReplaceReadGroups \
-       I=$INPUT/${NAME}.$TAIL \
+       I=$INPUT/${NAME}$TAIL \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
        RGLB=modern3 \
@@ -46,7 +46,7 @@ echo "java -jar $PICARD AddOrReplaceReadGroups \
 
 
 time java -jar $PICARD AddOrReplaceReadGroups \
-       I=$INPUT/${NAME}.$TAIL \
+       I=$INPUT/${NAME}$TAIL \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
        RGLB=modern3 \
