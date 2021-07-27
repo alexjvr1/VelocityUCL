@@ -35,7 +35,7 @@ echo "java -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.$TAIL \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3mus \
-       RGLB=MUS0204 \
+       RGLB=museum0204 \
        RGPL=ILLUMINA \
        RGPU=unit1 \
        RGSM=${NAME}" >> 02b.0_AddRG.log
@@ -44,8 +44,8 @@ echo "java -jar $PICARD AddOrReplaceReadGroups \
 time java -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.$TAIL \
        O=$OUTPUT/${NAME}.RG.bam \
-       RGID=4 \
-       RGLB=lib1 \
+       RGID=E3mus \
+       RGLB=museum0204 \
        RGPL=ILLUMINA \
        RGPU=unit1 \
        RGSM=${NAME}
