@@ -22,7 +22,7 @@ REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
 INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
 OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
 
-GenomeAnalysisTK.jar=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
+GenomeAnalysisTK=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
 
 
 #Set up ARRAY job
