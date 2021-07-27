@@ -15,22 +15,6 @@ I'm testing the raw data pre-processing and ATLAS pipeline on the UCL server (CS
 
 
 
-
-5. Local realignment using GATK3.8
-
-6. Validate bam file using PicardTools ValidateSamFile
-
-7. ATLAS: splitMerge
-
-8. ATLAS: PMD
-
-9. ATLAS: recalibrate
-
-10. ATLAS: output ANGSD inputs
-
-11. ATLAS: estimate genetic diversity in windows
-
-
 What is the state of the art with poolseq data? Should we use these approaches in windows for our data? 
 
 
