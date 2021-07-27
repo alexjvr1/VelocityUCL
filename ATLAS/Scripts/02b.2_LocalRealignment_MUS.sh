@@ -22,7 +22,7 @@ REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
 INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum
 OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum
 
-GenomeAnalysisTK.jar=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
+GenomeAnalysisTK=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
 
 
 #Set up ARRAY job
@@ -31,14 +31,14 @@ NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
 
 
 # Identify targets to realign
-java -jar $GenomeAnalysisTK.jar -T RealignerTargetCreator \
+java -jar $GenomeAnalysisTK -T RealignerTargetCreator \
 -R $REF \
 -o $OUTPUT/${NAME}.intervals \
 -I $INPUT/${NAME}.rmdup.bam
 
 
 # use IndelRealigner to realign the regions found in the RealignerTargetCreator step
-java -jar $GenomeAnalysisTK.jar -T IndelRealigner \
+java -jar $GenomeAnalysisTK -T IndelRealigner \
 -R $REF \
 -targetIntervals $INPUT/${NAME}.intervals \
 -I $INPUT/${NAME}.rmdup.bam \
