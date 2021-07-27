@@ -26,7 +26,7 @@ OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern_exp
 TAIL="RG.bam"
 
 #Set up ARRAY job
-#ls *bam | awk -F "." '{print $1}' >> mode.names
+ls $INPUT/*RG.bam | awk -F "." '{print $1}' >> mode.names
 NAME=$(sed "${SGE_TASK_ID}q;d" mode.names)
 
 echo "java -jar $PICARD MarkDuplicates \
