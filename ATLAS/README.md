@@ -80,9 +80,11 @@ We'll use PicardTools and GATK to add read group information to the bam files, a
 
 A script for each of the populations. The input files and RG information is changed for each: 
 
-[02b.0_AddRG.sh]()
+[02b.0_AddRG_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.0_AddRG_MUS.sh)
 
+[02b.0_AddRG_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.0_AddRG_MODC.sh)
 
+[02b.0_AddRG_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.0_AddRG_MODE.sh)
 
 
 
