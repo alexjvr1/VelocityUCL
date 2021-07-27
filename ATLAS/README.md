@@ -127,16 +127,18 @@ Use GATK3.8 for local realignment using:
 
 
 
+
+
 ### 6. Validate with PicardTools ValidateSamFile
 
-```
-qrsh -l tmem=34G,h_vmem=34G
+This can be run interactively if there are only a few samples. Or use these scripts: 
 
-cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus
+[02b.3_ValidateSamFile_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.3_ValidateSamFile_MUS.sh)
 
+[02b.3_ValidateSamFile_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.3_ValidateSamFile_MODC.sh)
 
+[02b.3_ValidateSamFile_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.3_ValidateSamFile_MODE.sh)
 
-```
 
 
 
