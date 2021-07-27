@@ -57,11 +57,13 @@ We're using a script for each population. Run these in the working directory to 
 ./script.sh
 ```
 
-[01a_museum_cutadapt_filtering_trimming.sh]()
+[01a_MUS_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MUS_cutadapt_filtering_trimming.sh)
 
-[01a_MODC_cutadapt_filtering_trimming.sh]()
+[01a_MODC_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODC_cutadapt_filtering_trimming.sh)
 
-[01a_MODE_cutadapt_filtering_trimming.sh]()
+[01a_MODE_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODE_cutadapt_filtering_trimming.sh)
+
+
 
 
 
