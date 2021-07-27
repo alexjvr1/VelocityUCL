@@ -24,9 +24,9 @@ What is the state of the art with poolseq data? Should we use these approaches i
 
 33 individuals from each museum species has been sequenced twice to increase sequence depth. We're concatenating these raw data together, then moving all samples to a folder called 01a_raw_museum_FINAL
 
-Use the [00_ConcatMusRpts.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/00_ConcatMusRpts.sh)
+Use the [00a_ConcatMusRpts.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/00a_ConcatMusRpts.sh)
 
-### 2. Remove adapter sequence using Cutadapt
+### 1. Remove adapter sequence using Cutadapt
 
 We're using a script for each population. Run these in the working directory to create the submission script in each case: 
 
@@ -42,7 +42,7 @@ We're using a script for each population. Run these in the working directory to 
 
 
 
-### 3. Map to Reference genome
+### 2a. Map to Reference genome
 
 Note that to use ATLAS correctly we will map unmerged reads.
 
@@ -57,7 +57,7 @@ ATLAS has an in-built function to annotate and merge these reads after mapping, 
 
 
 
-### 4. Add Read Groups and MarkDuplicates
+### 2b.0 Add Read Groups & 02b.1 MarkDuplicates
 
 We'll use PicardTools and GATK to add read group information to the bam files, and then to mark any PCR duplicates. 
 
@@ -82,7 +82,7 @@ Then mark duplicates
 
 
 
-### 5. Local realignment using GATK3.8
+### 02b.2 Local realignment using GATK3.8
 
 First create a dictionary for the reference genome if this is not available yet.
 
@@ -113,7 +113,7 @@ Use GATK3.8 for local realignment using:
 
 
 
-### 6. Validate with PicardTools ValidateSamFile
+### 02b.3 Validate with PicardTools ValidateSamFile
 
 This can be run interactively if there are only a few samples. Or use these scripts: 
 
@@ -139,17 +139,19 @@ No errors found
 
 
 
-### 7. ATLAS: SplitMerge
+### 03a.1 ATLAS: SplitMerge
 
 
 
 
 
-### 8. ATLAS: PMD
+### 03a.2 ATLAS: PMD
 
 
 
-### 9. ATLAS: recal
+### 03a.3 ATLAS: recal
+
+
 
 
 
