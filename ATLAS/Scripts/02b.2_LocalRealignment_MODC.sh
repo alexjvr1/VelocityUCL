@@ -26,7 +26,7 @@ GenomeAnalysisTK.jar=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysi
 
 
 #Set up ARRAY job
-#ls *bam | awk -F "." '{print $1}' >> modc.names
+ls $INPUT/*rmdup.bam |awk -F "/" '{print $NF}' | awk -F "." '{print $1}' > modc.names 
 NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
 
