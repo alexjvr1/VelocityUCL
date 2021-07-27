@@ -25,8 +25,8 @@ OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
 TAIL="R1.repaired.fastq.gz.repaired.merged.fastq.gz.bam"
 
 #Set up ARRAY job
-#ls *bam | awk -F "." '{print $1}' > modern.names 
-NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
+ls 02a_mapped_modern/*bam | awk -F "/" '{print $NF}' | awk -F "." '{print $1}' > modc.names 
+NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
 
 ##Add readgroups
