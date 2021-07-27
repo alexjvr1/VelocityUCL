@@ -13,13 +13,6 @@ E3 Aphantopus hyperantus
 I'm testing the raw data pre-processing and ATLAS pipeline on the UCL server (CS) 
 
 
-## Pre-processing: 
-
-
-
-2. Remove adapter sequence using Cutadapt
-
-3. Map to genome using BWA mem   #Note that unmerged reads are mapped as ATLAS has an in-built function to annotate and merge these reads. We need to keep this information because ATLAS also uses these data for the PMD recalibration
 
 4. Add RG & Remove duplicates  
 
@@ -62,6 +55,15 @@ We're using a script for each population. Run these in the working directory to 
 [01a_MODC_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODC_cutadapt_filtering_trimming.sh)
 
 [01a_MODE_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODE_cutadapt_filtering_trimming.sh)
+
+
+
+### 3. Map to Reference genome
+
+Note that to use ATLAS correctly we will map unmerged reads.
+
+ATLAS has an in-built function to annotate and merge these reads after mapping, and uses this sequence information for the PMD recalibration step. 
+
 
 
 
