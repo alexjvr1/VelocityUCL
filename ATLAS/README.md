@@ -49,6 +49,20 @@ What is the state of the art with poolseq data? Should we use these approaches i
 
 Use the [01a_ConcatMusRpts.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_ConcatMusRpts.sh)
 
+### 2. Remove adapter sequence using Cutadapt
+
+We're using a script for each population. Run these in the working directory to create the submission script in each case: 
+
+```
+./script.sh
+```
+
+[01a_museum_cutadapt_filtering_trimming.sh]()
+
+[01a_MODC_cutadapt_filtering_trimming.sh]()
+
+[01a_MODE_cutadapt_filtering_trimming.sh]()
+
 
 
 ### 4. Add RG, remove duplicates
