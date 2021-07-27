@@ -45,7 +45,9 @@ What is the state of the art with poolseq data? Should we use these approaches i
 ## Running Pipeline: 
 ### 1. Concat raw museum samples 
 
-33 individuals from each museum species has been sequenced twice to increase sequence depth. We're concatenating these raw data together, then moving all samples to a folder called raw_museum_FINAL
+33 individuals from each museum species has been sequenced twice to increase sequence depth. We're concatenating these raw data together, then moving all samples to a folder called 01a_raw_museum_FINAL
+
+Use the [01a_ConcatMusRpts.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_ConcatMusRpts.sh)
 
 
 
