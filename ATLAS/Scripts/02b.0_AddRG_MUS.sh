@@ -5,7 +5,7 @@
 #$ -l h_vmem=32G #enforced limit on shell memory usage
 #$ -l h_rt=1:00:00 ##wall time.  
 #$ -j y  #concatenates error and output files (with prefix job1)
-#$ -t 1-33
+#$ -t 1-48
 
 #Run on working directory
 cd $SGE_O_WORKDIR 
