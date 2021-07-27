@@ -65,11 +65,22 @@ Note that to use ATLAS correctly we will map unmerged reads.
 ATLAS has an in-built function to annotate and merge these reads after mapping, and uses this sequence information for the PMD recalibration step. 
 
 
+[02a_MapwithBWAmem.ARRAY_MUS_forATLAS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02a_MapwithBWAmem.ARRAY_MUS_forATLAS.sh)
+
+[02a_MapwithBWAmem.ARRAY_MODC_forATLAS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02a_MapwithBWAmem.ARRAY_MODC_forATLAS.sh)
+
+[02a_MapwithBWAmem.ARRAY_MODE_forATLAS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02a_MapwithBWAmem.ARRAY_MODE_forATLAS.sh)
+
+
+
+### 4. Add Read Groups and MarkDuplicates
+
+We'll use PicardTools and GATK to add read group information to the bam files, and then to mark any PCR duplicates. 
 
 
 
 
-### 4. Add RG, remove duplicates
+
 
 ### 5. Local realignment using GATK3.8
 
