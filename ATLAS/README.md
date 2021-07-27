@@ -65,7 +65,7 @@ java -jar $PICARD CreateSequenceDictionary R=GCA_902806685.1_iAphHyp1.1_genomic.
 ```
 
 
-Use GATK3.8 for local realignment using [02b.2_LocalRealignment.sh]()
+Use GATK3.8 for local realignment using [02b.2_LocalRealignment.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment.sh)
 
 
 
