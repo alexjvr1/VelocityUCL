@@ -35,6 +35,11 @@ Use these three scripts in this order:
 
 [00c_CollateAllMusSamples.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/00c_CollateAllMusSamples.sh)
 
+
+These take ~40minutes to run for E3
+
+
+
 ### 1. Remove adapter sequence using Cutadapt
 
 We're using a script for each population. Run these in the working directory to create the submission script in each case: 
@@ -48,6 +53,7 @@ We're using a script for each population. Run these in the working directory to 
 [01a_MODC_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODC_cutadapt_filtering_trimming.sh)
 
 [01a_MODE_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODE_cutadapt_filtering_trimming.sh)
+
 
 
 
@@ -66,34 +72,20 @@ ATLAS has an in-built function to annotate and merge these reads after mapping, 
 
 
 
-### 2b.0 Add Read Groups & 02b.1 MarkDuplicates
 
-We'll use PicardTools and GATK to add read group information to the bam files, and then to mark any PCR duplicates. 
+### 2b Process bam files before using ATLAS
 
+Step1. Add Read groups
 
-A script for each of the populations. The input files and RG information is changed for each: 
+Step2. Remove Duplicates
 
-[02b.0_AddRG_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.0_AddRG_MUS.sh)
+Step3. Local Realignment
 
-[02b.0_AddRG_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.0_AddRG_MODC.sh)
-
-[02b.0_AddRG_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.0_AddRG_MODE.sh)
-
-
-Then mark duplicates
-
-[02b.1_MarkDup_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.1_MarkDup_MUS.sh)
-
-[02b.1_MarkDup_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.1_MarkDup_MODC.sh)
-
-[02b.1_MarkDup_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.1_MarkDup_MODE.sh)
+Step4. Validate sam file
 
 
 
-
-### 02b.2 Local realignment using GATK3.8
-
-First create a dictionary for the reference genome if this is not available yet.
+We're using GATK3.8 for the local realignment. First we need to create a dictionary for the reference genome if this is not available yet.
 
 I'm running this in the interactive screen: 
 ```
@@ -109,33 +101,19 @@ java -jar $PICARD CreateSequenceDictionary R=GCA_902806685.1_iAphHyp1.1_genomic.
 
 ```
 
+Then run the processing scripts. There is a script for each of the populations. The input files and RG information is changed for each: 
 
-Use GATK3.8 for local realignment using:
+[02b_processbams_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b_processbams_MUS.sh)
 
-[02b.2_LocalRealignment_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment_MUS.sh)
+[02b_processbams_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b_processbams_MODC.sh)
 
-[02b.2_LocalRealignment_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment_MODC.sh)
-
-[02b.2_LocalRealignment_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.2_LocalRealignment_MODE.sh)
-
+[02b_processbams_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b_processbams_MODE.sh)
 
 
 
+Outputs are written to the 02a_mapped_* folders. The final validation files are named ${NAME}.validatesam. If there are no errors they'll simply say: "No errors found"
 
-### 02b.3 Validate with PicardTools ValidateSamFile
-
-This can be run interactively if there are only a few samples. Or use these scripts: 
-
-[02b.3_ValidateSamFile_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.3_ValidateSamFile_MUS.sh)
-
-[02b.3_ValidateSamFile_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.3_ValidateSamFile_MODC.sh)
-
-[02b.3_ValidateSamFile_MODE.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.3_ValidateSamFile_MODE.sh)
-
-
-Outputs are written to the 02a_mapped_* folders, and are names ${NAME}.validatesam. If there are no errors they'll simply say: "No errors found"
-
-
+e.g.
 ```
 cd 02a_mapped_museum
 cat *validatesam
