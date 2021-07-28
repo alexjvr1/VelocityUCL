@@ -129,6 +129,14 @@ No errors found
 ### 03a.1 ATLAS: SplitMerge
 
 
+```
+ATLAS=/share/apps/genomics/atlas-1.0/atlas
+
+ATLAS task=splitMerge bam=$i.bam
+```
+
+
+
 
 
 
