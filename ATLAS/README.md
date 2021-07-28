@@ -12,7 +12,7 @@ E3 Aphantopus hyperantus
 
 I'm testing the raw data pre-processing and ATLAS pipeline on the UCL server (CS) 
 
-
+Since many of the steps in this pipeline run fairly quickly we'll submit these commands sequentially rather than as an array. Too many small jobs can slow down or crash jobs on the server, so arrays should only be used for bigger jobs >1 hour each. Previous scripts written as arrays are kept here: https://github.com/alexjvr1/VelocityUCL/tree/main/ATLAS/Scripts/smallARRAYscripts
 
 
 What is the state of the art with poolseq data? Should we use these approaches in windows for our data? 
@@ -24,7 +24,7 @@ What is the state of the art with poolseq data? Should we use these approaches i
 
 33 individuals from each museum species has been sequenced twice to increase sequence depth. We're concatenating these raw data together, then moving all samples to a folder called 01a_raw_museum_FINAL
 
-Since the concat step runs fairly quickly we'll submit these commands sequentially rather than as an array. (Too many small jobs can slow down or crash jobs on the server, so arrays should only be used for bigger jobs >1 hour each).
+
 
 
 Use these three scripts in this order: 
