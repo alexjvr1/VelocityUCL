@@ -45,7 +45,7 @@ echo "while read NAME1 <&1; do java -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/$NAME1.$TAIL1 \
        O=$OUTPUT/$NAME1.RG.bam \
        RGID=E3mode \
-       RGLB=modern3 \
+       RGLB=modern4 \
        RGPL=ILLUMINA \
        RGPU=unit1 \
        RGSM=$NAME1; done 1<mode.names" >> 02b.0_AddRG.log
@@ -55,7 +55,7 @@ time while reads NAME1 <&1; do java -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/$NAME1$TAIL1 \
        O=$OUTPUT/$NAME1.RG.bam \
        RGID=E3mode \
-       RGLB=modern3 \
+       RGLB=modern4 \
        RGPL=ILLUMINA \
        RGPU=unit1 \
        RGSM=$NAME1; done 1<mode.names 
