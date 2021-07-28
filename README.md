@@ -106,6 +106,7 @@ file3.txt: OK
 |Software|version|path|
 |--------|--------|--------|
 |ANGSD|0.935|/share/apps/genomics/angsd-0.935/bin/angsd|
+|ATLAS| 1.0| /share/apps/genomics/atlas-1.0/atlas|
 |bamtools|2.5.1| /share/apps/genomics/bamtools-2.5.1/bin/bamtools|
 |BBmap|38.59| /share/apps/genomics/bbmap-38.59/bbmap.sh|
 |bcftools|1.9| /share/apps/genomics/bcftools-1.9/bin/bcftools|
