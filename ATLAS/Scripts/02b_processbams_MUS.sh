@@ -67,7 +67,7 @@ time while reads NAME1 <&1; do java -jar $PICARD AddOrReplaceReadGroups \
 #############################
 
 #Create list of bam files to process
-ls $INPUT/*RG.bam | awk -F "." '{print $1}' >> modc.names
+ls $INPUT/*RG.bam | awk -F "." '{print $1}' >> mus.names
 
 #Write command to log file
 echo "while read NAME2 <&2; do 
