@@ -24,7 +24,16 @@ What is the state of the art with poolseq data? Should we use these approaches i
 
 33 individuals from each museum species has been sequenced twice to increase sequence depth. We're concatenating these raw data together, then moving all samples to a folder called 01a_raw_museum_FINAL
 
-Use the [00a_ConcatMusRpts.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/00a_ConcatMusRpts.sh)
+Since the concat step runs fairly quickly we'll submit these commands sequentially rather than as an array. (Too many small jobs can slow down or crash jobs on the server, so arrays should only be used for bigger jobs >1 hour each).
+
+
+Use these three scripts in this order: 
+
+[00a_CreateInputs.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/00a_CreateInputs.sh)
+
+[00b_ConcatFastq.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/00b_ConcatFastq.sh)
+
+[00c_CollateAllMusSamples.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/00c_CollateAllMusSamples.sh)
 
 ### 1. Remove adapter sequence using Cutadapt
 
