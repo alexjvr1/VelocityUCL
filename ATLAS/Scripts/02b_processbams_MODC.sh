@@ -37,7 +37,7 @@ TAIL2="RG.bam"
 ############################
 
 #Create input file
-ls 02a_mapped_modern/*bam | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > modc.names 
+ls $INPUT/*bam | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > modc.names 
 
 #Write command to log file
 
