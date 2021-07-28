@@ -1,6 +1,6 @@
 #!/bin/bash
 #$ -S /bin/bash
-#$ -N C3.BWAmem_mod  ##job name
+#$ -N C3.mus_BWAmem  ##job name
 #$ -l tmem=16G #RAM
 #$ -l h_vmem=16G #enforced limit on memory shell usage
 #$ -l h_rt=10:00:00 ##wall time.  
