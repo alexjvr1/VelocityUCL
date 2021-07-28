@@ -80,7 +80,7 @@ VALIDATION_STRINGENCY=SILENT \
 CREATE_INDEX=true; done 2<modc.names" >> 02b.ProcessBams.log
 
 #Run command
-time while read NAM1 <&2; do java -jar $PICARD MarkDuplicates \
+time while read NAME2 <&2; do java -jar $PICARD MarkDuplicates \
 INPUT=$INPUT/$NAME2.$TAIL2 \
 OUTPUT=$OUTPUT/$NAME2.rmdup.bam \
 METRICS_FILE=$OUTPUT/$NAME2.dup.txt \
