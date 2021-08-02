@@ -381,7 +381,7 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
      - with average depth statistics for all populations
      - with reads and mapping rates for museum BAM files
 - Re-ran same 13 missing samples as before but outputted to 02a_mapped_museum.new
-- Continute to perform PCA using ANGSD on the BAM files for modern populations:
+- Continue to perform PCA using ANGSD on the BAM files for modern populations:
      - **ERROR:** 'Cannot allocate memory'
      - Continue code on a development cluster *qrsh -l tmem=62G,h_vmem=62G*
      - Join the cleaned data by site and allele
@@ -409,6 +409,24 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
           [1] 27
           ```
      - Need to join with the museum data too (skip this for now)
-     -  
+  
+ ## Monday 02/08/2021 🦋
+ - clone discoal repository into shared folder 
+     - *git clone https://github.com/kr-colab/discoal.git*
+ - install diploS/HIC 
+     - *wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh*
+     - *bash Anaconda3-5.0.1-Linux-x86_64.sh*
+     - *export PATH=/share/apps/anaconda3-5/bin:$PATH*
+     - *export LD_LIBRARY_PATH=/share/apps/anaconda3-5/lib:$LD_LIBRARY_PATH*
+     - *pip install tensorflow*
+          - **ERROR**: Command "/share/apps/anaconda3-5/bin/python -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-ntth0we5/grpcio/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-6jcu2ki2-record/install-record.txt --single-version-externally-managed --compile" failed with error code 1 in /tmp/pip-build-ntth0we5/grpcio/
+     - *pip install keras*
+          - **ERROR**: PermissionError: [Errno 13] Permission denied: '/share/apps/anaconda3-5/lib/python3.6/site-packages/Keras-2.4.3.dist-info'
+          - Cache entry deserialization failed, entry ignored
+     - *git clone https://github.com/kern-lab/diploSHIC.git*
+     - *cd diploSHIC*
+     - *python setup.py install*
+
+ 
 
               
