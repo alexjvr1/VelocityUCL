@@ -385,7 +385,7 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
      - **ERROR:** 'Cannot allocate memory'
      - Continue code on a development cluster *qrsh -l tmem=62G,h_vmem=62G*
      - Join the cleaned data by site and allele
-          - ```
+          ```
           library(dplyr)
           MODE.marker <- as.data.frame(MODETEST.clean$marker)
           colnames(MODE.marker) <- "marker"
@@ -410,23 +410,30 @@ CALLER="/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/03a_call_SNVs_UCL.sh"
           ```
      - Need to join with the museum data too (skip this for now)
   
- ## Monday 02/08/2021 🦋
- - clone discoal repository into shared folder 
-     - *git clone https://github.com/kr-colab/discoal.git*
- - install diploS/HIC 
-     - *wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh*
-     - *bash Anaconda3-5.0.1-Linux-x86_64.sh*
-     - *export PATH=/share/apps/anaconda3-5/bin:$PATH*
-     - *export LD_LIBRARY_PATH=/share/apps/anaconda3-5/lib:$LD_LIBRARY_PATH*
-     - *pip install tensorflow*
-          - **ERROR**: Command "/share/apps/anaconda3-5/bin/python -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-ntth0we5/grpcio/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-6jcu2ki2-record/install-record.txt --single-version-externally-managed --compile" failed with error code 1 in /tmp/pip-build-ntth0we5/grpcio/
-     - *pip install keras*
-          - **ERROR**: PermissionError: [Errno 13] Permission denied: '/share/apps/anaconda3-5/lib/python3.6/site-packages/Keras-2.4.3.dist-info'
-          - Cache entry deserialization failed, entry ignored
-     - *git clone https://github.com/kern-lab/diploSHIC.git*
-     - *cd diploSHIC*
-     - *python setup.py install*
-
+## Monday 02/08/2021 🦋
+- clone discoal repository into shared folder 
+    - *git clone https://github.com/kr-colab/discoal.git*
+- install diploS/HIC 
+    - *wget https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh*
+    - *bash Anaconda3-5.0.1-Linux-x86_64.sh*
+    - *export PATH=/share/apps/anaconda3-5/bin:$PATH*
+    - *export LD_LIBRARY_PATH=/share/apps/anaconda3-5/lib:$LD_LIBRARY_PATH*
+    - *pip install tensorflow*
+         - **ERROR**: Command "/share/apps/anaconda3-5/bin/python -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-ntth0we5/grpcio/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-6jcu2ki2-record/install-record.txt --single-version-externally-managed --compile" failed with error code 1 in /tmp/pip-build-ntth0we5/grpcio/
+    - *pip install keras*
+         - **ERROR**: PermissionError: [Errno 13] Permission denied: '/share/apps/anaconda3-5/lib/python3.6/site-packages/Keras-2.4.3.dist-info'
+         - Cache entry deserialization failed, entry ignored
+    - *git clone https://github.com/kern-lab/diploSHIC.git*
+    - *cd diploSHIC*
+    - *python setup.py install*
+         - **ERROR**: error: could not create '/share/apps/anaconda3-5/lib/python3.6/site-packages/shicstats.cpython-36m-x86_64-linux-gnu.so': Permission denied
+- run code in schmep node:
+     - *qrsh -l tmem=14G,h_vmem=14G*
+     - re-try installing keras and tensorflow
+          - keras installed successfully
+          - tensorflow outputting some error messages still
+     - re-try running *python setup.py install*
+          - permission granted but disk quota exceeded  
  
 
               
