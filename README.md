@@ -130,6 +130,40 @@ file3.txt: OK
 |vcftools|0.1.13| /share/apps/genomics/vcftools-0.1.13/bin/vcftools|
 
 
+For some software we have to export the path to the software and their libraries to our PATH: 
+
+python
+```
+export PATH=/share/apps/python-3.6.4-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.6.4-shared/lib:$LD_LIBRARY_PATH
+
+```
+
+java
+```
+export PATH=/share/apps/java/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
+```
+
+
+perl
+```
+export PATH=/share/apps/perl-5.30.0/bin:$PATH
+```
+
+samtools
+```
+export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
+
+```
+
+bwa
+```
+export PATH=/share/apps/genomics/bwa-0.7.17/bwa:$PATH
+```
+
+
 ### Note on renaming files
 
 Liverpool raw data is named with digits and a dash before the sample names. e.g. 33-AH-01-1900-47_191121_L001_R2.fastq.gz
