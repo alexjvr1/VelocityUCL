@@ -106,7 +106,8 @@ file3.txt: OK
 |Software|version|path|
 |--------|--------|--------|
 |ANGSD|0.935|/share/apps/genomics/angsd-0.935/bin/angsd|
-|ATLAS| 1.0| /share/apps/genomics/atlas-1.0/atlas|
+|ATLAS| 0.9 ** latest version|/share/apps/genomics/atlas-0.9/atlas|
+|ATLAS| 1.0** older version| /share/apps/genomics/atlas-1.0/atlas|
 |bamtools|2.5.1| /share/apps/genomics/bamtools-2.5.1/bin/bamtools|
 |BBmap|38.59| /share/apps/genomics/bbmap-38.59/bbmap.sh|
 |bcftools|1.9| /share/apps/genomics/bcftools-1.9/bin/bcftools|
@@ -131,6 +132,12 @@ file3.txt: OK
 
 
 For some software we have to export the path to the software and their libraries to our PATH: 
+
+ATLAS
+```
+export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
+```
+
 
 python
 ```
