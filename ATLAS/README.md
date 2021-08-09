@@ -125,6 +125,17 @@ No errors found
 ```
 
 
+## ATLAS
+
+The version numbers decrease, so v.0.9 is the latest version (not v.1.0). 
+
+To use ATLAS: 
+```
+ATLAS=/share/apps/genomics/atlas-0.9/atlas
+
+export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
+```
+
 
 ### 03a.1 ATLAS: SplitMerge
 
@@ -141,6 +152,9 @@ ATLAS task=splitMerge bam=$i.bam
 
 
 ### 03a.2 ATLAS: PMD
+
+
+Estimate 
 
 
 
