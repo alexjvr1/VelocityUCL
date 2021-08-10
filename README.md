@@ -77,6 +77,20 @@ scp -P 2222 *fastq.gz ajansen@localhost:/SAN/ugi/LepGenomics/C3_Aricia_agestis
 This will copy the file data.txt in the user alice’s home directory on their local machine to their home directory on the cluster, via the machine tails.
 ```
 
+Specifically: 
+```
+#At destination
+#open window1 and activate port forwarding: 
+
+ssh -l ajansen -L 3000:morecambe.cs.ucl.ac.uk:22 ajansen@tails.cs.ucl.ac.uk
+
+#open window2 and rsync files of interest to the local directory:
+
+rsync -auve "ssh -p 3000" $i ajansen@localhost:/SAN/ugi/LepGenomics/C3_Aricia_agestis/04_diploSHIC_simulations_AJvR/job0022*fvec .
+
+```
+
+
 ### Check that files have transferred properly
 
 We can use md5sum to check if files are the same at origin and destination: 
