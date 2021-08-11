@@ -13,6 +13,17 @@ diploSHIC paper [here](https://academic.oup.com/g3journal/article/8/6/1959/60280
 We'll use a modification of this method as implemented by [Kaut et al. 2020](https://www.nature.com/articles/s41586-020-2845-0?fbclid=IwAR3gk7HEGmPn5V0giczpdMycAgpu-Xttr8_cD550VPuW8tdQH6KSCYN_e60) on pairwise cichlid populations. 
 
 
+# Set up work environment
+
+We need three python3 packages for working with machine learning algorithms and genomic data: 
+```
+export PATH=/share/apps/python-3.6.4-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.6.4-shared/lib:$LD_LIBRARY_PATH
+
+python3 -m pip install scikit-allel tensorflow keras --user
+```
+
+
 # Initial tests on a single population
 
 We're testing the method on C3_Aricia_agestis MODC
