@@ -23,6 +23,21 @@ export LD_LIBRARY_PATH=/share/apps/python-3.6.4-shared/lib:$LD_LIBRARY_PATH
 python3 -m pip install scikit-allel tensorflow keras --user
 ```
 
+And install diploSHIC
+```
+git clone https://github.com/kern-lab/diploSHIC.git
+cd diploSHIC
+source /share/apps/source_files/python/python-3.9.5.source
+python3 -m pip install scikit-allel tensorflow keras --user
+python3 setup.py install --user
+
+Then, run:
+
+python3 diploSHIC.py -h
+
+to verify the install went smoothly.
+```
+
 
 # Initial tests on a single population
 
