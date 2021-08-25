@@ -139,9 +139,10 @@ export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.10
 
 ### 03a.1 ATLAS: SplitMerge
 
+**The latest version of ATLAS is 0.9, not 1.0. Ed upgraded to v.0.9 on the UCL shared apps folder so that I can run splitMerge and PMD on the museum samples. 
 
 ```
-ATLAS=/share/apps/genomics/atlas-1.0/atlas
+ATLAS=/share/apps/genomics/atlas-0.9/atlas
 
 ATLAS task=splitMerge bam=$i.bam
 ```
