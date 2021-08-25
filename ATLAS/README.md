@@ -77,7 +77,7 @@ ATLAS has an in-built function to annotate and merge these reads after mapping, 
 
 Step1. Add Read groups
 
-Step2. Remove Duplicates
+Step2. Mark Duplicates
 
 Step3. Local Realignment
 
@@ -123,6 +123,21 @@ No errors found
 No errors found
 
 ```
+
+If any errors are found at this point they need to be corrected. Run ValidateSam on previous versions of the bam file to establish where the error started. 
+
+eg. 
+
+MATE_NOT_FOUND error means sequences were removed at one step in the processing. Sequences should be marked but not removed if they are problematic (e.g. mark duplicates rather than remove duplicates). 
+
+Mate name or information errors can be corrected with [FixMateInformation](https://gatk.broadinstitute.org/hc/en-us/articles/360036713471-FixMateInformation-Picard-)
+
+ERROR:MISMATCH_MATE_ALIGNMENT_START	1
+
+ERROR:MISMATCH_MATE_CIGAR_STRING	1
+
+
+Rerun ValidateSam on the final bams to make sure there are no errors. 
 
 
 ## ATLAS
