@@ -136,8 +136,48 @@ ERROR:MISMATCH_MATE_ALIGNMENT_START	1
 
 ERROR:MISMATCH_MATE_CIGAR_STRING	1
 
+e.g for E3 MODE
+```
+pwd
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/02a_mapped_modern_exp
+
+cat *validatesam
+
+#Most of the files have "No errors found", but for four samples we have: 
+## HISTOGRAM	java.lang.String
+Error Type	Count
+ERROR:MISMATCH_MATE_CIGAR_STRING	1
+
+#To find the files: 
+grep "MISMATCH_MATE_CIGAR_STRING" *validatesam
+
+AH-02-2019-47.validatesam:ERROR:MISMATCH_MATE_CIGAR_STRING	1
+AH-02-2019-48.validatesam:ERROR:MISMATCH_MATE_CIGAR_STRING	2
+AH-02-2019-58.validatesam:ERROR:MISMATCH_MATE_CIGAR_STRING	1
+AH-02-2019-69.validatesam:ERROR:MISMATCH_MATE_CIGAR_STRING	1
+
+#Then we can run FixMateInformation for these four samples
+
+#Set path
+export PATH=/share/apps/java/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
+PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
+
+#Run this for each of the four samples. 
+java -jar $PICARD FixMateInformation \
+       I=AH-02-2019-47.realn.bam \
+       O=AH-02-2019-47.realn.fixed_mate.bam \
+       ADD_MATE_CIGAR=true
+
+#Run ValidateSam on the fixed files to check that this has worked. 
+
+```
+
 
 Rerun ValidateSam on the final bams to make sure there are no errors. 
+
+
+
 
 
 ## ATLAS
@@ -147,7 +187,6 @@ The version numbers decrease, so v.0.9 is the latest version (not v.1.0).
 To use ATLAS: 
 ```
 ATLAS=/share/apps/genomics/atlas-0.9/atlas
-
 export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
 ```
 
@@ -156,10 +195,11 @@ export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.10
 
 **The latest version of ATLAS is 0.9, not 1.0. Ed upgraded to v.0.9 on the UCL shared apps folder so that I can run splitMerge and PMD on the museum samples. 
 
+Create a text file with the ReadGroup names, cycle length (if single end), and paired/single
+
 ```
 ATLAS=/share/apps/genomics/atlas-0.9/atlas
-
-ATLAS task=splitMerge bam=$i.bam
+for i in $(ls *realn.bam); do $ATLAS task=splitMerge bam=$i; done
 ```
 
 
