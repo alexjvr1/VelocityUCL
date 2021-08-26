@@ -24,7 +24,7 @@ OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum
 TAIL1=realn.bam
 TAIL2=realn_mergedReads.bam
 RGFILE=RG.txt
-LENGTH
+LENGTH=50
 
 
 #Set paths
@@ -35,7 +35,7 @@ export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.10
 NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
 
 #Run script
-time $ATLAS task=splitMerge bam=$INPUT/${NAME}.$TAIL1 readGroupSettings=RG.txt
+time $ATLAS task=splitMerge bam=$INPUT/${NAME}.$TAIL1 readGroupSettings=$RGFILE
 
-time $ATLAS task=PMD bam=$INPUT/${NAME}.$TAIL2 fasta=$REF length=LENGTH
+time $ATLAS task=PMD bam=$INPUT/${NAME}.$TAIL2 fasta=$REF length=$LENGTH
 
