@@ -2,6 +2,8 @@
 
 Aim: Pipeline to use museum Lep samples
 
+papers [here](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1755-0998.2011.03052.x?casa_token=YTs1POVOPK4AAAAA%3A7XFOKFfBpfpIGMPdhKVZlFNkla5EuUg40XKAgqg4FAVCpilKt1qG6QfobST675at_brqhhiOklqQ6w); [here](https://onlinelibrary.wiley.com/doi/full/10.1111/mec.12516?casa_token=yegfoQbNAncAAAAA%3AUxANb32iov7KiQJzBPu6edGendNDI6EfJ3hBl1-wPiz7hrQOaZf7zznOH9uXmDAnM2sq1gdP34HE0w): [here](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-020-6594-0); [here](https://onlinelibrary.wiley.com/doi/full/10.1002/ece3.3065); [here](https://onlinelibrary.wiley.com/doi/full/10.1111/1755-0998.13082?casa_token=SwEzkfoTKcoAAAAA%3ANY3ox93WiWfk8JwOGyYygbh1fViES9ReVP3c55BMrqQ9OoxjvZV3Bwle1AIu8jGTuEixneuCfc_sgA); [here](https://onlinelibrary.wiley.com/doi/full/10.1111/syen.12481): [here](https://onlinelibrary.wiley.com/doi/full/10.1111/1755-0998.13245?casa_token=NNHXxQWaA7IAAAAA%3AbJtwuQJOVentokJAraPq9AQzYGSiUiT2GmZ3KzLdjv-zc9NW295hciVOWImnFZ7nqpzi6aROWZw-lA); [here](https://onlinelibrary.wiley.com/doi/full/10.1111/1755-0998.13269); 
+
 Cross-species comparison of genomic data quality using lab protocol (designed by Carl) and Bioinformatic pipeline. 
 
 Questions
