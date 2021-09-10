@@ -8,6 +8,16 @@ Questions
 
 1) What factors predict data quality (sample quality, sample preservation agent (e.g. dessication vs chemical), DNA concentrations.. what else?)
 
+2) Does the PMD profile change vs age and preservation method? 
+
+3) Does PMD change He and nuc div? 
+
+4) Does depth, sequence length or insert size affect estimates of He and nucleotide diversity? (within species) 
+
+5) Can we efficiently compare between modern and museum data? Do we have to make any corrections? e.g. subsample to the same depth
+
+expectation 1) Based on prelim data it looks like we have good museum data (nr of reads) but short reads. So less of the genome is covered compared to the modern data. 
+
 
 ## Initial check of data qualty vs DNA extraction concentrations for E3 Aphantopus hyperantus
 
@@ -28,4 +38,20 @@ ggplot(E3, aes(x=DNAExtraction_concentration.ng.ul., y=mapped_merged.perc, color
 
 dev.off()
 ```
+
+![alt_txt][Fig1]
+
+[Fig1]:https://user-images.githubusercontent.com/12142475/132857971-b267556e-9d9d-4f07-a182-cd2e09c93449.png
+
+![alt_txt][Fig2]
+
+[Fig2]:https://user-images.githubusercontent.com/12142475/132857979-6accd49b-8bf9-4b6a-a0c1-b4c9b34e123f.png
+
+![alt_txt][Fig3]
+
+[Fig3]:https://user-images.githubusercontent.com/12142475/132857982-463e57f2-1b61-4625-9df5-846a8c19303b.png
+
+
+
+
 
