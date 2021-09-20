@@ -67,7 +67,7 @@ $angsd -b ANGDS_mod.names -ref RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna 
 
 $angsd -b ANGDS_mode.names -ref RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna -out 03.1_ANGSD_2021/MODE.qc -r LR761675.1 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 20 -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 &> /dev/null
 
-$angsd -b ANGDS_mode.names -ref RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna -out 03.1_ANGSD_2021/MUS.qc -r LR761675.1 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 0 -trim 0 -C 50 -baq 1 -minMapQ 20 -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 &> /dev/null
+$angsd -b ANGSD_mus.names -ref RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna -out 03.1_ANGSD_2021/MUS.qc -r LR761675.1 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 0 -trim 0 -C 50 -baq 1 -minMapQ 20 -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 &> /dev/null
 
 ##Use NGStools script (plotQC.R) to calculate distributions
 /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_2021
@@ -99,7 +99,11 @@ MUS
 
 ![alt_txt][MUS.1]
 
-[MUS.1]:https://user-images.githubusercontent.com/12142475/134007897-b2abae91-6206-4514-a5c2-2ad2190f5ecb.png
+[MUS.1]:https://user-images.githubusercontent.com/12142475/134025020-5240366a-5245-48f7-93c6-41774325d27d.png
+
+![alt_txt][MUS.2]
+
+[MUS.2]:https://user-images.githubusercontent.com/12142475/134025047-d5700ae4-6464-4863-a792-5dbc72bdec63.png
 
 
 
@@ -112,17 +116,18 @@ POP=mod
 #POP=mus
 REGION=LR761675.1
 PP=1
-#PP=0 for museum samples because sequences are merged into single reads. 
+##PP=0 for museum samples because sequences are merged into single reads. 
 #PP=0
-minDP
-maxDP
+##Depth filters obtained from figures above
+minDP=17
+maxDP=350
 OUTDIR=$SPECIESDIR/03.1_ANGSD/03.1_SAF
 C=50
-MININD=
+MININD=10
 GL=1
 
 time $angsd -b ANGDS_$POP.names -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs $PP -r $REGION
--GL $GL -doSaf 1 -anc $SPECIESDIR/RefGenome/*fna -ref $SPECIESDIR/RefGenome/*fna -doCounts 1 -setMinDepthInd $minDP -setMaxDepth $maxDP -doMajorMinor 4 -out /newhome/aj18951/E3_Aphantopus_hyperantus_2020/03.1_ANGSD_2021/03.1_SAF/$POP.$REGION.SEPT20 -C $C -baq 1 -dumpCounts 2 -doDepth 1 -doGlf 2 -minInd $MININD
+-GL $GL -doSaf 1 -anc $SPECIESDIR/RefGenome/*fna -ref $SPECIESDIR/RefGenome/*fna -doCounts 1 -setMinDepth $minDP -setMaxDepth $maxDP -doMajorMinor 4 -out /newhome/aj18951/E3_Aphantopus_hyperantus_2020/03.1_ANGSD_2021/03.1_SAF/$POP.$REGION.SEPT20 -C $C -baq 1 -dumpCounts 2 -doDepth 1 -doGlf 2 -minInd $MININD
 ```
 
 
@@ -131,7 +136,24 @@ time $angsd -b ANGDS_$POP.names -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueO
 
 
 ```
+SPECIESDIR=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus
+POP=mod
+#POP=mode
+#POP=mus
+REGION=LR761675.1
+PP=1
+##PP=0 for museum samples because sequences are merged into single reads. 
+#PP=0
+##Depth filters obtained from figures above
+minDP=17
+maxDP=350
+OUTDIR=$SPECIESDIR/03.1_ANGSD/03.1_SAF
+C=50
+MININD=10
+GL=2
 
+time $angsd -b ANGDS_$POP.names -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs $PP -r $REGION
+-GL $GL -doSaf 1 -anc $SPECIESDIR/RefGenome/*fna -ref $SPECIESDIR/RefGenome/*fna -doCounts 1 -setMinDepth $minDP -setMaxDepth $maxDP -doMajorMinor 4 -out /newhome/aj18951/E3_Aphantopus_hyperantus_2020/03.1_ANGSD_2021/03.1_SAF/$POP.$REGION.$GL.SEPT20 -C $C -baq 1 -dumpCounts 2 -doDepth 1 -doGlf 2 -minInd $MININD
 
 ```
 
