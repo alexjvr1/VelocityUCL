@@ -45,6 +45,51 @@ See Section 4 [here](https://onlinelibrary.wiley.com/doi/10.1111/mec.16077)
 
 
 
+### Data quality
+
+Check the bam files to estimate global depth, individual depth distribution, and distribution of base qualities. 
+
+
+MODERN
+```
+#Run in interactive node
+qrsh -l tmem=32G, h_vmem=32G
+
+#Define angsd
+angsd=/share/apps/genomics/angsd-0.935/bin/angsd
+
+#Create two input files that list the bam file names
+ls 02a_mapped_modern/*realn_mergedReads.bam >> ANGDS_mod.names
+ls 02a_mapped_modern_exp/*realn_mergedReads.bam >> ANGDS_mode.names
+
+
+$angsd -b ANGDS_mod.names -ref RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna -out 03.1_ANGSD_2021/MODC.qc -r LR761675.1 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 20 -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 &> /dev/null
+
+$angsd -b ANGDS_mode.names -ref RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna -out 03.1_ANGSD_2021/MODE.qc -r LR761675.1 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs 1 -trim 0 -C 50 -baq 1 -minMapQ 20 -doQsDist 1 -doDepth 1 -doCounts 1 -maxDepth 500 &> /dev/null
+
+##Use NGStools script (plotQC.R) to calculate distributions
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_2021
+
+Rscript plotQC.R MODC.qc 2> /dev/null
+Rscript plotQC.R MODE.qc 2> /dev/null
+```
+
+MODE
+
+
+![alt_txt][MODE.1]
+
+[MODE.1]:https://user-images.githubusercontent.com/12142475/134003399-b9f6b15e-8c35-47fe-9062-6f05c73c1468.png
+
+
+MODC
+
+![alt_txt][MODC.1]
+
+[MODC.1]:https://user-images.githubusercontent.com/12142475/134003414-733d2649-67c1-4aea-9288-7a0b0dae29c6.png
+
+
+
 
 
 ### GL 1 - Full Data
