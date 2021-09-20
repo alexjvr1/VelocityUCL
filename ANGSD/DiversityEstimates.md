@@ -136,8 +136,8 @@ time $angsd -b ANGDS_$POP.names -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueO
 
 MODC
 ```
--> Total number of sites analyzed: 5780437
-	-> Number of sites retained after filtering: 5377972 
+-> Total number of sites analyzed: 5780437  (previous 5715589)
+	-> Number of sites retained after filtering: 5377972  (4964197)
 	[ALL done] cpu-time used =  1420.85 sec
 	[ALL done] walltime used =  1425.00 sec
 real	23m45.665s
@@ -148,8 +148,8 @@ sys	0m8.385s
 
 MODE
 ```
--> Total number of sites analyzed: 5688313
-	-> Number of sites retained after filtering: 5227896 
+-> Total number of sites analyzed: 5688313 (5688111)
+	-> Number of sites retained after filtering: 5227896  (5085827)
 	[ALL done] cpu-time used =  1172.12 sec
 	[ALL done] walltime used =  1176.00 sec
 
@@ -158,14 +158,29 @@ user	19m20.978s
 sys	0m11.173s
 ```
 
-MUS
+MUS   - we have an order of magnitude more SNPs! This is most likely due to the change in mapDamage (i.e. explicitly using merged reads only), and perhaps to do with the depth filters that were quite strict in the first run. 
 ```
+	-> Total number of sites analyzed: 4784988  (4786808)
+	-> Number of sites retained after filtering: 2978827 (276245)
+	[ALL done] cpu-time used =  476.66 sec
+	[ALL done] walltime used =  479.00 sec
 
+real	7m59.237s
+user	7m54.824s
+sys	0m1.867s
 ```
 
 
 #### Estimate SFS
 
+```
+realSFS=/share/apps/genomics/angsd-0.935/bin/realSFS 
+
+cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_2021/03.1_SAF/
+
+$realSFS mode.LR761675.1.1.SEPT20.saf.idx mod.LR761675.1.SEPT20.saf.idx -fold 1 > MODE.MODC.fold.sfs
+
+```
 
 
 
