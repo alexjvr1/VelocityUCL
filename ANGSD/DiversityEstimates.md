@@ -109,6 +109,9 @@ MUS
 
 ### GL 1 - Full Data
 
+
+#### Estimate SAF
+
 ```
 SPECIESDIR=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus
 POP=mod
@@ -129,6 +132,41 @@ GL=1
 time $angsd -b ANGDS_$POP.names -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs $PP -r $REGION
 -GL $GL -doSaf 1 -anc $SPECIESDIR/RefGenome/*fna -ref $SPECIESDIR/RefGenome/*fna -doCounts 1 -setMinDepth $minDP -setMaxDepth $maxDP -doMajorMinor 4 -out /newhome/aj18951/E3_Aphantopus_hyperantus_2020/03.1_ANGSD_2021/03.1_SAF/$POP.$REGION.SEPT20 -C $C -baq 1 -dumpCounts 2 -doDepth 1 -doGlf 2 -minInd $MININD
 ```
+
+
+MODC
+```
+-> Total number of sites analyzed: 5780437
+	-> Number of sites retained after filtering: 5377972 
+	[ALL done] cpu-time used =  1420.85 sec
+	[ALL done] walltime used =  1425.00 sec
+real	23m45.665s
+user	23m32.493s
+sys	0m8.385s
+```
+
+
+MODE
+```
+-> Total number of sites analyzed: 5688313
+	-> Number of sites retained after filtering: 5227896 
+	[ALL done] cpu-time used =  1172.12 sec
+	[ALL done] walltime used =  1176.00 sec
+
+real	19m35.369s
+user	19m20.978s
+sys	0m11.173s
+```
+
+MUS
+```
+
+```
+
+
+#### Estimate SFS
+
+
 
 
 
