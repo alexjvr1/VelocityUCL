@@ -41,7 +41,7 @@ See Section 4 [here](https://onlinelibrary.wiley.com/doi/10.1111/mec.16077)
 
 3. Add RG, mark Duplicates, and local realignment 
 
-**I've removed the merging step because only a very small portion of reads need to be merged. 
+4. SplitMerge with ATLAS to merge overlapping reads. 
 
 
 
