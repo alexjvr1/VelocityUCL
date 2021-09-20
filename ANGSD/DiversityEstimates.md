@@ -72,6 +72,8 @@ $angsd -b ANGDS_mode.names -ref RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
 ##Use NGStools script (plotQC.R) to calculate distributions
 /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_2021
 
+export PATH=/share/apps/R-4.0.3/bin:$PATH
+
 Rscript plotQC.R MODC.qc 2> /dev/null
 Rscript plotQC.R MODE.qc 2> /dev/null
 Rscript plotQC.R MUS.qc 2> /dev/null
@@ -95,14 +97,32 @@ MODC
 
 MUS
 
+![alt_txt][MUS.1]
 
+[MUS.1]:https://user-images.githubusercontent.com/12142475/134007897-b2abae91-6206-4514-a5c2-2ad2190f5ecb.png
 
 
 
 ### GL 1 - Full Data
 
 ```
+SPECIESDIR=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus
+POP=mod
+#POP=mode
+#POP=mus
+REGION=LR761675.1
+PP=1
+#PP=0 for museum samples because sequences are merged into single reads. 
+#PP=0
+minDP
+maxDP
+OUTDIR=$SPECIESDIR/03.1_ANGSD/03.1_SAF
+C=50
+MININD=
+GL=1
 
+time $angsd -b ANGDS_$POP.names -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs $PP -r $REGION
+-GL $GL -doSaf 1 -anc $SPECIESDIR/RefGenome/*fna -ref $SPECIESDIR/RefGenome/*fna -doCounts 1 -setMinDepthInd $minDP -setMaxDepth $maxDP -doMajorMinor 4 -out /newhome/aj18951/E3_Aphantopus_hyperantus_2020/03.1_ANGSD_2021/03.1_SAF/$POP.$REGION.SEPT20 -C $C -baq 1 -dumpCounts 2 -doDepth 1 -doGlf 2 -minInd $MININD
 ```
 
 
