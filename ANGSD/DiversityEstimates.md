@@ -180,6 +180,8 @@ cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_2021/03.1_SAF/
 
 $realSFS mode.LR761675.1.1.SEPT20.saf.idx mod.LR761675.1.SEPT20.saf.idx -fold 1 > MODE.MODC.fold.sfs
 
+
+Will run optimization on nSites: 5170774
 ```
 
 
