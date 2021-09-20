@@ -180,8 +180,11 @@ cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_2021/03.1_SAF/
 
 $realSFS mode.LR761675.1.1.SEPT20.saf.idx mod.LR761675.1.SEPT20.saf.idx -fold 1 > MODE.MODC.fold.sfs
 
-
+MODE-MODC:
 Will run optimization on nSites: 5170774
+
+MODE-MUS
+Will run optimization on nSites: 2945538
 ```
 
 
@@ -202,7 +205,7 @@ PP=1
 ##Depth filters obtained from figures above
 minDP=17
 maxDP=350
-OUTDIR=$SPECIESDIR/03.1_ANGSD/03.1_SAF
+OUTDIR=$SPECIESDIR/03.1_ANGSD/03.1_SAF.FULL.GL2
 C=50
 MININD=10
 GL=2
