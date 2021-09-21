@@ -134,7 +134,7 @@ file3.txt: OK
 |gcc|9.2.0|/share/apps/gcc-9.2.0/bin/gcc|
 |GenomeAnalysisTK.jar|3.7| /share/apps/genomics/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar|
 |java|| /share/apps/java/bin/java|
-|MapDamage|2.1.1| /share/apps/genomics/mapDamage-2.1.1/bin/mapDamage|
+|MapDamage|2.1.1| /share/apps/python-3.8.5-shared/bin/mapDamage **export python and R to PATH. See below**|
 |perl ||/share/apps/perl/bin/perl|
 |picard |2.20.3|/share/apps/genomics/picard-2.20.3/bin/picard.jar|
 |plink2 |v.2|/share/apps/genomics/plink-2.0/bin/plink2|
@@ -152,6 +152,15 @@ ATLAS
 export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
 ```
 
+bwa
+```
+export PATH=/share/apps/genomics/bwa-0.7.17/bwa:$PATH
+```
+
+perl
+```
+export PATH=/share/apps/perl-5.30.0/bin:$PATH
+```
 
 python
 ```
@@ -166,11 +175,21 @@ export PATH=/share/apps/java/bin:$PATH
 export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
 ```
 
+mapDamage
+```
+# Software
+##python
+export PATH=/share/apps/python-3.8.5-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.8.5-shared/lib:$LD_LIBRARY_PATH
 
-perl
+##R
+export PATH=/share/apps/R-4.0.3/bin:$PATH
+
+##mapDamage
+mapDamage="/share/apps/python-3.8.5-shared/bin/mapDamage"
+
 ```
-export PATH=/share/apps/perl-5.30.0/bin:$PATH
-```
+
 
 samtools
 ```
@@ -179,10 +198,7 @@ export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
 
 ```
 
-bwa
-```
-export PATH=/share/apps/genomics/bwa-0.7.17/bwa:$PATH
-```
+
 
 
 ### Note on renaming files
