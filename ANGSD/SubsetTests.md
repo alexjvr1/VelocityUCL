@@ -170,4 +170,37 @@ sys	0m0.116s
 ```
 
 
+MODE 
+```
+	-> Tue Sep 21 15:26:29 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 921428
+	-> Number of sites retained after filtering: 807561 
+	[ALL done] cpu-time used =  57.30 sec
+	[ALL done] walltime used =  58.00 sec
 
+real	0m58.554s
+user	0m57.001s
+sys	0m0.316s
+
+
+```
+
+
+
+
+MUS
+```
+	-> Tue Sep 21 15:36:38 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 671007
+	-> Number of sites retained after filtering: 112500 
+	[ALL done] cpu-time used =  7.97 sec
+	[ALL done] walltime used =  10.00 sec
+
+real	0m9.517s
+user	0m7.835s
+sys	0m0.148s
+
+
+```
