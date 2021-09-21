@@ -238,7 +238,7 @@ $realSFS fst stats MODC.MODE.fstout.fst.idx
 	-> Assuming idxname:MODC.MODE.fstout.fst.idx
 	-> Assuming .fst.gz file: MODC.MODE.fstout.fst.gz
 	-> FST.Unweight[nObs:746179]:0.043575 Fst.Weight:0.127231
-0.043575	0.127231    (OLD=0.123635)
+0.043575	0.127231    (OLD=0.123635) (GL2.FullData=0.120855)
 
 
 ### MODC-MUS
@@ -249,7 +249,7 @@ $realSFS fst stats MODC.MUS.fstout.fst.idx
 	-> Assuming idxname:MODC.MUS.fstout.fst.idx
 	-> Assuming .fst.gz file: MODC.MUS.fstout.fst.gz
 	-> FST.Unweight[nObs:110128]:0.057906 Fst.Weight:0.105808
-0.057906	0.105808   (OLD=0.073771)
+0.057906	0.105808   (OLD=0.073771)  (GL2.FullData=0.093701)
 
 
 ### MODE-MUS
@@ -260,7 +260,7 @@ $realSFS fst stats MODE.MUS.fstout.fst.idx
 	-> Assuming idxname:MODE.MUS.fstout.fst.idx
 	-> Assuming .fst.gz file: MODE.MUS.fstout.fst.gz
 	-> FST.Unweight[nObs:110083]:0.114075 Fst.Weight:0.207352
-0.114075	0.207352   (OLD=0.211117)
+0.114075	0.207352   (OLD=0.211117)   (GL2.FullData=0.210704)
 
 
 ```
@@ -274,12 +274,14 @@ $realSFS fst stats2 MODC.MUS.fstout.fst.idx -win 50000 -step 10000 > slidingwind
 	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
 win:50000 step:10000
 nSites:110128
+
 [ajansen@abner-601-1 03a_ANGSD]$ $realSFS fst stats2 MODC.MODE.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODC.MODE
 	-> Assuming idxname:MODC.MODE.fstout.fst.idx
 	-> Assuming .fst.gz file: MODC.MODE.fstout.fst.gz
 	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
 win:50000 step:10000
 nSites:746179
+
 [ajansen@abner-601-1 03a_ANGSD]$ $realSFS fst stats2 MODE.MUS.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODE.MUS
 	-> Assuming idxname:MODE.MUS.fstout.fst.idx
 	-> Assuming .fst.gz file: MODE.MUS.fstout.fst.gz
@@ -288,8 +290,39 @@ win:50000 step:10000
 nSites:110083
 
 
+
 ```
 
+
+
+
+## GL2.Full data
+
+```
+fst stats2 MODC.MUS.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODC.MUS
+-> Assuming idxname:MODC.MUS.fstout.fst.idx
+	-> Assuming .fst.gz file: MODC.MUS.fstout.fst.gz
+	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
+win:50000 step:10000
+nSites:110128
+
+
+$realSFS fst stats2 MODC.MODE.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODC.MODE
+	-> Assuming idxname:MODC.MODE.fstout.fst.idx
+	-> Assuming .fst.gz file: MODC.MODE.fstout.fst.gz
+	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
+win:50000 step:10000
+nSites:746179
+
+
+$realSFS fst stats2 MODE.MUS.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODE.MUS
+	-> Assuming idxname:MODE.MUS.fstout.fst.idx
+	-> Assuming .fst.gz file: MODE.MUS.fstout.fst.gz
+	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
+win:50000 step:10000
+nSites:110083
+
+```
 
 
 
