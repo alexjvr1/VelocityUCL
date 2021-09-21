@@ -65,14 +65,15 @@ AH-02-2019-52
 ```
 
 ```
-qrsh
+qrsh -l tmem=16G, h_vmem=16G
 
 /share/apps/genomics/samtools-1.9/bin/samtools
 while read NAME <&4; do $samtools view $NAME.$TAIL "LR761675.1:1-1000000" -o $NAME.LR75.subset.bam; done 4<subset.list
 ```
 
+## MapDamage tests
 
-## Test MapDamage is working on merged reads
+### Test MapDamage is working on bbmerge reads (ANGSD pipeline)
 
 
 ```
@@ -98,3 +99,16 @@ time $mapDamage --merge-libraries -i AH-01-1900-04.LR75.subset.bam -d MAPDAMAGE 
 
 
 ```
+
+This works. The samples have been merged with bbMerge before mapping to the reference. 
+
+
+### Test MapDamage is working ATLAS merged bams 
+
+
+We'll try this with the modern samples that were merged using SplitMerge from Atlas 
+```
+
+```
+
+
