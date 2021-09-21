@@ -341,4 +341,27 @@ $thetaStat do_stat MUS.thetas.idx -win 50000 -step 10000 -outnames E3.MUS.theta.
 ```
 
 
+Copy to the mac
+```
+/SAN/ugi/LepGenomics/E3_SubsetTests/03a_ANGSD
+
+#On mac
+#in one window connect to the remote server
+ssh -l ajansen -L 3000:morecambe.cs.ucl.ac.uk:22 ajansen@tails.cs.ucl.ac.uk
+
+#And copy over to the working directory
+/Users/alexjvr/2021postdoc/Velocity/E3_A.hyperantus/03.ANGSD
+
+rsync -auve "ssh -p 3000" $i ajansen@localhost:/SAN/ugi/LepGenomics/E3_SubsetTests/03a_ANGSD/*PG .
+ajansen@localhost's password: 
+receiving file list ... done
+E3.MODC.theta.window.gz.pestPG
+E3.MODE.theta.window.gz.pestPG
+E3.MUS.theta.window.gz.pestPG
+
+sent 82 bytes  received 47885 bytes  10659.33 bytes/sec
+total size is 47564  speedup is 0.99
+
+```
+
 
