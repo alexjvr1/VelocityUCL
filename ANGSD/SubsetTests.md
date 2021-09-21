@@ -204,3 +204,141 @@ sys	0m0.148s
 
 
 ```
+
+
+### SFS for each species pair
+
+
+```
+realSFS=/share/apps/genomics/angsd-0.935/bin/realSFS
+
+
+
+$realSFS MODC.1Msubset.July21.saf.idx MODE.1Msubset.July21.saf.idx -fold 1 > MODC.MODE.fold.sfs
+
+	-> Will run optimization on nSites: 746179
+	
+MODC - MUS
+
+-> Sites to keep[LR761675.1] from pop0:	110128
+
+MODE - MUS
+
+-> Sites to keep[LR761675.1] from pop0:	110883
+
+```
+
+
+```
+### MODC-MODE
+$realSFS fst index MODC.1Msubset.July21.saf.idx MODE.1Msubset.July21.saf.idx -sfs MODC.MODE.fold.sfs -fstout MODC.MODE.fstout
+-> Comparing positions: 1 with 0 has:46179
+
+$realSFS fst stats MODC.MODE.fstout.fst.idx 
+	-> Assuming idxname:MODC.MODE.fstout.fst.idx
+	-> Assuming .fst.gz file: MODC.MODE.fstout.fst.gz
+	-> FST.Unweight[nObs:746179]:0.043575 Fst.Weight:0.127231
+0.043575	0.127231    (OLD=0.123635)
+
+
+### MODC-MUS
+$realSFS fst index MODC.1Msubset.July21.saf.idx MUS.1Msubset.July21.saf.idx -sfs MODC.MUS.fold.sfs -fstout MODC.MUS.fstout
+-> Comparing positions: 1 with 0 has:10128
+
+$realSFS fst stats MODC.MUS.fstout.fst.idx 
+	-> Assuming idxname:MODC.MUS.fstout.fst.idx
+	-> Assuming .fst.gz file: MODC.MUS.fstout.fst.gz
+	-> FST.Unweight[nObs:110128]:0.057906 Fst.Weight:0.105808
+0.057906	0.105808   (OLD=0.073771)
+
+
+### MODE-MUS
+$realSFS fst index MUS.1Msubset.July21.saf.idx MODE.1Msubset.July21.saf.idx -sfs MODE.MUS.fold.sfs -fstout MODE.MUS.fstout
+-> Comparing positions: 1 with 0 has:10083
+
+$realSFS fst stats MODE.MUS.fstout.fst.idx 
+	-> Assuming idxname:MODE.MUS.fstout.fst.idx
+	-> Assuming .fst.gz file: MODE.MUS.fstout.fst.gz
+	-> FST.Unweight[nObs:110083]:0.114075 Fst.Weight:0.207352
+0.114075	0.207352   (OLD=0.211117)
+
+
+```
+
+
+Fst in windows
+```
+$realSFS fst stats2 MODC.MUS.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODC.MUS
+	-> Assuming idxname:MODC.MUS.fstout.fst.idx
+	-> Assuming .fst.gz file: MODC.MUS.fstout.fst.gz
+	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
+win:50000 step:10000
+nSites:110128
+[ajansen@abner-601-1 03a_ANGSD]$ $realSFS fst stats2 MODC.MODE.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODC.MODE
+	-> Assuming idxname:MODC.MODE.fstout.fst.idx
+	-> Assuming .fst.gz file: MODC.MODE.fstout.fst.gz
+	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
+win:50000 step:10000
+nSites:746179
+[ajansen@abner-601-1 03a_ANGSD]$ $realSFS fst stats2 MODE.MUS.fstout.fst.idx -win 50000 -step 10000 > slidingwindow.MODE.MUS
+	-> Assuming idxname:MODE.MUS.fstout.fst.idx
+	-> Assuming .fst.gz file: MODE.MUS.fstout.fst.gz
+	-> args: tole:0.000000 nthreads:4 maxiter:100 nsites:0 start:(null) chr:(null) start:-1 stop:-1 fstout:(null) oldout:0 seed:-1 bootstrap:0 resample_chr:0 whichFst:0 fold:0 ref:(null) anc:(null)
+win:50000 step:10000
+nSites:110083
+
+
+```
+
+
+
+
+#### Diversity Estimates
+
+##### Plot Nucleotide diversity across the genome
+
+See Fig 3 in Feng et al. 2019
+
+###### Thetas calculated in ANGSD in windows (-win 50kb -step 10kb)
+
+
+```
+thetaStat=/share/apps/genomics/angsd-0.935/bin/thetaStat 
+
+$realSFS MODC.1Msubset.July21.saf.idx -fold 1 > MODC.fold.sfs
+$realSFS saf2theta MODC.1Msubset.July21.saf.idx -sfs MODC.fold.sfs -outname MODC
+$thetaStat do_stat MODC.thetas.idx -win 50000 -step 10000 -outnames E3.MODC.theta.window.gz
+ /share/apps/genomics/angsd-0.935/bin/thetaStat do_stat MODC.thetas.idx -win 50000 -step 10000 -outnames E3.MODC.theta.window.gz
+	Assuming binfile:MODC.thetas.gz and indexfile:MODC.thetas.idx
+		Information from index file:
+		0	LR761675.1	782145	8	20
+	 -r=(null) outnames=E3.MODC.theta.window.gz step: 10000 win: 50000
+	pc.chr=LR761675.1 pc.nSites=782145 firstpos=108 lastpos=1000055
+	Dumping file: "E3.MODC.theta.window.gz.pestPG"
+
+$realSFS MODE.1Msubset.July21.saf.idx -fold 1 > MODE.fold.sfs
+$realSFS saf2theta MODE.1Msubset.July21.saf.idx -sfs MODE.fold.sfs -outname MODE
+ $thetaStat do_stat MODE.thetas.idx -win 50000 -step 10000 -outnames E3.MODE.theta.window.gz
+ /share/apps/genomics/angsd-0.935/bin/thetaStat do_stat MODE.thetas.idx -win 50000 -step 10000 -outnames E3.MODE.theta.window.gz
+	Assuming binfile:MODE.thetas.gz and indexfile:MODE.thetas.idx
+		Information from index file:
+		0	LR761675.1	807561	8	20
+	 -r=(null) outnames=E3.MODE.theta.window.gz step: 10000 win: 50000
+	pc.chr=LR761675.1 pc.nSites=807561 firstpos=33 lastpos=1000031
+	Dumping file: "E3.MODE.theta.window.gz.pestPG"
+	
+	
+$realSFS MUS.1Msubset.July21.saf.idx -fold 1 > MUS.fold.sfs
+$realSFS saf2theta MUS.1Msubset.July21.saf.idx -sfs MUS.fold.sfs -outname MUS
+$thetaStat do_stat MUS.thetas.idx -win 50000 -step 10000 -outnames E3.MUS.theta.window.gz
+ /share/apps/genomics/angsd-0.935/bin/thetaStat do_stat MUS.thetas.idx -win 50000 -step 10000 -outnames E3.MUS.theta.window.gz
+	Assuming binfile:MUS.thetas.gz and indexfile:MUS.thetas.idx
+		Information from index file:
+		0	LR761675.1	112500	8	20
+	 -r=(null) outnames=E3.MUS.theta.window.gz step: 10000 win: 50000
+	pc.chr=LR761675.1 pc.nSites=112500 firstpos=24 lastpos=999917
+	Dumping file: "E3.MUS.theta.window.gz.pestPG"
+```
+
+
+
