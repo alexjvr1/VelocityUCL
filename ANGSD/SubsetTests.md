@@ -112,3 +112,62 @@ We'll try this with the modern samples that were merged using SplitMerge from At
 ```
 
 
+## ANGSD
+
+### Estimate SAF for each population
+
+
+MODC
+```
+/SAN/ugi/LepGenomics/E3_SubsetTests/02a_mapped_modern
+
+cat MODC.10.poplist 
+AH-01-2016-01.LR75.subset.bam
+AH-01-2016-04.LR75.subset.bam
+AH-01-2016-05.LR75.subset.bam
+AH-01-2016-06.LR75.subset.bam
+AH-01-2016-07.LR75.subset.bam
+AH-01-2016-08.LR75.subset.bam
+AH-01-2016-09.LR75.subset.bam
+AH-01-2016-10.LR75.subset.bam
+AH-01-2016-11.LR75.subset.bam
+AH-01-2016-12.LR75.subset.bam
+
+
+ANGSD="/share/apps/genomics/angsd-0.935/bin/angsd"
+
+#Set filters
+#N="38"
+N="10"
+MININD="5"
+MINMAF=""
+MINQ="20"
+minMAPQ="20"
+minDP="2"
+maxDP="100"
+POP="MODC"
+C="50"
+POPLIST="MODC.10.poplist"
+SPECIESDIR="/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus"
+OUTDIR="/SAN/ugi/LepGenomics/E3_SubsetTests"
+PP=1 #use all reads. Flag 1 uses only proper pairs, but	MODC has	merged reads. NB to filter for proper pair reads in the bamfiles using samtools before this point
+
+
+time $ANGSD -b MODC.10.poplist -checkBamHeaders 1 -minQ 20 -minMapQ 20 -uniqueOnly 1 -remove_bads 1 -only_proper_pairs $PP -GL 1 -doSaf 1 -anc $SPECIESDIR/RefGenome/*fna -ref $SPECIESDIR/RefGenome/*fna -doCounts 1 -setMinDepthInd $minDP -setMaxDepth $maxDP -doMajorMinor 4 -out $OUTDIR/$POP.1Msubset.July21 -C $C -baq 1 -dumpCounts 2 -doDepth 1 -doGlf 2 -minInd $MININD
+
+
+	-> Tue Sep 21 15:15:51 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 927370
+	-> Number of sites retained after filtering: 782145 
+	[ALL done] cpu-time used =  43.22 sec
+	[ALL done] walltime used =  44.00 sec
+
+real	0m43.597s
+user	0m43.112s
+sys	0m0.116s
+
+```
+
+
+
