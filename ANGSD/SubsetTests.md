@@ -167,6 +167,36 @@ real	0m43.597s
 user	0m43.112s
 sys	0m0.116s
 
+
+
+### Downsampled data
+## minDP 2
+
+	-> Fri Sep 24 01:54:15 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 5211041
+	-> Number of sites retained after filtering: 38075 
+	[ALL done] cpu-time used =  20.75 sec
+	[ALL done] walltime used =  21.00 sec
+
+real	0m24.338s
+user	0m20.652s
+sys	0m0.113s
+
+
+## minDP 1
+	-> Fri Sep 24 02:06:12 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 5211041
+	-> Number of sites retained after filtering: 1128156 
+	[ALL done] cpu-time used =  49.62 sec
+	[ALL done] walltime used =  50.00 sec
+
+real	0m50.532s
+user	0m49.495s
+sys	0m0.135s
+
+
 ```
 
 
@@ -183,6 +213,35 @@ real	0m58.554s
 user	0m57.001s
 sys	0m0.316s
 
+
+
+#### Downsampled
+##minDP2
+
+
+	-> Fri Sep 24 01:56:54 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 5113243
+	-> Number of sites retained after filtering: 42161 
+	[ALL done] cpu-time used =  22.54 sec
+	[ALL done] walltime used =  22.00 sec
+
+real	0m22.989s
+user	0m22.363s
+sys	0m0.184s
+
+
+##minDP1
+	-> Fri Sep 24 02:01:55 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 5113243
+	-> Number of sites retained after filtering: 1164387 
+	[ALL done] cpu-time used =  52.14 sec
+	[ALL done] walltime used =  52.00 sec
+
+real	0m52.193s
+user	0m51.937s
+sys	0m0.217s
 
 ```
 
@@ -201,6 +260,33 @@ MUS
 real	0m9.517s
 user	0m7.835s
 sys	0m0.148s
+
+
+
+##minDP1
+	-> Fri Sep 24 02:09:28 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 4052904
+	-> Number of sites retained after filtering: 726361 
+	[ALL done] cpu-time used =  46.17 sec
+	[ALL done] walltime used =  47.00 sec
+
+real	0m47.078s
+user	0m46.037s
+sys	0m0.149s
+
+
+##minDP2
+	-> Fri Sep 24 02:10:43 2021
+	-> Arguments and parameters for all analysis are located in .arg file
+	-> Total number of sites analyzed: 4052904
+	-> Number of sites retained after filtering: 13947 
+	[ALL done] cpu-time used =  28.17 sec
+	[ALL done] walltime used =  28.00 sec
+
+real	0m28.569s
+user	0m28.098s
+sys	0m0.088s
 
 
 ```
@@ -238,7 +324,7 @@ $realSFS fst stats MODC.MODE.fstout.fst.idx
 	-> Assuming idxname:MODC.MODE.fstout.fst.idx
 	-> Assuming .fst.gz file: MODC.MODE.fstout.fst.gz
 	-> FST.Unweight[nObs:746179]:0.043575 Fst.Weight:0.127231
-0.043575	0.127231    (OLD=0.123635) (GL2.FullData=0.120855)
+0.043575	0.127231    (OLD=0.123635) (GL2.FullData=0.120855) (Downsampled (13516)=0.102854)
 
 
 ### MODC-MUS
@@ -249,7 +335,7 @@ $realSFS fst stats MODC.MUS.fstout.fst.idx
 	-> Assuming idxname:MODC.MUS.fstout.fst.idx
 	-> Assuming .fst.gz file: MODC.MUS.fstout.fst.gz
 	-> FST.Unweight[nObs:110128]:0.057906 Fst.Weight:0.105808
-0.057906	0.105808   (OLD=0.073771)  (GL2.FullData=0.093701)
+0.057906	0.105808   (OLD=0.073771)  (GL2.FullData=0.093701)   (Downsampled (3092loci)=0.046352)
 
 
 ### MODE-MUS
@@ -260,7 +346,7 @@ $realSFS fst stats MODE.MUS.fstout.fst.idx
 	-> Assuming idxname:MODE.MUS.fstout.fst.idx
 	-> Assuming .fst.gz file: MODE.MUS.fstout.fst.gz
 	-> FST.Unweight[nObs:110083]:0.114075 Fst.Weight:0.207352
-0.114075	0.207352   (OLD=0.211117)   (GL2.FullData=0.210704)
+0.114075	0.207352   (OLD=0.211117)   (GL2.FullData=0.210704) (Downsampled (2582loci)=0.032338)
 
 
 ```
