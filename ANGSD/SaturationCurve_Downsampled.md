@@ -41,3 +41,24 @@ We now have 10 sets of downsampled bam files for each of MODE and MODC. We need 
 
 
 ```
+
+
+## minDP 1 vs minDP 2
+
+Compare nucDiv estimated when allowing 1x and 2x minDP for each population
+```
+realSFS=/share/apps/genomics/angsd-0.935/bin/realSFS
+thetaStat=/share/apps/genomics/angsd-0.935/bin/thetaStat
+
+
+$realSFS MODC.fullLR75.minDP1.saf.idx -fold 1 > MODC.0.7X.minDP1.fold.SFS    ##1128156 sites
+$realSFS MODC.fullLR75.minDP2.saf.idx -fold 1 > MODC.0.7X.minDP2.fold.SFS    ##38075 sites
+
+$realSFS MODE.fullLR75.minDP1.saf.idx -fold 1 > MODE.0.7X.minDP1.fold.SFS    ##1164387 sites
+$realSFS MODE.fullLR75.minDP2.saf.idx -fold 1 > MODE.0.7X.minDP2.fold.SFS    ##42161 sites
+
+$realSFS MUS.fullLR75.minDP1.saf.idx -fold 1 > MUS.0.7X.minDP1.fold.SFS      ##726361 sites
+$realSFS MUS.fullLR75.minDP2.saf.idx -fold 1 > MUS.0.7X.minDP2.fold.SFS      ##13947 sites
+```
+
+
