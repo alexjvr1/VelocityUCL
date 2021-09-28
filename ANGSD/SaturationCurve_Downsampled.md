@@ -87,3 +87,5 @@ $realSFS saf2theta MUS.fullLR75.minDP2.saf.idx -sfs MUS.0.7X.minDP2.fold.SFS -ou
 $thetaStat do_stat MUS.0.7X.minDP2.thetas.idx -win 50000 -step 10000 -outnames MUS.0.7X.minDP2.theta.window.gz
 ```
 
+
+
