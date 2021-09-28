@@ -34,3 +34,10 @@ P="$var2"; done
 #this info is in the excel sheet: VelocitySampleStats_2021_AJvR.xlsx
 
 ```
+
+We now have 10 sets of downsampled bam files for each of MODE and MODC. We need to generate the folded SFS files for each of these populations: 
+
+```
+
+
+```
