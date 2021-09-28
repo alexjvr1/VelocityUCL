@@ -62,3 +62,28 @@ $realSFS MUS.fullLR75.minDP2.saf.idx -fold 1 > MUS.0.7X.minDP2.fold.SFS      ##1
 ```
 
 
+Estimate diversity for each of the SFS files
+```
+##MODC
+$realSFS saf2theta MODC.fullLR75.minDP1.saf.idx -sfs MODC.0.7X.minDP1.fold.SFS -outname MODC.0.7X.minDP1
+$thetaStat do_stat MODC.0.7X.minDP1.thetas.idx -win 50000 -step 10000 -outnames MODC.0.7X.minDP1.theta.window.gz
+
+$realSFS saf2theta MODC.fullLR75.minDP2.saf.idx -sfs MODC.0.7X.minDP2.fold.SFS -outname MODC.0.7X.minDP2
+$thetaStat do_stat MODC.0.7X.minDP2.thetas.idx -win 50000 -step 10000 -outnames MODC.0.7X.minDP2.theta.window.gz
+
+##MODE
+$realSFS saf2theta MODE.fullLR75.minDP1.saf.idx -sfs MODE.0.7X.minDP1.fold.SFS -outname MODE.0.7X.minDP1
+$thetaStat do_stat MODE.0.7X.minDP1.thetas.idx -win 50000 -step 10000 -outnames MODE.0.7X.minDP1.theta.window.gz
+
+$realSFS saf2theta MODE.fullLR75.minDP2.saf.idx -sfs MODE.0.7X.minDP2.fold.SFS -outname MODE.0.7X.minDP2
+$thetaStat do_stat MODE.0.7X.minDP2.thetas.idx -win 50000 -step 10000 -outnames MODE.0.7X.minDP2.theta.window.gz
+
+
+##MUS
+$realSFS saf2theta MUS.fullLR75.minDP1.saf.idx -sfs MUS.0.7X.minDP1.fold.SFS -outname MUS.0.7X.minDP1
+$thetaStat do_stat MUS.0.7X.minDP1.thetas.idx -win 50000 -step 10000 -outnames MUS.0.7X.minDP1.theta.window.gz
+
+$realSFS saf2theta MUS.fullLR75.minDP2.saf.idx -sfs MUS.0.7X.minDP2.fold.SFS -outname MUS.0.7X.minDP2
+$thetaStat do_stat MUS.0.7X.minDP2.thetas.idx -win 50000 -step 10000 -outnames MUS.0.7X.minDP2.theta.window.gz
+```
+
