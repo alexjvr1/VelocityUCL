@@ -88,4 +88,16 @@ $thetaStat do_stat MUS.0.7X.minDP2.thetas.idx -win 50000 -step 10000 -outnames M
 ```
 
 
+copy to mac to plot: 
+```
+#in first window run 
+ssh -l ajansen -L 3000:morecambe.cs.ucl.ac.uk:22 ajansen@tails.cs.ucl.ac.uk
 
+
+#open a second window and navigate to the Velocity folder on your comp
+
+/Users/alexjvr/2021postdoc/Velocity/E3_A.hyperantus/03.ANGSD
+rsync -auve "ssh -p 3000" $i ajansen@localhost:/SAN/ugi/LepGenomics/E3_SubsetTests/03a_ANGSD/*PG .
+
+
+```
