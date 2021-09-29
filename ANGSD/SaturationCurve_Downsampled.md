@@ -103,5 +103,20 @@ rsync -auve "ssh -p 3000" $i ajansen@localhost:/SAN/ugi/LepGenomics/E3_SubsetTes
 ```
 
 
+It looks like diversity is underestimated in museum data at 2X already. This could be due to missing data, as the denominator in Watterson's theta is the harmonic mean of the number of samples for which there is data. However, in ANGSD this is the total samples in the dataset without taking into account missing data. Thus the denominator is too large for most sites in the museum dataset, which will result in a lower tW. 
+
+We could use pixy to correct for this. 
+
+
+![alt_txt][Fig1_hist]
+
+[Fig1_hist]:https://user-images.githubusercontent.com/12142475/135264361-d2142190-6674-4e4e-9803-dd844c53741b.png
+
+
+
+![alt_txt][Fig2_linegraph]
+
+[Fig2_linegraph]:https://user-images.githubusercontent.com/12142475/135264347-20f3547a-b52b-4447-be51-cc3f4311cdba.png
+
 
 
