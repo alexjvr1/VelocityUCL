@@ -101,3 +101,7 @@ rsync -auve "ssh -p 3000" $i ajansen@localhost:/SAN/ugi/LepGenomics/E3_SubsetTes
 
 
 ```
+
+
+
+
