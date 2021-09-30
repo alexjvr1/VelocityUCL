@@ -158,7 +158,13 @@ export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.10
 ATLAS=/share/apps/genomics/atlas-0.9/atlas
 
 while IFS=  read -r line; do $ATLAS task=$TASK thetaGenomeWide bam=$line regions=Regions.LR75.bed > $line.theta; done < $INPUT
+
+
+## Or run it as a script, but add in -l avx2=yes
+while IFS=  read -r line; do $ATLAS task=$TASK thetaGenomeWide bam=$line regions=Regions.LR75.bed > $line.theta -l avx2=yes; done < $INPUT
 ```
+
+
 
 Where the bed file is just a list of regions for which to estimate the globalTheta. Here chromosome LR76..75
 ```
