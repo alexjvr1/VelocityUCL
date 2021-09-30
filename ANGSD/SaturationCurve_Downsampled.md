@@ -130,17 +130,30 @@ I can estimate the global theta in ATLAS from the bam files.
 
 ## Modern data
 
-First the modern bam files need to be processed with SplitMerge to merge any overlapping reads. 
+1) First the modern bam files need to be processed with SplitMerge to merge any overlapping reads. 
 
 Modify this scripts, where the input file is a list of bam file names: 
 
 [04b_ATLAS_SplitMerge.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04b_ATLAS_SplitMerge.sh)
 
 
+2) Then downsample these data to the different depths
+
+Use [this](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.5_Downsample_MODE.sh) script for a series of depths
+
+3) Index these files using the [Index.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/Index.sh) script
+
+4) Estimate theta. See below
+
+
 
 ## Estimate theta
 
 The global theta (here for LR75.1) can be estimated for each chromosome or region as specified in the bam file. 
+
+Modify the [04b_ATLAS_globalDiversity.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/04b_ATLAS_globalDiversity.sh) script
+
+OR
 
 Run the following command in the interactive node: 
 ```
