@@ -120,3 +120,10 @@ We could use pixy to correct for this.
 
 
 
+
+
+
+# ATLAS
+
+
+I can estimate the global theta in ATLAS from the bam files. From this I get the "Initial theta" which is estimated before incorporating the base quality correction incorporated by 
