@@ -189,7 +189,7 @@ LR761675.1	0	6196582
 
 The output writes all the chromosomes (0 lines read, etc), but we can extract the data specifically for our chromsomes: 
 ```
-for i in $(ls *theta); do grep -A 7 "LR761675.1" > $i.window.LR75.theta; done
+for i in $(ls *theta); do grep -A 7 "LR761675.1" $i > $i.window.LR75.theta; done
 ```
 
 
