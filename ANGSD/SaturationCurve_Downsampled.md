@@ -126,4 +126,44 @@ We could use pixy to correct for this.
 # ATLAS
 
 
-I can estimate the global theta in ATLAS from the bam files. From this I get the "Initial theta" which is estimated before incorporating the base quality correction incorporated by 
+I can estimate the global theta in ATLAS from the bam files. 
+
+## Modern data
+
+First the modern bam files need to be processed with SplitMerge to merge any overlapping reads. 
+
+Modify this scripts, where the input file is a list of bam file names: 
+
+[04b_ATLAS_SplitMerge.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04b_ATLAS_SplitMerge.sh)
+
+
+
+## Estimate theta
+
+The global theta (here for LR75.1) can be estimated for each chromosome or region as specified in the bam file. 
+
+Run the following command in the interactive node: 
+```
+#Define variables
+SHAREDFOLDER=/SAN/ugi/LepGenomics
+SPECIES=E3_Aphantopus_hyperantus
+FOLDER=E3_SubsetTests
+REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+INPUT=$SHAREDFOLDER/$FOLDER/02a_mapped_museum_FORANGSD/mus.bamlist
+OUTPUT=$SHAREDFOLDER/$FOLDER/02a_mapped_museum_FORANGSD/
+TASK=theta
+
+#Path to software
+export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
+ATLAS=/share/apps/genomics/atlas-0.9/atlas
+
+while IFS=  read -r line; do $ATLAS task=$TASK thetaGenomeWide bam=$line regions=Regions.LR75.bed > $line.theta; done < $INPUT
+```
+
+Where the bed file is just a list of regions for which to estimate the globalTheta. Here chromosome LR76..75
+```
+cat Regions.LR75.bed 
+
+LR761675.1	0	6196582
+
+```
