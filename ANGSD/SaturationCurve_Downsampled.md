@@ -181,6 +181,11 @@ for i in $(ls *theta); do grep -A 7 "LR761675.1" > $i.window.LR75.theta; done
 
 
 
-These outputs include information on the depth in 100kb windows, the % of sites with 2x data, and % sites with no data. 
+These outputs include information on each 100kb window for 1) mean depth, the % of sites with 2x data, and % sites with no data. 
 
-We can use this to plot the depth across the chromosome per individual. 
+We can use this to plot the depth and data across the chromosome per individual. 
+
+```
+
+
+```
