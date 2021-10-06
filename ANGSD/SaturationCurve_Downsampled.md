@@ -35,12 +35,10 @@ P="$var2"; done
 
 ```
 
-We now have 10 sets of downsampled bam files for each of MODE and MODC. We need to generate the folded SFS files for each of these populations: 
+We now have 10 sets of downsampled bam files for each of MODE and MODC. We need to generate the folded SFS files for each of these populations for ANGSD estimates: 
 
-```
+See below (run for 1X and 2X minDP)
 
-
-```
 
 
 ## minDP 1 vs minDP 2
@@ -198,7 +196,20 @@ These outputs include information on each 100kb window for 1) mean depth, the % 
 
 We can use this to plot the depth and data across the chromosome per individual. 
 
+The final excel sheet containing all these data is here: 
+```
+#on mac
+/Users/alexjvr/2021postdoc/Velocity/E3_A.hyperantus/ATLAS/saturation.data
+
+
+R
+library(ggplot2)
+
+pdf("E3.satplots.pd")
+ggplot(sat, aes(x=nrReads, y=InitialTheta, colour=Pop))+geom_point()
+ggplot(sat, aes(x=ATLASEstimatedDepth, y=InitialTheta, colour=Pop))+geom_point()
+ggplot(sat, aes(x=ATLASEstimatedDepth, y=nrReads, colour=Pop))+geom_point()
+dev.off()
 ```
 
 
-```
