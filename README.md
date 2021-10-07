@@ -269,6 +269,13 @@ for i in $(cat museum1.tomove); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_ra
 
 ```
 
+## Tools that look interesting
+
+For detecting parallel evolution - a multivariate approach
+
+[AF-vapeR - Whiting et al. 2021 BioRxiv](https://www.biorxiv.org/content/10.1101/2021.09.17.460770v1.full.pdf)
+
+
 
 
 
