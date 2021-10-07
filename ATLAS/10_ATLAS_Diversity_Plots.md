@@ -89,4 +89,31 @@ Add a column to each file specifying pop and indiv
 ```
 
 
+```
 
+Read into R and plot
+```
+library(dplyr)
+library(data.table)
+library(ggplot2)
+
+files <- list.files(pattern="new")   
+myfiles <- lapply(files, read.table, header=T)  ##read all files into a list
+colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", "theta_MLE", "theta_C95_l", "theta_C95_u", "LL", "Sample", "Pop")  
+myfiles2 <- lapply(myfiles, setNames, nm=colnames.new)   #rename columns
+
+as.numeric.factor <- function(x) {as.numeric(levels(x))[x]}   ##function to convert factor to numeric
+theta.table$start <- as.numeric.factor(theta.table$start)   #convert columns from factor to numeric
+theta.table$end <- as.numeric.factor(theta.table$end)
+theta.table$theta_MLE <- as.numeric.factor(theta.table$theta_MLE)
+
+theta.table$WinCenter <- theta.table$start+((theta.table$end-theta.table$start)/2)   ##create a column for window center
+
+#plot
+pdf("E3.theta.ATLAS.0.5Mbwindows.pdf")
+ggplot(theta.table, aes(x=WinCenter, y=theta_MLE, colour=Pop))+geom_point()
+ggplot(theta.table, aes(x=theta_MLE, fill=Pop))+geom_histogram()
+dev.off()
+
+
+```
