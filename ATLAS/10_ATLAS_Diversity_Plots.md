@@ -75,3 +75,18 @@ while IFS= read -r line; do $ATLAS task=theta bam=$line window=Regions.LR75_500k
 
 ```
 
+
+Download the resulting theta.txt.gz files to your home computer: 
+
+```
+/Users/alexjvr/2021postdoc/Velocity/E3_A.hyperantus/ATLAS
+
+gunzip *gz
+```
+
+Add a column to each file specifying pop and indiv
+
+```
+
+
+
