@@ -361,7 +361,15 @@ Modern samples arrive demultiplexed by the sequencing facility, but Museum sampl
 
 We're trimming all adapter sequence from the demultiplexed data. We're also removing all sequences that are shorter than 20bp and 3' quality trimmed to remove bases with PHRED quality score of < 20 with Cutadapt.
 
-If you're running this on BlueCrystal, you'll have to install cutadapt locally first using [these instructions] (https://cutadapt.readthedocs.io/en/stable/installation.html) - see below. 
+######## CS at UCL
+
+If you're running on the CS servers at UCL, skip to the next section "Generate submission script". 
+
+
+######## BlueCrystal (UoB users) 
+
+If you're running this on BlueCrystal (UoB), you'll have to install cutadapt locally first using [these instructions] (https://cutadapt.readthedocs.io/en/stable/installation.html) - see below. 
+
 We're using cutadapt version 3.4: 
 ```
 module load languages/python-anaconda3-5.2.0
@@ -392,7 +400,22 @@ cutadapt version 3.4
 
 ##### Generate submission script
 
-Run the following scripts to generate the submission script
+Run the following scripts to generate the submission script. Be sure to modify the path for your species, and to point to the correct input and output folders depending on the population you're working with. 
+
+Also check permissions for the folder you're writing to. 
+
+```
+#Check permissions
+
+ls -ltr folder.name
+
+#Change permissions
+## for the user
+chmod u+rwx 
+
+## for the group
+chmod g+rwx
+```
 
 [01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/01a_museum_cutadapt_filtering_trimming.sh)
 
