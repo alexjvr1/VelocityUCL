@@ -17,8 +17,8 @@
 SHAREDFOLDER=/SAN/ugi/LepGenomics
 SCRIPTS=VelocityPipeline/tools
 SPECIES=D3_Pararge_aegeria
-INFILE=00_raw_reads_museum1
-OUTFILE=01a_filtered_reads_museum1
+INFILE=00_raw_reads_museum_FINAL
+OUTFILE=01a_museum_cutadapt_reads
 
 $SHAREDFOLDER/$SCRIPTS/01a_parallel_cutadapt_UCL.sh \
 -i $SHAREDFOLDER/$SPECIES/$INFILE \
