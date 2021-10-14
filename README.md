@@ -286,13 +286,13 @@ For detecting parallel evolution - a multivariate approach
 
 ### 1. Raw to cleaned and processed data
 
-   1a. [Concatenate resequenced museum data](README.md#1a-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
+   00. [Concatenate resequenced museum data](README.md#1a-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
 
-   1b. [Trim adapter sequence using cutadapt](https://github.com/alexjvr1/VelocityUCL/tree/main#1b-demultiplex-and-adapter-trimming)
+   1a. [Trim adapter sequence using cutadapt](https://github.com/alexjvr1/VelocityUCL/tree/main#1a-demultiplex-and-adapter-trimming)
         
-   1c. [Repair problems in museum PE data for data from 1.2. (BBrepair)](README.md#1c-prepare-museum-data-for-mapdamage-22-repair-pe-reads)
+   1b. [Repair problems in museum PE data for data from 1.2. (BBrepair)](README.md#1b-prepare-museum-data-for-mapdamage-22-repair-pe-reads)
         
-   1d. [Merge overlapping PE reads in museum data (BBmerge)](README.md#1d-prepare-museum-data-for-mapdamage-22-merge-overlapping-pe-reads)
+   1c. [Merge overlapping PE reads in museum data (BBmerge)](README.md#1c-prepare-museum-data-for-mapdamage-22-merge-overlapping-pe-reads)
         
 #### 2. Map and process
 
@@ -364,7 +364,7 @@ Whole genome resequencing data was generated for 38 & 40 modern individuals (sam
 
 ### 1. Raw to cleaned and processed data
 
-#### 1a Concatenate museum reseq data
+#### 00 Concatenate museum reseq data
 
 ##### *TIME*
 
@@ -451,7 +451,7 @@ AH-02-2019-42_mod.exp_R2.fastq.gz  AH-02-2019-57_mod.exp_R2.fastq.gz  AH-02-2019
 ```
 
 
-#### 1b Demultiplex and Adapter trimming
+#### 1a Demultiplex and Adapter trimming
 
 ##### *TIME:*
 
@@ -560,7 +560,7 @@ Edit this submission script to submit from your home directory:
 ```
 
 
-#### 1c Prepare museum data for MapDamage (2.2): Repair PE reads
+#### 1b Prepare museum data for MapDamage (2.2): Repair PE reads
 
 ##### *TIME* 
 
@@ -589,35 +589,35 @@ We have it installed in the shared folder here:
 ```
 
 
-We'll repair the museum data using this script: [01c_bbtools_repair_museum_ARRAY.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01c_bbtools_repair_museum_ARRAY.sh)
+We'll repair the museum data using this script: [01c_bbtools_repair_museum_ARRAY.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01b_bbtools_repair_museum_ARRAY.sh)
 
 The input files will be all the museum fastq files found in 01a_mus.concat_cutadapt_reads
 
 Create two files with names for the inputs in the home directory for the species (e.g. /E3_Aphantopus_hyperantus_2020/): 
 ```
-ls 01a_mus.concat_cutadapt_reads/*R1*fastq.gz >> R1.museum.names.torepair
-ls 01a_mus.concat_cutadapt_reads/*R2*fastq.gz >> R2.museum.names.torepair
+ls 01a_museum_cutadapt_reads/*R1*fastq.gz >> R1.museum.names.torepair
+ls 01a_museum_cutadapt_reads/*R2*fastq.gz >> R2.museum.names.torepair
 
 ##remove the file path from the name files. We need only in the input file names. 
 sed -i 's:01a_mus.concat_cutadapt_reads/::g' *torepair
 ```
 
-This will write all the repaired files to: 01c_musPERepaired
+This will write all the repaired files to: 01b_musPERepaired
 
 ```
 #make the output directory within the species home directory:
-mkdir 01c_musPERepaired 
+mkdir 01b_musPERepaired 
 ```
 
 Check that the correct number of threads are specified (e.g. 48 indivs: PBS -t 1-48)
 
 And submit:
 ```
-qsub 01c_bbtools_repair_museum_ARRAY.sh 
+qsub 01b_bbtools_repair_museum_ARRAY.sh 
 ```
 
 
-#### 1d Prepare museum data for MapDamage (2.2): Merge overlapping PE reads
+#### 1c Prepare museum data for MapDamage (2.2): Merge overlapping PE reads
 
 ##### *TIME*
 
