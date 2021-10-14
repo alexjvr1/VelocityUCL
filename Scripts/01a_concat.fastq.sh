@@ -13,6 +13,8 @@
 #$ -l h_rt=1:00:00 ##wall time
 #$ -j y  #concatenates error and output files (with prefix job1)
 
+##Input files mus1_toconcat and mus2_toconcat = list of sample names to be concatenated, in the correct order. 
+
 
 #run job in working directory
 cd $SGE_O_WORKDIR
