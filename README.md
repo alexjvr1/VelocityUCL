@@ -840,54 +840,50 @@ Use the [02b.3_ValidateSamFile_MODC.sh](https://github.com/alexjvr1/VelocityUCL/
 
 This needs to be locally installed on BlueCrystal. Follow the git install instructions in the tutorial [here](https://ginolhac.github.io/mapDamage/)
 
-As the R libraries are loaded into the tmp memory we need to reinstall this every time we want to use MapDamage (after logging off)
 
-If there are any issues, the easiest thing to do is to reinstall MapDamage. 
-
+Mapdamage is installed on the server as a python library, so the following needs to be added to any script, or run in the interactive node before using mapdamage. 
 ```
-module load languages/R-3.6.3-gcc9.1.0
-languages/python-3.8.5
+##python
+export PATH=/share/apps/python-3.8.5-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.8.5-shared/lib:$LD_LIBRARY_PATH
 
-R
+##R
+export PATH=/share/apps/R-4.0.3/bin:$PATH
 
-install.packages("inline")
-install.packages("gam")
-install.packages("Rcpp")
-install.packages("ggplot2")
-install.packages("RcppGSL")
+##mapDamage
+mapDamage="/share/apps/python-3.8.5-shared/bin/mapDamage"
 
 ```
 
-MapDamage will be run in the 02a_museum_mapped folder. 
+
+
+MapDamage will be run in the 02a_museum_mapped_MERGED folder. 
 
 1. Create a file listing all the bamfiles
 ```
-
 ls *bam > bamlist
 ```
 
-2. Copy the script [02b_mapDamage_museum.sh](https://github.com/alexjvr1/Velocity2020/blob/master/02b_mapDamage_museum.sh) to the 02a_museum_mapped folder. Change the job name, the number of threads, and check the path to the reference genome.
+2. Copy the script [02c_MapDamage_forMERGED.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02c_MapDamage_forMERGED.sh) to the 02a_museum_mapped_MERGED folder. Change the job name, the number of threads, and check the path to the reference genome.
 
 Submit to queue.
 
 
+If you run this for the modern samples, remove --single-stranded from the code
+
+
 Move all the new rescaled bam files to a new folder: 
 ```
-mkdir 02b_museum_mapDamage
-mv 02a_museum_processed.mapped/results*/*bam 02b_museum_mapDamage && cd 02b_museum_mapDamage
+mkdir 02c_museum_mapDamage
+mv 02a_museum_processed.mapped/results*/*bam 02b_museum_mapDamage && cd 02c_museum_mapDamage
 
-module load apps/samtools-1.9
-for i in $(ls *bam); do ls $i >> flagstat.log && samtools flagstat $i >> flagstat.log; done
+samtools=/share/apps/genomics/samtools-1.9/bin/samtools
+for i in $(ls *bam); do ls $i >> flagstat.log && $samtools flagstat $i >> flagstat.log; done
 ```
 
 And index all the bams using the previous indexing script
-```
-cp ../02a_museum_mapped/02a_index.bamfiles.sh
 
-ls *bam > bamlist
 
-qsub 02a_index.bamfiles.sh
-```
 
 ##### ->>>  To call variants skip to section 3.2
 
