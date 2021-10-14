@@ -283,9 +283,9 @@ For detecting parallel evolution - a multivariate approach
 
 ### 1. Raw to cleaned and processed data
 
-   1a. [Trim adapter sequence using cutadapt](https://github.com/alexjvr1/VelocityUCL/tree/main#1a-demultiplex-and-adapter-trimming)
-        
-   1b. [Concatenate resequenced museum data](README.md#1b-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
+   1a. [Concatenate resequenced museum data](README.md#1a-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
+
+   1b. [Trim adapter sequence using cutadapt](https://github.com/alexjvr1/VelocityUCL/tree/main#1b-demultiplex-and-adapter-trimming)
         
    1c. [Repair problems in museum PE data for data from 1.2. (BBrepair)](README.md#1c-prepare-museum-data-for-mapdamage-22-repair-pe-reads)
         
@@ -301,44 +301,55 @@ For detecting parallel evolution - a multivariate approach
         
    2d. [Downsample modern data to the same depth as the museum data](README.md#2d-downsample-modern-data-to-the-same-coverage-as-in-the-museum-samples)
         
-#### 3. [SNP discovery and filtering](https://github.com/alexjvr1/Velocity2020#3-angsd)
+#### 3. [Genetic diversity and Population structure](https://github.com/alexjvr1/Velocity2020#3-angsd)
 
-3.1 ANGSD
+3.1 ATLAS - Genetic Diversity
+
+
+
+
+3.2 ANGSD - Population Structure
 
    3.1.a. [ANGSD filters for SFS](README.md#3a-angsd-filters-for-sfs) (ie. no MAF)
         
    3.1.b. [ANGSD filters for population genomics]
         
-
-3.2 VARIANT CALLING
-
-   3.2.1  [Call variants with bcftools mpileup and call]()
+   3.1.c. [PCAngsd]
 
 
 
+#### 4. VARIANT CALLING
 
-#### 4. Analyses: Outliers
+   4.1  [Call variants with bcftools mpileup and call]()
 
-   4a. [Outlier analysis in ANGSD]
-        
-   4b. [Manhattan plot]
-        
-   4c. [Table of functions]
-        
-   4d. [Network analysis]
+   4.2  [Filter SNPs]
+   
 
-#### 5. Analysis: Genetic diversity and population structure
+#### 5. Analysis: Regions under selection (diploSHIC)
 
+   4a. [Between population variables]
+
+   4b. [Within population variables]	
+   
+   4c. [Demographic model - test and validate]
+   
+   4d. [Training model]
+   
+   
 #### 6. Analysis: LD 
 
    6a. [ANGSD estimate LD across the genome]
+
+
+
+#### 7. Analysis: 
+
 
 
 ## DATA: Genome
 
 Aphantopus hyperantus (Ringlet) was the first genome available ([NCBI link](https://www.ncbi.nlm.nih.gov/assembly/GCA_902806685.1)), so the pipeline will be set up with this species. 
 
-Aricia agests genome and annotation. 
 
 ## DATA: WGS
 
@@ -350,7 +361,85 @@ Whole genome resequencing data was generated for 38 & 40 modern individuals (sam
 
 ### 1. Raw to cleaned and processed data
 
-#### 1a Demultiplex and Adapter trimming
+#### 1a Concatenate museum reseq data
+
+##### *TIME*
+
+~30-40min
+
+##### *METHOD*
+
+A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using these scripts: 
+
+[1b_concat.fastq.R1.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R1.sh) and [1b_concat.fastq.R2.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R2.sh)
+
+Reseq data are kept in the following folders:
+```
+00_raw_data_museum2
+
+01a_museum2_cutadapt_reads
+
+01a_mus.concat_cutadapt_reads  ## concatenated museum1 and museum2 + all samples that didn't have reseq data added. I'll point to this folder when mapping
+
+02a_museum_mapped  ##see below. This contains all data including concatenated reseq samples. 
+```
+
+
+#### Rename samples
+
+We don't need the really long names given to the samples by the sequencing facilities. We'll rename samples before proceeding further: 
+
+Museum
+```
+cd 01a_mus.concat_cutadapt_reads/
+
+#move all the log files into a folder
+mkdir logfiles
+mv *log logfiles
+
+#change the names
+~/software/rename_master/rename 's/long_name/new_name/' *gz
+
+##remove all the extra info about lane number and date etc. Final names will bein this format: 
+
+AH-01-1900-01_mus_R1.concat.fastq.gz  AH-01-1900-17_R2.fastq.gz         AH-01-1900-34_mus_R1.concat.fastq.gz
+AH-01-1900-01_mus_R2.concat.fastq.gz  AH-01-1900-18_R1.fastq.gz         AH-01-1900-34_mus_R2.concat.fastq.gz
+
+```
+
+Modern
+```
+I'm mapping simultaneously to mod.core and mod.exp, but I'll keep the cutadapt reads in their different folders. 
+
+cd 01a_modern_cutadapt_reads
+#move all the log files into a folder
+mkdir logfiles
+mv *log logfiles
+
+#change the names
+
+~/software/rename-master/rename 's/R1_001.fastq.gzcutadapt_filtered/mod.core/' *gz
+~/software/rename-master/rename 's/R2_001.fastq.gzcutadapt_filtered/mod.core/' *gz
+
+AH-01-2016-01_mod.core_R1.fastq.gz  AH-01-2016-16_mod.core_R1.fastq.gz  AH-01-2017-29_mod.core_R1.fastq.gz
+AH-01-2016-01_mod.core_R2.fastq.gz  AH-01-2016-16_mod.core_R2.fastq.gz  AH-01-2017-29_mod.core_R2.fastq.gz
+
+
+cd  01a_modern.exp_cutadapt_reads
+#move all the log files into a folder
+mkdir logfiles
+mv *log logfiles
+
+~/software/rename-master/rename 's/R1_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
+~/software/rename-master/rename 's/R2_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
+
+AH-02-2019-42_mod.exp_R1.fastq.gz  AH-02-2019-57_mod.exp_R1.fastq.gz  AH-02-2019-71_mod.exp_R1.fastq.gz
+AH-02-2019-42_mod.exp_R2.fastq.gz  AH-02-2019-57_mod.exp_R2.fastq.gz  AH-02-2019-71_mod.exp_R2.fastq.gz
+
+```
+
+
+#### 1b Demultiplex and Adapter trimming
 
 ##### *TIME:*
 
@@ -440,84 +529,6 @@ Edit this submission script to submit from your home directory:
 4. You might have to set the path to cutadapt to find your local version
 
 ```
-
-#### 1b Concatenate museum reseq data
-
-##### *TIME*
-
-~30-40min
-
-##### *METHOD*
-
-A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using these scripts: 
-
-[1b_concat.fastq.R1.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R1.sh) and [1b_concat.fastq.R2.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R2.sh)
-
-Reseq data are kept in the following folders:
-```
-00_raw_data_museum2
-
-01a_museum2_cutadapt_reads
-
-01a_mus.concat_cutadapt_reads  ## concatenated museum1 and museum2 + all samples that didn't have reseq data added. I'll point to this folder when mapping
-
-02a_museum_mapped  ##see below. This contains all data including concatenated reseq samples. 
-```
-
-
-#### Rename samples
-
-We don't need the really long names given to the samples by the sequencing facilities. We'll rename samples before proceeding further: 
-
-Museum
-```
-cd 01a_mus.concat_cutadapt_reads/
-
-#move all the log files into a folder
-mkdir logfiles
-mv *log logfiles
-
-#change the names
-~/software/rename_master/rename 's/long_name/new_name/' *gz
-
-##remove all the extra info about lane number and date etc. Final names will bein this format: 
-
-AH-01-1900-01_mus_R1.concat.fastq.gz  AH-01-1900-17_R2.fastq.gz         AH-01-1900-34_mus_R1.concat.fastq.gz
-AH-01-1900-01_mus_R2.concat.fastq.gz  AH-01-1900-18_R1.fastq.gz         AH-01-1900-34_mus_R2.concat.fastq.gz
-
-```
-
-Modern
-```
-I'm mapping simultaneously to mod.core and mod.exp, but I'll keep the cutadapt reads in their different folders. 
-
-cd 01a_modern_cutadapt_reads
-#move all the log files into a folder
-mkdir logfiles
-mv *log logfiles
-
-#change the names
-
-~/software/rename-master/rename 's/R1_001.fastq.gzcutadapt_filtered/mod.core/' *gz
-~/software/rename-master/rename 's/R2_001.fastq.gzcutadapt_filtered/mod.core/' *gz
-
-AH-01-2016-01_mod.core_R1.fastq.gz  AH-01-2016-16_mod.core_R1.fastq.gz  AH-01-2017-29_mod.core_R1.fastq.gz
-AH-01-2016-01_mod.core_R2.fastq.gz  AH-01-2016-16_mod.core_R2.fastq.gz  AH-01-2017-29_mod.core_R2.fastq.gz
-
-
-cd  01a_modern.exp_cutadapt_reads
-#move all the log files into a folder
-mkdir logfiles
-mv *log logfiles
-
-~/software/rename-master/rename 's/R1_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
-~/software/rename-master/rename 's/R2_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
-
-AH-02-2019-42_mod.exp_R1.fastq.gz  AH-02-2019-57_mod.exp_R1.fastq.gz  AH-02-2019-71_mod.exp_R1.fastq.gz
-AH-02-2019-42_mod.exp_R2.fastq.gz  AH-02-2019-57_mod.exp_R2.fastq.gz  AH-02-2019-71_mod.exp_R2.fastq.gz
-
-```
-
 
 
 #### 1c Prepare museum data for MapDamage (2.2): Repair PE reads
