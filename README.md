@@ -294,10 +294,12 @@ For detecting parallel evolution - a multivariate approach
 #### 2. Map and process
 
    2a. [Map museum and modern data to Sanger genome](README.md#2a-map-to-reference-genome) 
+   
+   2b. [Process BAM files](README.md#2b-process-bam-files)
+   
+   2c. [Correct museum data for possible deamination](README.md#2c-mapdamage-run-on-museum-data) (MapDamage -> output = corrected bam file) 
         
-   2b. [Correct museum data for possible deamination](README.md#2b-mapdamage-run-on-museum-data) (MapDamage -> output = corrected bam file) 
-        
-   2c. [Downsample modern data to the same depth as the museum data](README.md#2c-downsample-modern-data-to-the-same-coverage-as-in-the-museum-samples)
+   2d. [Downsample modern data to the same depth as the museum data](README.md#2d-downsample-modern-data-to-the-same-coverage-as-in-the-museum-samples)
         
 #### 3. [SNP discovery and filtering](https://github.com/alexjvr1/Velocity2020#3-angsd)
 
@@ -598,6 +600,7 @@ As these are no longer PE data, we can map as if we had a single read.
 
 Map museum and modern samples to the Sanger reference genome. Thereafter correct the museum bam files using MapDamage, and downsample the modern data to the same final depth as the corrected museum bam files. 
 
+
 #### 2a Map to Reference Genome
 
 ##### *TIME:*
@@ -692,8 +695,52 @@ for i in $(ls *bam); do ls $i >>flagstat.log && samtools flagstat $i >> flagstat
 Index the bam files with the script [02a_index.bamfiles.sh](https://github.com/alexjvr1/Velocity2020/blob/master/02a_index.bamfiles.sh)
 
 
+#### 2b. Process BAM files
 
-#### 2b. MapDamage run on museum data
+##### *TIME*
+
+~1 hour per population
+
+##### *METHOD*
+
+We're using Picard Tools to 1) Add Read Group information, 2) Mark Duplicate reads, 3) Perform a local realignment, and 4) validate the final BAM files. 
+
+1) Add Read Group information. 
+
+Formulate the read group name based on the population and the sequencing library
+
+Use the []() script to add read groups. We're submitting this as a loop rather than an array because it runs really quickly. 
+
+2) Mark Duplicate Reads
+
+Sometimes we see duplicate reads in the dataset which originate from the same DNA fragment. We want to filter these out because we assume that all read information is independent. Duplicate reads can arise during library prep as PCR duplicates, or during sequencing when the sequencer sees a single sequencing cluster as two clusters (called optical duplicates). 
+
+Use the []() script to remove duplicate reads
+
+3) Local realignment
+
+Local realignment can be useful to optimise mapping to low complexity or repeat regions in the genome. Our mapping tool doesn't do this (although some pipelines like GATK do incorporate local realignment). We will run a local realignment as an independent step. 
+
+Use the []() script for local realignment
+
+
+4) Validate Sam
+
+Finally we'll use Picard Tools to check if our bam/sam files look as expected. 
+
+Use the []() script to validate the files. 
+
+Some common errors and how to fix them: 
+
+a) 
+
+b) 
+
+c) 
+
+
+
+#### 2c. MapDamage run on museum data
 
 ##### *TIME*
 
@@ -757,7 +804,7 @@ qsub 02a_index.bamfiles.sh
 ##### ->>>  To call variants skip to section 3.2
 
 
-#### 2c. Downsample modern data to the same coverage as in the museum samples
+#### 2d. Downsample modern data to the same coverage as in the museum samples
 
 Due to the difference in sample quality between museum and modern samples, mean coverage is much higher for the modern data. This may bias the confidence in variant calls downstream. To avoid this problem I will downsample the modern data to the same mean depth as the museum data.
 
