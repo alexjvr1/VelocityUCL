@@ -318,7 +318,7 @@ For detecting parallel evolution - a multivariate approach
 
 
 
-#### 4. VARIANT CALLING
+#### 4. Variant Calling
 
    4.1  [Call variants with bcftools mpileup and call]()
 
@@ -369,17 +369,21 @@ Whole genome resequencing data was generated for 38 & 40 modern individuals (sam
 
 ##### *METHOD*
 
-A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using these scripts: 
+A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using this script: 
 
-[1b_concat.fastq.R1.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R1.sh) and [1b_concat.fastq.R2.sh](https://github.com/alexjvr1/Velocity2020/blob/master/concat.fastq.R2.sh)
+[01a_concat.fastq.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01a_concat.fastq.sh)
+
+
 
 Reseq data are kept in the following folders:
 ```
+00_raw_data_museum1
+
 00_raw_data_museum2
 
-01a_museum2_cutadapt_reads
+00_raw_reads_museum_FINAL   ## concatenated museum1 and museum2 + all samples that didn't have reseq data added.
 
-01a_mus.concat_cutadapt_reads  ## concatenated museum1 and museum2 + all samples that didn't have reseq data added. I'll point to this folder when mapping
+01a_museum_cutadapt_reads  ## Reads that have been processed with Cutadapt. I'll point to this folder when mapping
 
 02a_museum_mapped  ##see below. This contains all data including concatenated reseq samples. 
 ```
@@ -388,6 +392,10 @@ Reseq data are kept in the following folders:
 #### Rename samples
 
 We don't need the really long names given to the samples by the sequencing facilities. We'll rename samples before proceeding further: 
+
+There is a native rename on linux, but see [above](https://github.com/alexjvr1/VelocityUCL#note-on-renaming-files) on how to use the perl rename as shown below.
+
+Change the substitution names as needed. 
 
 Museum
 ```
@@ -398,7 +406,8 @@ mkdir logfiles
 mv *log logfiles
 
 #change the names
-~/software/rename_master/rename 's/long_name/new_name/' *gz
+#replace USERNAME with your username
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/long_name/new_name/' *gz
 
 ##remove all the extra info about lane number and date etc. Final names will bein this format: 
 
@@ -418,8 +427,8 @@ mv *log logfiles
 
 #change the names
 
-~/software/rename-master/rename 's/R1_001.fastq.gzcutadapt_filtered/mod.core/' *gz
-~/software/rename-master/rename 's/R2_001.fastq.gzcutadapt_filtered/mod.core/' *gz
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R1_001.fastq.gzcutadapt_filtered/mod.core/' *gz
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R2_001.fastq.gzcutadapt_filtered/mod.core/' *gz
 
 AH-01-2016-01_mod.core_R1.fastq.gz  AH-01-2016-16_mod.core_R1.fastq.gz  AH-01-2017-29_mod.core_R1.fastq.gz
 AH-01-2016-01_mod.core_R2.fastq.gz  AH-01-2016-16_mod.core_R2.fastq.gz  AH-01-2017-29_mod.core_R2.fastq.gz
@@ -430,8 +439,8 @@ cd  01a_modern.exp_cutadapt_reads
 mkdir logfiles
 mv *log logfiles
 
-~/software/rename-master/rename 's/R1_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
-~/software/rename-master/rename 's/R2_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R1_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R2_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
 
 AH-02-2019-42_mod.exp_R1.fastq.gz  AH-02-2019-57_mod.exp_R1.fastq.gz  AH-02-2019-71_mod.exp_R1.fastq.gz
 AH-02-2019-42_mod.exp_R2.fastq.gz  AH-02-2019-57_mod.exp_R2.fastq.gz  AH-02-2019-71_mod.exp_R2.fastq.gz
