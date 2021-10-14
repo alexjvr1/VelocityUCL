@@ -755,7 +755,9 @@ $samtools flagstat file.bam
 for i in $(ls *bam); do ls $i >>flagstat.log && $samtools flagstat $i >> flagstat.log; done
 ```
 
-Index the bam files with the script [02a_index.bamfiles.sh](https://github.com/alexjvr1/Velocity2020/blob/master/02a_index.bamfiles.sh)
+Index the bam files with the script [Index.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/Index.sh)
+
+Submit the script in the folder containing the bam files to be indexed. Create a list of bam files (see INPUT in the script), and remember to change all the paths. 
 
 
 #### 2b. Process BAM files
@@ -772,7 +774,16 @@ We're using Picard Tools to 1) Add Read Group information, 2) Mark Duplicate rea
 
 Formulate the read group name based on the population and the sequencing library
 
-Use the []() script to add read groups. We're submitting this as a loop rather than an array because it runs really quickly. 
+Use the [02b.1_AddRG.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.1_AddRG.sh) script to add read groups.
+
+Choose your RGID based on the species and population. e.g. for Ringlet (E3) modern core, RGID=E3modc
+
+Choose your RGLB based on the library the population was sequenced in. e.g. Ringlet modc were sequenced in mod03. RGLB=mod03
+
+Brown Argus modc RGLB=mod02; mode RGLB=mod02, mus RGLB=mus0204
+
+Speckled Wood modc RGLB=mod01; mode RGLB=mod01, mus RGLB=mus0103
+
 
 2) Mark Duplicate Reads
 
