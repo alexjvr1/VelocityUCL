@@ -569,10 +569,22 @@ Museum data is prone to post-mortem damage which we will correct for using MapDa
 
 [BBtools](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/installation-guide/) can be installed from the downloaded tarball
 
-We have it installed here
+
+####### UoB BlueCrystal
+
+We have it installed here 
 ```
 /newhome/bzzjrb/Software/bbmap/
 ```
+
+
+####### UCL CS
+
+This is installed in the shared folder here: 
+```
+/share/apps/genomics/bbmap-38.59/bbmap.sh
+```
+
 
 We'll repair the museum data using this script: [01c_bbtools_repair_museum_ARRAY.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01c_bbtools_repair_museum_ARRAY.sh)
 
