@@ -770,11 +770,14 @@ Submit the script in the folder containing the bam files to be indexed. Create a
 
 We're using Picard Tools to 1) Add Read Group information, 2) Mark Duplicate reads, 3) Perform a local realignment, and 4) validate the final BAM files. 
 
-1) Add Read Group information. 
+The links below provide a script for each step. Modify it to run this for each of your populations. 
+
+
+0) Add Read Group information. 
 
 Formulate the read group name based on the population and the sequencing library
 
-Use the [02b.1_AddRG.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.1_AddRG.sh) script to add read groups.
+Use the [02b.0_AddRG.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.0_AddRG.sh) script to add read groups.
 
 Choose your RGID based on the species and population. e.g. for Ringlet (E3) modern core, RGID=E3modc
 
@@ -785,32 +788,26 @@ Brown Argus modc RGLB=mod02; mode RGLB=mod02, mus RGLB=mus0204
 Speckled Wood modc RGLB=mod01; mode RGLB=mod01, mus RGLB=mus0103
 
 
-2) Mark Duplicate Reads
+1) Mark Duplicate Reads
 
 Sometimes we see duplicate reads in the dataset which originate from the same DNA fragment. We want to filter these out because we assume that all read information is independent. Duplicate reads can arise during library prep as PCR duplicates, or during sequencing when the sequencer sees a single sequencing cluster as two clusters (called optical duplicates). 
 
-Use the []() script to remove duplicate reads
+Use the [02b.1_MarkDup_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.1_MarkDup_MODC.sh) script to remove duplicate reads
 
-3) Local realignment
+2) Local realignment
 
 Local realignment can be useful to optimise mapping to low complexity or repeat regions in the genome. Our mapping tool doesn't do this (although some pipelines like GATK do incorporate local realignment). We will run a local realignment as an independent step. 
 
-Use the []() script for local realignment
+Use the [02b.2_LocalRealignment_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.2_LocalRealignment_MODC.sh) script for local realignment
 
 
-4) Validate Sam
+3) Validate Sam
 
 Finally we'll use Picard Tools to check if our bam/sam files look as expected. 
 
-Use the []() script to validate the files. 
+Use the [02b.3_ValidateSamFile_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.3_ValidateSamFile_MODC.sh) script to validate the files. 
 
-Some common errors and how to fix them: 
 
-a) 
-
-b) 
-
-c) 
 
 
 
