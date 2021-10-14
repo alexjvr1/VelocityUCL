@@ -362,6 +362,23 @@ Whole genome resequencing data was generated for 38 & 40 modern individuals (sam
 
 ## Pipeline for Velocity project from raw data to mapped reads:
 
+Test your scripts with a smaller subset of the data. This can either be submitted to the server as a script, or you can test the commands in the interactive node
+
+```
+qrsh -l tmem=8G, h_vmem=8G
+```
+
+If you've submitted a lot of scripts, or the server is busy, you won't get onto the interactive node. 
+
+Previous commands
+```
+history | grep command-of-interest
+
+#where command of interest = a command you know was in the line you're looking for. eg. if you can't remember the qrsh command: 
+history |grep qrsh
+```
+
+
 ### 1. Raw to cleaned and processed data
 
 #### 00 Concatenate museum reseq data
