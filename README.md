@@ -560,7 +560,7 @@ Edit this submission script to submit from your home directory:
 ```
 
 
-#### 1b Prepare museum data for MapDamage (2.2): Repair PE reads
+#### 1b Repair PE reads
 
 ##### *TIME* 
 
@@ -568,6 +568,7 @@ Edit this submission script to submit from your home directory:
 
 ##### *METHOD*
 
+This step is run for all three populations. 
 Museum data is prone to post-mortem damage which we will correct for using MapDamage (see 2.2 below). We need to pre-process the museum reads for this. First we need to correct any problems with the PE files. The most common problem we've found is mismatches between R1 and R2 files e.g. not equal in length or mismatches between names. We can correct for this using BBtools's repair.sh script. 
 
 [BBtools](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/installation-guide/) can be installed from the downloaded tarball
@@ -589,9 +590,9 @@ We have it installed in the shared folder here:
 ```
 
 
-We'll repair the museum data using this script: [01c_bbtools_repair_museum_ARRAY.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01b_bbtools_repair_museum_ARRAY.sh)
+We'll repair the museum data using this script: [01b_bbtools_repair_museum_ARRAY.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01b_bbtools_repair_museum_ARRAY.sh)
 
-The input files will be all the museum fastq files found in 01a_mus.concat_cutadapt_reads
+The input files will be all the museum fastq files found in 01a_museum_cutadapt_reads
 
 Create two files with names for the inputs in the home directory for the species (e.g. /E3_Aphantopus_hyperantus_2020/): 
 ```
@@ -599,7 +600,7 @@ ls 01a_museum_cutadapt_reads/*R1*fastq.gz >> R1.museum.names.torepair
 ls 01a_museum_cutadapt_reads/*R2*fastq.gz >> R2.museum.names.torepair
 
 ##remove the file path from the name files. We need only in the input file names. 
-sed -i 's:01a_mus.concat_cutadapt_reads/::g' *torepair
+sed -i 's:01a_museum_cutadapt_reads/::g' *torepair
 ```
 
 This will write all the repaired files to: 01b_musPERepaired
@@ -617,7 +618,7 @@ qsub 01b_bbtools_repair_museum_ARRAY.sh
 ```
 
 
-#### 1c Prepare museum data for MapDamage (2.2): Merge overlapping PE reads
+#### 1c Merge overlapping PE reads
 
 ##### *TIME*
 
@@ -625,13 +626,15 @@ qsub 01b_bbtools_repair_museum_ARRAY.sh
 
 ##### *METHOD*
 
-MapDamage requires that overlapping PE reads be merged. Our museum libraries were sequenced with 75bp PE kits, except for the final (museum4) library which was sequenced with 50bp PE. 
+Run this for the museum samples only
 
-We know from the library prep that the museum DNA is quite degraded. Thus we expect that the vast majority of the inserts would have overlapping PE sequences. 
+Insert sizes for all three populations were on average shorter than the PE reads. This is a particularly important step for the museum samples. We know from the library prep that the museum DNA is quite degraded. Thus we expect that the vast majority of the inserts would have overlapping PE sequences. 
+
+Insert sizes were 50-100bp and they were sequenced with 75bp PE kits, except for the final (museum4) library which was sequenced with 50bp PE.
 
 We can count and merge these using bbtools' merge script. 
 
-Edit [01c_bbtools_merge_museum_ARRAY.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01d_bbtools_merge_museum_ARRAY.sh) to set up the array submission script. 
+Edit [01c_bbtools_merge_museum_ARRAY.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01c_bbtools_merge_museum_ARRAY.sh) to set up the array submission script. 
 
 Make the output directory and we need the names files again: 
 ```
@@ -646,6 +649,7 @@ sed -i 's:01b_musPERepaired/::g' *repaired
 This outputs 3 files for each individual: a merged file and an unmerged R1 and R2 file. We will proceed only with the merged reads at this point.
 
 As these are no longer PE data, we can map as if we had a single read. 
+
 
 
 ### 2. Map and process
@@ -665,21 +669,21 @@ Modern Exp (n=40) ~10 hours for all but two samples which had to be restarted. T
 
 ##### *METHOD:*
 
-It is more efficient to run this code in local directory before submitting the mapping script to queue
+It is more efficient to run this code in the interactive node before submitting the mapping script to queue
 
 ```
 #Index the reference genome if needed. Check if the *fasta.fai* file exists in the SpeciesName/RefGenome/ folder in your local directory. If not, run the indexing code. 
 
 #index reference genome
-module load apps/bwa-0.7.15
-bwa index RefGenome/*fasta
+BWA=/share/apps/genomics/bwa-0.7.17/bwa
+$BWA index RefGenome/*fna
 
 
 #Create files with input names
 
 ## museum
 ##Repaired and merged = 1 file per indiv
-ls 01d_musAll_merged/*repaired.merged*fastq >> mus.merged.names
+ls 01c_musAll_merged/*repaired.merged*fastq >> mus.merged.names
 
 sed -i s:01d_musAll_merged/::g merged.museum.names
 
@@ -693,8 +697,12 @@ sed -i 's:01a_modern_cutadapt_reads/::g' *names
 #If we want to keep the core and expanding samples in separate folders we can leave the path to the indivs in the *names file
 
 #make output directories. 
-mkdir 02a_museum_mapped
+mkdir 02a_mapped_museum_MERGED
 mkdir 02a_modern_mapped
+mkdir 02a_modern_mapped_exp
+
+#If you're running the unmerged pipeline make this folder as well
+mkdir 02a_museum_mapped
 
 #Optional
 #Add the additional folders in the 02a_modern_mapped folder when working with an EXPANDING species as the output will be written there. 
@@ -713,17 +721,19 @@ mkdir 02a_modern_mapped/01a_modern.exp_cutadapt_reads
 
 Run the submission scripts: 
 
-[02a_MapwithBWAmem.ARRAY_museum.merged.sh](https://github.com/alexjvr1/Velocity2020/blob/master/02a_MapwithBWAmem.ARRAY_museum.merged.sh)
+[02a_MapwithBWAmem.ARRAY_museum.merged.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02a_MapwithBWAmem.ARRAY_museum.merged.sh)
 
-[02a_MapwithBWAmem.ARRAY_modern.sh](https://github.com/alexjvr1/Velocity2020/blob/master/02a_MapwithBWAmem.ARRAY_modern.sh)
+[02a_MapwithBWAmem.ARRAY_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02a_MapwithBWAmem.ARRAY_MODC.sh)
+
+Modify the MODC script to run it for MODE if you're working with an expanding species. 
 
 
 ##If we don't merge the museum reads, we can use this script to map the PE reads: 
 
-[02a_MapwithBWAmem.ARRAY_museum.sh](https://github.com/alexjvr1/Velocity2020/blob/master/02a_MapwithBWAmem.ARRAY_museum.sh)
+[02a_MapwithBWAmem.ARRAY_museum_forATLAS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02a_MapwithBWAmem.ARRAY_museum_forATLAS.sh)
 
 
-
+Mapped unmerged reads (PE) have the extension "forATLAS.bam", because we can use ATLAS' SplitMerge function to merge these reads later and collect insert size metrics. 
 
 
 Check that everything has mapped correctly by checking the file sizes. If the mapping is cut short (e.g. by exceeding the requested walltime) the partial bam file will look complete and can be indexed. But the bam file size will be small (~500kb) and empty when you look at it.
@@ -733,15 +743,16 @@ Check that everything has mapped correctly by checking the file sizes. If the ma
 du -sh *bam   
 
 #To see bam file
-module load apps/bcftools-1.8
-bcftools view file.bam | head
-Check the output with samtools flagstat
+bcftools=/share/apps/genomics/bcftools-1.9/bin/bcftools
+$bcftools view file.bam | head
 
-module load apps/samtools-1.9.1
-samtools flagstat file.bam
+
+#Check the output with samtools flagstat
+samtools=/share/apps/genomics/samtools-1.9/bin/samtools
+$samtools flagstat file.bam
 
 #make a flagstat log file for all of the samples
-for i in $(ls *bam); do ls $i >>flagstat.log && samtools flagstat $i >> flagstat.log; done
+for i in $(ls *bam); do ls $i >>flagstat.log && $samtools flagstat $i >> flagstat.log; done
 ```
 
 Index the bam files with the script [02a_index.bamfiles.sh](https://github.com/alexjvr1/Velocity2020/blob/master/02a_index.bamfiles.sh)
