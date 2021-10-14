@@ -37,8 +37,8 @@ mapDamage="/share/apps/python-3.8.5-shared/bin/mapDamage"
 SHAREDFOLDER=/SAN/ugi/LepGenomics
 SPECIES=E3_SubsetTests
 REF=$SHAREDFOLDER/E3_Aphantopus_hyperantus/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_FORANGSD
-OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_FORANGSD
+INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_MERGED
+OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_MERGED
 TAIL="LR75.subset.bam"
 
 
