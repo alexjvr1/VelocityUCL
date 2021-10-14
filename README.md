@@ -9,6 +9,9 @@ Here I'll curate the variant calling pipeline and analyses undertaken using the 
 Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeoflife/darwintreeoflife.data/tree/master/species)
 
 
+## [Skip to pipeline](https://github.com/alexjvr1/VelocityUCL#pipeline)
+
+
 ## General information for working on the UCL server
 
 See [here](https://hpc.cs.ucl.ac.uk/full-guide/) for a general guide of the CS server
@@ -371,7 +374,7 @@ Whole genome resequencing data was generated for 38 & 40 modern individuals (sam
 
 A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using this script: 
 
-[01a_concat.fastq.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01a_concat.fastq.sh)
+[00_CollateAllMusSamples.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_CollateAllMusSamples.sh)
 
 
 
@@ -580,7 +583,7 @@ We have it installed here
 
 ####### UCL CS
 
-This is installed in the shared folder here: 
+We have it installed in the shared folder here: 
 ```
 /share/apps/genomics/bbmap-38.59/bbmap.sh
 ```
