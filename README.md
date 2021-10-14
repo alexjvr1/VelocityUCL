@@ -631,16 +631,16 @@ We know from the library prep that the museum DNA is quite degraded. Thus we exp
 
 We can count and merge these using bbtools' merge script. 
 
-Edit [01d_bbtools_merge_museum_ARRAY.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01d_bbtools_merge_museum_ARRAY.sh) to set up the array submission script. 
+Edit [01c_bbtools_merge_museum_ARRAY.sh](https://github.com/alexjvr1/Velocity2020/blob/master/01d_bbtools_merge_museum_ARRAY.sh) to set up the array submission script. 
 
 Make the output directory and we need the names files again: 
 ```
-mkdir 01d_musAll_merged
+mkdir 01c_musAll_merged
 
-ls 01c_musPERepaired/*R1*gz >> R1.museum.names.repaired
-ls 01c_musPERepaired/*R2*gz >> R2.museum.names.repaired
+ls 01b_musPERepaired/*R1*gz >> R1.museum.names.repaired
+ls 01b_musPERepaired/*R2*gz >> R2.museum.names.repaired
 
-sed -i 's:01c_musPERepaired/::g' *repaired
+sed -i 's:01b_musPERepaired/::g' *repaired
 ```
 
 This outputs 3 files for each individual: a merged file and an unmerged R1 and R2 file. We will proceed only with the merged reads at this point.
