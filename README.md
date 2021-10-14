@@ -461,14 +461,14 @@ Modern samples arrive demultiplexed by the sequencing facility, but Museum sampl
 
 We're trimming all adapter sequence from the demultiplexed data. We're also removing all sequences that are shorter than 20bp and 3' quality trimmed to remove bases with PHRED quality score of < 20 with Cutadapt.
 
-######## CS at UCL
+####### CS at UCL
 
-If you're running on the CS servers at UCL, skip to the next section "Generate submission script". 
+If you're running on the CS servers at UCL, skip to the next section ["Generate submission script"](https://github.com/alexjvr1/VelocityUCL#generate-submission-script). 
 
 
-######## BlueCrystal (UoB users) 
+####### BlueCrystal (UoB users) 
 
-If you're running this on BlueCrystal (UoB), you'll have to install cutadapt locally first using [these instructions] (https://cutadapt.readthedocs.io/en/stable/installation.html) - see below. 
+If you're running this on BlueCrystal (UoB), you'll have to install cutadapt locally first using [these instructions](https://cutadapt.readthedocs.io/en/stable/installation.html) - see below. 
 
 We're using cutadapt version 3.4: 
 ```
@@ -502,7 +502,14 @@ cutadapt version 3.4
 
 Run the following scripts to generate the submission script. Be sure to modify the path for your species, and to point to the correct input and output folders depending on the population you're working with. 
 
-Also check permissions for the folder you're writing to. 
+You'll need to run this script for each population (MODC, MODE, MUS).
+
+Also create and check permissions for each output folder.
+```
+mkdir 01a_museum_cutadapt_reads
+mkdir 01a_modern_cutadapt_reads
+mkdir 01a_modern_exp_cutadapt_reads
+```
 
 ```
 #Check permissions
@@ -510,6 +517,11 @@ Also check permissions for the folder you're writing to.
 ls -ltr folder.name
 
 #Change permissions
+# r=read
+# w=write
+# x=execute
+#You don't need all three for all files. e.g. data files can't be executed (bam, fastq, etc), so just use chmod u+rw. 
+
 ## for the user
 chmod u+rwx 
 
@@ -520,11 +532,16 @@ chmod g+rwx
 [01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01a_museum_cutadapt_filtering_trimming.sh)
 
 
-##### Submission script
+Run this locally
+```
+./01a_museum_cutadapt_filtering_trimming.sh
+```
 
-The above scripts will generate this: 
+This will generate a script in the folder you intend to use as your output folder: 
 
+```
 01a_parallel_cutadapt_bluecp3.sh
+```
 
 Edit this submission script to submit from your home directory:
 
