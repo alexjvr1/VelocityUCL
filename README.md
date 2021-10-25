@@ -144,6 +144,7 @@ file3.txt: OK
 |python3 |3|/share/apps/python/bin/python3|
 |R|4.0.3| /share/apps/R-4.0.3/bin/R|
 |samtools|1.9| /share/apps/genomics/samtools-1.9/bin/samtools|
+|Trimmomatic|0.39|/SAN/ugi/LepGenomics/Software/Trimmomatic-0.39|
 |vcflib|1.0.0| /share/apps/genomics/vcflib-1.0.0/bin|
 |vcftools|0.1.13| /share/apps/genomics/vcftools-0.1.13/bin/vcftools|
 
