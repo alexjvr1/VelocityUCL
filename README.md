@@ -482,6 +482,16 @@ Modern samples arrive demultiplexed by the sequencing facility, but Museum sampl
 
 We're trimming all adapter sequence from the demultiplexed data. We're also removing all sequences that are shorter than 20bp and 3' quality trimmed to remove bases with PHRED quality score of < 20 with Cutadapt.
 
+We'll use Trimmomatic to remove adapters. We'll use the TrueSeq3 ([NEBNext and TruSeq core adapters are the same](https://www.biostars.org/p/349635/))
+
+See the recommendations from the Trimmomatic developers [here](https://www.biostars.org/p/323087/): TruSeq3-PE-2.fa contains the core adapters and some additional adapter sequences that would be in unusual locations. 
+
+Does AdapterRemoval remove adapter sequences by default? And we need to specify 3' and 5' adapter trimming as we're sequencing through the entire read. 
+This might've been the problem with the initial CutAdapt pipeline because it seemed to remove all of the adapter sequence for the modern data. 
+
+
+
+
 ####### CS at UCL
 
 If you're running on the CS servers at UCL, skip to the next section ["Generate submission script"](https://github.com/alexjvr1/VelocityUCL#generate-submission-script). 
