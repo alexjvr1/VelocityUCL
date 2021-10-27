@@ -486,6 +486,9 @@ We'll use Trimmomatic to remove adapters. We'll use the TrueSeq3 ([NEBNext and T
 
 See the recommendations from the Trimmomatic developers [here](https://www.biostars.org/p/323087/): TruSeq3-PE-2.fa contains the core adapters and some additional adapter sequences that would be in unusual locations. 
 
+Trimmomatic's ILLUMINACLIP options are specifically designed to find sequence "read-throug", i.e. where the read length is longer than the sequence (as in 
+our museum data). See the manual [here](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
+
 Does AdapterRemoval remove adapter sequences by default? And we need to specify 3' and 5' adapter trimming as we're sequencing through the entire read. 
 This might've been the problem with the initial CutAdapt pipeline because it seemed to remove all of the adapter sequence for the modern data. 
 
