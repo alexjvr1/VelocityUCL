@@ -510,20 +510,110 @@ pwd
 $AdapterRemoval --collapse --basenam AH-01-1900-02 --file1 AH-01-1900-02.trimtest_1P.fastq.gz --file2 AH-01-1900-02.trimtest_2P.fastq.gz --trimns --trimqualities
 ```
 
+
 Map to reference genome: 
 ```
+cat 02a_MapwithBWAmem.ARRAY_museum_TrimTest.sh
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N C3.BWAmem_mod  ##job name
+#$ -l tmem=16G #RAM
+#$ -l h_vmem=16G #enforced limit on memory shell usage
+#$ -l h_rt=10:00:00 ##wall time.  
+#$ -j y  #concatenates error and output files (with prefix job1)
 
+#run job in working directory
+cd $SGE_O_WORKDIR 
+
+
+##Software
+BWA=/share/apps/genomics/bwa-0.7.17/bwa
+export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
+
+#Define variables
+SHAREDFOLDER=/SAN/ugi/LepGenomics
+SPECIES=E3_Aphantopus_hyperantus
+REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+INPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
+OUTPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
+NAME=AH-01-1900-02
+
+
+
+##Check if Ref Genome is indexed by bwa
+if [[ ! $REF.fai ]]
+then 
+	echo $REF" not indexed. Indexing now"
+	$BWA index $REF
+else
+	echo $REF" indexed"
+fi
+
+
+##Map 
+
+echo "time $BWA mem $REF $INPUT/$NAME | samtools sort -o  $OUTPUT/$NAME.bam" >> map_mus.log
+time $BWA mem $REF $INPUT/$NAME.collapsed | samtools sort -o  $OUTPUT/$NAME.bam
 ```
 
 
 
 Bam processing: AddRG, MarkDup, LocalRealn, CheckBam
 ```
+#Index bam
+samtools=/share/apps/genomics/samtools-1.9/bin/samtools
+$samtools index AH-01-1900-02.collapsed.bam
+
+#Bam processing
 export PATH=/share/apps/java/bin:$PATH
 export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
 PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
 
+#Add RG info
+time java -jar $PICARD AddOrReplaceReadGroups \
+       I=AH-01-1900-02.collapsed.bam \
+       O=AH-01-1900-02.collapsed.RG.bam \
+       RGID=E3mus \
+       RGLB=mus0204 \
+       RGPL=ILLUMINA \
+       RGPU=unit1 \
+       RGSM=AH02
 
+#MarkDuplicates
+time java -jar $PICARD MarkDuplicates \
+INPUT=AH-01-1900-02.collapsed.RG.bam \
+OUTPUT=AH-01-1900-02.collapsed.rmdup.bam \
+METRICS_FILE=AH-01-1900-02.dup.txt \
+REMOVE_DUPLICATES=false \
+VALIDATION_STRINGENCY=SILENT \
+CREATE_INDEX=true
+
+
+#Local Realignment
+export PATH=/share/apps/jdk1.8.0_131/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/jdk1.8.0_131/lib:$LD_LIBRARY_PATH
+GenomeAnalysisTK=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
+REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+
+###Identify targets to realign
+java -jar $GenomeAnalysisTK -T RealignerTargetCreator \
+-R $REF \
+-o AH-01-1900-02.intervals \
+-I AH-01-1900-02.collapsed.rmdup.bam
+
+###Local realignment
+java -jar $GenomeAnalysisTK -T IndelRealigner \
+-R $REF \
+-targetIntervals AH-01-1900-02.intervals \
+-I AH-01-1900-02.collapsed.rmdup.bam \
+-o AH-01-1900-02.realn.bam
+
+#Validate Bam
+time java -jar $PICARD ValidateSamFile \
+INPUT=AH-01-1900-02.realn.bam \
+OUTPUT=AH-01-1900-02.validatesam \
+MODE=SUMMARY
 
 ```
 
