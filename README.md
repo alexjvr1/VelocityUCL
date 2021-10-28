@@ -563,7 +563,7 @@ Bam processing: AddRG, MarkDup, LocalRealn, CheckBam
 ```
 #Index bam
 samtools=/share/apps/genomics/samtools-1.9/bin/samtools
-$samtools index AH-01-1900-02.collapsed.bam
+$samtools index AH-01-1900-02.bam
 
 #Bam processing
 export PATH=/share/apps/java/bin:$PATH
@@ -572,7 +572,7 @@ PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
 
 #Add RG info
 time java -jar $PICARD AddOrReplaceReadGroups \
-       I=AH-01-1900-02.collapsed.bam \
+       I=AH-01-1900-02.bam \
        O=AH-01-1900-02.collapsed.RG.bam \
        RGID=E3mus \
        RGLB=mus0204 \
@@ -594,7 +594,7 @@ CREATE_INDEX=true
 export PATH=/share/apps/jdk1.8.0_131/bin:$PATH
 export LD_LIBRARY_PATH=/share/apps/jdk1.8.0_131/lib:$LD_LIBRARY_PATH
 GenomeAnalysisTK=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
-REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+REF=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
 
 ###Identify targets to realign
 java -jar $GenomeAnalysisTK -T RealignerTargetCreator \
