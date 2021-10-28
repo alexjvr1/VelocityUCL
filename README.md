@@ -499,6 +499,22 @@ java -jar ../Software/Trimmomatic-0.39/trimmomatic-0.39.jar PE -trimlog Trimmoma
 ```
 
 
+Followed by AdapterTrimming. Used for trimming adapters and merging reads
+```
+
+```
+
+Bam processing: AddRG, MarkDup, LocalRealn, CheckBam
+```
+
+```
+
+MapDamage
+```
+
+
+
+
 
 ####### CS at UCL
 
