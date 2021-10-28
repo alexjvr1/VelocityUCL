@@ -501,11 +501,29 @@ java -jar ../Software/Trimmomatic-0.39/trimmomatic-0.39.jar PE -trimlog Trimmoma
 
 Followed by AdapterTrimming. Used for trimming adapters and merging reads
 ```
+AdapterRemoval=/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.1/build/AdapterRemoval
+$AdapterRemoval --collapse --basename $file \
+--file1 $file$TAIL1  --file2 $file$TAIL2 --trimns --trimqualities
+
+#For our test: 
+pwd
+$AdapterRemoval --collapse --basenam AH-01-1900-02 --file1 AH-01-1900-02.trimtest_1P.fastq.gz --file2 AH-01-1900-02.trimtest_2P.fastq.gz --trimns --trimqualities
+```
+
+Map to reference genome: 
+```
 
 ```
+
+
 
 Bam processing: AddRG, MarkDup, LocalRealn, CheckBam
 ```
+export PATH=/share/apps/java/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
+PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
+
+
 
 ```
 
