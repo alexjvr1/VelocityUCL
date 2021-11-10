@@ -16,4 +16,33 @@ Possible issues:
 3) Reads are merged before any error correction (e.g. filtering for low quality reads, or removing the first 10bp of the reads. 
 
 
+## IGV
 
+We can compare the sequences that worked (unmerged PE reads) and the elevated G>A using IGV to view the sequences. 
+
+This can't be launched on the UCL servers, so I'll download the relevant AH-01-1900-02 bam files to my computer:
+
+
+#Copy data
+```
+#Open a tunnel to copy data
+
+
+#Create a folder to work in: 
+/Users/alexjvr/2021postdoc/Velocity/E3_A.hyperantus/IGV
+
+## Sample that worked. Reads merged after mapping. 
+rsync -auve "ssh -p 3000" $i ajansen@localhost:/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/02a_mapped_museum/AH-01-1900-02.realn_mergedReads.bam .
+##See log file here: less E3.MapDmg.mus.o3966910.2
+##Here the reads were merged after mapping, but this isn't seen properly by MapDamage, so MapDamage assess only the inward facing PP reads: 
+##WARNING Processed 5090528 paired reads, assumed to be non-overlapping, facing inwards and correctly paired; 4385412 of these were excluded as improperly paired.
+#However, this results in the expected substitution frequencies. 
+00:05:04 mapdamage.rescale INFO Expected substition frequencies before and after rescaling:
+00:05:04 mapdamage.rescale INFO     C>T    0.0039    0.0027
+00:05:04 mapdamage.rescale INFO     T>C    0.0015    0.0015
+00:05:04 mapdamage.rescale INFO     G>A    0.0031    0.0031
+00:05:04 mapdamage.rescale INFO     A>G    0.0014    0.0014
+
+## Sample with elevated G>A
+
+```
