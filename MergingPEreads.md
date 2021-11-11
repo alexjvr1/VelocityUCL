@@ -215,6 +215,16 @@ Average length of retained reads: 52.2643
 ```
 
 
+```
+12:11:36 mapdamage.rescale INFO Reading corrected probabilities from '/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/TrimmomaticTest/AH02_collapseconservatively/Stats_out_MCMC_correct_prob.csv'
+12:15:21 mapdamage.rescale INFO Expected substition frequencies before and after rescaling:
+12:15:21 mapdamage.rescale INFO     C>T    0.0033    0.0028
+12:15:21 mapdamage.rescale INFO     T>C    0.0021    0.0021
+12:15:21 mapdamage.rescale INFO     G>A    0.0071    0.0071
+12:15:21 mapdamage.rescale INFO     A>G    0.0020    0.0020
+
+```
+
 
 
 
