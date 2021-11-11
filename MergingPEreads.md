@@ -58,10 +58,103 @@ rsync -auve "ssh -p 3000" $i ajansen@localhost:/SAN/ugi/LepGenomics/E3_Aphantopu
 
 So far the only sites that generate believable G>A are the non-overlapping PE reads filtered from the full dataset. 
 
-Test the following: 
+Test G>A for the following: 
 
-1) 
+Prepare data: Trimmomatic followed by AdapterRemoval
+a) Remove adapters
+b) 
 
+1) R1 only. And distribution of nucleotide substitutions
+
+2) R2 only. And distribution of nucleotide substitutions
+
+3) Should we remove ends?
+
+4) 
+
+
+#### Adapters
+
+```
+#Default (Nextera)
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCACNNNNNNATCTCGTATGCCGTCTTCTGCTTG	AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTAGATCTCGGTGGTCGCCGTATCATT
+#Nextera library prep
+AGATCGGAAGAGCACACGTCTGAACTCCAGTC	AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
+GTGTAGATCT	GTGTAGATCT	
+#TruSeq (Used in the Velocity project)
+AATGATACGGCGACCACCGAGATCTACAC	CAAGCAGAAGACGGCATACGAGAT
+TACACTCTTTCCCTACACGACGCTCTTCCGATCT	GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT
+#Nextera and Illumina adapters
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGTA	AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+AATGATACGGCGACCACCGAGATCTACAC	CAAGCAGAAGACGGCATACGAGAT
+```
+
+### Variables and wd
+
+```
+qrsh -l tmem=5G h_vmem=5G
+cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/TrimmomaticTest
+
+AdapterRemoval=/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.2/build/AdapterRemoval
+AdapterList=/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.2/Barcodes/VelocityAllAdapters
+```
+
+
+
+## Test1
+
+AH02 PE adapter trimming with list of default, Nextera, Illumina, and TruSeq adapters.
+
+```
+ $AdapterRemoval --file1 AH-01-1900-02.trimtest_1P.fastq.gz --file2 AH-01-1900-02.trimtest_2P.fastq.gz --adapter-list $AdapterList
+```
+
+
+OUT
+```
+[Adapter trimming]
+RNG seed: 2646895129
+Alignment shift value: 2
+Global mismatch threshold: 0.333333
+Quality format (input): Phred+33
+Quality score max (input): 41
+Quality format (output): Phred+33
+Quality score max (output): 41
+Mate-number separator (input): '/'
+Trimming 5p: 0
+Trimming 3p: 0
+Trimming Ns: No
+Trimming Phred scores <= 2: No
+Trimming using sliding windows: No
+Minimum genomic length: 15
+Maximum genomic length: 4294967295
+Collapse overlapping reads: No
+Deterministic collapse: No
+Conservative collapse: No
+Minimum overlap (in case of collapse): 11
+
+
+[Trimming statistics]
+Total number of read pairs: 3163204
+Number of unaligned read pairs: 22895
+Number of well aligned read pairs: 3140309
+Number of discarded mate 1 reads: 142
+Number of singleton mate 1 reads: 0
+Number of discarded mate 2 reads: 142
+Number of singleton mate 2 reads: 0
+Number of reads with adapters[1]: 18840
+Number of reads with adapters[2]: 12
+Number of reads with adapters[3]: 9257
+Number of reads with adapters[4]: 5203
+Number of reads with adapters[5]: 7809
+Number of reads with adapters[6]: 205
+Number of reads with adapters[7]: 0
+Number of retained reads: 6326124
+Number of retained nucleotides: 315878771
+Average length of retained reads: 49.9324
+
+
+```
 
 
 
