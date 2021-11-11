@@ -229,6 +229,40 @@ Average length of retained reads: 52.2643
 ## Test3: Trim 10 bp from 5' of both sequences
 
 
+## Test4: Collapsed reads, but run mapDamage with --single-end setting
+
+
+```
+time $mapDamage --merge-libraries -i $INPUT/$NAME -d $OUTPUT/AH02_collapseconservatively -r $REF --rescale
+```
+Usually I get a warning that the reads aren't paired end and inward facing, but I didn't get this warning this time: 
+```
+12:27:26 mapdamage.rescale INFO Reading corrected probabilities from '/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/TrimmomaticTest/AH02_collapseconservatively/Stats_out_MCMC_correct_prob.csv'
+12:31:07 mapdamage.rescale INFO Expected substition frequencies before and after rescaling:
+12:31:07 mapdamage.rescale INFO     C>T    0.0033    0.0020
+12:31:07 mapdamage.rescale INFO     T>C    0.0021    0.0021
+12:31:07 mapdamage.rescale INFO     G>A    0.0071    0.0034
+12:31:07 mapdamage.rescale INFO     A>G    0.0020    0.0020
+12:31:07 mapdamage.rescale INFO Quality metrics before and after scaling:
+12:31:07 mapdamage.rescale INFO     CT-Q00     82796     82796
+12:31:07 mapdamage.rescale INFO     CT-Q10     82761     34715
+12:31:07 mapdamage.rescale INFO     CT-Q20     82590     34627
+12:31:07 mapdamage.rescale INFO     CT-Q30     82215     34487
+12:31:07 mapdamage.rescale INFO     CT-Q40     74967     33358
+12:31:07 mapdamage.rescale INFO     GA-Q00    169720    169720
+12:31:07 mapdamage.rescale INFO     GA-Q10    169638     61418
+12:31:07 mapdamage.rescale INFO     GA-Q20    169293     61297
+12:31:07 mapdamage.rescale INFO     GA-Q30    168493     61066
+12:31:07 mapdamage.rescale INFO     GA-Q40    150792     59205
+```
+ And frequencies are corrected... 
+ 
+How much data is left? 
+
+
+
+
+
 
 
 
