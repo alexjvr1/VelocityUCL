@@ -226,6 +226,9 @@ Average length of retained reads: 52.2643
 ```
 
 
+## Test3: Trim 10 bp from 5' of both sequences
+
+
 
 
 
