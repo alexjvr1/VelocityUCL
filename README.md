@@ -386,8 +386,20 @@ We will count the number of reads in the raw dataset and at each filtering step 
 1. Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](https://docs.google.com/spreadsheets/d/1q0PjdjiDabJCutWC0NvQog6sbgB7bKcxBNgD8dPc7uQ/edit?usp=sharing). 
 
 
-Raw reads can be counted using fastqc. 
+Check the read quality and raw read count with FastQC. 
 
+Create a FastQC script by modifying the [00_fastqc_raw_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_fastqc_raw_museum.sh) script for your species and population. Make the script executable and run it in your input directory (where the raw fastq.gz files are). 
+
+```
+chmod u+x 00_fastqc_raw_museum.sh
+./00_fastqc_raw_museum.sh
+
+##This will generate a script to submit to the server: 
+## $TIMESTAMP will be replaced by the date and time the script was generated
+qsub parallel_fastqc.$TIMESTAMP.smsjob.sh
+```
+
+Copy all the .html files to your computer and look at the data quality by eye. Raw read counts should be at the top of the page. 
 
 
 
