@@ -379,6 +379,12 @@ history | grep command-of-interest
 history |grep qrsh
 ```
 
+### 0. Raw read count
+
+We will count the number of reads in the raw dataset and at each filtering step to assess the proportion of raw reads that remain in the final dataset. 
+
+Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](). 
+
 
 ### 1. Raw to cleaned and processed data
 
