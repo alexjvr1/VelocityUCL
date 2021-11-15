@@ -383,7 +383,10 @@ history |grep qrsh
 
 We will count the number of reads in the raw dataset and at each filtering step to assess the proportion of raw reads that remain in the final dataset. 
 
-Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](). 
+Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](https://docs.google.com/spreadsheets/d/1q0PjdjiDabJCutWC0NvQog6sbgB7bKcxBNgD8dPc7uQ/edit?usp=sharing). 
+
+Find information about each species' sampling date and site [here](https://docs.google.com/spreadsheets/d/1G9r50W0VV_ANZ19rIvqZpXWFemy2MW76_iXuyBuCQGA/edit?usp=sharing)
+
 
 
 ### 1. Raw to cleaned and processed data
@@ -475,7 +478,7 @@ AH-02-2019-42_mod.exp_R2.fastq.gz  AH-02-2019-57_mod.exp_R2.fastq.gz  AH-02-2019
 ```
 
 
-#### 1a Demultiplex and Adapter trimming
+#### 1a Adapter trimming
 
 ##### *TIME:*
 
