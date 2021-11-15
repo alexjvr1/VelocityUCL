@@ -262,6 +262,10 @@ How much data is left?
 
 
 
+## Solution
+
+It turns out the original advice was incorrect. I should run MapDamage without the --single-end option. If this option is chosen then the reads are only trimmed at the 5' end of R1, thus the 5' end of R2 remains uncorrected. 
+
 
 
 
