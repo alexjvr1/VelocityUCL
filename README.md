@@ -805,95 +805,6 @@ Edit this submission script to submit from your home directory:
 ```
 
 
-#### 1b Repair PE reads
-
-##### *TIME* 
-
-~1hour
-
-##### *METHOD*
-
-This step is run for all three populations. 
-Museum data is prone to post-mortem damage which we will correct for using MapDamage (see 2.2 below). We need to pre-process the museum reads for this. First we need to correct any problems with the PE files. The most common problem we've found is mismatches between R1 and R2 files e.g. not equal in length or mismatches between names. We can correct for this using BBtools's repair.sh script. 
-
-[BBtools](https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/installation-guide/) can be installed from the downloaded tarball
-
-
-####### UoB BlueCrystal
-
-We have it installed here 
-```
-/newhome/bzzjrb/Software/bbmap/
-```
-
-
-####### UCL CS
-
-We have it installed in the shared folder here: 
-```
-/share/apps/genomics/bbmap-38.59/bbmap.sh
-```
-
-
-We'll repair the museum data using this script: [01b_bbtools_repair_museum_ARRAY.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01b_bbtools_repair_museum_ARRAY.sh)
-
-The input files will be all the museum fastq files found in 01a_museum_cutadapt_reads
-
-Create two files with names for the inputs in the home directory for the species (e.g. /E3_Aphantopus_hyperantus_2020/): 
-```
-ls 01a_museum_cutadapt_reads/*R1*fastq.gz >> R1.museum.names.torepair
-ls 01a_museum_cutadapt_reads/*R2*fastq.gz >> R2.museum.names.torepair
-
-##remove the file path from the name files. We need only in the input file names. 
-sed -i 's:01a_museum_cutadapt_reads/::g' *torepair
-```
-
-This will write all the repaired files to: 01b_musPERepaired
-
-```
-#make the output directory within the species home directory:
-mkdir 01b_musPERepaired 
-```
-
-Check that the correct number of threads are specified (e.g. 48 indivs: PBS -t 1-48)
-
-And submit:
-```
-qsub 01b_bbtools_repair_museum_ARRAY.sh 
-```
-
-
-#### 1c Merge overlapping PE reads
-
-##### *TIME*
-
-30-40min
-
-##### *METHOD*
-
-Run this for the museum samples only
-
-Insert sizes for all three populations were on average shorter than the PE reads. This is a particularly important step for the museum samples. We know from the library prep that the museum DNA is quite degraded. Thus we expect that the vast majority of the inserts would have overlapping PE sequences. 
-
-Insert sizes were 50-100bp and they were sequenced with 75bp PE kits, except for the final (museum4) library which was sequenced with 50bp PE.
-
-We can count and merge these using bbtools' merge script. 
-
-Edit [01c_bbtools_merge_museum_ARRAY.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01c_bbtools_merge_museum_ARRAY.sh) to set up the array submission script. 
-
-Make the output directory and we need the names files again: 
-```
-mkdir 01c_musAll_merged
-
-ls 01b_musPERepaired/*R1*gz >> R1.museum.names.repaired
-ls 01b_musPERepaired/*R2*gz >> R2.museum.names.repaired
-
-sed -i 's:01b_musPERepaired/::g' *repaired
-```
-
-This outputs 3 files for each individual: a merged file and an unmerged R1 and R2 file. We will proceed only with the merged reads at this point.
-
-As these are no longer PE data, we can map as if we had a single read. 
 
 
 
@@ -914,9 +825,11 @@ Modern Exp (n=40) ~10 hours for all but two samples which had to be restarted. T
 
 ##### *METHOD:*
 
-It is more efficient to run this code in the interactive node before submitting the mapping script to queue
+Make sure you're using the latest version of the reference genome. We're using the references from NCBI RefSeq where available. e.g. [here](https://www.ncbi.nlm.nih.gov/assembly/GCF_905163445.1,GCF_905163445.1/?&utm_source=gquery)
 
+It is more efficient to run this code in the interactive node before submitting the mapping script to queue
 ```
+#Index the reference genome if needed. Check if the *fasta.fai* file exists in the SpeciesName/RefGenome/ folder in your local directory. If not, run the indexing code. 
 #Index the reference genome if needed. Check if the *fasta.fai* file exists in the SpeciesName/RefGenome/ folder in your local directory. If not, run the indexing code. 
 
 #index reference genome
