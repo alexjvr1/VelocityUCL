@@ -383,9 +383,20 @@ history |grep qrsh
 
 We will count the number of reads in the raw dataset and at each filtering step to assess the proportion of raw reads that remain in the final dataset. 
 
-Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](https://docs.google.com/spreadsheets/d/1q0PjdjiDabJCutWC0NvQog6sbgB7bKcxBNgD8dPc7uQ/edit?usp=sharing). 
+1. Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](https://docs.google.com/spreadsheets/d/1q0PjdjiDabJCutWC0NvQog6sbgB7bKcxBNgD8dPc7uQ/edit?usp=sharing). 
 
-Find information about each species' sampling date and site [here](https://docs.google.com/spreadsheets/d/1G9r50W0VV_ANZ19rIvqZpXWFemy2MW76_iXuyBuCQGA/edit?usp=sharing)
+
+Raw reads can be counted using fastqc. 
+
+
+
+
+2. Find information about each species' sampling date and site [here](https://docs.google.com/spreadsheets/d/1G9r50W0VV_ANZ19rIvqZpXWFemy2MW76_iXuyBuCQGA/edit?usp=sharing), and update the shared file accordingly. 
+
+
+
+
+
 
 
 
