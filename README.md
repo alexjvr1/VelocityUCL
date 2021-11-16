@@ -2040,4 +2040,16 @@ If you make use of PALEOMIX in your work, please cite
 
 ```
 
+Paleomix is located here: 
+```
+paleomix=~/.local/bin/paleomix
+```
 
+To use this on the computing node (qrsh) or in a script, the following is needed: 
+```
+source /share/apps/source_files/python/python-3.6.4.source
+
+paleomix=~/.local/bin/paleomix
+
+$paleomix
+```
