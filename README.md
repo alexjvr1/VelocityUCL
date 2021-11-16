@@ -473,16 +473,30 @@ our museum data). See the manual [here](http://www.usadellab.org/cms/uploads/sup
 
 ###### 1. Trimmomatic
 
-Create a submission script by modifying the [01a_Trimmomatic.sh]() script. 
+Create a submission script by modifying the [01a_Trimmomatic.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01a_Trimmomatic.sh) script. 
+
+Run this in the command line to create a submission script:  
+```
+./01a_Trimmomatic.sh
+```
 
 
-Test Trimmomatic
+
+Example Trimmomatic script with the default options in our scripts:
 ```
 java -jar ../Software/Trimmomatic-0.39/trimmomatic-0.39.jar PE -trimlog TrimmomaticTest/trim.log 00_raw_reads_museum_FINAL/ALLSAMPLES/AH-01-1900-02_190312_L008_R1.fastq.gz 00_raw_reads_museum_FINAL/ALLSAMPLES/AH-01-1900-02_190312_L008_R2.fastq.gz -baseout TrimmomaticTest/AH-01-1900-02.trimtest ILLUMINACLIP:../Software/Trimmomatic-0.39/adapters/TruSeq3-PE-2.fa:2:30:8:1:True LEADING:20 TRAILING:20 SLIDINGWINDOW:4:20 MINLEN:20 AVGQUAL:20
 ```
 
+Once the run is complete we can collect information for the shared data file: 
 
-Followed by AdapterTrimming. Used for trimming adapters and merging reads
+
+
+
+
+###### 2. AdapterRemoval
+
+
+Followed by AdapterRemoval. Used for trimming any remaining adapters and merging reads
 ```
 AdapterRemoval=/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.1/build/AdapterRemoval
 $AdapterRemoval --collapse --basename $file \
