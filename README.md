@@ -11,7 +11,7 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 
 ## [Skip to pipeline](https://github.com/alexjvr1/VelocityUCL#pipeline)
 
-## [Use the PaleoMix pipeline]()
+## [Use the PaleoMix pipeline](https://github.com/alexjvr1/VelocityUCL#paleomix-pipeline)
 
 
 ## General information for working on the UCL server
