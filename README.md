@@ -2053,3 +2053,7 @@ paleomix=~/.local/bin/paleomix
 
 $paleomix
 ```
+
+Picard Tools - The latest version compatable with PaleoMix is v1.1.37, but the earliest version on the server is Picard 2.20. 
+
+
