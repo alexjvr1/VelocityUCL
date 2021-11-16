@@ -35,7 +35,7 @@ PHREDSCORE=33
 CROP=150
 HEADCROP=0
 AVGQUAL=20
-QUEUE=uclcs
+QUEUE=CS
 
 function author {
 	echo
