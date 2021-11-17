@@ -714,100 +714,6 @@ time $mapDamage --merge-libraries -i $INPUT/$NAME -d $OUTPUT/$NAME -r $REF --res
 ```
 
 
-####### CS at UCL
-
-If you're running on the CS servers at UCL, skip to the next section ["Generate submission script"](https://github.com/alexjvr1/VelocityUCL#generate-submission-script). 
-
-
-####### BlueCrystal (UoB users) 
-
-If you're running this on BlueCrystal (UoB), you'll have to install cutadapt locally first using [these instructions](https://cutadapt.readthedocs.io/en/stable/installation.html) - see below. 
-
-We're using cutadapt version 3.4: 
-```
-module load languages/python-anaconda3-5.2.0
-
-module load tools/cmake-3.8.1
-module load tools/autoconf-2.69
-module load languages/gcc-9.1.0
-module add tools/nasm-2.15.05
-
-#install cutadapt in your home directory using the web instructions
-pip3 install --user --upgrade cutadapt
-
-#Check that this cutadapt works
-~/.local/bin/cutadapt --help
-
-
-##Check if this directory is in your PATH:
-echo $PATH
-
-##And add to PATH if it isn't yet
-PATH="$PATH:~/.local/bin/"
-
-##Now you can run cutadapt directly
-cutadapt --help
-
-cutadapt version 3.4
-```
-
-##### Generate submission script
-
-Run the following scripts to generate the submission script. Be sure to modify the path for your species, and to point to the correct input and output folders depending on the population you're working with. 
-
-You'll need to run this script for each population (MODC, MODE, MUS).
-
-Also create and check permissions for each output folder.
-```
-mkdir 01a_museum_cutadapt_reads
-mkdir 01a_modern_cutadapt_reads
-mkdir 01a_modern_exp_cutadapt_reads
-```
-
-```
-#Check permissions
-
-ls -ltr folder.name
-
-#Change permissions
-# r=read
-# w=write
-# x=execute
-#You don't need all three for all files. e.g. data files can't be executed (bam, fastq, etc), so just use chmod u+rw. 
-
-## for the user
-chmod u+rwx 
-
-## for the group
-chmod g+rwx
-```
-
-[01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01a_museum_cutadapt_filtering_trimming.sh)
-
-
-Run this locally
-```
-./01a_museum_cutadapt_filtering_trimming.sh
-```
-
-This will generate a script in the folder you intend to use as your output folder: 
-
-```
-01a_parallel_cutadapt_bluecp3.sh
-```
-
-Edit this submission script to submit from your home directory:
-
-```
-1. Set all paths to your home directory if necessary. 
-
-2. Adjust the number of threads (PBS -t 1-xx) to equal the number of individuals to be analysed. 
-
-3. Check that any empty arguments have been removed from the cutadapt command
-
-4. You might have to set the path to cutadapt to find your local version
-
-```
 
 
 
@@ -1989,6 +1895,107 @@ See pigeon paper
 
 
 #### 4e. 
+
+
+
+## Old CODE
+
+####### CS at UCL
+
+If you're running on the CS servers at UCL, skip to the next section ["Generate submission script"](https://github.com/alexjvr1/VelocityUCL#generate-submission-script). 
+
+
+####### BlueCrystal (UoB users) 
+
+If you're running this on BlueCrystal (UoB), you'll have to install cutadapt locally first using [these instructions](https://cutadapt.readthedocs.io/en/stable/installation.html) - see below. 
+
+We're using cutadapt version 3.4: 
+```
+module load languages/python-anaconda3-5.2.0
+
+module load tools/cmake-3.8.1
+module load tools/autoconf-2.69
+module load languages/gcc-9.1.0
+module add tools/nasm-2.15.05
+
+#install cutadapt in your home directory using the web instructions
+pip3 install --user --upgrade cutadapt
+
+#Check that this cutadapt works
+~/.local/bin/cutadapt --help
+
+
+##Check if this directory is in your PATH:
+echo $PATH
+
+##And add to PATH if it isn't yet
+PATH="$PATH:~/.local/bin/"
+
+##Now you can run cutadapt directly
+cutadapt --help
+
+cutadapt version 3.4
+```
+
+##### Generate submission script
+
+Run the following scripts to generate the submission script. Be sure to modify the path for your species, and to point to the correct input and output folders depending on the population you're working with. 
+
+You'll need to run this script for each population (MODC, MODE, MUS).
+
+Also create and check permissions for each output folder.
+```
+mkdir 01a_museum_cutadapt_reads
+mkdir 01a_modern_cutadapt_reads
+mkdir 01a_modern_exp_cutadapt_reads
+```
+
+```
+#Check permissions
+
+ls -ltr folder.name
+
+#Change permissions
+# r=read
+# w=write
+# x=execute
+#You don't need all three for all files. e.g. data files can't be executed (bam, fastq, etc), so just use chmod u+rw. 
+
+## for the user
+chmod u+rwx 
+
+## for the group
+chmod g+rwx
+```
+
+[01a_museum_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01a_museum_cutadapt_filtering_trimming.sh)
+
+
+Run this locally
+```
+./01a_museum_cutadapt_filtering_trimming.sh
+```
+
+This will generate a script in the folder you intend to use as your output folder: 
+
+```
+01a_parallel_cutadapt_bluecp3.sh
+```
+
+Edit this submission script to submit from your home directory:
+
+```
+1. Set all paths to your home directory if necessary. 
+
+2. Adjust the number of threads (PBS -t 1-xx) to equal the number of individuals to be analysed. 
+
+3. Check that any empty arguments have been removed from the cutadapt command
+
+4. You might have to set the path to cutadapt to find your local version
+
+```
+
+
 
 
 
