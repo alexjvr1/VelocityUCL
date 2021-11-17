@@ -1,5 +1,11 @@
 # Ringlet Aphantopus hyperantus
 
+Modern samples on CS cluster have been concatenated together from the two modern wgs runs: 
+
+
+
+
+
 
 minimum_spanning_network_core_AHall.pdf
 
