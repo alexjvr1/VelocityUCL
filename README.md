@@ -506,7 +506,27 @@ grep "Both Surviving" 01a_Trimmomatic_*/*log |awk '{print $1, $7}' >> Trimmomati
 
 ###### 2. AdapterRemoval
 
-Used for trimming any remaining adapters and merging reads
+Used for trimming any remaining adapters and merging reads. 
+
+
+Modify the [01b_AdapterRemover_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01b_AdapterRemover_museum.sh) script for each population. 
+
+Create the submission scripts: 
+```
+chmod u+x 01b_AdapterRemover*sh
+chmod g+x 01b_AdapterRemover*sh
+
+./01b_AdapterRemover_museum.sh
+./01b_AdapterRemover_MODC.sh
+./01b_AdapterRemover_MODE.sh
+
+#submit the generated script to queue
+```
+
+
+
+
+Here is an example of the script that will be run. 
 ```
 AdapterRemoval=/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.1/build/AdapterRemoval
 $AdapterRemoval --collapse --basename $file \
@@ -518,6 +538,22 @@ $AdapterRemoval --collapse --basename AH-01-1900-02 --file1 AH-01-1900-02.trimte
 ```
 
 
+All run settings and outputs are written to files called SAMPLENAME.settings. We can extract all the information we're interested from here: 
+
+```
+Total number of read pairs: 43667928
+Number of unaligned read pairs: 78684
+Number of well aligned read pairs: 43589244
+Number of discarded mate 1 reads: 0
+Number of singleton mate 1 reads: 0
+Number of discarded mate 2 reads: 0
+Number of singleton mate 2 reads: 0
+Number of reads with adapters[1]: 969987
+Number of full-length collapsed pairs: 43528725
+Number of truncated collapsed pairs: 0
+Number of retained reads: 43807131
+Number of retained nucleotides: 2145366993
+Average length of retained reads: 48.973
 
 
 
