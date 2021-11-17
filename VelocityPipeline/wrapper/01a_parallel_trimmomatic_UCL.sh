@@ -19,6 +19,7 @@
 VERSION='2-2021.11.15'
 CMD="/SAN/ugi/LepGenomics/Software/Trimmomatic-0.39/trimmomatic-0.39.jar"
 
+
 # Default values for optional variables
 EXTRA=''
 EMAIL=''
@@ -71,9 +72,10 @@ function usage {
 	echo "      -q <queue> => SGE queue: uclcs | iceberg | popgenom | molecol (optional: default=$QUEUE)"
 	echo "      -e <email> => Notification email address (default=$EMAIL)"
 	echo "      -h => show this help"
+	echo "      -N <JOBNAME> => Name given to job in queue"
 	echo ""
 	echo "  Example:"
-	echo "      $(basename $0) -i raw_reads -o trimmed_reads -q uclcs"
+	echo "      $(basename $0) -i raw_reads -o trimmed_reads -q CS"
 	echo ""
 	echo ""
 	exit 0
@@ -141,6 +143,9 @@ then
 			-e)	shift
 				EMAIL=$1
 				;;	
+			-N)	shift
+				JOBNAME=$1
+				;;
 			*)	echo 
 				echo "ERROR - Invalid option: $1"
 				echo
@@ -169,6 +174,8 @@ echo '#!/bin/bash' > $SMSJOB
 
 # UCL Server options
 # -----------------------------------------
+echo '#$ -S /bin/bash' >> $SMSJOB
+echo '#$ -N '$JOBNAME >> $SMSJOB
 echo '#$ -l h_rt='$HRS':00:00' >> $SMSJOB
 echo '#$ -l tmem='$MEM'G' >> $SMSJOB
 echo '#$ -l h_vmem='$MEM'G' >> $SMSJOB
@@ -190,6 +197,10 @@ echo '#$ -o '$LOG >> $SMSJOB
 
 cat >> $SMSJOB <<EOF
 
+#Add Java to PATH
+export PATH=/share/apps/java/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
+
 INDIR=$INDIR
 OUTDIR=$OUTDIR
 FQFILES1=(\$INDIR/*R1.fastq*)
@@ -198,7 +209,8 @@ INDEX=\$((SGE_TASK_ID-1))
 FQ1=\${FQFILES1[\$INDEX]}
 FQ2=\${FQFILES2[\$INDEX]}
 
-INPUT_TMPDIR=$INPUT_LOCALDIR
+INPUT_TMPDIR=$OUTDIR/$INPUT_LOCALDIR
+
 
 # Create temporary local directories
 if [ ! -e \$INPUT_TMPDIR ];
@@ -214,6 +226,7 @@ FQ1=\$(basename \$FQ1)
 FQ2=\$(basename \$FQ2)
 
 LOG="\$OUTDIR/"\${FQ1%%_R1.*}".log"
+
 
 echo "trimmomatic \$FQ1 \$FQ2 files..." > \$LOG
 echo >> \$LOG 
@@ -236,7 +249,7 @@ echo >> \$LOG
 
 cd \$INPUT_TMPDIR
 
-$CMD PE -phred$PHREDSCORE \$FQ1 \$FQ2 \${FQ1%%.fastq*}_paired.fastq.gz \${FQ1%%.fastq*}_unpaired.fastq.gz \${FQ2%%.fastq*}_paired.fastq.gz \${FQ2%%.fastq*}_unpaired.fastq.gz CROP:$CROP HEADCROP:$HEADCROP ILLUMINACLIP:$ADAPTPATH:$ILLUMINACLIP LEADING:$LEADING TRAILING:$TRAILING SLIDINGWINDOW:$SLIDINGWINDOW MINLEN:$MINLEN AVGQUAL:$AVGQUAL>> \$LOG 2>&1
+java -jar $CMD PE -phred$PHREDSCORE \$FQ1 \$FQ2 \${FQ1%%.fastq*}_paired.fastq.gz \${FQ1%%.fastq*}_unpaired.fastq.gz \${FQ2%%.fastq*}_paired.fastq.gz \${FQ2%%.fastq*}_unpaired.fastq.gz CROP:$CROP HEADCROP:$HEADCROP ILLUMINACLIP:$ADAPTPATH:$ILLUMINACLIP LEADING:$LEADING TRAILING:$TRAILING SLIDINGWINDOW:$SLIDINGWINDOW MINLEN:$MINLEN AVGQUAL:$AVGQUAL>> \$LOG 2>&1
 
 # Copy results back to output directory
 # and check all files are good
