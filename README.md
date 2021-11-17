@@ -499,15 +499,14 @@ Once the run is complete we can collect information for the shared data file:
 
 This will write the sample name and number of read pairs surviving trimming to a file called TrimmomaticStats. 
 ```
-grep "Both Surviving" *log |awk '{print $1, $7}' >> TrimmomaticStats 
+grep "Both Surviving" 01a_Trimmomatic_*/*log |awk '{print $1, $7}' >> TrimmomaticStats.log
 ```
 
 
 
 ###### 2. AdapterRemoval
 
-
-Followed by AdapterRemoval. Used for trimming any remaining adapters and merging reads
+Used for trimming any remaining adapters and merging reads
 ```
 AdapterRemoval=/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.1/build/AdapterRemoval
 $AdapterRemoval --collapse --basename $file \
@@ -515,68 +514,11 @@ $AdapterRemoval --collapse --basename $file \
 
 #For our test: 
 pwd
-$AdapterRemoval --collapse --basenam AH-01-1900-02 --file1 AH-01-1900-02.trimtest_1P.fastq.gz --file2 AH-01-1900-02.trimtest_2P.fastq.gz --trimns --trimqualities
+$AdapterRemoval --collapse --basename AH-01-1900-02 --file1 AH-01-1900-02.trimtest_1P.fastq.gz --file2 AH-01-1900-02.trimtest_2P.fastq.gz --trimns --trimqualities
 ```
 
 
 
-#### Rename samples
-
-We don't need the really long names given to the samples by the sequencing facilities. We'll rename samples before proceeding further: 
-
-There is a native rename on linux, but see [above](https://github.com/alexjvr1/VelocityUCL#note-on-renaming-files) on how to use the perl rename as shown below.
-
-Change the substitution names as needed. 
-
-Museum
-```
-cd 01b_museum_adapterremoval_reads
-
-#move all the log files into a folder
-mkdir logfiles
-mv *log logfiles
-
-#change the names
-#replace USERNAME with your username
-/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/long_name/new_name/' *gz
-
-##remove all the extra info about lane number and date etc. Final names will bein this format: 
-
-AH-01-1900-01_mus_R1.concat.fastq.gz  AH-01-1900-17_R2.fastq.gz         AH-01-1900-34_mus_R1.concat.fastq.gz
-AH-01-1900-01_mus_R2.concat.fastq.gz  AH-01-1900-18_R1.fastq.gz         AH-01-1900-34_mus_R2.concat.fastq.gz
-
-```
-
-Modern
-```
-I'm mapping simultaneously to mod.core and mod.exp, but I'll keep the adapter trimmed reads in their different folders. 
-
-cd 01b_modern_adapterremoval_reads
-#move all the log files into a folder
-mkdir logfiles
-mv *log logfiles
-
-#change the names
-
-/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R1_001.fastq.gzcutadapt_filtered/mod.core/' *gz
-/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R2_001.fastq.gzcutadapt_filtered/mod.core/' *gz
-
-AH-01-2016-01_mod.core_R1.fastq.gz  AH-01-2016-16_mod.core_R1.fastq.gz  AH-01-2017-29_mod.core_R1.fastq.gz
-AH-01-2016-01_mod.core_R2.fastq.gz  AH-01-2016-16_mod.core_R2.fastq.gz  AH-01-2017-29_mod.core_R2.fastq.gz
-
-
-cd  01a_modern.exp_adapterremoval_reads
-#move all the log files into a folder
-mkdir logfiles
-mv *log logfiles
-
-/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R1_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
-/share/apps/perl-5.30.0/bin/perl5.30.0 /home/USERNAME/prename.pl 's/R2_001.fastq.gzcutadapt_filtered/mod.exp/' *gz
-
-AH-02-2019-42_mod.exp_R1.fastq.gz  AH-02-2019-57_mod.exp_R1.fastq.gz  AH-02-2019-71_mod.exp_R1.fastq.gz
-AH-02-2019-42_mod.exp_R2.fastq.gz  AH-02-2019-57_mod.exp_R2.fastq.gz  AH-02-2019-71_mod.exp_R2.fastq.gz
-
-```
 
 
 
