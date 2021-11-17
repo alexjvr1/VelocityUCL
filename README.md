@@ -554,7 +554,7 @@ Number of truncated collapsed pairs: 0
 Number of retained reads: 43807131
 Number of retained nucleotides: 2145366993
 Average length of retained reads: 48.973
-
+```
 
 
 
