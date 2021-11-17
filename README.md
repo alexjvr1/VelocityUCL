@@ -441,9 +441,9 @@ Reseq data are kept in the following folders:
 
 00_raw_reads_museum_FINAL   ## concatenated museum1 and museum2 + all samples that didn't have reseq data added.
 
-01a_museum_trimmomatic_reads  ## Reads that have been processed with Trimmomatic. 
+01a_Trimmomatic_museum  ## Reads that have been processed with Trimmomatic. 
 
-01b_museum_adapterremoval_reads  ## Additional adapter removal and merging of overlapping PE reads. I'll point to this folder when mapping. 
+01b_Adapterremoval_museum  ## Additional adapter removal and merging of overlapping PE reads. I'll point to this folder when mapping. 
 
 02a_museum_mapped  ##see below. This contains all data including concatenated reseq samples. 
 ```
@@ -471,9 +471,17 @@ Trimmomatic's ILLUMINACLIP options are specifically designed to find sequence "r
 our museum data). See the manual [here](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
 
 
-###### 1. Trimmomatic
+###### 1. Trimmomatic
 
 Create a submission script by modifying the [01a_Trimmomatic.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01a_Trimmomatic.sh) script. 
+
+
+**NB
+
+Samples have to be renamed before this script is run. The script expects a basename which is the sample name, followed by .R1.fastq.gz or .R2.fastq.gz. 
+
+Use the rename.pl program as described [above](https://github.com/alexjvr1/VelocityUCL#note-on-renaming-files)
+
 
 Run this in the command line to create a submission script:  
 ```
@@ -489,7 +497,10 @@ java -jar ../Software/Trimmomatic-0.39/trimmomatic-0.39.jar PE -trimlog Trimmoma
 
 Once the run is complete we can collect information for the shared data file: 
 
-
+This will write the sample name and number of read pairs surviving trimming to a file called TrimmomaticStats. 
+```
+grep "Both Surviving" *log |awk '{print $1, $7}' >> TrimmomaticStats 
+```
 
 
 
