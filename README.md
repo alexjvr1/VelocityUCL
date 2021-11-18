@@ -391,7 +391,14 @@ We will count the number of reads in the raw dataset and at each filtering step 
 
 Check the read quality and raw read count with FastQC. 
 
-Create a FastQC script by modifying the [00_fastqc_raw_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_fastqc_raw_museum.sh) script for your species and population. Make the script executable and run it in your input directory (where the raw fastq.gz files are). 
+First move all the R0 reads into a separate folder within the 00_raw_reads_xx folder: 
+```
+mkdir R0_Reads
+mv *R0* R0_Reads
+```
+
+
+Next, create a FastQC script by modifying the [00_fastqc_raw_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_fastqc_raw_museum.sh) script for your species and population. Make the script executable and run it in your input directory (where the raw fastq.gz files are). 
 
 ```
 chmod u+x 00_fastqc_raw_museum.sh
