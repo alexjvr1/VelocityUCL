@@ -18,4 +18,4 @@ OUTFILE=00_raw_reads_museum
 $SHAREDFOLDER/$SCRIPTS/00_parallel_fastqc_UCL.sh \
 -i $SHAREDFOLDER/$SPECIES/$INFILE \
 -o $SHAREDFOLDER/$SPECIES/$OUTFILE \
--t 1 -m 4 -v 4;
+-t 1 -m 16 -v 16;
