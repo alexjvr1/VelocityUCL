@@ -237,6 +237,13 @@ Replace USERNAME with your username
 ```
 
 
+## Data
+
+See [here](https://github.com/alexjvr1/VelocityUCL/blob/main/RawDataCheck.md) for sample management for Modern3. 
+
+
+
+
 ## Concatenate samples before starting pipeline
 
 1. Create a directory for the final raw museum data. 
