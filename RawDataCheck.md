@@ -82,8 +82,33 @@ Modern3.2 - Officially requested resequencing of the full Modern3.
 
 The final raw reads after 1) removing duplicate reads, and 2) concatenating run1 and run2 data: 
 
+Email to Ilik on 31/08/2021
+```
+Only four populations were affected and I've now finished cleaning them. I've also concatenated the Modern3.2 data with the original Modern3.1 data (only two pops), so the Ringlet core dataset will hopefully be quite good. 
+ 
 
+I've stored all the cleaned and concatenated data in the same backup folder as our raw data on the UoB long-term storage (called rawseq_Modern3.1_cleaned_Aug2021)
 
+ 
+E1 - EE Mountain Ringlet - NO duplicates
+
+E2 - EA Scotch Argus - Duplicates
+
+E3 - AH-01 (MODC)  Ringlet - Duplicates
+
+H2 - MM Rosy Footman - NO Duplicates
+
+H3 - EG16 Dingy Footman (MODC) - Duplicates
+
+H3 - EG11 Dingy Footman (MODE) - NO Duplicates
+
+I1 - XF Garden carpet - NO Duplicates
+
+J1 - AU Small tortoiseshell - Duplicates
+
+ 
+
+Resequenced on Modern3.2: E3 - A.hyperantus, and H3 - EG11 (MODE) (unfortunately they resequenced the Dingy footman pop with no duplicates, so our core dataset will be quite small)
 
 
 
