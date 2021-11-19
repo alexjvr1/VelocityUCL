@@ -64,6 +64,24 @@ $SEQKIT rmdup ${NAME} -i -n -o ${NAME}.clean.fastqc.gz -D ${NAME}.duplicates.txt
 
 ### Modern3
 
+Modern3 was re-sequenced by Genewiz after lower than expected raw reads from the initial sequencing. 
+
+In addition, Modern3 was re-sequenced at our cost to increase the number of reads in the final dataset. 
+
+### The final raw data are: 
+
+Modern3.1 - concatenated raw reads for Genewiz runs1 and 2. 
+          
+          - These data contain duplicate reads for some of the species. This was checked and removed. 
+
+Modern3.2 - Officially requested resequencing of the full Modern3. 
+
+
+
+### Final cleaned and concatenated data
+
+The final raw reads after 1) removing duplicate reads, and 2) concatenating run1 and run2 data: 
+
 
 
 
