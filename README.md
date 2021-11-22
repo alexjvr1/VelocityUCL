@@ -414,7 +414,24 @@ history | grep command-of-interest
 history |grep qrsh
 ```
 
-### 0. Raw read count
+
+### 00a Concatenate museum reseq data
+
+##### *TIME*
+
+~30-40min
+
+##### *METHOD*
+
+If you haven't concatenated the repeat sequenced museum samples yet, do so now: 
+
+A subset of individuals (33 per species) have been sequenced twice to increase mean depth. These raw data need to be concatenated together.
+
+Follow the steps outlined [here](https://github.com/alexjvr1/VelocityUCL/blob/main/README.md#concatenate-samples-before-starting-pipeline)
+
+
+
+### 00b. Raw read count and Velocity_SampleStats
 
 We will count the number of reads in the raw dataset and at each filtering step to assess the proportion of raw reads that remain in the final dataset. 
 
@@ -449,27 +466,7 @@ Copy all the .html files to your computer and look at the data quality by eye. R
 
 
 
-
-
-
-
-
-### 1. Raw to cleaned and processed data
-
-#### 00 Concatenate museum reseq data
-
-##### *TIME*
-
-~30-40min
-
-##### *METHOD*
-
-If you haven't concatenated the repeat sequenced museum samples yet, do so now: 
-
-A subset of individuals (33 per species) have been sequenced twice to increase mean depth. These raw data need to be concatenated together.
-
-Follow the steps outlined [here](https://github.com/alexjvr1/VelocityUCL/blob/main/README.md#concatenate-samples-before-starting-pipeline)
-
+### Folder management: 
 
 Reseq data are kept in the following folders:
 ```
@@ -487,6 +484,8 @@ Reseq data are kept in the following folders:
 ```
 
 
+
+### 1. Raw to cleaned and processed data
 
 #### 1a Adapter trimming
 
