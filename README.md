@@ -415,11 +415,18 @@ history |grep qrsh
 ```
 
 
+## NOTE
+
+If there are any R0 reads in your raw_reads folders, these sequences have been trimmed for adapters previously. Please make sure to start with the raw data. 
+
+Ask Alex to replace the data. 
+
+
 ### 00a Concatenate museum reseq data
 
 ##### *TIME*
 
-~30-40min
+~10 min
 
 ##### *METHOD*
 
@@ -433,6 +440,8 @@ Follow the steps outlined [here](https://github.com/alexjvr1/VelocityUCL/blob/ma
 
 ### 00b. Raw read count and Velocity_SampleStats
 
+
+
 We will count the number of reads in the raw dataset and at each filtering step to assess the proportion of raw reads that remain in the final dataset. 
 
 1. Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](https://docs.google.com/spreadsheets/d/1q0PjdjiDabJCutWC0NvQog6sbgB7bKcxBNgD8dPc7uQ/edit?usp=sharing). 
@@ -440,11 +449,6 @@ We will count the number of reads in the raw dataset and at each filtering step 
 
 Check the read quality and raw read count with FastQC. 
 
-First move all the R0 reads into a separate folder within the 00_raw_reads_xx folder: 
-```
-mkdir R0_Reads
-mv *R0* R0_Reads
-```
 
 
 Next, create a FastQC script by modifying the [00_fastqc_raw_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_fastqc_raw_museum.sh) script for your species and population. Make the script executable and run it in your input directory (where the raw fastq.gz files are). 
