@@ -320,9 +320,14 @@ For detecting parallel evolution - a multivariate approach
 
 ## Pipeline
 
-### 1. Raw to cleaned and processed data
+### 0. Prepare the data
 
-   00. [Concatenate resequenced museum data](README.md#1a-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
+   00a. [Concatenate resequenced museum data](README.md#1a-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
+
+   00b. [FastQC](https://github.com/alexjvr1/VelocityUCL#00b-raw-read-count-and-velocity_samplestats) to count the number of raw reads
+  
+
+### 1. Raw to cleaned and processed data
 
    1a. [Trim adapter sequence using cutadapt](https://github.com/alexjvr1/VelocityUCL/tree/main#1a-demultiplex-and-adapter-trimming)
         
