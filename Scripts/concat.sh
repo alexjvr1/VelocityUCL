@@ -1,29 +1,140 @@
 #!/bin/bash
 ###########################################
 # (c) Alexandra Jansen van Rensburg
-# last modified 28/07/2021 05:49 
+# last modified 22/11/2021 
 ###########################################
 
-## Concatenate all museum samples that were sequenced twice
+## Description: Given two input directories with raw fastq files (gzip allowed)
+## concatenate all museum samples that appear in both folders. 
+## The script is written to concatenate 33 museum samples that were sequenced twice for each species. 
 
-#$ -S /bin/bash ##shell to be used
-#$ -N C3.mus.concat.cutadapt  ##job name
-#$ -l tmem=16G #amount of memory you whish to request
-#$ -l h_vmem=16G #enforced amount of shell storage
-#$ -l h_rt=1:00:00 ##wall time
-#$ -j y  #concatenates error and output files (with prefix job1)
+VERSION='1-2021.11.22'
+
+# Default values for optional variables
+EXTRA=''
+EMAIL=''
+NCORES=1
+HRS=1
+MEM=16
+QUEUE=CS
+JOBNAME=Mus.concat
+SHARED=/SAN/ugi/LepGenomics/
+INDIR1=$SPECIESDIR/00_raw_reads_museum/ALLSAMPLES/
+INDIR2=$SPECIESDIR/00_raw_reads_museum2/ALLSAMPLES
+OUTDIR=$SPECIESDIR/00_raw_reads_museum_FINAL
 
 
-#run job in working directory
-cd $SGE_O_WORKDIR
+function author {
+	echo
+	echo "#########################################"
+	echo "  $(basename $0)"
+	echo "  version $VERSION"
+	echo "  (c) Alexandra Jansen van Rensburg"
+	echo "  alexjvr@gmail.com"
+	echo "#########################################"
+	echo
+}
 
-#Define variables
-SPECIESDIR=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus
-PATH1=00_raw_reads_museum/ALLSAMPLES/
-PATH2=00_raw_reads_museum2/ALLSAMPLES
-OUTPUT=$SPECIESDIR/00_raw_reads_museum_FINAL
-TAIL1=_R1.fastq.gz
-TAIL2=_R2.fastq.gz
+function usage {
+	echo
+	echo "Usage:"
+	echo "  $(basename $0)"
+	echo "      -I <First input directory> => (optional, default=$INDIR1). Folder with first batch of sequencing (museum1) with fastq.gz files. Paired files shall have the same name with following extension: *R1.fastq* - *R2.fastq*"
+	echo "      -i <Second input directory> => (optional, default=$INDIR2). Folder with second batch of sequencing (museum2) with fastq.gz files. Paired files shall have the same name with following extension: *R1.fastq* - *R2.fastq*"
+  echo "      -o <output directory> => (optional, default=$OUTDIR). Output folder to save concatenated files"
+  echo "      -S <species directory> => Name of species directory"
+	echo "      -n <number of processors> => processors per trimming (optional, default=$NCORES)"
+	echo "      -t <allocated time> => Allocated time (in hours) for each analysis (optional: default=$HRS)"
+	echo "      -m <allocated memory> => Allocated memory (in gigabytes) for each analysis (optional: default=$MEM)"
+	echo "      -q <queue> => SGE queue: uclcs | iceberg | popgenom | molecol (optional: default=$QUEUE)"
+	echo "      -h => show this help"
+	echo "      -N <JOBNAME> => Name given to job in queue. (optional: default=$JOBNAME)"
+	echo ""
+	echo "  Example:"
+	echo "      $(basename $0) -S E3_Aphantopus_hyperantus -N E3.Mus.concat"
+	echo ""
+	echo ""
+	exit 0
+}
+
+author
+
+if [ "$#" -ge "1" ]; # min 1 args: 1 for -S <species directory>
+then 
+	while [ $# -gt 0 ]; do
+		case "$1" in
+			-h|-help) usage
+					  ;;
+      -I) shift
+        INDIR1=$(readlink -f $1)
+          ;;
+      -i)	shift
+				INDIR2=$(readlink -f $1)
+				;;
+			-o)	shift
+				OUTDIR=$(readlink -f $1)
+				;;
+			-n)	shift
+				NCORES=$1
+				;;
+			-t)	shift
+				HRS=$1
+				;;
+			-m)	shift
+				MEM=$1
+				;;
+			-q)	shift
+				QUEUE=$1
+				;;
+			-N)	shift
+				JOBNAME=$1
+				;;
+			*)	echo 
+				echo "ERROR - Invalid option: $1"
+				echo
+				usage
+				;;
+		esac
+		shift
+	done
+else
+	usage
+fi
+
+
+
+
+
+
+# Initialize submission script
+mkdir -p $OUTDIR
+echo '#!/bin/bash' > $SMSJOB
+
+# UCL Server options
+# -----------------------------------------
+echo '#$ -S /bin/bash' >> $SMSJOB
+echo '#$ -N '$JOBNAME >> $SMSJOB
+echo '#$ -l h_rt='$HRS':00:00' >> $SMSJOB
+echo '#$ -l tmem='$MEM'G' >> $SMSJOB
+echo '#$ -l h_vmem='$MEM'G' >> $SMSJOB
+if [ ! -z "$EMAIL" ];
+then
+	echo '#$ -m bea' >> $SMSJOB
+	echo '#$ -M '$EMAIL >> $SMSJOB
+fi
+
+if (($NCORES > 1 ));
+then
+	echo '#$ -pe openmp '$NCORES >> $SMSJOB
+fi
+
+echo '#$ -t 1-'$N >> $SMSJOB
+echo '#$ -j y' >> $SMSJOB
+echo '#$ -o '$LOG >> $SMSJOB
+# -----------------------------------------
+
+cat >> $SMSJOB <<EOF
+
 
 ##Concat fastq files
 
