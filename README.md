@@ -300,7 +300,7 @@ diff museum1.names museum2.names | grep '1900' | sed 's/^>\ //'> museum1.tomove
 #Check that none of these have been concatenated: 
 diff concat.names museum1.tomove
 
-count=(wc -l museum1.tomove)
+count=$(wc -l museum1.tomove | awk '{print $1}')
 echo "number of samples to move:" $count
 
 for i in $(cat museum1.tomove); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_raw_reads_museum_FINAL; done
