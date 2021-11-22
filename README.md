@@ -295,7 +295,7 @@ ls 00_raw_reads_museum2/ALLSAMPLES/*R1*gz | awk -F "/" '{print $NF}' | awk -F "_
 ls 00_raw_reads_museum_FINAL/*R1*gz | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > concat.names
 
 #Create a list of samples to move from mus1 to the FINAL folder
-diff museum1.names museum2.names | grep '1900' | sed 's/^>\ //'> museum1.tomove
+diff museum1.names museum2.names | grep '1900' | sed 's/^<\ //'> museum1.tomove
 
 #Check that none of these have been concatenated: 
 diff concat.names museum1.tomove
