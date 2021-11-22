@@ -7,7 +7,7 @@
 # Generates submission script to concatenate museum1 and museum2 samples together. 
 
 
-/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/concat.sh \
+/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/00_concat.sh \
 -I 00_raw_reads_museum/ALLSAMPLES \
 -i 00_raw_reads_museum2/ALLSAMPLES \
 -S E3_Aphantopus_hyperantus \
