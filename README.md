@@ -246,25 +246,14 @@ See [here](https://github.com/alexjvr1/VelocityUCL/blob/main/RawDataCheck.md) fo
 
 ## Concatenate samples before starting pipeline
 
-1. Create a directory for the final raw museum data. 
+1. The script expects samples to be named in the same way in both folders. So remove any additional  information from the names. 
 
-2. Make sure all the samples are names consistently
+2. Use the 00_Concat_Museum1andMuseum2.sh script to generate a submission script for concatenating the samples. 
 
-3. Identify all samples to be concatenated (33 for each species)
-
-4. Concat all 33 samples that were sequenced twice
-
-5. Move all samples that were sequenced only once from museum1 to the 00_raw_reads_FINAL
+3. Move all samples that were sequenced only once from museum1 to the 00_raw_reads_museum_FINAL
 
 
-#### 1. Create a directory for the final museum data
-```
-##
-mkdir 00_raw_reads_museum_FINAL/
-```
-
-
-#### 2. Rename samples as needed
+#### 1. Rename samples as needed
 
 All raw reads contain information about the sequencer and lane that the sample was sequenced in. This is in the format: *_191121_L001* 
 
@@ -281,40 +270,43 @@ Some reads are returned with a leading number and dash: 20-AH-01-1900-09_....fas
 ```
 
 
-#### 3. Identify samples that were sequenced twice
+#### 2. Concatenate repeat samples
 
+
+Modify the script [00_Concat_Museum1andMuseum2.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_Concat_Museum1and2.sh). 
+
+Run this in the command line: 
 ```
-##list all samples that were sequenced twice
+#move the script to your species directory
 
-ls 00_raw_reads_museum/ALLSAMPLES/*R1*gz |awk -F "/" '{print $NF}'|awk -F "_" '{print $1}' > museum1.names
-ls 00_raw_reads_museum2/ALLSAMPLES/*R1*gz |awk -F "/" '{print $NF}' |awk -F "_" '{print $1}' > museum2.names
-
-cat museum1.names museum2.names |sort |uniq --repeated > museum1.toconcat
+chmod u+x 00_Concat_Museum1andMuseum2.sh
+./00_Concat_Museum1andMuseum2.sh
 ```
 
-#### 4. Concatenate repeat samples
+This will create a submission script that can be submitted to the server with qsub. 
+
+#check that the request for resources is sensible in the script
 
 
-Modify the script [concat.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/concat.sh)
+#### 3. Move all the samples that were sequenced once to the 00_raw_reads_museum_concat
+```
+ls 00_raw_reads_museum/ALLSAMPLES/*R1*gz | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > museum1.names
+ls 00_raw_reads_museum2/ALLSAMPLES/*R1*gz | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > museum2.names
+ls 00_raw_reads_museum_FINAL/*R1*gz | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > concat.names
 
+#Create a list of samples to move from mus1 to the FINAL folder
+diff museum1.names museum2.names | grep 'AAg' | sed 's/^>\ //'> museum1.tomove
 
-
-##Move all the samples that were sequenced once to the 00_raw_reads_museum_concat
-
-ls 00_raw_reads_museum/*R1*gz | awk -F "/" '{print $NF}' | awk -F "_" '{print $1}' > museum1.names
-ls 00_raw_reads_museum/ALLSAMPLES/*R1*gz | awk -F "/" '{print $NF}' |
-awk -F "_" '{print $1}' > museumconcat.names
-
-
-diff museum1.names museumconcat.names | grep 'AAg' | sed 's/^>\ //'> museum1.tomove
+#Check that none of these have been concatenated: 
+diff concat.names museum1.tomove
 
 wc -l museum1.tomove > count
 echo "number of samples to move:" $count
 
 for i in $(cat museum1.tomove); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_raw_reads_museum_FINAL; done
-
-
 ```
+
+
 
 ## Tools that look interesting
 
