@@ -329,15 +329,14 @@ For detecting parallel evolution - a multivariate approach
 
 ### 1. Raw to cleaned and processed data
 
-   1a. [Trim adapter sequence using cutadapt](https://github.com/alexjvr1/VelocityUCL/tree/main#1a-demultiplex-and-adapter-trimming)
+   1a. [Trim adapter sequence using Trimmomatic](https://github.com/alexjvr1/VelocityUCL#1a-adapter-trimming)
         
-   1b. [Repair problems in museum PE data for data from 1.2. (BBrepair)](README.md#1b-prepare-museum-data-for-mapdamage-22-repair-pe-reads)
-        
-   1c. [Merge overlapping PE reads in museum data (BBmerge)](README.md#1c-prepare-museum-data-for-mapdamage-22-merge-overlapping-pe-reads)
+   1b. [https://github.com/alexjvr1/VelocityUCL#2-adapterremoval](https://github.com/alexjvr1/VelocityUCL#2-adapterremoval)
+   
         
 #### 2. Map and process
 
-   2a. [Map museum and modern data to Sanger genome](README.md#2a-map-to-reference-genome) 
+   2a. [Map museum and modern data to Sanger genome](https://github.com/alexjvr1/VelocityUCL#2a-map-to-reference-genome) 
    
    2b. [Process BAM files](README.md#2b-process-bam-files)
    
@@ -497,7 +496,7 @@ Reseq data are kept in the following folders:
 
 ### 1. Raw to cleaned and processed data
 
-#### 1a Adapter trimming
+#### Adapter trimming
 
 ##### *TIME:*
 
@@ -508,7 +507,7 @@ This runs in 1-2 hours for the full dataset (museum + modern)
 
 Modern and museum samples arrive demultiplexed by the sequencing facility. 
 
-We're trimming all adapter sequence from the demultiplexed data. We're also removing all sequences that are shorter than 20bp and 5' quality trimmed to remove bases with PHRED quality score of < 20 with Cutadapt.
+We're trimming all adapter sequence from the demultiplexed data. We're also removing all sequences that are shorter than 20bp and 5' quality trimmed to remove bases with PHRED quality score of < 20.
 
 We'll use Trimmomatic to remove adapters. We'll use the TrueSeq3 adapters provided with Trimmomatic. ([NEBNext and TruSeq core adapters are the same](https://www.biostars.org/p/349635/))
 
@@ -518,7 +517,7 @@ Trimmomatic's ILLUMINACLIP options are specifically designed to find sequence "r
 our museum data). See the manual [here](http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
 
 
-###### 1. Trimmomatic
+##### 1a. Trimmomatic
 
 Create a submission script by modifying the [01a_Trimmomatic.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/VelocityPipeline/pipeline/01a_Trimmomatic.sh) script. 
 
@@ -551,7 +550,7 @@ grep "Both Surviving" 01a_Trimmomatic_*/*log |awk '{print $1, $7}' >> Trimmomati
 
 
 
-###### 2. AdapterRemoval
+##### 1b. AdapterRemoval
 
 Used for trimming any remaining adapters and merging reads. 
 
