@@ -322,7 +322,7 @@ For detecting parallel evolution - a multivariate approach
 
 ### 0. Prepare the data
 
-   00a. [Concatenate resequenced museum data](README.md#1a-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
+   00a. [Concatenate resequenced museum data](https://github.com/alexjvr1/VelocityUCL#00a-concatenate-museum-reseq-data) (some individuals have been sequenced >1)
 
    00b. [FastQC](https://github.com/alexjvr1/VelocityUCL#00b-raw-read-count-and-velocity_samplestats) to count the number of raw reads
   
@@ -426,8 +426,9 @@ If there are any R0 reads in your raw_reads folders, these sequences have been t
 
 Ask Alex to replace the data. 
 
+### 0. Prepare Data
 
-### 00a Concatenate museum reseq data
+#### 00a Concatenate museum reseq data
 
 ##### *TIME*
 
@@ -443,7 +444,7 @@ Follow the steps outlined [here](https://github.com/alexjvr1/VelocityUCL/blob/ma
 
 
 
-### 00b. Raw read count and Velocity_SampleStats
+#### 00b. Raw read count and Velocity_SampleStats
 
 
 
