@@ -159,7 +159,7 @@ LOG="\$OUTDIR/"\${FQ1%%_R1.fastq*}".log"
 
 
 
-echo "Concatenating $INDIR1/\$FQ1 AND $INDIR2/\$FQ1 files..." > \$LOG
+echo "Concatenating \$FQ1 AND \$FQ1 files..." > \$LOG
 echo >> \$LOG 
 echo "CMD: " >> \$LOG
 echo "cat \\\">> \$LOG
@@ -169,7 +169,7 @@ echo >> \$LOG
 echo "---------------------------------------------------" >> \$LOG
 echo >> \$LOG
 
-echo "Concatenating $INDIR1/\$FQ2 AND $INDIR2/\$FQ2 files..." >> \$LOG
+echo "Concatenating \$FQ2 AND \$FQ2 files..." >> \$LOG
 echo >> \$LOG
 echo "CMD: " >> \$LOG
 echo "cat \\\">> \$LOG
