@@ -445,18 +445,11 @@ Follow the steps outlined [here](https://github.com/alexjvr1/VelocityUCL/blob/ma
 
 #### 00b. Raw read count and Velocity_SampleStats
 
-
-
-We will count the number of reads in the raw dataset and at each filtering step to assess the proportion of raw reads that remain in the final dataset. 
+Add species information and raw reads to the Velocity_Samples_Stats shared spreadsheet: 
 
 1. Count the raw reads for each individual from all populations. Update the shared spreadsheet found [here](https://docs.google.com/spreadsheets/d/1q0PjdjiDabJCutWC0NvQog6sbgB7bKcxBNgD8dPc7uQ/edit?usp=sharing). 
 
-
-Check the read quality and raw read count with FastQC. 
-
-
-
-Next, create a FastQC script by modifying the [00_fastqc_raw_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_fastqc_raw_museum.sh) script for your species and population. Make the script executable and run it in your input directory (where the raw fastq.gz files are). 
+Create a FastQC script by modifying the [00_fastqc_raw_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_fastqc_raw_museum.sh) script for your species and population. Make the script executable and run it in your input directory (where the raw fastq.gz files are). 
 
 ```
 chmod u+x 00_fastqc_raw_museum.sh
