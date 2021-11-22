@@ -466,15 +466,14 @@ Copy all the .html files to your computer and look at the data quality by eye. R
 
 If you haven't concatenated the repeat sequenced museum samples yet, do so now: 
 
-A subset of individuals (33 per species) have been sequenced twice to increase mean depth. The data from both sequencing runs need to be concatenated together after adapter trimming. We're using this script: 
+A subset of individuals (33 per species) have been sequenced twice to increase mean depth. These raw data need to be concatenated together.
 
-[00_CollateAllMusSamples.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/00_CollateAllMusSamples.sh)
-
+Follow the steps outlined [here](https://github.com/alexjvr1/VelocityUCL/blob/main/README.md#concatenate-samples-before-starting-pipeline)
 
 
 Reseq data are kept in the following folders:
 ```
-00_raw_data_museum1
+00_raw_data_museum
 
 00_raw_data_museum2
 
