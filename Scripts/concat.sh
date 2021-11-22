@@ -41,8 +41,8 @@ function usage {
 	echo "  $(basename $0)"
 	echo "      -I <First input directory> => (optional, default=$INDIR1). Folder with first batch of sequencing (museum1) with fastq.gz files. Paired files shall have the same name with following extension: *R1.fastq* - *R2.fastq*"
 	echo "      -i <Second input directory> => (optional, default=$INDIR2). Folder with second batch of sequencing (museum2) with fastq.gz files. Paired files shall have the same name with following extension: *R1.fastq* - *R2.fastq*"
-  echo "      -o <output directory> => (optional, default=$OUTDIR). Output folder to save concatenated files"
-  echo "      -S <species directory> => Name of species directory"
+	echo "      -o <output directory> => (optional, default=$OUTDIR). Output folder to save concatenated files"
+	echo "      -S <species directory> => Name of species directory"
 	echo "      -n <number of processors> => processors per trimming (optional, default=$NCORES)"
 	echo "      -t <allocated time> => Allocated time (in hours) for each analysis (optional: default=$HRS)"
 	echo "      -m <allocated memory> => Allocated memory (in gigabytes) for each analysis (optional: default=$MEM)"
@@ -64,15 +64,18 @@ then
 	while [ $# -gt 0 ]; do
 		case "$1" in
 			-h|-help) usage
-					  ;;
-      -I) shift
-        INDIR1=$(readlink -f $1)
-          ;;
-      -i)	shift
+			  	;;
+      			-I) shift
+			        INDIR1=$(readlink -f $1)
+          			;;
+		        -i)	shift
 				INDIR2=$(readlink -f $1)
 				;;
 			-o)	shift
 				OUTDIR=$(readlink -f $1)
+				;;
+			-S)	shift
+				SPECIESDIR=$(readlink -f $1)
 				;;
 			-n)	shift
 				NCORES=$1
@@ -102,7 +105,13 @@ else
 fi
 
 
+N1=$(find $INDIR1 -maxdepth 1 -name "*R1.fastq*" | wc -l | cut -f1 -d" ")
+N2=$(find $INDIR2 -maxdepth 1 -name "*R1.fastq*" | wc -l | cut -f1 -d" ")
 
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+
+SMSJOB="$OUTDIR/Concat.$JOBNAME.$TIMESTAMP.smsjob.sh"
+LOG="$OUTDIR/$JOBNAME.$TIMESTAMP.smsjob.log"
 
 
 
@@ -128,12 +137,42 @@ then
 	echo '#$ -pe openmp '$NCORES >> $SMSJOB
 fi
 
-echo '#$ -t 1-'$N >> $SMSJOB
+echo '#$ -t 1-'$N2 >> $SMSJOB
 echo '#$ -j y' >> $SMSJOB
 echo '#$ -o '$LOG >> $SMSJOB
 # -----------------------------------------
 
 cat >> $SMSJOB <<EOF
+
+
+INDIR1=$INDIR1
+INDIR2=$INDIR2
+OUTDIR=$OUTDIR
+FQFILES1=(\$INDIR2/*R1*.fastq*)
+FQFILES2=(\$INDIR2/*R2*.fastq*)
+INDEX=\$((SGE_TASK_ID-1))
+FQ1=\${FQFILES1[\$INDEX]}
+FQ2=\${FQFILES2[\$INDEX]}
+
+
+FQ1=\$(basename \$FQ1)
+FQ2=\$(basename \$FQ2)
+
+LOG="\$OUTDIR/"\${FQ1%%_R1.*}".log"
+
+
+echo "Concatenating $INDIR1\$FQ1 AND $INDIR2\$FQ1 files..." > \$LOG
+echo >> \$LOG 
+echo "CMD: " >> \$LOG
+echo "cat \\\">> \$LOG
+echo "$INDIR1\$FQ1 $INDIR2\$FQ1 \\\">> \$LOG
+echo ">$OUTDIR\${FQ1%%.fastq*}_paired.fastq.gz \${FQ1%%.fastq*}_unpaired.fastq.gz \\\">> \$LOG
+echo "\${FQ2%%.fastq*}_paired.fastq.gz \${FQ2%%.fastq*}_unpaired.fastq.gz \\\">> \$LOG
+echo >> \$LOG
+echo "---------------------------------------------------" >> \$LOG
+echo >> \$LOG
+
+cd \$SPECIESDIR
 
 
 ##Concat fastq files
@@ -146,3 +185,15 @@ time while read NAME1 <&1 && read NAME2 <&2; do cat $SPECIESDIR/$PATH1/$NAME1$TA
 
 echo "while read NAME1 <&MUS1 && read NAME2 <&MUS2; do cat $SPECIESDIR/$PATH1/$NAME1$TAIL2 $SPECIESDIR/$PATH2/$NAME2$TAIL2 > $OUTPUT/$NAME1_R2.concat.fastq.gz; done" >> concat.mus.log
 time while read NAME1 <&1 && read NAME2 <&2; do cat $SPECIESDIR/$PATH1/$NAME1$TAIL2 $SPECIESDIR/$PATH2/$NAME2$TAIL2 > $OUTPUT/$NAME1_R2.concat.fastq.gz; done 1<museum1.names 2<museum2.names
+
+
+EOF
+
+
+chmod +x $SMSJOB
+
+
+echo "Command to submit the job to UCL ($QUEUE queue):"
+echo
+echo "qsub $SMSJOB"
+echo
