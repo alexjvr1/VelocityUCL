@@ -542,6 +542,15 @@ Samples have to be renamed before this script is run. The script expects a basen
 Use the rename.pl program as described [above](https://github.com/alexjvr1/VelocityUCL#note-on-renaming-files)
 
 
+Also, ensure that all the fastqc output files are in a different folder. 
+
+```
+mkdir fastqc_outfiles
+mv *fastqc* fastqc_outfiles
+mv *log fastqc_outfiles
+```
+
+
 Run this in the command line to create a submission script:  
 ```
 ./01a_Trimmomatic.sh
