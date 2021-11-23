@@ -625,6 +625,19 @@ Average length of retained reads: 48.973
 ```
 
 
+Extract stats for our shared datasheet: 
+```
+#Run this in each AdapterRemoval folder
+ls *settings |awk -F "." '{print $1}' > names
+grep "Total number of read pairs" | awk '{print $6}' > file1
+grep "Number of well aligned read pairs" | awk '{print $7}' > file2
+grep "Number of reads with adapters" | awk '{print $6}' > file3
+grep "retained reads" | awk '{print $5}' > file4
+grep "Average length" | awk '{print $6}' > file5
+paste names file1 file2 file3 file4 file5
+
+
+```
 
 
 Map to reference genome: 
