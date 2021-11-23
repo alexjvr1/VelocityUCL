@@ -567,7 +567,7 @@ Once the run is complete we can collect information for the shared data file:
 
 This will write the sample name and number of read pairs surviving trimming to a file called TrimmomaticStats. 
 ```
-grep "Both Surviving" 01a_Trimmomatic_*/*log |awk '{print $1, $4, $7, $8, $20, $21}' >> TrimmomaticStats.log
+grep "Both Surviving" 01a_Trimmomatic*/*log |awk '{print $1, $4, $7, $8, $20, $21}' >> TrimmomaticStats.log
 ```
 
 
