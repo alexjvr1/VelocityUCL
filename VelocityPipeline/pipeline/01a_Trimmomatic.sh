@@ -13,6 +13,7 @@
 /SAN/ugi/LepGenomics/VelocityPipeline/wrapper/parallel_trimmomatic_UCL.sh \
 -i 00_raw_reads_museum/TEST \
 -o 01a_Trimmomatic_museum/TEST \
+-N mus.Trim \
 -n 1 -t 8 -m 4 -ph 33 -c 150 -hc 0 \
 -ad /SAN/ugi/LepGenomics/Software/Trimmomatic-0.39/adapters/Velocity.fa \
 -illclip '2:30:8:1:true' -le 20 -tr 20 -sw '4:20' -minl 20 -avg 20;
