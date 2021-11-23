@@ -253,9 +253,13 @@ See [here](https://github.com/alexjvr1/VelocityUCL/blob/main/RawDataCheck.md) fo
 3. Move all samples that were sequenced only once from museum1 to the 00_raw_reads_museum_FINAL
 
 
-#### 1. Rename samples as needed
+#### 1. Rename samples
 
-All raw reads contain information about the sequencer and lane that the sample was sequenced in. This is in the format: *_191121_L001* 
+Modern and Museum samples need to be in the format: 
+
+SampleName_R1.fastq.gz and SampleName_R2.fastq.gz
+
+All raw reads contain information about the sequencer and lane that the sample was sequenced in that we need to remove. This is in the format: *_191121_L001* 
 
 Some reads are returned with a leading number and dash: 20-AH-01-1900-09_....fastq.gz. The leading 20- in this case is from the facility and should be removed.
 ```
@@ -465,11 +469,18 @@ Copy all the .html files to your computer and look at the data quality by eye. R
 
 Extract raw read, read length, and GC% information for all the html files: 
 ```
-grep "Total " *R1*.html | awk -F "</td>" '{print $8}' | sed 's:<td>::' >> file1
-grep "Total " *R1*.html | awk -F "</td>" '{print $12}' | sed 's:<td>::' >> file2
-grep "Total " *R1*.html | awk -F "</td>" '{print $14}' | sed 's:<td>::' >> file3
-paste file1 file2 file3 
+ls *R1*html | awk -F "_" '{print $1}'  > names
+grep "Total " *R1*.html | awk -F "</td>" '{print $8}' | sed 's:<td>::' > file1
+grep "Total " *R1*.html | awk -F "</td>" '{print $12}' | sed 's:<td>::' > file2
+grep "Total " *R1*.html | awk -F "</td>" '{print $14}' | sed 's:<td>::' > file3
+paste names file1 file2 file3 
 
+
+#Check that R1 and R2 have the same number of reads
+#If the final number is the same as the number of samples then R1 and R2 reads matched exactly
+ls *html | awk -F "_" '{print $1}'  > names
+grep "Total " *.html | awk -F "</td>" '{print $8}' | sed 's:<td>::' > file1
+cat file1 |uniq |wc -l 
 ```
 
 
