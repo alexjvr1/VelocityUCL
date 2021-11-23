@@ -463,6 +463,15 @@ qsub parallel_fastqc.$TIMESTAMP.smsjob.sh
 Copy all the .html files to your computer and look at the data quality by eye. Raw read counts should be at the top of the page. 
 
 
+Extract raw read, read length, and GC% information for all the html files: 
+```
+grep "Total " *R1*.html | awk -F "</td>" '{print $8}' | sed 's:<td>::' >> file1
+grep "Total " *R1*.html | awk -F "</td>" '{print $12}' | sed 's:<td>::' >> file2
+grep "Total " *R1*.html | awk -F "</td>" '{print $14}' | sed 's:<td>::' >> file3
+paste file1 file2 file3 
+
+```
+
 
 2. Find information about each species' sampling date and site [here](https://docs.google.com/spreadsheets/d/1G9r50W0VV_ANZ19rIvqZpXWFemy2MW76_iXuyBuCQGA/edit?usp=sharing), and update the shared file accordingly. 
 
