@@ -639,6 +639,16 @@ paste names file1 file2 file3 file4 file5 file6
 
 ```
 
+See [here](https://github.com/ewels/MultiQC/issues/1005) for an extensive discussion on how these outputs are calculated. Importantly for us: 
+
+1) Well aligned read pairs: PE sequences that overlap
+
+2) Full-length collapsed pairs: PE sequences that overlap by 11+ bp, and are collapsed into a single read. 
+
+3) retained_reads = R1 + R2 + Singleton R1 + Singleton R2 + Full length Collapsed + Truncated Collapsed
+
+
+## Mapping
 
 Map to reference genome: 
 ```
