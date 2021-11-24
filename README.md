@@ -524,6 +524,8 @@ We're trimming all adapter sequence from the demultiplexed data. We're also remo
 
 We'll use Trimmomatic to remove adapters. We'll use the TrueSeq3 adapters provided with Trimmomatic. ([NEBNext and TruSeq core adapters are the same](https://www.biostars.org/p/349635/))
 
+See [here](https://support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html) for commonly used adapters in Illumina projects. 
+
 See the recommendations from the Trimmomatic developers [here](https://www.biostars.org/p/323087/): TruSeq3-PE-2.fa contains the core adapters and some additional adapter sequences that would be in unusual locations. 
 
 Trimmomatic's ILLUMINACLIP options are specifically designed to find sequence "read-through", i.e. where the read length is longer than the sequence (as in 
