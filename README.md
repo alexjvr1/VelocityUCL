@@ -814,7 +814,7 @@ time $mapDamage --merge-libraries -i $INPUT/$NAME -d $OUTPUT/$NAME -r $REF --res
 
 ### 2. Map and process
 
-Map museum and modern samples to the Sanger reference genome. Thereafter correct the museum bam files using MapDamage, and downsample the modern data to the same final depth as the corrected museum bam files. 
+Map museum and modern samples to the Sanger reference genome. Then correct the museum bam files using MapDamage, and downsample the modern data to the same final depth as the corrected museum bam files. 
 
 
 #### 2a Map to Reference Genome
@@ -834,42 +834,41 @@ Make sure you're using the latest version of the reference genome. We're using t
 It is more efficient to run this code in the interactive node before submitting the mapping script to queue
 ```
 #Index the reference genome if needed. Check if the *fasta.fai* file exists in the SpeciesName/RefGenome/ folder in your local directory. If not, run the indexing code. 
-#Index the reference genome if needed. Check if the *fasta.fai* file exists in the SpeciesName/RefGenome/ folder in your local directory. If not, run the indexing code. 
 
 #index reference genome
 BWA=/share/apps/genomics/bwa-0.7.17/bwa
 $BWA index RefGenome/*fna
 
 
-#Create files with input names
+#Create lists of the input names
 
 ## museum
-##Repaired and merged = 1 file per indiv
-ls 01c_musAll_merged/*repaired.merged*fastq >> mus.merged.names
+##Adapter trimmed and collapsed = 1 file per indiv
+cd 01b_AdapterRemoval_museum
+ls *collapsed > mus.tomap
+##Check that this contains the correct number of samples (48)
+wc -l mus.tomap 
+#Navigate back to the $SHAREDFOLDER/$SPECIES directory and move the list of sample names tehre
+cd ..
+mv 01b_AdapterRemoval_museum/mus.tomap .
 
-sed -i s:01d_musAll_merged/::g merged.museum.names
 
 ## modern
-## Cutadapt and adapter trimmed = 2 files per indiv
-ls 01a_modern_cutadapt_reads/*R1_paired* >> R1.modern.names
-ls 01a_modern_cutadapt_reads/*R2_paired* >> R2.modern.names
+## Adapter trimmed, but not collapsed = 2 files per indiv
+ls 01b_AdapterRemoval_MODC/*R1_paired* >> R1.modern.names
+ls 01b_AdapterRemoval_MODC/*R2_paired* >> R2.modern.names
 
-sed -i 's:01a_modern_cutadapt_reads/::g' *names
-#Optional 
-#If we want to keep the core and expanding samples in separate folders we can leave the path to the indivs in the *names file
+sed -i 's:01b_AdapterRemoval_MODC/::g' *names
+
 
 #make output directories. 
-mkdir 02a_mapped_museum_MERGED
-mkdir 02a_modern_mapped
-mkdir 02a_modern_mapped_exp
+mkdir 02a_mapped_MUS
+mkdir 02a_mapped_MODC
+mkdir 02a_mapped_MODE
 
 #If you're running the unmerged pipeline make this folder as well
-mkdir 02a_museum_mapped
+mkdir 02a_mapped_MUS_unmerged
 
-#Optional
-#Add the additional folders in the 02a_modern_mapped folder when working with an EXPANDING species as the output will be written there. 
-mkdir 02a_modern_mapped/01a_modern_cutadapt_reads
-mkdir 02a_modern_mapped/01a_modern.exp_cutadapt_reads
 
 #Check that you're pointing to the correct reference genome
 
@@ -905,8 +904,8 @@ Check that everything has mapped correctly by checking the file sizes. If the ma
 du -sh *bam   
 
 #To see bam file
-bcftools=/share/apps/genomics/bcftools-1.9/bin/bcftools
-$bcftools view file.bam | head
+samtools=/share/apps/genomics/samtools-1.9/bin/samtools
+$samtools view file.bam | head
 
 
 #Check the output with samtools flagstat
@@ -920,6 +919,8 @@ for i in $(ls *bam); do ls $i >>flagstat.log && $samtools flagstat $i >> flagsta
 Index the bam files with the script [Index.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/Index.sh)
 
 Submit the script in the folder containing the bam files to be indexed. Create a list of bam files (see INPUT in the script), and remember to change all the paths. 
+
+
 
 
 #### 2b. Process BAM files
