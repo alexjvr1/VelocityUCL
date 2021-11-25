@@ -653,115 +653,6 @@ See [here](https://github.com/ewels/MultiQC/issues/1005) for an extensive discus
 
 
 
-Bam processing: AddRG, MarkDup, LocalRealn, CheckBam
-```
-#Index bam
-samtools=/share/apps/genomics/samtools-1.9/bin/samtools
-$samtools index AH-01-1900-02.bam
-
-#Bam processing
-export PATH=/share/apps/java/bin:$PATH
-export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
-PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
-
-#Add RG info
-time java -jar $PICARD AddOrReplaceReadGroups \
-       I=AH-01-1900-02.bam \
-       O=AH-01-1900-02.collapsed.RG.bam \
-       RGID=E3mus \
-       RGLB=mus0204 \
-       RGPL=ILLUMINA \
-       RGPU=unit1 \
-       RGSM=AH02
-
-#MarkDuplicates
-time java -jar $PICARD MarkDuplicates \
-INPUT=AH-01-1900-02.collapsed.RG.bam \
-OUTPUT=AH-01-1900-02.collapsed.rmdup.bam \
-METRICS_FILE=AH-01-1900-02.dup.txt \
-REMOVE_DUPLICATES=false \
-VALIDATION_STRINGENCY=SILENT \
-CREATE_INDEX=true
-
-
-#Local Realignment
-export PATH=/share/apps/jdk1.8.0_131/bin:$PATH
-export LD_LIBRARY_PATH=/share/apps/jdk1.8.0_131/lib:$LD_LIBRARY_PATH
-GenomeAnalysisTK=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
-REF=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-
-###Identify targets to realign
-java -jar $GenomeAnalysisTK -T RealignerTargetCreator \
--R $REF \
--o AH-01-1900-02.intervals \
--I AH-01-1900-02.collapsed.rmdup.bam
-
-###Local realignment
-java -jar $GenomeAnalysisTK -T IndelRealigner \
--R $REF \
--targetIntervals AH-01-1900-02.intervals \
--I AH-01-1900-02.collapsed.rmdup.bam \
--o AH-01-1900-02.realn.bam
-
-#Validate Bam
-time java -jar $PICARD ValidateSamFile \
-INPUT=AH-01-1900-02.realn.bam \
-OUTPUT=AH-01-1900-02.validatesam \
-MODE=SUMMARY
-
-```
-
-MapDamage
-```
-#Submit script
-
-#$ -S /bin/bash
-#$ -N E3.MapDmg.mus  ##job name
-#$ -l tmem=32G #RAM
-#$ -l h_vmem=32G #enforced limit on shell memory usage
-#$ -l h_rt=5:00:00 ##wall time.  
-#$ -j y  #concatenates error and output files (with prefix job1)
-##$ -t 1-48
-
-#Run on working directory
-cd $SGE_O_WORKDIR
-
-
-# Software
-##python
-export PATH=/share/apps/python-3.8.5-shared/bin:$PATH
-export LD_LIBRARY_PATH=/share/apps/python-3.8.5-shared/lib:$LD_LIBRARY_PATH
-
-##R
-export PATH=/share/apps/R-4.0.3/bin:$PATH
-
-##mapDamage
-mapDamage="/share/apps/python-3.8.5-shared/bin/mapDamage"
-
-
-# Define variables
-SHAREDFOLDER=/SAN/ugi/LepGenomics
-SPECIES=E3_Aphantopus_hyperantus
-REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-#INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_FORANGSD
-#OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_FORANGSD/MAPDAMAGE
-INPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
-OUTPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
-TAIL="realn.bam"
-
-
-#Create Array
-#NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
-NAME=AH-01-1900-02.realn.bam
-
-##Script
-echo "time $mapDamage --merge-libraries -i $INPUT/${NAME}.$TAIL -d $OUTPUT -r $REF --rescale --single-stranded"
-time $mapDamage --merge-libraries -i $INPUT/$NAME -d $OUTPUT/$NAME -r $REF --rescale --single-stranded  
-```
-
-
-
-
 
 
 
@@ -2164,4 +2055,115 @@ fi
 echo "time $BWA mem $REF $INPUT/$NAME | samtools sort -o  $OUTPUT/$NAME.bam" >> map_mus.log
 time $BWA mem $REF $INPUT/$NAME.collapsed | samtools sort -o  $OUTPUT/$NAME.bam
 ```
+
+
+Bam processing: AddRG, MarkDup, LocalRealn, CheckBam
+```
+#Index bam
+samtools=/share/apps/genomics/samtools-1.9/bin/samtools
+$samtools index AH-01-1900-02.bam
+
+#Bam processing
+export PATH=/share/apps/java/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
+PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
+
+#Add RG info
+time java -jar $PICARD AddOrReplaceReadGroups \
+       I=AH-01-1900-02.bam \
+       O=AH-01-1900-02.collapsed.RG.bam \
+       RGID=E3mus \
+       RGLB=mus0204 \
+       RGPL=ILLUMINA \
+       RGPU=unit1 \
+       RGSM=AH02
+
+#MarkDuplicates
+time java -jar $PICARD MarkDuplicates \
+INPUT=AH-01-1900-02.collapsed.RG.bam \
+OUTPUT=AH-01-1900-02.collapsed.rmdup.bam \
+METRICS_FILE=AH-01-1900-02.dup.txt \
+REMOVE_DUPLICATES=false \
+VALIDATION_STRINGENCY=SILENT \
+CREATE_INDEX=true
+
+
+#Local Realignment
+export PATH=/share/apps/jdk1.8.0_131/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/jdk1.8.0_131/lib:$LD_LIBRARY_PATH
+GenomeAnalysisTK=/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar
+REF=/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+
+###Identify targets to realign
+java -jar $GenomeAnalysisTK -T RealignerTargetCreator \
+-R $REF \
+-o AH-01-1900-02.intervals \
+-I AH-01-1900-02.collapsed.rmdup.bam
+
+###Local realignment
+java -jar $GenomeAnalysisTK -T IndelRealigner \
+-R $REF \
+-targetIntervals AH-01-1900-02.intervals \
+-I AH-01-1900-02.collapsed.rmdup.bam \
+-o AH-01-1900-02.realn.bam
+
+#Validate Bam
+time java -jar $PICARD ValidateSamFile \
+INPUT=AH-01-1900-02.realn.bam \
+OUTPUT=AH-01-1900-02.validatesam \
+MODE=SUMMARY
+
+```
+
+MapDamage
+```
+#Submit script
+
+#$ -S /bin/bash
+#$ -N E3.MapDmg.mus  ##job name
+#$ -l tmem=32G #RAM
+#$ -l h_vmem=32G #enforced limit on shell memory usage
+#$ -l h_rt=5:00:00 ##wall time.  
+#$ -j y  #concatenates error and output files (with prefix job1)
+##$ -t 1-48
+
+#Run on working directory
+cd $SGE_O_WORKDIR
+
+
+# Software
+##python
+export PATH=/share/apps/python-3.8.5-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.8.5-shared/lib:$LD_LIBRARY_PATH
+
+##R
+export PATH=/share/apps/R-4.0.3/bin:$PATH
+
+##mapDamage
+mapDamage="/share/apps/python-3.8.5-shared/bin/mapDamage"
+
+
+# Define variables
+SHAREDFOLDER=/SAN/ugi/LepGenomics
+SPECIES=E3_Aphantopus_hyperantus
+REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+#INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_FORANGSD
+#OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_museum_FORANGSD/MAPDAMAGE
+INPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
+OUTPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
+TAIL="realn.bam"
+
+
+#Create Array
+#NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
+NAME=AH-01-1900-02.realn.bam
+
+##Script
+echo "time $mapDamage --merge-libraries -i $INPUT/${NAME}.$TAIL -d $OUTPUT -r $REF --rescale --single-stranded"
+time $mapDamage --merge-libraries -i $INPUT/$NAME -d $OUTPUT/$NAME -r $REF --rescale --single-stranded  
+```
+
+
+
+
 
