@@ -864,8 +864,7 @@ ls *bam > bamlist
 
 Submit to queue.
 
-
-If you run this for the modern samples, remove --single-stranded from the code
+When running on modern samples add the "--stats-only" option
 
 
 Move all the new rescaled bam files to a new folder: 
