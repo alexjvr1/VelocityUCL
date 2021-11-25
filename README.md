@@ -815,6 +815,12 @@ Finally we'll use Picard Tools to check if our bam/sam files look as expected.
 Use the [02b.3_ValidateSamFile_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.3_ValidateSamFile_MODC.sh) script to validate the files. 
 
 
+See [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035891231-Errors-in-SAM-or-BAM-files-can-be-diagnosed-with-ValidateSamFile) for a summary from the Broad Institute about the possible errors. 
+
+Common errors that you might get are: 
+
+MISMATCH_MATE_CIGAR_STRING: Modify this [script](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.5_FixMate_MODC.sh) to fix mate
+MISMATCH_MATE_ALIGNMENT_START
 
 
 
