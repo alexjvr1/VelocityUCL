@@ -47,5 +47,5 @@ NAME=$(sed "${SGE_TASK_ID}q;d" mus.names)
 
 
 ##Script
-echo "time $mapDamage --merge-libraries -i $INPUT/${NAME}.$TAIL -d $OUTPUT -r $REF --rescale --single-stranded"
-time $mapDamage --merge-libraries -i $INPUT/${NAME}.$TAIL -d $OUTPUT/${NAME} -r $REF --rescale --single-stranded  
+echo "time $mapDamage --merge-libraries -i $INPUT/${NAME}.$TAIL -d $OUTPUT -r $REF --rescale"
+time $mapDamage --merge-libraries -i $INPUT/${NAME}.$TAIL -d $OUTPUT/${NAME} -r $REF --rescale  
