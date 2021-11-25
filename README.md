@@ -650,53 +650,6 @@ See [here](https://github.com/ewels/MultiQC/issues/1005) for an extensive discus
 3) retained_reads = R1 + R2 + Singleton R1 + Singleton R2 + Full length Collapsed + Truncated Collapsed
 
 
-## Mapping
-
-Map to reference genome: 
-```
-cat 02a_MapwithBWAmem.ARRAY_museum_TrimTest.sh
-#!/bin/bash
-#$ -S /bin/bash
-#$ -N C3.BWAmem_mod  ##job name
-#$ -l tmem=16G #RAM
-#$ -l h_vmem=16G #enforced limit on memory shell usage
-#$ -l h_rt=10:00:00 ##wall time.  
-#$ -j y  #concatenates error and output files (with prefix job1)
-
-#run job in working directory
-cd $SGE_O_WORKDIR 
-
-
-##Software
-BWA=/share/apps/genomics/bwa-0.7.17/bwa
-export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
-export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
-
-#Define variables
-SHAREDFOLDER=/SAN/ugi/LepGenomics
-SPECIES=E3_Aphantopus_hyperantus
-REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-INPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
-OUTPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
-NAME=AH-01-1900-02
-
-
-
-##Check if Ref Genome is indexed by bwa
-if [[ ! $REF.fai ]]
-then 
-	echo $REF" not indexed. Indexing now"
-	$BWA index $REF
-else
-	echo $REF" indexed"
-fi
-
-
-##Map 
-
-echo "time $BWA mem $REF $INPUT/$NAME | samtools sort -o  $OUTPUT/$NAME.bam" >> map_mus.log
-time $BWA mem $REF $INPUT/$NAME.collapsed | samtools sort -o  $OUTPUT/$NAME.bam
-```
 
 
 
@@ -848,7 +801,7 @@ cd 01b_AdapterRemoval_museum
 ls *collapsed > mus.tomap
 ##Check that this contains the correct number of samples (48)
 wc -l mus.tomap 
-#Navigate back to the $SHAREDFOLDER/$SPECIES directory and move the list of sample names tehre
+#Navigate back to the $SHAREDFOLDER/$SPECIES directory and move the list of sample names there
 cd ..
 mv 01b_AdapterRemoval_museum/mus.tomap .
 
@@ -2160,4 +2113,55 @@ $paleomix
 
 Picard Tools - The latest version compatable with PaleoMix is v1.1.37, but the earliest version on the server is Picard 2.20. 
 
+
+
+## Map and Process bams in qrsh
+
+## Mapping
+
+Map to reference genome: 
+```
+cat 02a_MapwithBWAmem.ARRAY_museum_TrimTest.sh
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N C3.BWAmem_mod  ##job name
+#$ -l tmem=16G #RAM
+#$ -l h_vmem=16G #enforced limit on memory shell usage
+#$ -l h_rt=10:00:00 ##wall time.  
+#$ -j y  #concatenates error and output files (with prefix job1)
+
+#run job in working directory
+cd $SGE_O_WORKDIR 
+
+
+##Software
+BWA=/share/apps/genomics/bwa-0.7.17/bwa
+export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
+
+#Define variables
+SHAREDFOLDER=/SAN/ugi/LepGenomics
+SPECIES=E3_Aphantopus_hyperantus
+REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+INPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
+OUTPUT=$SHAREDFOLDER/$SPECIES/TrimmomaticTest
+NAME=AH-01-1900-02
+
+
+
+##Check if Ref Genome is indexed by bwa
+if [[ ! $REF.fai ]]
+then 
+	echo $REF" not indexed. Indexing now"
+	$BWA index $REF
+else
+	echo $REF" indexed"
+fi
+
+
+##Map 
+
+echo "time $BWA mem $REF $INPUT/$NAME | samtools sort -o  $OUTPUT/$NAME.bam" >> map_mus.log
+time $BWA mem $REF $INPUT/$NAME.collapsed | samtools sort -o  $OUTPUT/$NAME.bam
+```
 
