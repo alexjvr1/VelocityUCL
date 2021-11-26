@@ -20,18 +20,12 @@ export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
 SHAREDFOLDER=/SAN/ugi/LepGenomics
 SPECIES=E3_Aphantopus_hyperantus
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-INPUT=$SHAREDFOLDER/$SPECIES/01a_MODC_cutadapt_reads
-OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
-
-#Create a list of input files
-#ls $INPUT/*R1.fastq.gz | awk -F "/" '{print $NF}' > modc.R1.tomap
-#ls $INPUT/*R2.fastq.gz | awk -F "/" '{print $NF}' > modc.R2.tomap
-
-#echo "list of samples to map = modc.R1.tomap & modc.R2.tomap" >> map_modc.log
+INPUT=$SHAREDFOLDER/$SPECIES/01b_AdapterRemoval_MODC.unmerged
+OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_MODC
 
 ##Define ARRAY names
-NAME1=$(sed "${SGE_TASK_ID}q;d" modc.R1.tomap)
-NAME2=$(sed "${SGE_TASK_ID}q;d" modc.R2.tomap)
+NAME1=$(sed "${SGE_TASK_ID}q;d" R1.modc.names)
+NAME2=$(sed "${SGE_TASK_ID}q;d" R2.modc.names)
 
 
 ##Map using array
@@ -39,5 +33,5 @@ NAME2=$(sed "${SGE_TASK_ID}q;d" modc.R2.tomap)
 sample_name=`echo ${NAME1} | awk -F "." '{print $1}'`
 echo "[mapping running for] $sample_name"
 printf "\n"
-echo "time $BWA mem $REF $INPUT/${NAME1} $INPUT/${NAME2}| samtools sort -o  $OUTPUT/${NAME1}.forATLAS.bam" >> map_mus.log
-time $BWA mem $REF $INPUT/${NAME1} $INPUT/${NAME2} | samtools sort -o  $OUTPUT/${NAME1}.forATLAS.bam
+echo "time $BWA mem $REF $INPUT/${NAME1} $INPUT/${NAME2}| samtools sort -o  $OUTPUT/${NAME1}.bam" >> map_modc.log
+time $BWA mem $REF $INPUT/${NAME1} $INPUT/${NAME2} | samtools sort -o  $OUTPUT/${NAME1}.bam
