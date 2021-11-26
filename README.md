@@ -881,7 +881,25 @@ Modify the [02b.4_Flagstat_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob
 
 Once all the sample.flagstat files are ready, collect the info for our spreadsheet: 
 ```
+##Modern samples
 
+ls *realn.bam.flagstat |awk -F "." '{print $1}' > names
+grep "QC-passed reads" *realn.bam.flagstat |awk '{print $1}' |awk -F ":" '{print $2}' > totalreads
+grep "+ 0 mapped" *realn.bam.flagstat |awk '{print $1}' |awk -F ":" '{print $2}' > mapped
+grep "+ 0 mapped" *realn.bam.flagstat |awk -F " " '{print $5}' |awk -F "(" '{print $2}' > prop.mapped
+grep "properly paired" *realn.bam.flagstat |awk '{print $1}' |awk -F ":" '{print $2}' > pe.mapped
+grep "properly paired" *realn.bam.flagstat |awk '{print $6}' |awk -F "(" '{print $2}' > prop.pe.mapped
+
+paste names totalreads mapped prop.mapped pe.mapped prop.pe.mapped
+
+
+##Museum samples
+ls *realn.bam.flagstat |awk -F "." '{print $1}' > names
+grep "QC-passed reads" *realn.bam.flagstat |awk '{print $1}' |awk -F ":" '{print $2}' > totalreads
+grep "+ 0 mapped" *realn.bam.flagstat |awk '{print $1}' |awk -F ":" '{print $2}' > mapped
+grep "+ 0 mapped" *realn.bam.flagstat |awk -F " " '{print $5}' |awk -F "(" '{print $2}' > prop.mapped
+
+paste names totalreads mapped prop.mapped
 
 ```
 
@@ -916,30 +934,32 @@ mapDamage="/share/apps/python-3.8.5-shared/bin/mapDamage"
 
 
 
-MapDamage will be run in the 02a_museum_mapped_MERGED folder. 
-
 1. Create a file listing all the bamfiles
+
+These are the final input files from the previous step. ie. the sample.realn.bam files
+
 ```
-ls *bam > bamlist
+cd 02a_mapped_museum
+ls *realn.bam > bamlist
 ```
 
-2. Copy the script [02c_MapDamage_forMERGED.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02c_MapDamage_forMERGED.sh) to the 02a_museum_mapped_MERGED folder. Change the job name, the number of threads, and check the path to the reference genome.
+2. Copy the script [02c_MapDamage_forMERGED.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02c_MapDamage_forMERGED.sh) to the 02a_mapped_museum. Change the job name, the number of threads, and check the path to the reference genome.
 
 Submit to queue.
 
-When running on modern samples add the "--stats-only" option
+
+3. When running on modern samples add the "--stats-only" option
 
 
-Move all the new rescaled bam files to a new folder: 
+4. Move all the new rescaled bam files:
+
+The rescaled bams are writtedn to a folder for each sample. We want them all on one place: 
 ```
-mkdir 02c_museum_mapDamage
-mv 02a_museum_processed.mapped/results*/*bam 02b_museum_mapDamage && cd 02c_museum_mapDamage
-
-samtools=/share/apps/genomics/samtools-1.9/bin/samtools
-for i in $(ls *bam); do ls $i >> flagstat.log && $samtools flagstat $i >> flagstat.log; done
+cd 02c_MapDamage_MUS
+mv AH*/*rescaled.bam .
 ```
 
-And index all the bams using the previous indexing script
+5. Index all the bams using the previous indexing script
 
 
 
