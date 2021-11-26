@@ -699,19 +699,27 @@ mv 01b_AdapterRemoval_museum/mus.tomap .
 
 ## modern
 ## Adapter trimmed, but not collapsed = 2 files per indiv
-ls 01b_AdapterRemoval_MODC/*R1_paired* >> R1.modern.names
-ls 01b_AdapterRemoval_MODC/*R2_paired* >> R2.modern.names
+ls 01b_AdapterRemoval_MODC/*R1_paired* > modc.names
+sed -i 's:01b_AdapterRemoval_MODC/::g' modc.names
+sed -i 's:.pair1.truncated::g'  modc.names
 
-sed -i 's:01b_AdapterRemoval_MODC/::g' *names
+#Check that these files list only the modern sample names and not any of the path: 
+head modc.names
+AH-01-2016-01
+AH-01-2016-04
+AH-01-2016-05
+....
 
 
 #make output directories. 
-mkdir 02a_mapped_MUS
+mkdir 02a_mapped_museum
 mkdir 02a_mapped_MODC
 mkdir 02a_mapped_MODE
 
+
 #If you're running the unmerged pipeline make this folder as well
-mkdir 02a_mapped_MUS_unmerged
+#The usual pipeline does not use the unmerged Museum data
+mkdir 02a_mapped_MUS.unmerged
 
 
 #Check that you're pointing to the correct reference genome
