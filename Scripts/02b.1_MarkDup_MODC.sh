@@ -21,8 +21,8 @@ PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
 SHAREDFOLDER=/SAN/ugi/LepGenomics
 SPECIES=E3_Aphantopus_hyperantus
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
-OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_modern
+INPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_MODC.unmerged
+OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_MODC.unmerged
 TAIL="RG.bam"
 
 #Set up ARRAY job
