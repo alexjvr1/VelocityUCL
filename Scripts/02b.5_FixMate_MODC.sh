@@ -29,7 +29,8 @@ TAIL="realn.bam"
 #ls *bam | awk -F "." '{print $1}' >> modc.names
 NAME=$(sed "${SGE_TASK_ID}q;d" modc.names.tofix)
 
-java -jar picard.jar FixMateInformation \ I=input.bam \ O=fixed_mate.bam \ ADD_MATE_CIGAR=true
+#Generic script
+#java -jar picard.jar FixMateInformation \ I=input.bam \ O=fixed_mate.bam \ ADD_MATE_CIGAR=true
 
 echo "java -jar $PICARD FixMateInformation \
 INPUT=$INPUT/${NAME}.realn.bam \
