@@ -788,7 +788,7 @@ We're using Picard Tools to 1) Add Read Group information, 2) Mark Duplicate rea
 The links below provide a script for each step. Modify it to run this for each of your populations. 
 
 
-0) Add Read Group information. 
+##### 0) Add Read Group information. 
 
 Formulate the read group name based on the population and the sequencing library
 
@@ -803,32 +803,87 @@ Brown Argus modc RGLB=mod02; mode RGLB=mod02, mus RGLB=mus0204
 Speckled Wood modc RGLB=mod01; mode RGLB=mod01, mus RGLB=mus0103
 
 
-1) Mark Duplicate Reads
+##### 1) Mark Duplicate Reads
 
 Sometimes we see duplicate reads in the dataset which originate from the same DNA fragment. We want to filter these out because we assume that all read information is independent. Duplicate reads can arise during library prep as PCR duplicates, or during sequencing when the sequencer sees a single sequencing cluster as two clusters (called optical duplicates). 
 
 Use the [02b.1_MarkDup_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.1_MarkDup_MODC.sh) script to remove duplicate reads
 
-2) Local realignment
+##### 2) Local realignment
 
 Local realignment can be useful to optimise mapping to low complexity or repeat regions in the genome. Our mapping tool doesn't do this (although some pipelines like GATK do incorporate local realignment). We will run a local realignment as an independent step. 
 
 Use the [02b.2_LocalRealignment_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.2_LocalRealignment_MODC.sh) script for local realignment
 
 
-3) Validate Sam
+##### 3) Validate bam
 
 Finally we'll use Picard Tools to check if our bam/sam files look as expected. 
 
 Use the [02b.3_ValidateSamFile_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.3_ValidateSamFile_MODC.sh) script to validate the files. 
 
 
-See [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035891231-Errors-in-SAM-or-BAM-files-can-be-diagnosed-with-ValidateSamFile) for a summary from the Broad Institute about the possible errors. 
+See which samples have any errors: 
+```
+cat *validatesam
+
+```
 
 Common errors that you might get are: 
 
-MISMATCH_MATE_CIGAR_STRING: Modify this [script](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.5_FixMate_MODC.sh) to fix mate
+MISMATCH_MATE_CIGAR_STRING
 MISMATCH_MATE_ALIGNMENT_START
+
+
+See [here](https://gatk.broadinstitute.org/hc/en-us/articles/360035891231-Errors-in-SAM-or-BAM-files-can-be-diagnosed-with-ValidateSamFile) for a summary from the Broad Institute about the possible errors. 
+
+
+##### 4) Fix any errors, and revalidate 
+
+Generally the FixMateInformation option from picardTools will correct any errors. Modify the [02b.5_FixMate_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.5_FixMate_MODC.sh) script. 
+
+Create a list of sample names to be fixed called modc.names.tofix (change the population as needed). The script requires sample names without any tail. e.g.
+```
+cat modc.names.tofix
+AH-01-2016-06
+AH-01-2016-12
+AH-01-2016-15
+AH-01-2016-18
+AH-01-2017-21
+```
+
+This will produce new bam files called sample.fixed.bam. 
+
+Validate these bam files by modifying the script from step 3 above. 
+
+If there are no more errors, you can delete the old realn.bam files for these samples. And rename the fixed files to realn.bam. 
+
+```
+#This will delete the bam and bai files
+for i in $(cat modc.names.tofix); do rm $i.realn.ba*; done
+
+mv AH-01-2016-06.fixed.bam AH-01-2016-06.realn.bam
+mv AH-01-2016-12.fixed.bam AH-01-2016-06.realn.bam
+mv AH-01-2016-15.fixed.bam AH-01-2016-15.realn.bam
+...
+
+##Then index all these by modifying the index.sh script from above.
+##Make sure all the files are named in the same way. i.e. sample.realn.bam, sample.realn.bai. Some scripts write the indexed file to sample.realn.bam.bai. 
+##If this happens, rename them -> mv sample.realn.bam.bai sample.realn.bai
+```
+
+
+##### 5) Get stats with Flagstat
+
+We want to collect metrics to add to our shared spreadsheet. 
+
+Modify the [02b.4_Flagstat_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.4_Flagstat_MODC.sh) script. 
+
+Once all the sample.flagstat files are ready, collect the info for our spreadsheet: 
+```
+
+
+```
 
 
 
