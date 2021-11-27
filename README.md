@@ -1390,7 +1390,7 @@ mkdir 03.2_Variant_calling_museum
 
 3. Copy the variant calling script to each folder
 
-Script here: [03a_variant_calling_bluecp3.sh](https://github.com/alexjvr1/Velocity2020/blob/master/03a_variant_calling_bluecp3.sh)
+Script here: [03a_variant_calling_bluecp3.sh](https://github.com/alexjvr1/Velocity2020/blob/master/03a_variant_calling_UCL.sh)
 
 a) Edit the variables in the script for each species and population
 
