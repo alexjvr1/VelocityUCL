@@ -576,6 +576,13 @@ grep "Both Surviving" 01a_Trimmomatic*/*log |awk '{print $1, $4, $7, $8, $20, $2
 
 ##### 1b. AdapterRemoval
 
+###### TIME
+
+~12 hours per population. Pops can be submitted simultaneously. 
+
+
+###### METHOD
+
 Used for trimming any remaining adapters and merging reads. 
 
 
