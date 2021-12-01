@@ -13,4 +13,4 @@
 /SAN/ugi/LepGenomics/VelocityPipeline/wrapper/parallel_adapterremoval_UCL.sh \
 -i 01a_Trimmomatic_museum \
 -o 01b_AdapterRemoval_museum \
--n 1 -t 1 -m 8 -N AdaptRem.mus;
+-n 1 -t 5 -m 8 -N AdaptRem.mus;
