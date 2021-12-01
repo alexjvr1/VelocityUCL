@@ -795,6 +795,17 @@ We're using Picard Tools to 1) Add Read Group information, 2) Mark Duplicate rea
 The links below provide a script for each step. Modify it to run this for each of your populations. 
 
 
+Before proceeding: 
+
+1) check that all the samples have run correctly. 
+
+2) Rename samples to remove any intervening text. The sample names should be sample-name.bam
+
+eg. AH-01-2017-40.bam
+
+Use perl rename as described above. 
+
+
 ##### 0) Add Read Group information. 
 
 Formulate the read group name based on the population and the sequencing library
