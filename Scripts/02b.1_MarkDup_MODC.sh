@@ -29,7 +29,7 @@ TAIL="RG.bam"
 #ls $INPUT/*RG.bam | awk -F "/" '{print $NF}' | awk -F "." '{print $1}' >> modc.names
 NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
-echo "java -xmx6Gg -xms6g -jar $PICARD MarkDuplicates \
+echo "java -Xmx6g -Xms6g -jar $PICARD MarkDuplicates \
 INPUT=$INPUT/${NAME}.$TAIL \
 OUTPUT=$OUTPUT/${NAME}.rmdup.bam \
 METRICS_FILE=$OUTPUT/${NAME}.dup.txt \
@@ -38,7 +38,7 @@ VALIDATION_STRINGENCY=SILENT \
 CREATE_INDEX=true" >> 02b.1_MarkDup.log
 
 
-time java -xmx6Gg -xms6g -jar $PICARD MarkDuplicates \
+time java -Xmx6g -Xms6g -jar $PICARD MarkDuplicates \
 INPUT=$INPUT/${NAME}.$TAIL \
 OUTPUT=$OUTPUT/${NAME}.rmdup.bam \
 METRICS_FILE=$OUTPUT/${NAME}.dup.txt \
