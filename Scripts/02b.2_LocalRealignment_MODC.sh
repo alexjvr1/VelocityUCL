@@ -31,14 +31,14 @@ NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
 
 # Identify targets to realign
-java -xmx6Gg -xms6g -jar $GenomeAnalysisTK -T RealignerTargetCreator \
+java -Xmx6g -Xms6g -jar $GenomeAnalysisTK -T RealignerTargetCreator \
 -R $REF \
 -o $OUTPUT/${NAME}.intervals \
 -I $INPUT/${NAME}.rmdup.bam
 
 
 # use IndelRealigner to realign the regions found in the RealignerTargetCreator step
-java -xmx6Gg -xms6g -jar $GenomeAnalysisTK -T IndelRealigner \
+java -Xmx6Gg -Xms6g -jar $GenomeAnalysisTK -T IndelRealigner \
 -R $REF \
 -targetIntervals $INPUT/${NAME}.intervals \
 -I $INPUT/${NAME}.rmdup.bam \
