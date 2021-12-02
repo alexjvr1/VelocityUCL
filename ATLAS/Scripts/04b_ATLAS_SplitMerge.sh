@@ -7,6 +7,10 @@
 #$ -j y  #concatenates error and output files (with prefix job1)
 
 
+##Input files: list of input bam files = samples.bamlist
+##RG.txt text file with read group and paired/unpaired info. Eg: 
+##E3mus paired
+
 #Run on working directory
 cd $SGE_O_WORKDIR 
 
