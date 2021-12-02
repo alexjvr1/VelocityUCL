@@ -29,13 +29,13 @@ TAIL="realn.bam"
 #ls *bam | awk -F "." '{print $1}' >> modc.names
 NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
-echo "java -jar $PICARD ValidateSamFile \
+echo "java -Xmx6g -Xms6g -jar $PICARD ValidateSamFile \
 INPUT=$INPUT/${NAME}.realn.bam \
 OUTPUT=$OUTPUT/${NAME}.validatesam
 MODE=SUMMARY" >> 02b.3_ValidateSamFile.log
 
 
-time java -jar $PICARD ValidateSamFile \
+time java -Xmx6g -Xms6g -jar $PICARD ValidateSamFile \
 INPUT=$INPUT/${NAME}.realn.bam \
 OUTPUT=$OUTPUT/${NAME}.validatesam \
 MODE=SUMMARY
