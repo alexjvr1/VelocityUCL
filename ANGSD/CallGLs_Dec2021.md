@@ -119,6 +119,31 @@ user    2m21.534s
 sys     0m5.938s
 
 
+MODC
+        -> Total number of sites analyzed: 5775262
+        -> Number of sites retained after filtering: 1548346 
+        [ALL done] cpu-time used =  815.97 sec
+        [ALL done] walltime used =  839.00 sec
+
+real    13m58.535s
+user    13m24.163s
+sys     0m11.818s
+
+
+
+
+MODE 
+        -> Total number of sites analyzed: 5679903
+        -> Number of sites retained after filtering: 1067045 
+        [ALL done] cpu-time used =  701.03 sec
+        [ALL done] walltime used =  706.00 sec
+
+real    11m45.669s
+user    11m30.830s
+sys     0m10.219s
+
+
+
 ```
 
 
@@ -126,4 +151,8 @@ sys     0m5.938s
 ## minDP
 
 We also need to check if the depth makes a difference. Ideally we want minDP 5x, but this would mean that many museum individuals drop out. 
+
+
+
+
 
