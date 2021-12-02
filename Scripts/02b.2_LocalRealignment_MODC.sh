@@ -38,7 +38,7 @@ java -Xmx6g -Xms6g -jar $GenomeAnalysisTK -T RealignerTargetCreator \
 
 
 # use IndelRealigner to realign the regions found in the RealignerTargetCreator step
-java -Xmx6Gg -Xms6g -jar $GenomeAnalysisTK -T IndelRealigner \
+java -Xmx6g -Xms6g -jar $GenomeAnalysisTK -T IndelRealigner \
 -R $REF \
 -targetIntervals $INPUT/${NAME}.intervals \
 -I $INPUT/${NAME}.rmdup.bam \
