@@ -30,7 +30,7 @@ NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
 ##Add readgroups
 
-echo "java -jar $PICARD AddOrReplaceReadGroups \
+echo "java -Xmx6g -Xms6g -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.bam \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
@@ -40,7 +40,7 @@ echo "java -jar $PICARD AddOrReplaceReadGroups \
        RGSM=${NAME}" >> 02b.0_AddRG.log
 
 
-time java -jar $PICARD AddOrReplaceReadGroups \
+time java -Xmx6g -Xms6g -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.bam \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
