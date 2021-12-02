@@ -97,9 +97,26 @@ sys     0m16.881s
 
 ```
 
-2. 100% genotyping rate
+#### 2. 100% genotyping rate
+
+Results
+```
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_Dec2021/03.1_SAF_
 
 ```
+
+
+```
+MUS
+        -> Arguments and parameters for all analysis are located in .arg file
+        -> Total number of sites analyzed: 4820076
+        -> Number of sites retained after filtering: 87 
+        [ALL done] cpu-time used =  147.46 sec
+        [ALL done] walltime used =  155.00 sec
+
+real    2m34.426s
+user    2m21.534s
+sys     0m5.938s
 
 
 ```
