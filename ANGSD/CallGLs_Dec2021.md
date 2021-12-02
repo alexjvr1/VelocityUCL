@@ -148,11 +148,22 @@ sys     0m10.219s
 
 
 
-## minDP
+## SFS
 
-We also need to check if the depth makes a difference. Ideally we want minDP 5x, but this would mean that many museum individuals drop out. 
-
-
+We're using the 80% genotyping rate SAF files to estimate SFS 
 
 
+MODC-MODE
+```
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_Dec2021/03_SFS_MODC.MODE.sh
 
+-> Sites to keep[LR761675.1] from pop0: 4172362
+        -> Sites to keep[LR761675.1] from pop1: 4172362
+        -> [readdata] lastread:4172362 posi:75
+        -> Comparing positions: 1 with 0 has:4172362
+        -> Only read nSites: 4172362 will therefore prepare next chromosome (or exit)
+        -> Done reading data from chromosome will prepare next chromosome
+        -> Will run optimization on nSites: 4172362
+------------
+
+```
