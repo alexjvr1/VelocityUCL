@@ -32,13 +32,13 @@ NAME=$(sed "${SGE_TASK_ID}q;d" modc.names.tofix)
 #Generic script
 #java -jar picard.jar FixMateInformation \ I=input.bam \ O=fixed_mate.bam \ ADD_MATE_CIGAR=true
 
-echo "java -jar $PICARD FixMateInformation \
+echo "java -Xmx6g -Xms6g -jar $PICARD FixMateInformation \
 INPUT=$INPUT/${NAME}.realn.bam \
 OUTPUT=$OUTPUT/${NAME}.fixed.bam \
 ADD_MATE_CIGAR=true" >> 02b.4_FixMate.log
 
 
-time java -jar $PICARD FixMateInformation \
+time java -Xmx6g -Xms6g -jar $PICARD FixMateInformation \
 INPUT=$INPUT/${NAME}.realn.bam \
 OUTPUT=$OUTPUT/${NAME}.fixed.bam \
 ADD_MATE_CIGAR=true 
