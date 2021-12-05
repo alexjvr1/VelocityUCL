@@ -35,12 +35,10 @@ NAME=$(sed "${SGE_TASK_ID}q;d" modc.names.tofix)
 echo "java -jar $PICARD FixMateInformation \
 INPUT=$INPUT/${NAME}.realn.bam \
 OUTPUT=$OUTPUT/${NAME}.fixed.bam \
-ADD_MATE_CIGAR=true \
-MODE=SUMMARY" >> 02b.3_ValidateSamFile.log
+ADD_MATE_CIGAR=true" >> 02b.4_FixMate.log
 
 
 time java -jar $PICARD FixMateInformation \
 INPUT=$INPUT/${NAME}.realn.bam \
 OUTPUT=$OUTPUT/${NAME}.fixed.bam \
-ADD_MATE_CIGAR=true \
-MODE=SUMMARY
+ADD_MATE_CIGAR=true 
