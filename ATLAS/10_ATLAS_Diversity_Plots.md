@@ -134,6 +134,156 @@ Add a column to each file specifying pop and indiv
 
 ```
 
+
+
+## Read into R and plot
+
+###MUS
+```
+#Read population into a list
+MUS.files <- list.files(pattern="AH-01-1900") 
+MUS.myfiles <- lapply(MUS.files, read.table, header=T)  ##read all files into a list
+colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", 
+MUS.myfiles2 <- lapply(MUS.myfiles, setNames, nm=colnames.new)   #rename columns
+
+#Add pop and sample columns 
+MUS.files <- gsub("_theta_estimates.txt.gz", "", MUS.files)
+library(purrr)
+MUS.myfiles <- Map(cbind, MUS.myfiles, Sample=MUS.files)
+MUS.myfiles <- Map(cbind, MUS.myfiles, Pop="MUS")
+
+#Keep only the chromosomes
+MUS.myfiles.Chrsonly <- lapply(1:length(MUS.myfiles), function(x) MUS.myfiles[[x]][MUS.myfiles[[x]] !="CADCXM"])
+
+#Convert list to dataframe
+library(reshape2)
+allvars <- colnames(MUS.myfiles[[1]])
+MUS.ll <- melt(MUS.myfiles, id.vars=allvars)
+MUS.ll$midpos=((MUS.ll$end-MUS.ll$start)/2)+MUS.ll$start
+
+MUS.ll.Chrsonly <- (MUS.ll.Chrsonly %>% filter(!grepl("CADC", Chr)))
+
+##Check the proportion of missing data: 
+
+ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()   
+ggplot(MUS.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()
+ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
+
+##Select a threshold and identify samples to remove: 
+summary(MUS.ll.Chrsonly[which(ll.Chrsonly$fracMissing>0.6),])
+
+MUS.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-08", "AH-01-1900-09", "AH-01-1900-10", "AH-01-1900-11", "AH-01-1900-13", "AH-01-1900-14", "AH-01-1900-15", "AH-01-1900-16", "AH-01-1900-20", "AH-01-1900-21", "AH-01-1900-22", "AH-01-1900-22", "AH-01-1900-23", "AH-01-1900-24", "AH-01-1900-25", "AH-01-1900-27", "AH-01-1900-28", "AH-01-1900-29", "AH-01-1900-32", "AH-01-1900-33", "AH-01-1900-34", "AH-01-1900-35", "AH-01-1900-37", "AH-01-1900-38", "AH-01-1900-39", "AH-01-1900-40", "AH-01-1900-41", "AH-01-1900-42", "AH-01-1900-43", "AH-01-1900-45", "AH-01-1900-46", "AH-01-1900-47")
+
+MUS.ll.Chronly.0.6miss <- filter(MUS.ll.Chrsonly, Sample %in% MUS.tokeep)
+summary(MUS.ll.Chronly.0.6miss$Sample)
+
+```
+
+
+###MODC
+```
+#Read population into a list
+MODC.files <- list.files(pattern="AH-01-20") 
+MODC.myfiles <- lapply(MODC.files, read.table, header=T)  ##read all files into a list
+colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", 
+MODC.myfiles2 <- lapply(MODC.myfiles, setNames, nm=colnames.new)   #rename columns
+
+#Add pop and sample columns 
+MODC.files <- gsub("_theta.gz", "", MODC.files)
+library(purrr)
+MODC.myfiles <- Map(cbind, MODC.myfiles, Sample=MODC.files)
+MODC.myfiles <- Map(cbind, MODC.myfiles, Pop="MODC")
+
+#Keep only the chromosomes
+MODC.myfiles.Chrsonly <- lapply(1:length(MODC.myfiles), function(x) MODC.myfiles[[x]][MODC.myfiles[[x]] !="CADCXM"])
+
+#Convert list to dataframe
+library(reshape2)
+allvars <- colnames(MODC.myfiles[[1]])
+MODC.ll <- melt(MODC.myfiles, id.vars=allvars)
+MODC.ll$midpos=((MODC.ll$end-MODC.ll$start)/2)+MODC.ll$start
+
+MODC.ll.Chrsonly <- (MODC.ll.Chrsonly %>% filter(!grepl("CADC", Chr)))
+
+##Check the proportion of missing data: 
+
+ggplot(MODC.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()   
+ggplot(MODC.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()
+ggplot(MODC.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
+
+##Select a threshold and identify samples to remove: 
+summary(MODC.ll.Chrsonly[which(MODC.ll.Chrsonly$fracMissing>0.6),])
+
+MODC.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-08", "AH-01-1900-09", "AH-01-1900-10", "AH-01-1900-11", "AH-01-1900-13", "AH-01-1900-14", "AH-01-1900-15", "AH-01-1900-16", "AH-01-1900-20", "AH-01-1900-21", "AH-01-1900-22", "AH-01-1900-22", "AH-01-1900-23", "AH-01-1900-24", "AH-01-1900-25", "AH-01-1900-27", "AH-01-1900-28", "AH-01-1900-29", "AH-01-1900-32", "AH-01-1900-33", "AH-01-1900-34", "AH-01-1900-35", "AH-01-1900-37", "AH-01-1900-38", "AH-01-1900-39", "AH-01-1900-40", "AH-01-1900-41", "AH-01-1900-42", "AH-01-1900-43", "AH-01-1900-45", "AH-01-1900-46", "AH-01-1900-47")
+
+MODC.ll.Chronly.0.6miss <- filter(MODC.ll.Chrsonly, Sample %in% MODC.tokeep)
+summary(MODC.ll.Chronly.0.6miss$Sample)
+
+```
+
+
+
+
+###MODE
+```
+#Read population into a list
+MODE.files <- list.files(pattern="AH-02") 
+MODE.myfiles <- lapply(MODE.files, read.table, header=T)  ##read all files into a list
+colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", 
+MODE.myfiles2 <- lapply(MODE.myfiles, setNames, nm=colnames.new)   #rename columns
+
+#Add pop and sample columns 
+MODE.files <- gsub("_theta.gz", "", MODE.files)
+library(purrr)
+MODE.myfiles <- Map(cbind, MODE.myfiles, Sample=MODE.files)
+MODE.myfiles <- Map(cbind, MODE.myfiles, Pop="MODE")
+
+#Keep only the chromosomes
+MODE.myfiles.Chrsonly <- lapply(1:length(MODE.myfiles), function(x) MODE.myfiles[[x]][MODE.myfiles[[x]] !="CADCXM"])
+
+#Convert list to dataframe
+library(reshape2)
+allvars <- colnames(MODE.myfiles[[1]])
+MODE.ll <- melt(MODE.myfiles, id.vars=allvars)
+MODE.ll$midpos=((MODE.ll$end-MODE.ll$start)/2)+MODE.ll$start
+
+MODE.ll.Chrsonly <- (MODE.ll.Chrsonly %>% filter(!grepl("CADC", Chr)))
+
+##Check the proportion of missing data: 
+
+ggplot(MODE.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()   
+ggplot(MODE.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()
+ggplot(MODE.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
+
+##Select a threshold and identify samples to remove: 
+summary(MODE.ll.Chrsonly[which(MODE.ll.Chrsonly$fracMissing>0.6),])
+
+MODE.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-08", "AH-01-1900-09", "AH-01-1900-10", "AH-01-1900-11", "AH-01-1900-13", "AH-01-1900-14", "AH-01-1900-15", "AH-01-1900-16", "AH-01-1900-20", "AH-01-1900-21", "AH-01-1900-22", "AH-01-1900-22", "AH-01-1900-23", "AH-01-1900-24", "AH-01-1900-25", "AH-01-1900-27", "AH-01-1900-28", "AH-01-1900-29", "AH-01-1900-32", "AH-01-1900-33", "AH-01-1900-34", "AH-01-1900-35", "AH-01-1900-37", "AH-01-1900-38", "AH-01-1900-39", "AH-01-1900-40", "AH-01-1900-41", "AH-01-1900-42", "AH-01-1900-43", "AH-01-1900-45", "AH-01-1900-46", "AH-01-1900-47")
+
+MODE.ll.Chronly.0.6miss <- filter(MODE.ll.Chrsonly, Sample %in% MODE.tokeep)
+summary(MODE.ll.Chronly.0.6miss$Sample)
+
+```
+
+
+Concat and Plot
+```
+# Concatenate the three lists
+
+# Make chromosome a factor 
+ll.Chronly.0.6miss$Chr <- as.factor(ll.Chronly.0.6miss$Chr)
+
+
+# Plot
+ggplot(ll.Chronly.0.6miss, aes(x=midpos, y=theta_MLE, colour=Sample))+geom_point()+facet_wrap(~Chr)
+
+
+
+```
+
+
+
+
 Read into R and plot
 ```
 library(dplyr)
