@@ -32,10 +32,10 @@ FOLDER=E3_SubsetTests
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
 INPUT=$SHAREDFOLDER/$FOLDER/02a_mapped_modern_exp
 OUTPUT=$SHAREDFOLDER/$FOLDER/02a_mapped_modern_exp_Downsampled
-TAIL="fullLR75.subset_mergedReads.bam"
+
 
 
 paste mode.names.100 mode.prop.downsample mode.propnames | while IFS=$'\t' read -r var1 var2 var3; do java -jar $PICARD DownsampleSam \
-I=$INPUT/"$var1".$TAIL \
+I=$INPUT/"$var1" \
 O=$OUTPUT/"$var1".fullLR75.Downsampled."$var3".bam \
 P="$var2"; done
