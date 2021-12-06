@@ -44,7 +44,7 @@ c) Run the [02b.5_Downsample.sh](https://github.com/alexjvr1/VelocityUCL/blob/ma
 Make sure to use the merged bam files (created with SplitMerge in ATLAS). You'll get errors about the read lengths exceeding the insert size if this hasn't been done. 
 
 
-Run SplitMerge from ATLAS for all downsampled populations using the [xx.sh]() script. 
+Run SplitMerge from ATLAS for all downsampled populations using the [04b_ATLAS_SplitMerge.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/04b_ATLAS_SplitMerge.sh) script. 
 
 
 ## 3. Estimate theta for MODE, MODC, and MUS
