@@ -9,6 +9,49 @@ We can estimate a global theta, or estimate theta in windows. According to the p
 The [ibis paper](https://www.sciencedirect.com/science/article/pii/S0960982218316099#mmc2) uses 5Mb windows. 
 
 
+## 1. Downsample modern data
+
+Modern data was sequenced to a much higher coverage than the museum data. Downsample these data to a) determine how sequencing depth affects estimates of theta, b) choose a deth comparable to the MUS dataset. 
+
+a) Create folders for downsampled data
+``
+mkdir 04_Downsampled_MODC
+mkdir 04_Downsampled_MODE
+```
+
+b) Generate the three input files needed for the Downsample.sh script: 
+
+```
+#1) mode.names.4sets = a list of sample names, repeated for the series of subsampling (here to 4 different depths). 
+seq 1 4 | xargs -Inone cat mode.names > mode.names.4sets
+
+#2) mode.prop.downsample = the proportion of data to sample for each individual
+
+0.2, 0.4, 0.6, 0.8
+
+#3) mode.propnames = a name for the output. I've used the expected depth after downsampling
+
+0.2X, 0.4X, 0.6X, 0.8X
+
+```
+
+
+c) Run the [02b.5_Downsample.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.5_Downsample_MODE.sh) script for each population. This will write results to the Downsampled folders. 
+
+
+## 2. Run SpitMerge for MODC and MODE
+
+Make sure to use the merged bam files (created with SplitMerge in ATLAS). You'll get errors about the read lengths exceeding the insert size if this hasn't been done. 
+
+
+Run SplitMerge from ATLAS for all downsampled populations using the [xx.sh]() script. 
+
+
+## 3. Estimate theta for MODE, MODC, and MUS
+
+Run ATLAS for MODE, MODC, and MUS either by submitting the following script (modified for each pop), or on the interactive server. 
+
+
 
 ## 1. Estimate theta in windows of 1Mb 
 
@@ -37,15 +80,7 @@ LR761675.1	5500001	6196582
 ATLAS doesn't allow overlapping windows, so if we want a sliding window approach we'll need to run the analysis multiple times with shifted non-overlapping windows. 
 
 
-## 2. Run SpitMerge for MODC and MODE
-
-Make sure to use the merged bam files (created with SplitMerge in ATLAS). You'll get errors about the read lengths exceeding the insert size if this hasn't been done. 
-
-
-## 3. Estimate theta for MODE, MODC, and MUS
-
-Run ATLAS for MODE, MODC, and MUS either by submitting the following script (modified for each pop), or on the interactive server. 
-
+## Plot
 
 ```
 #!/bin/bash
