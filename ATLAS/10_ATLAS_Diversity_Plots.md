@@ -46,18 +46,20 @@ Make sure to use the merged bam files (created with SplitMerge in ATLAS). You'll
 
 Run SplitMerge from ATLAS for all downsampled populations using the [04b_ATLAS_SplitMerge.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/04b_ATLAS_SplitMerge.sh) script. 
 
+Run this in the 02a_mapped_MODC.unmerged and 02a_mapped_MODE.unmerged folders. 
 
-## 3. Estimate theta for MODE, MODC, and MUS
-
-Run ATLAS for MODE, MODC, and MUS either by submitting the following script (modified for each pop), or on the interactive server. 
-
+Check bam files using [ValidateSamFiles.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.3_ValidateSamFile_MODC.sh) and fix if necessary. 
 
 
-## 1. Estimate theta in windows of 1Mb 
+## 3. Estimate theta in windows of 1Mb for MODE, MODC, and MUS
 
 1Mb windows are suggested for low coverage data. 
 
-If the analysis should be run on a specific regions or chromosomes, create a bed file to specify the windows. Skip this step when analysing the whole genome:
+
+Run ATLAS for MODE, MODC, and MUS using the [Theta.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/04b_ATLAS_Theta_Window.sh) script. 
+
+
+If the analysis should be run on a specific regions or chromosomes, create a bed file to specify the windows. Skip this note when analysing the whole genome:
 ```
 /SAN/ugi/LepGenomics/E3_SubsetTests/02a_mapped_museum_FORANGSD
 
