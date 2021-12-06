@@ -10,12 +10,11 @@ The [ibis paper](https://www.sciencedirect.com/science/article/pii/S096098221831
 
 
 
-## 1. Estimate theta in windows of 0.5Mb 
+## 1. Estimate theta in windows of 1Mb 
 
-These are smaller than the min window size suggested by the ATLAS paper. So we'll increase these window sizes for the final analysis. 
+1Mb windows are suggested for low coverage data. 
 
-1. Create a bed file specifying the windows needed: 
-
+If the analysis should be run on a specific regions or chromosomes, create a bed file to specify the windows. Skip this step when analysing the whole genome:
 ```
 /SAN/ugi/LepGenomics/E3_SubsetTests/02a_mapped_museum_FORANGSD
 
@@ -37,9 +36,16 @@ LR761675.1	5500001	6196582
 
 ATLAS doesn't allow overlapping windows, so if we want a sliding window approach we'll need to run the analysis multiple times with shifted non-overlapping windows. 
 
-Run ATLAS for MODE, MODC, and MUS either by submitting the following script (modified for each pop), or on the interactive server. 
+
+## 2. Run SpitMerge for MODC and MODE
 
 Make sure to use the merged bam files (created with SplitMerge in ATLAS). You'll get errors about the read lengths exceeding the insert size if this hasn't been done. 
+
+
+## 3. Estimate theta for MODE, MODC, and MUS
+
+Run ATLAS for MODE, MODC, and MUS either by submitting the following script (modified for each pop), or on the interactive server. 
+
 
 ```
 #!/bin/bash
