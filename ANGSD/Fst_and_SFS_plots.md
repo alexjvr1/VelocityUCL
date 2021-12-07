@@ -1,7 +1,43 @@
 # Plot SFS
 
+SFS were estimating using this script. 
+
+Remember to change PP=0 for museum samples (to specify merged reads). 
+
+
+Calculate SFS
+```
+$realSFS MODC.LR761675.1.1.SEPT20.saf.idx -maxIter 100 > MODC.smallFolded.sfs
+nSites: 4469532
+
+$realSFS MODE.LR761675.1.1.SEPT20.saf.idx -maxIter 100 > MODE.smallFolded.sfs
+nSites: 4381798
+
+$realSFS MUS.LR761675.1.1.Dec21.saf.idx -maxIter 100 > MUS.smallFolded.sfs
+nSites: 313825
+
+Exclude individuals that were removed from the ATLAS estimates: 
+nSites: 105094
+$realSFS MUS.LR761675.1.1.Dec21.saf.idx -maxIter 100 > MUS.smallFolded2.sfs
+
+
+##Read into R and plot
+MODC.sfs <- scan("MODC.LR75.sfs")
+MODE.sfs <- scan("MODE.LR75.sfs")
+MUS.sfs <- scan("MUS.smallFolded2.sfs")
+
+pdf("E3.SFS.plots")
+par(mfrow=c(1,3))
+barplot(MODC.sfs[-c(1,length(MODC.sfs))], main="MODC.sfs, nSites: 4469532")
+barplot(MODE.sfs[-c(1,length(MODE.sfs))], main="MODE.sfs, nSites: 4381798")
+barplot(MUS.sfs[-c(1,length(MUS.sfs))], main="MUS.sfs, nSites: 105094")
+dev.off()
+```
+
+
 ```
 /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/03.1_ANGSD_Dec2021/03.1_SAF_0.8GenotypingRate
+
 
 #MODC
 MODC.sfs <- read.table("MODC.LR75.sfs", header=F)
