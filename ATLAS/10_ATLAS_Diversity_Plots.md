@@ -14,7 +14,8 @@ The [ibis paper](https://www.sciencedirect.com/science/article/pii/S096098221831
 Modern data was sequenced to a much higher coverage than the museum data. Downsample these data to a) determine how sequencing depth affects estimates of theta, b) choose a deth comparable to the MUS dataset. 
 
 a) Create folders for downsampled data
-``
+
+```
 mkdir 04_Downsampled_MODC
 mkdir 04_Downsampled_MODE
 ```
