@@ -46,11 +46,28 @@ c) Run the [02b.5_Downsample.sh](https://github.com/alexjvr1/VelocityUCL/blob/ma
 Make sure to use the merged bam files (created with SplitMerge in ATLAS). You'll get errors about the read lengths exceeding the insert size if this hasn't been done. 
 
 
-Run SplitMerge from ATLAS for all downsampled populations using the [04b_ATLAS_SplitMerge.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/04b_ATLAS_SplitMerge.sh) script. 
+a) Run SplitMerge from ATLAS for 
+  
+        1) The full Modern bam files (.realn.bam) 
+
+        2) all downsampled populations using the [04b_ATLAS_SplitMerge.sh (https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/04b_ATLAS_SplitMerge.sh) script. 
 
 Run this in the 02a_mapped_MODC.unmerged and 02a_mapped_MODE.unmerged folders. 
 
-Check bam files using [ValidateSamFiles.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.3_ValidateSamFile_MODC.sh) and fix if necessary. 
+You'll need to 
+        
+        1) index all the bam files before running ALTAS
+        
+        2) Create an RG.txt file for the SplitMerge run. This file contains the RG and if the reads are PE or SE: 
+        
+```
+        #e.g.
+        cat RG.txt
+        E3modc paired
+```
+
+
+b) Check bam files using [ValidateSamFiles.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.3_ValidateSamFile_MODC.sh) and fix if necessary. 
 
 
 ## 3. Estimate theta in windows of 1Mb for MODE, MODC, and MUS
