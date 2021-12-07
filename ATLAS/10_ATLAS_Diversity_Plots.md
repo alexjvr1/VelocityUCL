@@ -129,11 +129,6 @@ Download the resulting theta.txt.gz files to your home computer:
 gunzip *gz
 ```
 
-Add a column to each file specifying pop and indiv
-
-```
-
-
 
 
 
