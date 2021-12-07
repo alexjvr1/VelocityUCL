@@ -143,7 +143,7 @@ Add a column to each file specifying pop and indiv
 #Read population into a list
 MUS.files <- list.files(pattern="AH-01-1900") 
 MUS.myfiles <- lapply(MUS.files, read.table, header=T)  ##read all files into a list
-colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", 
+colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", "theta_MLE", "theta_C95_l", "theta_C95_u", "LL")
 MUS.myfiles2 <- lapply(MUS.myfiles, setNames, nm=colnames.new)   #rename columns
 
 #Add pop and sample columns 
@@ -161,13 +161,15 @@ allvars <- colnames(MUS.myfiles[[1]])
 MUS.ll <- melt(MUS.myfiles, id.vars=allvars)
 MUS.ll$midpos=((MUS.ll$end-MUS.ll$start)/2)+MUS.ll$start
 
-MUS.ll.Chrsonly <- (MUS.ll.Chrsonly %>% filter(!grepl("CADC", Chr)))
+MUS.ll.Chrsonly <- (MUS.ll %>% filter(!grepl("CADC", Chr)))
 
 ##Check the proportion of missing data: 
 
+pdf("MUS.missingdata.pdf")
 ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()   
 ggplot(MUS.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()
 ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
+dev.off()
 
 ##Select a threshold and identify samples to remove: 
 summary(MUS.ll.Chrsonly[which(ll.Chrsonly$fracMissing>0.6),])
@@ -185,11 +187,11 @@ summary(MUS.ll.Chronly.0.6miss$Sample)
 #Read population into a list
 MODC.files <- list.files(pattern="AH-01-20") 
 MODC.myfiles <- lapply(MODC.files, read.table, header=T)  ##read all files into a list
-colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", 
+colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", "theta_MLE", "theta_C95_l", "theta_C95_u", "LL")
 MODC.myfiles2 <- lapply(MODC.myfiles, setNames, nm=colnames.new)   #rename columns
 
 #Add pop and sample columns 
-MODC.files <- gsub("_theta.gz", "", MODC.files)
+MODC.files <- gsub("_theta_estimates.txt.gz", "", MODC.files)
 library(purrr)
 MODC.myfiles <- Map(cbind, MODC.myfiles, Sample=MODC.files)
 MODC.myfiles <- Map(cbind, MODC.myfiles, Pop="MODC")
@@ -203,21 +205,22 @@ allvars <- colnames(MODC.myfiles[[1]])
 MODC.ll <- melt(MODC.myfiles, id.vars=allvars)
 MODC.ll$midpos=((MODC.ll$end-MODC.ll$start)/2)+MODC.ll$start
 
-MODC.ll.Chrsonly <- (MODC.ll.Chrsonly %>% filter(!grepl("CADC", Chr)))
+MODC.ll.Chrsonly <- (MODC.ll %>% filter(!grepl("CADC", Chr)))
 
 ##Check the proportion of missing data: 
-
+pdf("MODC.missingdata.pdf")
 ggplot(MODC.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()   
 ggplot(MODC.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()
 ggplot(MODC.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
+dev.off()
 
-##Select a threshold and identify samples to remove: 
+##Select a threshold and identify samples to remove (if any) 
 summary(MODC.ll.Chrsonly[which(MODC.ll.Chrsonly$fracMissing>0.6),])
 
-MODC.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-08", "AH-01-1900-09", "AH-01-1900-10", "AH-01-1900-11", "AH-01-1900-13", "AH-01-1900-14", "AH-01-1900-15", "AH-01-1900-16", "AH-01-1900-20", "AH-01-1900-21", "AH-01-1900-22", "AH-01-1900-22", "AH-01-1900-23", "AH-01-1900-24", "AH-01-1900-25", "AH-01-1900-27", "AH-01-1900-28", "AH-01-1900-29", "AH-01-1900-32", "AH-01-1900-33", "AH-01-1900-34", "AH-01-1900-35", "AH-01-1900-37", "AH-01-1900-38", "AH-01-1900-39", "AH-01-1900-40", "AH-01-1900-41", "AH-01-1900-42", "AH-01-1900-43", "AH-01-1900-45", "AH-01-1900-46", "AH-01-1900-47")
+#MODC.tokeep <- c("")
 
-MODC.ll.Chronly.0.6miss <- filter(MODC.ll.Chrsonly, Sample %in% MODC.tokeep)
-summary(MODC.ll.Chronly.0.6miss$Sample)
+#MODC.ll.Chronly.0.6miss <- filter(MODC.ll.Chrsonly, Sample %in% MODC.tokeep)
+#summary(MODC.ll.Chronly.0.6miss$Sample)
 
 ```
 
@@ -229,11 +232,11 @@ summary(MODC.ll.Chronly.0.6miss$Sample)
 #Read population into a list
 MODE.files <- list.files(pattern="AH-02") 
 MODE.myfiles <- lapply(MODE.files, read.table, header=T)  ##read all files into a list
-colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", 
+colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", "theta_MLE", "theta_C95_l", "theta_C95_u", "LL")
 MODE.myfiles2 <- lapply(MODE.myfiles, setNames, nm=colnames.new)   #rename columns
 
 #Add pop and sample columns 
-MODE.files <- gsub("_theta.gz", "", MODE.files)
+MODE.files <- gsub("_theta_estimates.txt.gz", "", MODE.files)
 library(purrr)
 MODE.myfiles <- Map(cbind, MODE.myfiles, Sample=MODE.files)
 MODE.myfiles <- Map(cbind, MODE.myfiles, Pop="MODE")
@@ -247,66 +250,52 @@ allvars <- colnames(MODE.myfiles[[1]])
 MODE.ll <- melt(MODE.myfiles, id.vars=allvars)
 MODE.ll$midpos=((MODE.ll$end-MODE.ll$start)/2)+MODE.ll$start
 
-MODE.ll.Chrsonly <- (MODE.ll.Chrsonly %>% filter(!grepl("CADC", Chr)))
+MODE.ll.Chrsonly <- (MODE.ll %>% filter(!grepl("CADC", Chr)))
 
 ##Check the proportion of missing data: 
 
+pdf("MODE.missingdata.pdf")
 ggplot(MODE.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()   
 ggplot(MODE.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()
 ggplot(MODE.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
+dev.off()
 
-##Select a threshold and identify samples to remove: 
-summary(MODE.ll.Chrsonly[which(MODE.ll.Chrsonly$fracMissing>0.6),])
+##Select a threshold and identify samples to remove (if any) 
+#summary(MODE.ll.Chrsonly[which(MODE.ll.Chrsonly$fracMissing>0.6),])
 
-MODE.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-08", "AH-01-1900-09", "AH-01-1900-10", "AH-01-1900-11", "AH-01-1900-13", "AH-01-1900-14", "AH-01-1900-15", "AH-01-1900-16", "AH-01-1900-20", "AH-01-1900-21", "AH-01-1900-22", "AH-01-1900-22", "AH-01-1900-23", "AH-01-1900-24", "AH-01-1900-25", "AH-01-1900-27", "AH-01-1900-28", "AH-01-1900-29", "AH-01-1900-32", "AH-01-1900-33", "AH-01-1900-34", "AH-01-1900-35", "AH-01-1900-37", "AH-01-1900-38", "AH-01-1900-39", "AH-01-1900-40", "AH-01-1900-41", "AH-01-1900-42", "AH-01-1900-43", "AH-01-1900-45", "AH-01-1900-46", "AH-01-1900-47")
+#MODE.tokeep <- c("")
 
-MODE.ll.Chronly.0.6miss <- filter(MODE.ll.Chrsonly, Sample %in% MODE.tokeep)
-summary(MODE.ll.Chronly.0.6miss$Sample)
+#MODE.ll.Chronly.0.6miss <- filter(MODE.ll.Chrsonly, Sample %in% MODE.tokeep)
+#summary(MODE.ll.Chronly.0.6miss$Sample)
 
 ```
 
 
 Concat and Plot
 ```
-# Concatenate the three lists
+# Concatenate the three data.frames
+library(dplyr)
+
+E3.data <- bind_rows(MUS.ll.Chrsonly, MODC.ll.Chrsonly, MODE.ll.Chrsonly)
+dim(data)
+[1] 47347    18
+
+
 
 # Make chromosome a factor 
-ll.Chronly.0.6miss$Chr <- as.factor(ll.Chronly.0.6miss$Chr)
+E3.data$Chr <- as.factor(E3.data$Chr)
 
 
 # Plot
-ggplot(ll.Chronly.0.6miss, aes(x=midpos, y=theta_MLE, colour=Sample))+geom_point()+facet_wrap(~Chr)
-
-
-
-```
-
-
-
-
-Read into R and plot
-```
-library(dplyr)
-library(data.table)
-library(ggplot2)
-
-files <- list.files(pattern="new")   
-myfiles <- lapply(files, read.table, header=T)  ##read all files into a list
-colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", "theta_MLE", "theta_C95_l", "theta_C95_u", "LL", "Sample", "Pop")  
-myfiles2 <- lapply(myfiles, setNames, nm=colnames.new)   #rename columns
-
-as.numeric.factor <- function(x) {as.numeric(levels(x))[x]}   ##function to convert factor to numeric
-theta.table$start <- as.numeric.factor(theta.table$start)   #convert columns from factor to numeric
-theta.table$end <- as.numeric.factor(theta.table$end)
-theta.table$theta_MLE <- as.numeric.factor(theta.table$theta_MLE)
-
-theta.table$WinCenter <- theta.table$start+((theta.table$end-theta.table$start)/2)   ##create a column for window center
-
-#plot
-pdf("E3.theta.ATLAS.0.5Mbwindows.pdf")
-ggplot(theta.table, aes(x=WinCenter, y=theta_MLE, colour=Pop))+geom_point()
-ggplot(theta.table, aes(x=theta_MLE, fill=Pop))+geom_histogram()
+pdf("E3.theta.pdf")
+ggplot(E3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
 dev.off()
 
 
+
 ```
+
+
+
+
+
