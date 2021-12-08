@@ -107,7 +107,11 @@ LR761675.1	5500001	6196582
 ATLAS doesn't allow overlapping windows, so if we want a sliding window approach we'll need to run the analysis multiple times with shifted non-overlapping windows. 
 
 
-## Plot
+### 4. Estimate global theta for each chromosome  (Skip this step initially) 
+
+Regions for which to estimate global theta can be specified using a bed file. 
+
+We'll estimate a global (mean) theta for each chromosome and each individual. 
 
 ```
 #!/bin/bash
@@ -144,19 +148,23 @@ while IFS= read -r line; do $ATLAS task=theta bam=$line window=Regions.LR75_500k
 ```
 
 
-Download the resulting theta.txt.gz files to your home computer: 
 
-```
-/Users/alexjvr/2021postdoc/Velocity/E3_A.hyperantus/ATLAS
-
-gunzip *gz
-```
 
 
 
 
 
 ## Read into R and plot
+
+
+Download the resulting theta.txt.gz files to your home computer: 
+
+```
+/Users/alexjvr/2021postdoc/Velocity/E3_A.hyperantus/ATLAS
+
+```
+
+And plot
 
 ###MUS
 ```
