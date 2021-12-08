@@ -4,7 +4,7 @@
 #$ -l tmem=16G #RAM
 #$ -l h_vmem=16G #enforced limit on shell memory usage
 #$ -l h_rt=1:00:00 ##wall time. 
-#$ -l tscratch=50G
+#$ -l tscratch=20G
 #$ -j y  #concatenates error and output files (with prefix job1)
 #$ -t 1-38
 
