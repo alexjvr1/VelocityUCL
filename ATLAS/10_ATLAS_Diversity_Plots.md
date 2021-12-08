@@ -56,8 +56,14 @@ Run this in the 02a_mapped_MODC.unmerged and 02a_mapped_MODE.unmerged folders.
 
 You'll need to 
         
-        1) index all the bam files before running ALTAS
+        1) index all the bam files before running ALTAS. 
         
+        ATLAS expects indexed files to have the extension bam.bai, so rename files accordingly:
+        
+```
+/share/apps/perl-5.30.0/bin/perl5.30.0 /home/ajansen/prename.pl 's:realn.bai:realn.bam.bai:g' *bai
+```
+
         2) Create an RG.txt file for the SplitMerge run. This file contains the RG and if the reads are PE or SE: 
         
 ```
