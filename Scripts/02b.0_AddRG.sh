@@ -4,6 +4,7 @@
 #$ -l tmem=16G #RAM
 #$ -l h_vmem=16G #enforced limit on shell memory usage
 #$ -l h_rt=1:00:00 ##wall time.  
+#$ -l tscratch=20G
 #$ -j y  #concatenates error and output files (with prefix job1)
 #$ -t 1-35
 
@@ -28,9 +29,16 @@ OUTPUT=$SHAREDFOLDER/$SPECIES/02a_mapped_MODC.unmerged
 NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
 
+#Set up scratch space
+mkdir -p /scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
+TMP_DIR=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
+TMPDIR=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
+
+
+
 ##Add readgroups
 
-echo "java -Xmx6g -Xms6g -jar $PICARD AddOrReplaceReadGroups \
+echo "java -Xmx6g -Xms6g -Djava.io.tmpdir=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.bam \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
@@ -40,7 +48,7 @@ echo "java -Xmx6g -Xms6g -jar $PICARD AddOrReplaceReadGroups \
        RGSM=${NAME}" >> 02b.0_AddRG.log
 
 
-time java -Xmx6g -Xms6g -jar $PICARD AddOrReplaceReadGroups \
+time java -Xmx6g -Xms6g -Djava.io.tmpdir=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.bam \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
@@ -48,3 +56,9 @@ time java -Xmx6g -Xms6g -jar $PICARD AddOrReplaceReadGroups \
        RGPL=ILLUMINA \
        RGPU=unit1 \
        RGSM=${NAME}
+
+function finish {
+    rm -rf /scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
+}
+
+trap finish EXIT ERR INT TERM
