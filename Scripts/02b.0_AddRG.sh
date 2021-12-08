@@ -18,6 +18,7 @@ PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
 
 
 #Define variables
+USERNAME=ajansen
 SHAREDFOLDER=/SAN/ugi/LepGenomics
 SPECIES=E3_Aphantopus_hyperantus
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
@@ -30,15 +31,15 @@ NAME=$(sed "${SGE_TASK_ID}q;d" modc.names)
 
 
 #Set up scratch space
-mkdir -p /scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
-TMP_DIR=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
-TMPDIR=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
+mkdir -p /scratch0/$USERNAME/$JOB_ID.$SGE_TASK_ID
+TMP_DIR=/scratch0/$USERNAME/$JOB_ID.$SGE_TASK_ID
+TMPDIR=/scratch0/$USERNAME/$JOB_ID.$SGE_TASK_ID
 
 
 
 ##Add readgroups
 
-echo "java -Xmx6g -Xms6g -Djava.io.tmpdir=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID -jar $PICARD AddOrReplaceReadGroups \
+echo "java -Xmx4g -Xms4g -Djava.io.tmpdir=/scratch0/$USERNAME/$JOB_ID.$SGE_TASK_ID -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.bam \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
@@ -48,7 +49,7 @@ echo "java -Xmx6g -Xms6g -Djava.io.tmpdir=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
        RGSM=${NAME}" >> 02b.0_AddRG.log
 
 
-time java -Xmx6g -Xms6g -Djava.io.tmpdir=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID -jar $PICARD AddOrReplaceReadGroups \
+time java -Xmx4g -Xms4g -Djava.io.tmpdir=/scratch0/$USERNAME/$JOB_ID.$SGE_TASK_ID -jar $PICARD AddOrReplaceReadGroups \
        I=$INPUT/${NAME}.bam \
        O=$OUTPUT/${NAME}.RG.bam \
        RGID=E3modc \
@@ -58,7 +59,7 @@ time java -Xmx6g -Xms6g -Djava.io.tmpdir=/scratch0/ajansen/$JOB_ID.$SGE_TASK_ID 
        RGSM=${NAME}
 
 function finish {
-    rm -rf /scratch0/ajansen/$JOB_ID.$SGE_TASK_ID
+    rm -rf /scratch0/$USERNAME/$JOB_ID.$SGE_TASK_ID
 }
 
 trap finish EXIT ERR INT TERM
