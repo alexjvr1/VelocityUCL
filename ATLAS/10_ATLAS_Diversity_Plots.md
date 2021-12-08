@@ -180,8 +180,6 @@ library(purrr)
 MUS.myfiles <- Map(cbind, MUS.myfiles, Sample=MUS.files)
 MUS.myfiles <- Map(cbind, MUS.myfiles, Pop="MUS")
 
-#Keep only the chromosomes
-MUS.myfiles.Chrsonly <- lapply(1:length(MUS.myfiles), function(x) MUS.myfiles[[x]][MUS.myfiles[[x]] !="CADCXM"])
 
 #Convert list to dataframe
 library(reshape2)
@@ -189,7 +187,8 @@ allvars <- colnames(MUS.myfiles[[1]])
 MUS.ll <- melt(MUS.myfiles, id.vars=allvars)
 MUS.ll$midpos=((MUS.ll$end-MUS.ll$start)/2)+MUS.ll$start
 
-MUS.ll.Chrsonly <- (MUS.ll %>% filter(!grepl("CADC", Chr)))
+#Keep only the chromosomes
+MUS.ll.Chrsonly <- (MUS.ll %>% filter(grepl("LR", Chr)))
 
 ##Check the proportion of missing data: 
 
@@ -224,8 +223,6 @@ library(purrr)
 MODC.myfiles <- Map(cbind, MODC.myfiles, Sample=MODC.files)
 MODC.myfiles <- Map(cbind, MODC.myfiles, Pop="MODC")
 
-#Keep only the chromosomes
-MODC.myfiles.Chrsonly <- lapply(1:length(MODC.myfiles), function(x) MODC.myfiles[[x]][MODC.myfiles[[x]] !="CADCXM"])
 
 #Convert list to dataframe
 library(reshape2)
@@ -233,7 +230,8 @@ allvars <- colnames(MODC.myfiles[[1]])
 MODC.ll <- melt(MODC.myfiles, id.vars=allvars)
 MODC.ll$midpos=((MODC.ll$end-MODC.ll$start)/2)+MODC.ll$start
 
-MODC.ll.Chrsonly <- (MODC.ll %>% filter(!grepl("CADC", Chr)))
+#Keep only the chromosomes
+MODC.ll.Chrsonly <- (MODC.ll %>% filter(grepl("LR", Chr)))
 
 ##Check the proportion of missing data: 
 pdf("MODC.missingdata.pdf")
@@ -269,8 +267,6 @@ library(purrr)
 MODE.myfiles <- Map(cbind, MODE.myfiles, Sample=MODE.files)
 MODE.myfiles <- Map(cbind, MODE.myfiles, Pop="MODE")
 
-#Keep only the chromosomes
-MODE.myfiles.Chrsonly <- lapply(1:length(MODE.myfiles), function(x) MODE.myfiles[[x]][MODE.myfiles[[x]] !="CADCXM"])
 
 #Convert list to dataframe
 library(reshape2)
@@ -278,7 +274,8 @@ allvars <- colnames(MODE.myfiles[[1]])
 MODE.ll <- melt(MODE.myfiles, id.vars=allvars)
 MODE.ll$midpos=((MODE.ll$end-MODE.ll$start)/2)+MODE.ll$start
 
-MODE.ll.Chrsonly <- (MODE.ll %>% filter(!grepl("CADC", Chr)))
+#Keep only chromosomes
+MODE.ll.Chrsonly <- (MODE.ll %>% filter(grepl("LR", Chr)))
 
 ##Check the proportion of missing data: 
 
