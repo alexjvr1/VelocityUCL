@@ -5,6 +5,7 @@
 #$ -l h_vmem=16G #enforced limit on shell memory usage
 #$ -l h_rt=10:00:00 ##wall time.
 #$ -j y  #concatenates error and output files (with prefix job1)
+#$ -t 1-38
 
 
 #Run on working directory
@@ -20,10 +21,21 @@ ATLAS=/share/apps/genomics/atlas-0.9/atlas
 SHAREDFOLDER=/SAN/ugi/LepGenomics
 SPECIES=E3_Aphantopus_hyperantus
 REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
-INPUT=$SHAREDFOLDER/$SPECIES/04_ATLAS/MODC/modc.bamlist
+INPUT=$SHAREDFOLDER/$SPECIES/04_ATLAS/MODC
 OUTPUT=$SHAREDFOLDER/$SPECIES/04_ATLAS/MODC
 TASK=theta
 
 
+
+##Define ARRAY
+NAME=$(sed "${SGE_TASK_ID}q;d" modc.bamlist)
+
+
 #Run analysis
-while IFS=  read -r line; do $ATLAS task=$TASK bam=$line; done < $INPUT
+#while IFS=  read -r line; do $ATLAS task=$TASK bam=$INPUT/$line; done < $INPUT
+
+$ATLAS task=$TASK bam=$INPUT/${NAME}
+
+
+
+
