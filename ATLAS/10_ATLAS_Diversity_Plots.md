@@ -380,7 +380,7 @@ C3.MODC.ll.Chrsonly.maxmissing0.95.MaxDP25X
 MODE.files <- list.files(pattern="AH-02") 
 MODE.myfiles <- lapply(MODE.files, read.table, header=T)  ##read all files into a list
 colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore", "pi.A", "pi.C", "pi.G", "pi.T", "theta_MLE", "theta_C95_l", "theta_C95_u", "LL")
-MODE.myfiles2 <- lapply(MODE.myfiles, setNames, nm=colnames.new)   #rename columns
+
 
 #Add pop and sample columns 
 MODE.files <- gsub("_theta_estimates.txt.gz", "", MODE.files)
@@ -436,10 +436,12 @@ E3.MODE.ll.Chrsonly12X
 
 #D3 
 #Filters
-#Max depth 10X
-D3.MODC.ll.Chrsonly10X <- D3.MODC.ll.Chrsonly[which(D3.MODC.ll.Chrsonly$depth<10),]
+#Max depth: Removed the last pos of NC98 because the depth was unusually high
+ggplot(D3.MODE.ll.Chrsonly[which(D3.MODE.ll.Chrsonly$Chr=="NC_053198.1"),], aes(x=midpos, y=depth, colour=Sample))+geom_point()
+D3.MODE.ll.Chrsonly.lasposNC98 <- (D3.MODE.ll.Chrsonly[which(D3.MODE.ll.Chrsonly$midpos!=17258061),])
 #Final file
-D3.MODC.ll.Chrsonly10X
+D3.MODE.ll.Chrsonly.lasposNC98
+[1] 18864    18
 
 
 #C3
@@ -460,7 +462,7 @@ Concat and Plot
 library(dplyr)
 
 ##E3
-E3.data <- bind_rows(E3.MUS.ll.Chronly.0.6miss.min0.55X.max2.5X, E3.MODC.ll.Chrsonly7X, MODE.ll.Chrsonly)
+E3.data <- bind_rows(E3.MUS.ll.Chronly.0.6miss.min0.55X.max2.5X, E3.MODC.ll.Chrsonly7X, E3.MODE.ll.Chrsonly12X)
 dim(E3.data)
 [1] 47347    18
 
@@ -478,7 +480,7 @@ dev.off()
 
 
 ##D3
-D3.data <- bind_rows(D3.MUS.ll.Chronly.0.6miss.min0.5X.max2X, D3.MODC.ll.Chrsonly10X, MODE.ll.Chrsonly)
+D3.data <- bind_rows(D3.MUS.ll.Chronly.0.6miss.min0.5X.max2X, D3.MODC.ll.Chrsonly10X, D3.MODE.ll.Chrsonly.lasposNC98)
 dim(D3.data)
 [1] 33832    18
 
@@ -496,7 +498,7 @@ dev.off()
 
 
 ##C3
-C3.data <- bind_rows(C3.MUS.ll.Chronly.0.7miss.min0.34X.max2X, C3.MODC.ll.Chrsonly.maxmissing0.95.MaxDP25X, MODE.ll.Chrsonly)
+C3.data <- bind_rows(C3.MUS.ll.Chronly.0.7miss.min0.34X.max2X, C3.MODC.ll.Chrsonly.maxmissing0.95.MaxDP25X, C3.MODE.ll.Chrsonly.maxmissing0.95.MaxDP7X)
 dim(C3.data)
 [1] 26717    18
 
