@@ -76,6 +76,7 @@ You'll need to
 b) Check bam files using [ValidateSamFiles.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/02b.3_ValidateSamFile_MODC.sh) and fix if necessary. 
 
 
+
 ## 3. Estimate theta in windows of 1Mb for MODE, MODC, and MUS
 
 1Mb windows are suggested for low coverage data. 
@@ -105,6 +106,7 @@ LR761675.1	5500001	6196582
 ```
 
 ATLAS doesn't allow overlapping windows, so if we want a sliding window approach we'll need to run the analysis multiple times with shifted non-overlapping windows. 
+
 
 
 ### 4. Estimate global theta for each chromosome  (Skip this step initially) 
@@ -164,7 +166,29 @@ Download the resulting theta.txt.gz files to your home computer:
 
 ```
 
-And plot
+And plot. 
+
+You'll need to know how your chromosomes and scaffolds are named. Have a look (using cat or less) at the indexed reference genome (xx.fna.fai) in the RefGenome folder on the server. You'll see several longer chromosomes (typically ~28), and some scaffolds that are shorter and start with a different name. 
+
+e.g. for Ringlet (Aphantopus hyperantus). 
+
+Chromosomes = LRxxx
+
+Scaffolds = CADCXxxx
+
+
+Brown Argus (Aricia agestis)
+
+Chromosomes = LR
+
+Scaffolds = CAJH
+
+
+Speckled wood (Pararge aegeria)
+
+Chromosomes = NC
+
+Scaffolds = NW
 
 ###MUS
 ```
@@ -185,22 +209,27 @@ MUS.myfiles <- Map(cbind, MUS.myfiles, Pop="MUS")
 library(reshape2)
 allvars <- colnames(MUS.myfiles[[1]])
 MUS.ll <- melt(MUS.myfiles, id.vars=allvars)
+
+#Add a column with the midposition of the estimate (calculated from the start and end of each window)
 MUS.ll$midpos=((MUS.ll$end-MUS.ll$start)/2)+MUS.ll$start
 
-#Keep only the chromosomes
+#Keep only the chromosomes. Replace "LR" with your chromosome name. See above
 MUS.ll.Chrsonly <- (MUS.ll %>% filter(grepl("LR", Chr)))
 
-##Check the proportion of missing data: 
 
+##Check the proportion of missing data: 
 pdf("MUS.missingdata.pdf")
-ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()   
-ggplot(MUS.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()
-ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
+ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()     #Plot of theta vs fraction missing data in each window coloured by chromosome
+ggplot(MUS.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()  #Plot of theta vs fraction of loci with 2x+ coverage
+ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()  #Plot of theta vs fraction missing data in each window, coloured by sample. 
 dev.off()
 
-##Select a threshold and identify samples to remove: 
-summary(MUS.ll.Chrsonly[which(ll.Chrsonly$fracMissing>0.6),])
+##Select a threshold based on the previous plots that maximise data, but remove any poor quality individuals: 
+##
+Thresh <- 0.6  #replace this threshold based on the above figures. 
+summary(MUS.ll.Chrsonly[which(ll.Chrsonly$fracMissing>Thresh),])
 
+#List of samples to keep based on the above threshold
 MUS.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-08", "AH-01-1900-09", "AH-01-1900-10", "AH-01-1900-11", "AH-01-1900-13", "AH-01-1900-14", "AH-01-1900-15", "AH-01-1900-16", "AH-01-1900-20", "AH-01-1900-21", "AH-01-1900-22", "AH-01-1900-22", "AH-01-1900-23", "AH-01-1900-24", "AH-01-1900-25", "AH-01-1900-27", "AH-01-1900-28", "AH-01-1900-29", "AH-01-1900-32", "AH-01-1900-33", "AH-01-1900-34", "AH-01-1900-35", "AH-01-1900-37", "AH-01-1900-38", "AH-01-1900-39", "AH-01-1900-40", "AH-01-1900-41", "AH-01-1900-42", "AH-01-1900-43", "AH-01-1900-45", "AH-01-1900-46", "AH-01-1900-47")
 
 MUS.ll.Chronly.0.6miss <- filter(MUS.ll.Chrsonly, Sample %in% MUS.tokeep)
