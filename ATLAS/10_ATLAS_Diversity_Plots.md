@@ -81,6 +81,7 @@ b) Check bam files using [ValidateSamFiles.sh](https://github.com/alexjvr1/Veloc
 
 1Mb windows are suggested for low coverage data. 
 
+The script runs for 3-5 hours per population. 
 
 Run ATLAS for MODE, MODC, and MUS using the [Theta.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/04b_ATLAS_Theta_Window.sh) script. 
 
