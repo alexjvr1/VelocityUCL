@@ -407,13 +407,49 @@ ggplot(MODE.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_
 ggplot(MODE.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_point()
 dev.off()
 
+
 ##Select a threshold and identify samples to remove (if any) 
-#summary(MODE.ll.Chrsonly[which(MODE.ll.Chrsonly$fracMissing>0.6),])
+MODE.ll.Chrsonly.maxmissing0.95 <- MODE.ll.Chrsonly[which(MODE.ll.Chrsonly$fracMissing<0.95),]
 
 #MODE.tokeep <- c("")
 
-#MODE.ll.Chronly.0.6miss <- filter(MODE.ll.Chrsonly, Sample %in% MODE.tokeep)
-#summary(MODE.ll.Chronly.0.6miss$Sample)
+#MODC.ll.Chronly.0.6miss <- filter(MODC.ll.Chrsonly, Sample %in% MODC.tokeep)
+#summary(MODC.ll.Chronly.0.6miss$Sample)
+
+#Check for max depth filter: 
+pdf("MODE.depthvsTheta.pdf")
+ggplot(MODC.ll.Chrsonly.maxmissing0.95, aes(x=depth, y=theta_MLE))+geom_point()
+ggplot(MODC.ll.Chrsonly.maxmissing0.95, aes(x=depth, y=theta_MLE, colour=Sample))+geom_point()
+ggplot(MODC.ll.Chrsonly.maxmissing0.95, aes(x=depth, y=theta_MLE, colour=Chr))+geom_point()
+dev.off()
+
+
+#E3
+#Filters
+#Max depth 12X
+E3.MODE.ll.Chrsonly12X <- MODE.ll.Chrsonly[which(MODE.ll.Chrsonly$depth<12),]
+#Final file
+E3.MODE.ll.Chrsonly12X
+[1] 12564    18
+
+
+
+#D3 
+#Filters
+#Max depth 10X
+D3.MODC.ll.Chrsonly10X <- D3.MODC.ll.Chrsonly[which(D3.MODC.ll.Chrsonly$depth<10),]
+#Final file
+D3.MODC.ll.Chrsonly10X
+
+
+#C3
+#Filters
+#Max missing 0.95 (there were a few windows with 0 missingness and 0 theta)
+#Max depth 7X
+C3.MODE.ll.Chrsonly.maxmissing0.95.MaxDP7X <- C3.MODE.ll.Chrsonly.maxmissing0.95[which(C3.MODE.ll.Chrsonly.maxmissing0.95$depth<7),]
+#Final file
+C3.MODE.ll.Chrsonly.maxmissing0.95.MaxDP7X
+[1] 13785    18
 
 ```
 
