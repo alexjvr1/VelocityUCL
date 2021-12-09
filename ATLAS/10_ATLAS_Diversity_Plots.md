@@ -215,6 +215,7 @@ MUS.ll <- melt(MUS.myfiles, id.vars=allvars)
 MUS.ll$midpos=((MUS.ll$end-MUS.ll$start)/2)+MUS.ll$start
 
 #Keep only the chromosomes. Replace "LR" with your chromosome name. See above
+library(dplyr)
 MUS.ll.Chrsonly <- (MUS.ll %>% filter(grepl("LR", Chr)))
 
 
@@ -261,6 +262,7 @@ MODC.ll <- melt(MODC.myfiles, id.vars=allvars)
 MODC.ll$midpos=((MODC.ll$end-MODC.ll$start)/2)+MODC.ll$start
 
 #Keep only the chromosomes
+library(dplyr)
 MODC.ll.Chrsonly <- (MODC.ll %>% filter(grepl("LR", Chr)))
 
 ##Check the proportion of missing data: 
@@ -305,6 +307,7 @@ MODE.ll <- melt(MODE.myfiles, id.vars=allvars)
 MODE.ll$midpos=((MODE.ll$end-MODE.ll$start)/2)+MODE.ll$start
 
 #Keep only chromosomes
+library(dplyr)
 MODE.ll.Chrsonly <- (MODE.ll %>% filter(grepl("LR", Chr)))
 
 ##Check the proportion of missing data: 
