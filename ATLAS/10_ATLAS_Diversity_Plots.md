@@ -346,6 +346,11 @@ dev.off()
 
 
 #E3
+#Filters
+#Max depth 7X
+E3.MODC.ll.Chrsonly7X <- MODC.ll.Chrsonly[which(MODC.ll.Chrsonly$depth<7),]
+#Final file
+E3.MODC.ll.Chrsonly7X
 
 
 #D3 
