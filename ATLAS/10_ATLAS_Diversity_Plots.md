@@ -241,8 +241,24 @@ summary(MUS.ll.Chronly.0.6miss$Sample)
 
 #Plot Depth across windows 
 pdf("E3.MUS.theta.depth.pdf")
-ggplot(MUS.ll.Chronly, aes(x=midpos, y=theta_MLE, colour=Sample))+geom_point(size=0.2)+facet_wrap(~Chr)
+ggplot(MUS.ll.Chronly.0.6miss, aes(x=midpos, y=theta_MLE, colour=Sample))+geom_point(size=0.2)+facet_wrap(~Chr)
+ggplot(MUS.ll.Chronly.0.6miss, aes(x=depth, y=theta_MLE, colour=Sample))+geom_point()
 dev.off()
+
+
+##Filters
+#E3
+#minDP 0.5X, maxDP 2.5X
+E3.MUS.ll.Chronly.0.6miss.min0.55X <- E3.MUS.ll.Chronly.0.6miss[which(E3.MUS.ll.Chronly.0.6miss$depth>0.55),]
+E3.MUS.ll.Chronly.0.6miss.min0.55X.max2.5X <- E3.MUS.ll.Chronly.0.6miss.min0.55X[which(E3.MUS.ll.Chronly.0.6miss.min0.55X$depth<2.5),]
+
+#D3 
+#minDP 0.5X, maxDP 2X
+D3.MUS.ll.Chronly.0.6miss.min0.5X <- D3.MUS.ll.Chronly.0.6miss[which(D3.MUS.ll.Chronly.0.6miss$depth>0.5),]
+D3.MUS.ll.Chronly.0.6miss.min0.5X.max2X <- D3.MUS.ll.Chronly.0.6miss.min0.5X[which(D3.MUS.ll.Chronly.0.6miss.min0.5X$depth<2),]
+
+
+#C3
 
 ```
 
