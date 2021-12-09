@@ -3,7 +3,7 @@
 #$ -N E3.MODC.ATLAS.GlobDiv  ##job name
 #$ -l tmem=16G #RAM
 #$ -l h_vmem=16G #enforced limit on shell memory usage
-#$ -l h_rt=3:00:00 ##wall time.
+#$ -l h_rt=10:00:00 ##wall time.
 #$ -j y  #concatenates error and output files (with prefix job1)
 
 
