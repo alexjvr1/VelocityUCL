@@ -202,8 +202,8 @@ MUS.myfiles2 <- lapply(MUS.myfiles, setNames, nm=colnames.new)   #rename columns
 #Add pop and sample columns 
 MUS.files <- gsub("_theta_estimates.txt.gz", "", MUS.files)
 library(purrr)
-MUS.myfiles2 <- Map(cbind, MUS.myfiles, Sample=MUS.files)
-MUS.myfiles3 <- Map(cbind, MUS.myfiles2, Pop="MUS")
+MUS.myfiles3 <- Map(cbind, MUS.myfiles2, Sample=MUS.files)
+MUS.myfiles4 <- Map(cbind, MUS.myfiles3, Pop="MUS")
 
 
 #Convert list to dataframe
@@ -306,16 +306,16 @@ colnames.new <- c("Chr", "start", "end", "depth", "fracMissing", "fracTwoOrMore"
 MODC.myfiles2 <- lapply(MODC.myfiles, setNames, nm=colnames.new)   #rename columns
 
 #Add pop and sample columns 
-MODC.files <- gsub("_theta_estimates.txt.gz", "", MODC.files)
+MODC.files <- gsub(".realn_mergedReads_theta_estimates.txt.gz", "", MODC.files)
 library(purrr)
-MODC.myfiles <- Map(cbind, MODC.myfiles, Sample=MODC.files)
-MODC.myfiles <- Map(cbind, MODC.myfiles, Pop="MODC")
+MODC.myfiles3 <- Map(cbind, MODC.myfiles2, Sample=MODC.files)
+MODC.myfiles4 <- Map(cbind, MODC.myfiles3, Pop="MODC")
 
 
 #Convert list to dataframe
 library(reshape2)
-allvars <- colnames(MODC.myfiles[[1]])
-MODC.ll <- melt(MODC.myfiles, id.vars=allvars)
+allvars <- colnames(MODC.myfiles4[[1]])
+MODC.ll <- melt(MODC.myfiles4, id.vars=allvars)
 MODC.ll$midpos=((MODC.ll$end-MODC.ll$start)/2)+MODC.ll$start
 
 #Keep only the chromosomes
@@ -330,12 +330,39 @@ ggplot(MODC.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Sample))+geom_po
 dev.off()
 
 ##Select a threshold and identify samples to remove (if any) 
-summary(MODC.ll.Chrsonly[which(MODC.ll.Chrsonly$fracMissing>0.6),])
+MODC.ll.Chrsonly.maxmissing0.95 <- MODC.ll.Chrsonly[which(MODC.ll.Chrsonly$fracMissing<0.95),]
 
 #MODC.tokeep <- c("")
 
 #MODC.ll.Chronly.0.6miss <- filter(MODC.ll.Chrsonly, Sample %in% MODC.tokeep)
 #summary(MODC.ll.Chronly.0.6miss$Sample)
+
+#Check for max depth filter: 
+pdf("MODC.depthvsTheta.pdf")
+ggplot(MODC.ll.Chrsonly.maxmissing0.95, aes(x=depth, y=theta_MLE))+geom_point()
+ggplot(MODC.ll.Chrsonly.maxmissing0.95, aes(x=depth, y=theta_MLE, colour=Sample))+geom_point()
+ggplot(MODC.ll.Chrsonly.maxmissing0.95, aes(x=depth, y=theta_MLE, colour=Chr))+geom_point()
+dev.off()
+
+
+#E3
+
+
+#D3 
+#Filters
+#Max depth 10X
+D3.MODC.ll.Chrsonly10X <- D3.MODC.ll.Chrsonly[which(D3.MODC.ll.Chrsonly$depth<10),]
+#Final file
+D3.MODC.ll.Chrsonly10X
+
+
+#C3
+#Filters
+#Max missing 0.95 (there were a few windows with 0 missingness and 0 theta)
+#Max depth 25X
+C3.MODC.ll.Chrsonly.maxmissing0.95.MaxDP25X <- C3.MODC.ll.Chrsonly.maxmissing0.95[which(C3.MODC.ll.Chrsonly.maxmissing0.95$depth<25),]
+#Final file
+C3.MODC.ll.Chrsonly.maxmissing0.95.MaxDP25X
 
 ```
 
