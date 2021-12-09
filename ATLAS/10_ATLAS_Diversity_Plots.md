@@ -202,14 +202,14 @@ MUS.myfiles2 <- lapply(MUS.myfiles, setNames, nm=colnames.new)   #rename columns
 #Add pop and sample columns 
 MUS.files <- gsub("_theta_estimates.txt.gz", "", MUS.files)
 library(purrr)
-MUS.myfiles <- Map(cbind, MUS.myfiles, Sample=MUS.files)
-MUS.myfiles <- Map(cbind, MUS.myfiles, Pop="MUS")
+MUS.myfiles2 <- Map(cbind, MUS.myfiles, Sample=MUS.files)
+MUS.myfiles3 <- Map(cbind, MUS.myfiles2, Pop="MUS")
 
 
 #Convert list to dataframe
 library(reshape2)
-allvars <- colnames(MUS.myfiles[[1]])
-MUS.ll <- melt(MUS.myfiles, id.vars=allvars)
+allvars <- colnames(MUS.myfiles3[[1]])
+MUS.ll <- melt(MUS.myfiles3, id.vars=allvars)
 
 #Add a column with the midposition of the estimate (calculated from the start and end of each window)
 MUS.ll$midpos=((MUS.ll$end-MUS.ll$start)/2)+MUS.ll$start
@@ -230,7 +230,8 @@ dev.off()
 ##Select a threshold based on the previous plots that maximise data, but remove any poor quality individuals: 
 ##
 Thresh <- 0.6  #replace this threshold based on the above figures. 
-summary(MUS.ll.Chrsonly[which(ll.Chrsonly$fracMissing>Thresh),])
+new <- MUS.ll.Chrsonly[which(MUS.ll.Chrsonly$fracMissing<Thresh),]
+summary(new$Sample)
 
 #List of samples to keep based on the above threshold
 MUS.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-08", "AH-01-1900-09", "AH-01-1900-10", "AH-01-1900-11", "AH-01-1900-13", "AH-01-1900-14", "AH-01-1900-15", "AH-01-1900-16", "AH-01-1900-20", "AH-01-1900-21", "AH-01-1900-22", "AH-01-1900-22", "AH-01-1900-23", "AH-01-1900-24", "AH-01-1900-25", "AH-01-1900-27", "AH-01-1900-28", "AH-01-1900-29", "AH-01-1900-32", "AH-01-1900-33", "AH-01-1900-34", "AH-01-1900-35", "AH-01-1900-37", "AH-01-1900-38", "AH-01-1900-39", "AH-01-1900-40", "AH-01-1900-41", "AH-01-1900-42", "AH-01-1900-43", "AH-01-1900-45", "AH-01-1900-46", "AH-01-1900-47")
@@ -241,24 +242,57 @@ summary(MUS.ll.Chronly.0.6miss$Sample)
 
 #Plot Depth across windows 
 pdf("E3.MUS.theta.depth.pdf")
-ggplot(MUS.ll.Chronly.0.6miss, aes(x=midpos, y=theta_MLE, colour=Sample))+geom_point(size=0.2)+facet_wrap(~Chr)
+ggplot(MUS.ll.Chronly.0.6miss, aes(x=depth, y=theta_MLE, colour=Chr))+geom_point()
 ggplot(MUS.ll.Chronly.0.6miss, aes(x=depth, y=theta_MLE, colour=Sample))+geom_point()
 dev.off()
 
 
 ##Filters
 #E3
-#minDP 0.5X, maxDP 2.5X
+#Thresh 0.6, minDP 0.5X, maxDP 2.5X
+#Samples kept (35)
+MUS.tokeep
+ [1] "AH-01-1900-04" "AH-01-1900-05" "AH-01-1900-06" "AH-01-1900-08"
+ [5] "AH-01-1900-09" "AH-01-1900-10" "AH-01-1900-11" "AH-01-1900-13"
+ [9] "AH-01-1900-14" "AH-01-1900-15" "AH-01-1900-16" "AH-01-1900-20"
+[13] "AH-01-1900-21" "AH-01-1900-22" "AH-01-1900-22" "AH-01-1900-23"
+[17] "AH-01-1900-24" "AH-01-1900-25" "AH-01-1900-27" "AH-01-1900-28"
+[21] "AH-01-1900-29" "AH-01-1900-32" "AH-01-1900-33" "AH-01-1900-34"
+[25] "AH-01-1900-35" "AH-01-1900-37" "AH-01-1900-38" "AH-01-1900-39"
+[29] "AH-01-1900-40" "AH-01-1900-41" "AH-01-1900-42" "AH-01-1900-43"
+[33] "AH-01-1900-45" "AH-01-1900-46" "AH-01-1900-47"
 E3.MUS.ll.Chronly.0.6miss.min0.55X <- E3.MUS.ll.Chronly.0.6miss[which(E3.MUS.ll.Chronly.0.6miss$depth>0.55),]
 E3.MUS.ll.Chronly.0.6miss.min0.55X.max2.5X <- E3.MUS.ll.Chronly.0.6miss.min0.55X[which(E3.MUS.ll.Chronly.0.6miss.min0.55X$depth<2.5),]
 
 #D3 
-#minDP 0.5X, maxDP 2X
+#Thresh 0.6, minDP 0.5X, maxDP 2X
+#Samples kept (32)
+#D3.tokeep
+ [1] "PA-01-1900-09" "PA-01-1900-10" "PA-01-1900-11" "PA-01-1900-12"
+ [5] "PA-01-1900-14" "PA-01-1900-15" "PA-01-1900-16" "PA-01-1900-17"
+ [9] "PA-01-1900-18" "PA-01-1900-19" "PA-01-1900-20" "PA-01-1900-21"
+[13] "PA-01-1900-22" "PA-01-1900-25" "PA-01-1900-26" "PA-01-1900-27"
+[17] "PA-01-1900-28" "PA-01-1900-30" "PA-01-1900-31" "PA-01-1900-32"
+[21] "PA-01-1900-33" "PA-01-1900-34" "PA-01-1900-35" "PA-01-1900-39"
+[25] "PA-01-1900-40" "PA-01-1900-41" "PA-01-1900-43" "PA-01-1900-44"
+[29] "PA-01-1900-45" "PA-01-1900-47" "PA-01-1900-49" "PA-01-1900-52"
 D3.MUS.ll.Chronly.0.6miss.min0.5X <- D3.MUS.ll.Chronly.0.6miss[which(D3.MUS.ll.Chronly.0.6miss$depth>0.5),]
 D3.MUS.ll.Chronly.0.6miss.min0.5X.max2X <- D3.MUS.ll.Chronly.0.6miss.min0.5X[which(D3.MUS.ll.Chronly.0.6miss.min0.5X$depth<2),]
 
 
 #C3
+#Thresh 0.7, minDP 0.34X, maxDP 2X  (no minDepth filter)
+#Samples kept (26)
+#C3.MUS.tokeep
+ [1] "AAg-19-1900-05" "AAg-19-1900-08" "AAg-19-1900-09" "AAg-19-1900-10"
+ [5] "AAg-19-1900-14" "AAg-19-1900-15" "AAg-19-1900-18" "AAg-19-1900-20"
+ [9] "AAg-19-1900-24" "AAg-19-1900-26" "AAg-19-1900-27" "AAg-19-1900-28"
+[13] "AAg-19-1900-32" "AAg-19-1900-34" "AAg-19-1900-35" "AAg-19-1900-36"
+[17] "AAg-19-1900-37" "AAg-19-1900-38" "AAg-19-1900-39" "AAg-19-1900-40"
+[21] "AAg-19-1900-41" "AAg-19-1900-42" "AAg-19-1900-43" "AAg-19-1900-44"
+[25] "AAg-19-1900-45" "AAg-19-1900-48"
+
+C3.MUS.ll.Chronly.0.7miss.min0.34X.max2X <- C3.MUS.ll.Chronly.0.7miss[which(C3.MUS.ll.Chronly.0.7miss$depth<2),]
 
 ```
 
