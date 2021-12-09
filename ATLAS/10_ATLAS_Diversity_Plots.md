@@ -423,7 +423,8 @@ Concat and Plot
 # Concatenate the three data.frames
 library(dplyr)
 
-E3.data <- bind_rows(MUS.ll.Chrsonly, MODC.ll.Chrsonly, MODE.ll.Chrsonly)
+##E3
+E3.data <- bind_rows(E3.MUS.ll.Chronly.0.6miss.min0.55X.max2.5X, MODC.ll.Chrsonly, MODE.ll.Chrsonly)
 dim(data)
 [1] 47347    18
 
@@ -438,6 +439,41 @@ pdf("E3.theta.pdf")
 ggplot(E3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
 dev.off()
 
+
+
+##D3
+D3.data <- bind_rows(D3.MUS.ll.Chronly.0.6miss.min0.5X.max2X, MODC.ll.Chrsonly, MODE.ll.Chrsonly)
+dim(data)
+[1] 47347    18
+
+
+
+# Make chromosome a factor 
+D3.data$Chr <- as.factor(D3.data$Chr)
+
+
+# Plot
+pdf("D3.theta.pdf")
+ggplot(D3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
+dev.off()
+
+
+
+##C3
+C3.data <- bind_rows(C3.MUS.ll.Chronly.0.7miss.min0.34X.max2X, MODC.ll.Chrsonly, MODE.ll.Chrsonly)
+dim(data)
+[1] 47347    18
+
+
+
+# Make chromosome a factor 
+C3.data$Chr <- as.factor(C3.data$Chr)
+
+
+# Plot
+pdf("C3.theta.pdf")
+ggplot(C3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
+dev.off()
 
 
 ```
