@@ -425,7 +425,7 @@ library(dplyr)
 
 ##E3
 E3.data <- bind_rows(E3.MUS.ll.Chronly.0.6miss.min0.55X.max2.5X, E3.MODC.ll.Chrsonly7X, MODE.ll.Chrsonly)
-dim(data)
+dim(E3.data)
 [1] 47347    18
 
 
@@ -443,8 +443,8 @@ dev.off()
 
 ##D3
 D3.data <- bind_rows(D3.MUS.ll.Chronly.0.6miss.min0.5X.max2X, D3.MODC.ll.Chrsonly10X, MODE.ll.Chrsonly)
-dim(data)
-[1] 47347    18
+dim(D3.data)
+[1] 33832    18
 
 
 
@@ -461,8 +461,8 @@ dev.off()
 
 ##C3
 C3.data <- bind_rows(C3.MUS.ll.Chronly.0.7miss.min0.34X.max2X, C3.MODC.ll.Chrsonly.maxmissing0.95.MaxDP25X, MODE.ll.Chrsonly)
-dim(data)
-[1] 47347    18
+dim(C3.data)
+[1] 26717    18
 
 
 
