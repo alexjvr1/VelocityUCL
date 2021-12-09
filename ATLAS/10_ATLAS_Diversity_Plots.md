@@ -220,6 +220,7 @@ MUS.ll.Chrsonly <- (MUS.ll %>% filter(grepl("LR", Chr)))
 
 
 ##Check the proportion of missing data: 
+library(ggplot2)
 pdf("MUS.missingdata.pdf")
 ggplot(MUS.ll.Chrsonly, aes(x=fracMissing, y=theta_MLE, colour=Chr))+geom_point()     #Plot of theta vs fraction missing data in each window coloured by chromosome
 ggplot(MUS.ll.Chrsonly, aes(x=fracTwoOrMore, y=theta_MLE, colour=Sample))+geom_point()  #Plot of theta vs fraction of loci with 2x+ coverage
@@ -236,6 +237,12 @@ MUS.tokeep <- c("AH-01-1900-04", "AH-01-1900-05", "AH-01-1900-06", "AH-01-1900-0
 
 MUS.ll.Chronly.0.6miss <- filter(MUS.ll.Chrsonly, Sample %in% MUS.tokeep)
 summary(MUS.ll.Chronly.0.6miss$Sample)
+
+
+#Plot Depth across windows 
+pdf("E3.MUS.theta.depth.pdf")
+ggplot(MUS.ll.Chronly, aes(x=midpos, y=theta_MLE, colour=Sample))+geom_point(size=0.2)+facet_wrap(~Chr)
+dev.off()
 
 ```
 
