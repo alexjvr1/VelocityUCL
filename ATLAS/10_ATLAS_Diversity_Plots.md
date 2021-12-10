@@ -473,9 +473,22 @@ E3.data$Chr <- as.factor(E3.data$Chr)
 
 
 # Plot
+
+##Theta
 pdf("E3.theta.pdf")
 ggplot(E3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
 dev.off()
+
+##NucFreq
+
+pdf("E3.NucDiv.pdf")
+ggplot(E3.data, aes(x=midpos, y=pi.G., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(E3.data, aes(x=midpos, y=pi.A., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(E3.data, aes(x=midpos, y=pi.T., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(E3.data, aes(x=midpos, y=pi.C., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+dev.off()
+
+
 
 
 
@@ -496,6 +509,14 @@ ggplot(D3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+fac
 dev.off()
 
 
+pdf("D3.NucDiv.pdf")
+ggplot(D3.data, aes(x=midpos, y=pi.G., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(D3.data, aes(x=midpos, y=pi.A., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(D3.data, aes(x=midpos, y=pi.T., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(D3.data, aes(x=midpos, y=pi.C., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+dev.off()
+
+
 
 ##C3
 C3.data <- bind_rows(C3.MUS.ll.Chronly.0.7miss.min0.34X.max2X, C3.MODC.ll.Chrsonly.maxmissing0.95.MaxDP25X, C3.MODE.ll.Chrsonly.maxmissing0.95.MaxDP7X)
@@ -511,6 +532,14 @@ C3.data$Chr <- as.factor(C3.data$Chr)
 # Plot
 pdf("C3.theta.pdf")
 ggplot(C3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
+dev.off()
+
+
+pdf("C3.NucDiv.pdf")
+ggplot(C3.data, aes(x=midpos, y=pi.G., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(C3.data, aes(x=midpos, y=pi.A., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(C3.data, aes(x=midpos, y=pi.T., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+ggplot(C3.data, aes(x=midpos, y=pi.C., colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
 dev.off()
 
 
