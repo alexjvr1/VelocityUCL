@@ -476,7 +476,7 @@ E3.data$Chr <- as.factor(E3.data$Chr)
 
 ##Theta
 pdf("E3.theta.pdf")
-ggplot(E3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
+ggplot(E3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
 dev.off()
 
 ##NucFreq
@@ -505,7 +505,7 @@ D3.data$Chr <- as.factor(D3.data$Chr)
 
 # Plot
 pdf("D3.theta.pdf")
-ggplot(D3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
+ggplot(D3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
 dev.off()
 
 
@@ -531,7 +531,7 @@ C3.data$Chr <- as.factor(C3.data$Chr)
 
 # Plot
 pdf("C3.theta.pdf")
-ggplot(C3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)
+ggplot(C3.data, aes(x=midpos, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
 dev.off()
 
 
