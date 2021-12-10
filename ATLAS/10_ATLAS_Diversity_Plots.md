@@ -548,4 +548,157 @@ dev.off()
 
 
 
+## Plot Theta vs Sample dates
 
+C3
+```
+#Add dates
+C3.data$CollectionDate C3.data$Sample
+C3.data$SampleData <- gsub("AAg-19-2016.*", "2016", C3.data$SampleData, perl=TRUE)
+C3.data$SampleData <- gsub("AAg-10-2016.*", "2016", C3.data$SampleData, perl=TRUE)
+
+unique(C3.data$CollectionDate)  #see what samples you have
+C3.data$CollectionDate <- gsub("AAg-19-1900-05.*", "1914", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-08.*", "1915", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-09.*", "1916", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-10.*", "1916", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-14.*", "1920", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-15.*", "1902", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-18.*", "1905", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-20.*", "1911", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-24.*", "1911", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-26.*", "1916", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-27.*", "1917", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-28.*", "1894", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-32.*", "1894", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-34.*", "1905", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-35.*", "1905", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-36.*", "1906", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-37.*", "1911", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-38.*", "1915", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-39.*", "1916", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-40.*", "1916", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-41.*", "1916", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-42.*", "1916", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-43.*", "1917", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-44.*", "1919", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-45.*", "1919", C3.data$CollectionDate, perl=TRUE)
+C3.data$CollectionDate <- gsub("AAg-19-1900-48.*", "1914", C3.data$CollectionDate, perl=TRUE)
+
+```
+
+
+Plot
+```
+library(ggplot2)
+pdf("C3.Theta.vsCollectionDate.pdf")
+ggplot(C3.data, aes(x=CollectionDate, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+dev.off()
+```
+
+
+
+D3
+```
+D3.data$CollectionData <- D3.data$Sample
+D3.data$CollectionData <- gsub("PA-01-2016.*", "2016", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-2017.*", "2017", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-22-2017.*", "2017", D3.data$CollectionData, perl=TRUE)
+unique(D3.data$CollectionData)
+D3.data$CollectionData <- gsub("PA-01-1900-09.*", "1902", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-10.*", "1902", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-11.*", "1903", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-12.*", "1907", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-14.*", "1911", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-15.*", "1916", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-16.*", "1916", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-17.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-18.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-19.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-20.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-21.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-22.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-25.*", "1901", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-26.*", "1903", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-27.*", "1903", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-28.*", "1903", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-30.*", "1908", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-31.*", "1912", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-32.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-33.*", "1911", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-34.*", "1917", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-35.*", "1910", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-39.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-40.*", "1920", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-41.*", "1889", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-43.*", "1926", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-44.*", "1926", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-45.*", "1926", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-47.*", "1927", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-49.*", "1928", D3.data$CollectionData, perl=TRUE)
+D3.data$CollectionData <- gsub("PA-01-1900-52.*", "1929", D3.data$CollectionData, perl=TRUE)
+```
+
+
+Plot
+```
+library(ggplot2)
+
+pdf("D3.Theta.vsCollectionDate.pdf")
+ggplot(D3.data, aes(x=CollectionData, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+dev.off()
+```
+
+
+E3
+```
+E3.data$CollectionDate <- E3.data$Sample
+E3.data$CollectionDate <- gsub("AH-01-2016.*", "2016", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-2017.*", "2017", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-02-2019.*", "2019", E3.data$CollectionDate, perl=TRUE)
+
+E3.data$CollectionDate <- gsub("AH-01-1900-04*", "1906", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-05*", "1906", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-06*", "1906", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-08*", "1906", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-09*", "1911", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-10*", "1911", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-11*", "1915", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-13*", "1898", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-14*", "1894", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-15*", "1905", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-16*", "1900", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-20*", "1899", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-21*", "1906", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-22*", "1911", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-23*", "1916", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-24*", "1892", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-25*", "1905", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-27*", "1907", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-28*", "1907", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-29*", "1921", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-32*", "1921", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-33*", "1921", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-34*", "1921", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-35*", "1922", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-37*", "1922", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-38*", "1922", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-39*", "1922", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-40*", "1922", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-41*", "1924", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-45*", "1924", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-46*", "1925", E3.data$CollectionDate, perl=TRUE)
+E3.data$CollectionDate <- gsub("AH-01-1900-47*", "1925", E3.data$CollectionDate, perl=TRUE)
+
+
+
+
+
+```
+
+Plot
+```
+pdf("E3.Theta.vsCollectionDate.pdf")
+ggplot(E3.data, aes(x=CollectionDate, y=theta_MLE, colour=Pop))+geom_point(size=0.2)+facet_wrap(~Chr)+theme(axis.text.x = element_text(angle = 90, size=5))
+dev.off()
+```
