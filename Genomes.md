@@ -1,4 +1,4 @@
-# Genome
+# Genomes
 
 Genome assemblies from the Darwin Tree of Life project: 
 
@@ -9,22 +9,24 @@ A1
 
 *Lymantria monacha* - Black arches
 
-
+[Assembly: GCA_905163515.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905163515.1)
 
 
 ## B
 
 #### B1
 
-** - Small Blue
+*Cupido minimus* - Small Blue
+
+[]()
 
 #### B2
 
-** - Chalk-hill blue
+*Polyommatus coridon* - Chalk-hill blue
 
 #### B3
 
-** - Adonis Blue
+*Polyommatus bellargus* - Adonis Blue
 
 
 ## C 
@@ -33,14 +35,20 @@ A1
 
 *Aricia artaxerxes* - Northern Brown Argus
 
+[Project: PRJEB41902](https://www.ebi.ac.uk/ena/browser/view/PRJEB41902)
+
 #### C2
 
-** - Silver studded blue
+*Plebejus argus* - Silver studded blue
+
+[Assembly: GCA_905404155.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905404155.1)
 
 #### C3
 
+
 *Aricia agestis* - Brown Argus
 
+[Assembly: GCA_905147365.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905147365.1)
 
 ## D
 
