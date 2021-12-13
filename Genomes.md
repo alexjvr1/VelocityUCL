@@ -94,38 +94,45 @@ A1
 
 #### G1
 
-** - Lulworth skipper
+*Thymelicus acteon* - Lulworth skipper
 
 #### G2
 
-** - Large skipper
+*Ochlodes sylvanus* - Large skipper
+
+[Assembly: GCA_905404295.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905404295.1)
+
 
 #### G3
 
-** - Silver spotted skipper
+*Hesperia comma* - Silver spotted skipper
+
+[Assembly: GCA_905404135.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905404135.1)
 
 ## H
 
 #### H1
 
-** - Garden tiger
+*Arctia caja* - Garden tiger
 
 #### H2
 
-** - Rosy Footman
+*Miltochrista miniata* - Rosy Footman
 
 #### H3
 
-** - Dingy Footman
+*Eilema griseola* - Dingy Footman
 
 ## I
 
 #### I1
 
-** - Garden carpet
+*Xanthorhoe fluctuata* - Garden carpet
 
 ## J
 
 #### J1
 
-** - Small Tortoiseshell
+*Aglais urticae* - Small Tortoiseshell
+
+[Assembly: GCA_905147175.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905147175.1?show=blobtoolkit)
