@@ -58,25 +58,36 @@ A1
 
 #### D2
 
-** - Meadow brown
+*Maniola jurtina* - Meadow brown
+
+[Assembly: GCA_905333055.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905333055.1)
 
 #### D3
 
 *Pararge aegeria* - Speckled Wood
  
+[Assembly: GCA_905163445.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905163445.1?show=blobtoolkit)
+ 
+ 
 ## E
 
 #### E1
 
-** - Mountain Ringlet
+*Erebia epiphron* - Mountain Ringlet
+
+[Project: PRJEB41911](https://www.ebi.ac.uk/ena/browser/view/PRJEB41911)
 
 #### E2
 
-** - Scotch Argus
+*Erebia aethiops* - Scotch Argus
+
+[]()
 
 #### E3
 
 *Aphantopus hyperantus* - Ringlet
+
+[Assembly: GCA_902806685.1](https://www.ebi.ac.uk/ena/browser/view/GCA_902806685.1)
 
 
 ## G
