@@ -22,11 +22,16 @@ A1
 
 #### B2
 
-*Polyommatus coridon* - Chalk-hill blue
+*Polyommatus coridon* - Chalk-hill blue  (Syn. *Lysandra coridon*)
+
+[Assembly: GCA_905220515.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905220515.1)
 
 #### B3
 
-*Polyommatus bellargus* - Adonis Blue
+*Polyommatus bellargus* - Adonis Blue  (Syn. *Lysandra bellargus*)
+
+[Assembly: GCA_905333045.1](https://www.ebi.ac.uk/ena/browser/view/GCA_905333045.1)
+
 
 
 ## C 
