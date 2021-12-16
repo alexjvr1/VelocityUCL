@@ -58,3 +58,68 @@ After filtering, kept 38 out of 38 Individuals
 
 ```
 
+
+### Smaller vcf
+
+Create smaller vcf files based on 16Mb of data, minInd10 and minVariantQuality of 3. This is a likelihood ratio of Major/Major vs minor allele
+
+```
+$ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 minVariantQual=3
+
+```
+
+D3
+```
+MODE
+
+$vcftools --gzvcf ATLAS_majorMinor_majorMinor.vcf.gz --exclude-positions remove.singletons --recode --recode-INFO-all --out ATLAS.nosingletons
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf ATLAS_majorMinor_majorMinor.vcf.gz
+	--exclude-positions remove.singletons
+	--recode-INFO-all
+	--out ATLAS.nosingletons
+	--recode
+
+Using zlib version: 1.2.7
+After filtering, kept 36 out of 36 Individuals
+Outputting VCF file...
+After filtering, kept 358447 out of a possible 1037042 Sites
+
+
+
+
+MODC
+- Atlas terminated successfully in 7.63333 min!
+
+$vcftools --gzvcf ATLAS_majorMinor_majorMinor.vcf.gz --singletons
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf ATLAS_majorMinor_majorMinor.vcf.gz
+	--singletons
+
+Using zlib version: 1.2.7
+After filtering, kept 33 out of 33 Individuals
+Outputting Singleton Locations
+After filtering, kept 864331 out of a possible 864331 Sites
+Run Time = 9.00 seconds
+
+#write first two columns and use to remove singletons and private doubletons
+
+awk '{print $1, $2}' out.singletons > toremove.singletons
+
+$vcftools --gzvcf ATLAS_majorMinor_majorMinor.vcf.gz --exclude-positions toremove.singletons --recode --recode-INFO-all --out MODC.nosingletons
+
+After filtering, kept 33 out of 33 Individuals
+Outputting VCF file...
+After filtering, kept 302824 out of a possible 864331 Sites
+
+
+
+```
