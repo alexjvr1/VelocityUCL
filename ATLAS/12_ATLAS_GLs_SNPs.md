@@ -71,7 +71,17 @@ $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 
 D3
 ```
 MODE
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 minVariantQual=3
 
+
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 minVariantQual=2
+
+
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000
+
+
+## Using minVariantQuality=3
+vcftools=/share/apps/genomics/vcftools-0.1.16/bin/vcftools
 $vcftools --gzvcf ATLAS_majorMinor_majorMinor.vcf.gz --exclude-positions remove.singletons --recode --recode-INFO-all --out ATLAS.nosingletons
 
 VCFtools - 0.1.16
@@ -93,6 +103,21 @@ After filtering, kept 358447 out of a possible 1037042 Sites
 
 
 MODC
+##Test LRT
+
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 minVariantQual=3
+
+
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 minVariantQual=2
+
+
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000
+
+
+
+
+
+## Using minVariantQuality=3
 - Atlas terminated successfully in 7.63333 min!
 
 $vcftools --gzvcf ATLAS_majorMinor_majorMinor.vcf.gz --singletons
@@ -121,5 +146,22 @@ Outputting VCF file...
 After filtering, kept 302824 out of a possible 864331 Sites
 
 
+```
+
+
+MUS
+```
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 minVariantQual=3
+- Atlas terminated successfully in 4.41667 min!
+
+
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000 minVariantQual=2
+
+
+time $ATLAS task=$TASK glf=$INPUT/$GLFLIST minSamplesWithData=10 limitSites=16000000
+
+
+$vcftools --gzvcf ATLAS_majorMinor_majorMinor.vcf.gz --freq2
+After filtering, kept 1010512 out of a possible 1010512 Sites
 
 ```
