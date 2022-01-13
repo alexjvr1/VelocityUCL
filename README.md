@@ -415,7 +415,7 @@ cd /SAN/ugi/LepGenomics/Species/RefGenome
 
 [Fig1]:https://user-images.githubusercontent.com/12142475/149309912-650bf11c-b3e2-4b4d-8746-24d79cec30c8.png
 
-4. Retrieve the genome using wget
+4. Retrieve the genome using wget and the ftp site address in your browser:
 ```
 wget --recursive --no-parent -nH -R "index.html*" https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/404/155/GCA_905404155.1_ilPleArgu1.1/GCA_905404155.1_ilPleArgu1.1_genomic.fna.gz 
 ```
