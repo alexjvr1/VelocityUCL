@@ -397,6 +397,29 @@ For detecting parallel evolution - a multivariate approach
 
 Aphantopus hyperantus (Ringlet) was the first genome available ([NCBI link](https://www.ncbi.nlm.nih.gov/assembly/GCA_902806685.1)), so the pipeline will be set up with this species. 
 
+To import genomes to the server from NCBI: 
+
+1. Log onto the interactive node:
+```
+qrsh -l tmem=8G, h_vmem=8G
+```
+
+2. Navigate to the species RefGenome folder
+```
+cd /SAN/ugi/LepGenomics/Species/RefGenome
+```
+
+3. Find the genome you're interested in. Find the ftp address by clicking "FTP directory for GenBank assembly" under "Access Data" in the right-hand panel. This shoud open a directory in your browser that looks like this: 
+
+![alt_txt][Fig1]
+
+[Fig1]:https://user-images.githubusercontent.com/12142475/149309912-650bf11c-b3e2-4b4d-8746-24d79cec30c8.png
+
+4. Retrieve the genome using wget
+```
+wget --recursive --no-parent -nH -R "index.html*" https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/905/404/155/GCA_905404155.1_ilPleArgu1.1/GCA_905404155.1_ilPleArgu1.1_genomic.fna.gz 
+```
+
 
 ## DATA: WGS
 
