@@ -253,6 +253,18 @@ See [here](https://github.com/alexjvr1/VelocityUCL/blob/main/RawDataCheck.md) fo
 3. Move all samples that were sequenced only once from museum1 to the 00_raw_reads_museum_FINAL
 
 
+ALTERNATIVE: 
+
+*This script works where samples have been sequenced across multiple runs and/or lanes.*
+
+1. Move R1 and R2 files into separate folders
+
+2. Run the [concat_multipleruns.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/concat_multipleruns.sh) script. 
+
+3. Modify for R2 and run. 
+
+
+
 #### 1. Rename samples
 
 Modern and Museum samples need to be in the format: 
