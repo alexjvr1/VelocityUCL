@@ -10,7 +10,7 @@
 # AdapterRemoval will merge any overlapping reads as well, which is needed for the museum samples. 
 
 
-/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/parallel_adapterremoval_UCL.sh \
+/SAN/ugi/LepGenomics/VelocityPipeline/wrapper/parallel_adapterremoval_museum_UCL.sh \
 -i 01a_Trimmomatic_museum \
 -o 01b_AdapterRemoval_museum \
 -n 1 -t 5 -m 8 -N AdaptRem.mus;
