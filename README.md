@@ -621,7 +621,12 @@ grep "Both Surviving" 01a_Trimmomatic*/*log |awk '{print $1, $4, $7, $8, $20, $2
 Used for trimming any remaining adapters and merging reads. 
 
 
-Modify the [01b_AdapterRemover_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01b_AdapterRemover_museum.sh) script for each population. 
+Modify the following two scripts for each population: 
+
+[01b_AdapterRemover_museum.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01b_AdapterRemover_museum.sh)
+
+[01b_AdapterRemover_modern.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/Scripts/01b_AdapterRemover_modern.sh)
+
 
 Create the submission scripts: 
 ```
