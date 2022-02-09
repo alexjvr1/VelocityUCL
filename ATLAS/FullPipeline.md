@@ -73,8 +73,10 @@ RG1 paired
 
 ##SplitMerge
 for i in $(ls *RG1*bam); do time $ATLAS task=splitMerge bam=$i updateQuality readGroupSettings=RG.txt; done
+#10mins per sample
 
 ##recal
+time $ATLAS task=recal bam=AH-02-2019-42.realn.RG1.rgadded_mergedReads.bam region=../M_hyperantus.phast.1.766.bed verbose
 
 
 ##Subsample to the same depth as the museum data (0.8X)
@@ -83,6 +85,8 @@ for i in $(ls *RG1*bam); do time $ATLAS task=splitMerge bam=$i updateQuality rea
 
 
 ##Estimate theta
+
+
 ```
 
 ###We can add lots of filters: 
