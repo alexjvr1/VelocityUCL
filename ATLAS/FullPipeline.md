@@ -61,3 +61,40 @@ sys	0m2.717s
 ```
 
 
+Run ATLAS: 
+```
+ATLAS=/share/apps/genomics/atlas-0.9/atlas
+export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
+
+#create a RG file
+nano RG.txt
+RG1 paired
+
+
+##SplitMerge
+for i in $(ls *RG1*bam); do time $ATLAS task=splitMerge bam=$i updateQuality readGroupSettings=RG.txt; done
+
+##recal
+
+
+##Subsample to the same depth as the museum data (0.8X)
+
+
+
+
+##Estimate theta
+```
+
+###We can add lots of filters: 
+readUpToDepth
+- Setting window size to 1000000. (parameter 'window')
+   - Will read data up to depth 1000 and ignore additional bases. (parameter 'readUpToDepth')
+   - Will filter out bases with quality outside the range [1, 93] (parameters 'minQual', 'maxQual')
+   - Will print qualities truncated to [33, 126] (parameters 'minOutQual', 'maxOutQual')
+   - Will filter out windows with a missing data fraction > 1.000000. (parameter 'maxMissing')
+   - Will filter out windows with a fraction of 'N' in reference > 1.000000. (parameter 'maxRefN')
+   - Chromosomes with no further specifications are assumed to be diploid (parameters 'ploidy' or 'haploid' to change ploidy).
+   - Mates that are farther than 2000 apart will be considered orphans. (parameter 'acceptedDistance')
+   - Will ignore orphaned reads and not write them to BAM (use 'keepOrphans' to keep them).
+   - Will keep random read for all of overlapping positions
+   - Will update quality scores of prefered bases to reflect information from overlapping bases.
