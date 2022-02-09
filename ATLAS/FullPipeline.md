@@ -23,11 +23,19 @@ e.g. for AH-02-2019-42:
 samtools=/share/apps/genomics/samtools-1.14/bin/samtools
 
 $samtools view AH-02-2019-42.realn.bam | grep "@" | awk '{print $1, $2, $3, $4}'|sort |uniq
+
+A00410:144:HHW5LDRXX:2
+A00410:136:HH7T3DRXX:1
+A00410:136:HH7T3DRXX:2
 ```
 
-
-This will output the sequence names which contain the sequencing machine and lane number information. We can use this to get all the readIDs for reads associated with the different read groups. 
+And write these to a text file: 
 ```
+nano E3.MODE_RG.list
+ReadID	RGinbam	RGname	
+A00410:144:HHW5LDRXX:2	HHW5LDRXX_lane2	RG1
+A00410:136:HH7T3DRXX:1 HH7T3DRXX_lane1 RG2
+A00410:136:HH7T3DRXX:2	HH7T3DRXX_lane2 RG3
 
 ```
 
@@ -38,5 +46,18 @@ export PATH=/share/apps/java/bin:$PATH
 export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
 PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
 
+java -jar $PICARD FilterSamReads I=AH-02-2019-43.realn.bam O=AH-02-2019-43.realn.RG1.bam READ_LIST_FILE=AH53.RG1.reads FILTER=includeReadList
 
+Elapsed time: 3.96 minutes for one sample
 ```
+
+And add the appropriate read group to each of the split files. 
+```
+time java -jar $PICARD AddOrReplaceReadGroups I=AH-02-2019-43.realn.RG1.bam O=AH-02-2019-43.realn.RG1.rgadded.bam RGID=RG1 RGLB=modern04 RGPL=Illumina4000 RGPU=HHW5LDRXX2 RGSM=43
+
+real	3m36.398s
+user	3m34.347s
+sys	0m2.717s
+```
+
+
