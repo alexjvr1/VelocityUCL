@@ -61,6 +61,16 @@ sys	0m2.717s
 ```
 
 
+
+##NOTE: Sam uses the RefSeq reference genome (annotated) to generate the bed file. We need to check that the chromosome names are the same between our reference and the RefSeq reference, and rename if necessary. 
+
+We need to rename them for: *A. hyperantus*. See the two versions of chromosome names [here](https://www.ncbi.nlm.nih.gov/assembly/GCF_902806685.1). 
+
+
+
+
+
+
 Run ATLAS: 
 ```
 ATLAS=/share/apps/genomics/atlas-0.9/atlas
