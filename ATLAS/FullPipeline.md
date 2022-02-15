@@ -129,6 +129,7 @@ TASK=recal
 #Run analysis
 while IFS=  read -r line; do time $ATLAS task=$TASK bam=$line region=../A.hyperantus_LR76only.bam minDepth=2  maxDepth=4 limitWindows=2 verbose > $line.recal -l avx2=yes; done < $INPUT
 
+- Atlas terminated successfully in 15.85 min!
 ```
 
 
