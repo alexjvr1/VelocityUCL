@@ -84,9 +84,54 @@ RG1 paired
 ##SplitMerge
 for i in $(ls *RG1*bam); do time $ATLAS task=splitMerge bam=$i updateQuality readGroupSettings=RG.txt; done
 #10mins per sample
+```
 
+
+Recal
+```
 ##recal
 time $ATLAS task=recal bam=AH-02-2019-42.realn.RG1.rgadded_mergedReads.bam region=../M_hyperantus.phast.1.766.bed verbose
+```
+
+Recal uses a LOT of memory! Based on the ATLAS notes, they required 55Gb RAM for an average of 2X sequencing, using the human genome. Our biggest dataset is MODE, which has a mean sequencing depth of ~3.5X. This requires a lot more memory. But we can limit the memory usage by limiting the depth (minDepth=2, and maxDepth=4), the size of the windows (default = 1Mil, windowSize=500000). If all else fails, we can limit the number of windows read in from each chromosome (eg. limitWindows=4)
+
+Testing on 2 samples, this seems to work. I'm going to test
+
+1) 80Gb RAM with no window limit, and maxDP = 6
+```
+#!/bin/bash
+#$ -S /bin/bash
+#$ -N E3.MODE.ATLAS.recal  ##job name
+#$ -l tmem=64G #RAM
+#$ -l h_vmem=64G #enforced limit on shell memory usage
+#$ -l h_rt=1:00:00 ##wall time.
+#$ -j y  #concatenates error and output files (with prefix job1)
+
+
+#Run on working directory
+cd $SGE_O_WORKDIR 
+
+
+#Path to software
+export LD_LIBRARY_PATH=/share/apps/openblas-0.3.19/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
+ATLAS=/share/apps/genomics/atlas-0.9/atlas
+
+
+#Define variables
+SHAREDFOLDER=/SAN/ugi/LepGenomics
+SPECIES=E3_Aphantopus_hyperantus
+REF=$SHAREDFOLDER/$SPECIES/RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna
+INPUT=$SHAREDFOLDER/$SPECIES/04_ATLAS/MODE/recal.bamlist
+OUTPUT=$SHAREDFOLDER/$SPECIES/04_ATLAS/MODE
+TASK=recal
+
+
+#Run analysis
+while IFS=  read -r line; do time $ATLAS task=$TASK bam=$line region=../A.hyperantus_LR76only.bam minDepth=2  maxDepth=4 limitWindows=2 verbose > $line.recal -l avx2=yes; done < $INPUT
+
+```
+
+
 
 
 ##Subsample to the same depth as the museum data (0.8X)
