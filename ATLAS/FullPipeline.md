@@ -39,6 +39,21 @@ A00410:136:HH7T3DRXX:2	HH7T3DRXX_lane2 RG3
 
 ```
 
+The museum samples sequenced by the CGR have all been sequenced on one lane per library. 33 Indivs have been submitted to a second lot of sequencing: 
+```
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/02a_mapped_museum
+
+$samtools view AH-01-1900-48.realn.bam | grep "M_" | awk -F ":" '{print $1, $2, $3, $4}'|sort |uniq
+M_K00210 144 H3FJ3BBXY 8
+
+$samtools view AH-01-1900-47.realn.bam | grep "M_" | awk -F ":" '{print $1, $2, $3, $4}'|sort |uniq
+M_K00210 144 H3FJ3BBXY 8
+M_K00210 167 HFV5HBBXY 1
+
+```
+
+
+
 
 Now split the bam file by these reads using [FilterSamReads](https://broadinstitute.github.io/picard/command-line-overview.html#FilterSamReads)
 ```
