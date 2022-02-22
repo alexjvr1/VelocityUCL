@@ -171,6 +171,10 @@ export PATH=/share/apps/perl-5.30.0/bin:$PATH
 
 python
 ```
+export PATH=/share/apps/python-3.8.5-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.8.5-shared/lib:$LD_LIBRARY_PATH
+
+
 export PATH=/share/apps/python-3.6.4-shared/bin:$PATH
 export LD_LIBRARY_PATH=/share/apps/python-3.6.4-shared/lib:$LD_LIBRARY_PATH
 
