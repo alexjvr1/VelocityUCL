@@ -83,6 +83,36 @@ We need to rename them for: *A. hyperantus*. See the two versions of chromosome 
 
 
 
+We need the following files for ATLAS: 
+
+1) A merged bam per individual which contains RG information for data from different sequencing lanes. This will be used for PMD. 
+
+2) Separate bam files for each individual representing each RG. These will be used to create merged files for recal. 
+
+3) Concatenated bam files per RG which contains information on each indiv as RG information. This will be used for recal
+
+
+Once PMD has been calculated per individual, we merge all the individual data from a RG. We'll specify the PMD by specifying RG information in a big concatenated PMD file. 
+
+First, extract only RG1 information (They'll be the same across RGs within an indiv, and we don't want to duplicate the information. 
+```
+for i in $(ls *.RG1andRG2merged_PMD_input_Empiric.txt); do grep RG1 $i >> $i.RG1only; done
+
+
+```
+
+
+Then substitute the RG information in each PMD file with the sample name: 
+```
+for i in $(ls *Empiric.txt); do awk -F "\t" 'NR==0{print "file_name";next}{print FILENAME "\t" $2 "\t" $3}' OFS=, $i >> $i.NEW; done
+
+
+```
+
+
+
+
+
 
 
 
@@ -146,6 +176,9 @@ while IFS=  read -r line; do time $ATLAS task=$TASK bam=$line region=../A.hypera
 
 - Atlas terminated successfully in 15.85 min!
 ```
+
+
+
 
 
 
