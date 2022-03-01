@@ -1,4 +1,4 @@
-# Invaraint sites for Recal
+# Invariant sites for Recal
 
 Goal 1: Are the invariant sites really invariant? 
 
@@ -42,6 +42,29 @@ bcftools=
 
 ## Strategy: Goal 2 - Do we have enough data for recal? 
 
+
+Merge the bam files for each RG independently: 
+
+```
+samtools=/share/apps/genomics/samtools-1.14/bin/samtools
+
+#-r adds the sample name to each RGID. This way we can keep the individual information. 
+#When running ATLAS on this file, use poolReadGroups
+
+#list all the bam files to be merged
+ls *bam > RG1.bamlist  
+
+#and merge
+$samtools merge -r -b RG1.bamlist RG1.merged.bam
+```
+
+
+What is the coverage for the pooled data per invariant site: 
+```
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/02a_mapped_museum/RG1bams
+
+$samtools bedcov A.hyperantus_LR76only.bed RG1.merged.bam > RG1merged.bedcov.out
+```
 
 
 
