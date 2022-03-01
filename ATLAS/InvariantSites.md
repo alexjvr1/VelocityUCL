@@ -26,9 +26,11 @@ cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/
 
 ```
 
-Extract the sites from the bed file: 
+Extract the sites from the bed file using [Subsetbybed.sh]() 
 ```
+java -Xmx6g -Xms6g -jar $PICARD FilterSamReads I=${NAME} O=${NAME}.RG1.bam READ_LIST_FILE=${NAME}.RG1.list FILTER=includeReadList
 
+Whereq
 ```
 
 
