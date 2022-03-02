@@ -34,6 +34,8 @@ Whereq
 ```
 
 
+
+
 We can use bcftools mpileup to quickly find the variation at these sites across all our bam files: 
 
 ```
