@@ -30,7 +30,6 @@ Extract the sites from the bed file using [Subsetbybed.sh]()
 ```
 java -Xmx6g -Xms6g -jar $PICARD FilterSamReads I=${NAME} O=${NAME}.RG1.bam READ_LIST_FILE=${NAME}.RG1.list FILTER=includeReadList
 
-Whereq
 ```
 
 
@@ -39,7 +38,10 @@ Whereq
 We can use bcftools mpileup to quickly find the variation at these sites across all our bam files: 
 
 ```
-bcftools=
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/02a_mapped_museum/RG1bams
+
+bcftools=/share/apps/genomics/bcftools-1.14/bin/bcftools
+$bcftools mpileup --fasta-ref ../../RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna RG1.merged.bam -a INFO/AD -R A.hyperantus_LR76only.bed > RG1.merged.mpileup 
 ```
 
 
