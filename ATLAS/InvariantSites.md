@@ -30,9 +30,6 @@ cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/RG1bams
 1. Extract all the reads that cover the invariant sites [ExtractInvariantSitesFromBam.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/ExtractInvariantSitesFromBam.sh) from the MODE.unmerged and MODC.unmerged realn.bam datasets. 
 
 
-2. Concatenate all the bam files together. 
-
-
 Other approaches: 
 
 This was run for the museum data RG1 dataset. 
@@ -41,7 +38,6 @@ bedtools=/share/apps/genomics/bedtools-2.30.0/bin/bedtools
 
 $bedtools intersect -abam RG1.merged.bam -b A.hyperantus_LR76only.bed > RG1.invariant.merged.bam
 ```
-
 
 
 OR
@@ -55,7 +51,7 @@ java -Xmx6g -Xms6g -jar $PICARD FilterSamReads I=${NAME} O=${NAME}.RG1.bam READ_
 
 
 
-We can use bcftools mpileup to quickly find the variation at these sites across all our bam files: 
+2. Use bcftools mpileup to quickly find the variation at these sites across all our bam files: 
 
 ```
 /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/02a_mapped_museum/RG1bams
@@ -64,7 +60,8 @@ bcftools=/share/apps/genomics/bcftools-1.14/bin/bcftools
 $bcftools mpileup --fasta-ref ../../RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna RG1.merged.bam -a INFO/AD -R A.hyperantus_LR76only.bed > RG1.merged.mpileup 
 ```
 
-Check the allelic depth (AD). We expect that these sites are invariant, but the variance that is present tells us what the error rate is within the Illumina run. 
+
+3. Check the allelic depth (AD). We expect that these sites are invariant, but the variance that is present tells us what the error rate is within the Illumina run. 
 ```
 grep "AD=" RG1.invariant.merged.mpileup |awk -F ";" '{print $2}'
 ```
