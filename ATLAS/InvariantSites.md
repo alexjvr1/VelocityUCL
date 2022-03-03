@@ -17,14 +17,34 @@ Goal 2: Do we have enough data. According to [ATLAS](https://bitbucket.org/wegma
 
 ## Strategy: Goal 1 - Are the invariant sites invariant?
 
-We'll intersect these with the modern bam files. 
+We'll intersect the invariant sites in the bed file with the modern bam files. 
 
 ```
 qrsh -l tmem=8G, h_vmem=8G, h_rt=3600
 
-cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/
+cd /SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/RG1bams
 
 ```
+
+
+1. Extract all the reads that cover the invariant sites [ExtractInvariantSitesFromBam.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/ExtractInvariantSitesFromBam.sh) from the MODE.unmerged and MODC.unmerged realn.bam datasets. 
+
+
+2. Concatenate all the bam files together. 
+
+
+Other approaches: 
+
+This was run for the museum data RG1 dataset. 
+```
+bedtools=/share/apps/genomics/bedtools-2.30.0/bin/bedtools
+
+$bedtools intersect -abam RG1.merged.bam -b A.hyperantus_LR76only.bed > RG1.invariant.merged.bam
+```
+
+
+
+OR
 
 Extract the sites from the bed file using [Subsetbybed.sh]() 
 ```
@@ -43,6 +63,14 @@ We can use bcftools mpileup to quickly find the variation at these sites across 
 bcftools=/share/apps/genomics/bcftools-1.14/bin/bcftools
 $bcftools mpileup --fasta-ref ../../RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna RG1.merged.bam -a INFO/AD -R A.hyperantus_LR76only.bed > RG1.merged.mpileup 
 ```
+
+Check the allelic depth (AD). We expect that these sites are invariant, but the variance that is present tells us what the error rate is within the Illumina run. 
+```
+grep "AD=" RG1.invariant.merged.mpileup |awk -F ";" '{print $2}'
+```
+
+We'll check what the range of AD is and choose a cut-off for the alt AD before excluding loci as invariant sites. 
+
 
 
 
