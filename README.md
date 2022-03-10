@@ -134,6 +134,7 @@ file3.txt: OK
 |BWA|0.7.17| /share/apps/genomics/bwa-0.7.17/bwa|
 |Cutadapt | |/share/apps/python/bin/cutadapt| 
 |Cutadapt|2.5|/share/apps/genomics/cutadapt-2.5/bin/cutadapt|
+|discoal||/share/apps/genomics/discoal/discoal|
 |fastQC|0.11.8| /share/apps/genomics/FastQC-0.11.8/fastqc|
 |gatk|3.7.0|/share/apps/genomics/GenomeAnalysisTK-3.7/GenomeAnalysisTK.jar|
 |gatk|3.8.1|/share/apps/genomics/GenomeAnalysisTK-3.8.1.0/GenomeAnalysisTK.jar|
