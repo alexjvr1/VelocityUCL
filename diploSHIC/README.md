@@ -66,9 +66,18 @@ We're assuming a constant population size over the last 150 years. Discoal can s
 
 To run diploSHIC we need to install some python3 packages. The machine learning model is built in tensorflow using keras: 
 ```
-export PATH=/share/apps/python-3.6.4-shared/bin:$PATH
-export LD_LIBRARY_PATH=/share/apps/python-3.6.4-shared/lib:$LD_LIBRARY_PATH
+export PATH=/share/apps/python-3.8.5-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.8.5-shared/lib:$LD_LIBRARY_PATH
 
 python3 -m pip install scikit-allel tensorflow keras --user
+```
+
+```
+export PATH=/share/apps/python-3.8.5-shared/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/python-3.8.5-shared/lib:$LD_LIBRARY_PATH
+
+diploSHIC=/SAN/ugi/LepGenomics/Software/diploSHIC/diploshic/diploSHIC
+
+python3 $diploSHIC -h
 ```
 
