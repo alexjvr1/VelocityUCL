@@ -15,15 +15,11 @@ I'm testing the raw data pre-processing and ATLAS pipeline on the UCL server (CS
 Since many of the steps in this pipeline run fairly quickly we'll submit these commands sequentially rather than as an array. Too many small jobs can slow down or crash jobs on the server, so arrays should only be used for bigger jobs >1 hour each. Previous scripts written as arrays are kept here: [smallARRAYscripts](https://github.com/alexjvr1/VelocityUCL/tree/main/ATLAS/Scripts/smallARRAYscripts)
 
 
-What is the state of the art with poolseq data? Should we use these approaches in windows for our data? 
-
-
 
 ## Running Pipeline: 
 ### 0. Concat raw museum samples 
 
 33 individuals from each museum species has been sequenced twice to increase sequence depth. We're concatenating these raw data together, then moving all samples to a folder called 01a_raw_museum_FINAL
-
 
 
 
@@ -190,12 +186,51 @@ ATLAS=/share/apps/genomics/atlas-0.9/atlas
 export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
 ```
 
+### 03a.0a ATLAS: Find all read groups
+
+We need to split all the bam files by read group. 
+
+First find all the read groups in each population: 
+
+```
+for i in $(ls *mergedReads.bam); do samtools view $i | grep "NC_" | awk -F ":" '{print $1, $2, $3, $4}' |sort |uniq; done
+
+K00124 207 HKWH3BBXX 3
+```
+
+Once we have this information, we can make two RG.txt files: 
+
+1. RG.txt which contains the RG for the population
+```
+export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
+
+for i in $(ls *realn.bam); do samtools view -H $i |grep "@RG"; done 
+
+nano RG.txt
+D3mus  paired
+```
+
+2. ALL.RG.txt which contains the RG information for each of the sequencing lanes
+```
+nano ALL.RG.txt
+K00124:207:HKWH3BBXX:3      HKWH3BBXX_lane3      RG1
+```
+
+### 03a.0b Split bams into RGs
+
+Split all the individual bam files into different RGs
+
+
+
 
 ### 03a.1 ATLAS: SplitMerge
 
 **The latest version of ATLAS is 0.9, not 1.0. Ed upgraded to v.0.9 on the UCL shared apps folder so that I can run splitMerge and PMD on the museum samples. 
 
-Create a text file with the ReadGroup names, cycle length (if single end), and paired/single
+Create a text file with the ReadGroup names, cycle length (if single end), and paired/single. 
+
+
 
 ```
 ATLAS=/share/apps/genomics/atlas-0.9/atlas
