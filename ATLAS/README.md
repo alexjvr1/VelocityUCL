@@ -186,11 +186,11 @@ ATLAS=/share/apps/genomics/atlas-0.9/atlas
 export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
 ```
 
-### 03a.0a ATLAS: Find all read groups
+### 04a.0a ATLAS: Find all read groups
 
 We need to split all the bam files by read group. 
 
-First find all the read groups in each population: 
+First find all the read groups in each population. Use the [04.0a_FindRGs.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04.0_FindRG.sh)
 
 ```
 for i in $(ls *mergedReads.bam); do samtools view $i | grep "NC_" | awk -F ":" '{print $1, $2, $3, $4}' |sort |uniq; done
@@ -217,14 +217,8 @@ nano ALL.RG.txt
 K00124:207:HKWH3BBXX:3      HKWH3BBXX_lane3      RG1
 ```
 
-### 03a.0b Split bams into RGs
 
-Split all the individual bam files into different RGs
-
-
-
-
-### 03a.1 ATLAS: SplitMerge
+### 04a.0 ATLAS: SplitMerge
 
 **The latest version of ATLAS is 0.9, not 1.0. Ed upgraded to v.0.9 on the UCL shared apps folder so that I can run splitMerge and PMD on the museum samples. 
 
@@ -239,19 +233,45 @@ for i in $(ls *realn.bam); do $ATLAS task=splitMerge bam=$i; done
 
 
 
+### 04a.1b Split bams into RGs
 
+Split all the individual bam files into different RGs
+
+1. Write all of the reads associated with a particular RG to file 
+
+Modify the [04a.1b_WriteRG1_list.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04a.0b_WriteRG1_list.sh) for each RG for each population. 
+
+
+2. Split each individual bam file by RG
+
+Modify the [04a.1c_SplitBAMS_RG1.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04a.0c_SplitBAMS_RG1.sh) script for each RG within each population
+
+
+3. Calculate the total size of all the bam files for each RG
+
+```
+du -sch *RG1*merged*bam
+```
+
+If the total bams is <10Gb for a read group, merge the bam files
+
+```
+
+```
 
 
 ### 03a.2 ATLAS: PMD
 
 
-Estimate 
+Estimate the PMD per sample for each of the museum samples. This needs to be run on the full museum samples (with all RGs combined). Don't filter the reads. 
+
+
 
 
 
 ### 03a.3 ATLAS: recal
 
-
+This should be run on each of the read groups within each of the populations. 
 
 
 
