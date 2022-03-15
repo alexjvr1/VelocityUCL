@@ -253,11 +253,7 @@ Modify the [04a.1c_SplitBAMS_RG1.sh](https://github.com/alexjvr1/VelocityUCL/blo
 du -sch *RG1*merged*bam
 ```
 
-If the total bams is <10Gb for a read group, merge the bam files
-
-```
-
-```
+If the total bams is <10Gb for a read group, merge the bam files. Use the [MergeBAMS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/MergeBAMS.sh) script
 
 
 ### 03a.2 ATLAS: PMD
