@@ -256,18 +256,39 @@ du -sch *RG1*merged*bam
 If the total bams is <10Gb for a read group, merge the bam files. Use the [MergeBAMS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/MergeBAMS.sh) script
 
 
-### 03a.2 ATLAS: PMD
+### 03a.2 ATLAS: PMD - Museum individuals
 
 
 Estimate the PMD per sample for each of the museum samples. This needs to be run on the full museum samples (with all RGs combined). Don't filter the reads. 
 
+Modify the [04b_ATLAS_MUS.pmd.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04b_ATLAS_MUS.pmd.sh) script
+
+This will output a pmd correction for each individual.
 
 
-
-
-### 03a.3 ATLAS: recal
+### 03a.3 ATLAS: recal - All RGs
 
 This should be run on each of the read groups within each of the populations. 
+
+Modify the [04_ATLAS_recal.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04b_ATLAS_recal.sh)
+
+Files needed to run this: 
+
+pmdFile *Empiric* for the museum bam file
+
+File containing a set of invaraint sites
+
+mergeTheseRGs.txt file with all the RGs within the 
+
+e.g. for E3 museum: 
+```
+cat mergeTheseRGs.txt 
+AH-01-1900-01 AH-01-1900-04 AH-01-1900-05 AH-01-1900-06	AH-01-1900-08	AH-01-1900-09	AH-01-1900-10	AH-01-1900-11	AH-01-1900-13	AH-01-1900-14	AH-01-1900-15	AH-01-1900-16	AH-01-1900-20	AH-01-1900-21	AH-01-1900-22	AH-01-1900-23	AH-01-1900-24	AH-01-1900-25	AH-01-1900-27	AH-01-1900-28	AH-01-1900-29	AH-01-1900-32	AH-01-1900-33	AH-01-1900-34	AH-01-1900-35	AH-01-1900-37	AH-01-1900-38	AH-01-1900-39	AH-01-1900-40	AH-01-1900-41	AH-01-1900-45	AH-01-1900-46	AH-01-1900-47
+```
+
+
+
+
 
 
 
