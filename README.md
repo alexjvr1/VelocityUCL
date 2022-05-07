@@ -438,6 +438,23 @@ wget --recursive --no-parent -nH -R "index.html*" https://ftp.ncbi.nlm.nih.gov/g
 ```
 
 
+Index and .dict files for the genome are needed for some of the processing steps (e.g., Local Realignment with GATK)
+```
+#.dict file
+export PATH=/share/apps/java/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/java/lib:$LD_LIBRARY_PATH
+PICARD=/share/apps/genomics/picard-2.20.3/bin/picard.jar
+java -jar $PICARD CreateSequenceDictionary \
+R=GCA_905404155.1_ilPleArgu1.1_genomic.fna \
+O=GCA_905404155.1_ilPleArgu1.1_genomic.dict
+
+#Index .fai
+export PATH=/share/apps/genomics/samtools-1.9/bin:$PATH
+export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
+samtools faidx GCA_905404155.1_ilPleArgu1.1_genomic.fna
+```
+
+
 ## DATA: WGS
 
 Whole genome resequencing data was generated for 38 & 40 modern individuals (sampled 2016-2017 & 2019) from a core and expanding population. Museum data was generated from 48 individuals + resequencing of a subset of individuals to increase read coverage. 
