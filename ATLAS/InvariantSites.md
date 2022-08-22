@@ -70,6 +70,44 @@ We'll check what the range of AD is and choose a cut-off for the alt AD before e
 
 
 
+4. Based on how we usually call variant sites, we'll accept sites with 5+AD for the alt allele as true variants. To identify and count these: 
+
+```
+awk -F " " '{print $8}' RG1.merged.mpileup | awk -F ";" '{print $2}' RG1.merged.mpileup_AD
+```
+
+Read into R
+```
+#fill=T fills all missing data with NA
+data <- read.table("RG1.merged.mpileup_AD", fill=T, header=F)
+
+#Mean and variance of each allele
+dim(data)
+[1] 2650155       4
+summary(data)
+       V1              V2                V3                V4         
+ Min.   :  0.0   Min.   : 0.0000   Min.   :0         Min.   :0        
+ 1st Qu.: 13.0   1st Qu.: 0.0000   1st Qu.:0         1st Qu.:0        
+ Median : 18.0   Median : 0.0000   Median :0         Median :0        
+ Mean   : 18.3   Mean   : 0.0846   Mean   :0         Mean   :0        
+ 3rd Qu.: 22.0   3rd Qu.: 0.0000   3rd Qu.:0         3rd Qu.:0        
+ Max.   :262.0   Max.   :63.0000   Max.   :5         Max.   :2        
+                 NA's   :818       NA's   :2452202   NA's   :2646414  
+
+#We can see there are a lot of alt alleles called:
+dim(data[which(data$V2>0),])
+[1] 197953      4
+#197953/2650155=7.5%  of the loci have alt alleles
+
+#How many of these could be true variants?
+
+dim(data[which(data$V2>4),])
+[1] 1885    4
+#1885/2650155*100 = 0.07%
+```
+
+
+
 
 ## Strategy: Goal 2 - Do we have enough data for recal? 
 
