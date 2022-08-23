@@ -21,3 +21,16 @@ However, a quality filter needs to be applied. The following reduces the dataset
 bcftools filter -O z -o MODC_filtered_Qual20.vcf.gz -i '%QUAL>20 ' MODC_ATLAS_majorMinor_majorMinor.vcf.gz
 ```
 
+
+
+## Input files: map and ped
+
+We need plink ped and map files
+
+
+
+## Input files: [INPUT_PARAMETERS_FILE](https://github.com/alexjvr1/VelocityUCL/edit/main/GONE/INPUT_PARAMETERS_FILE)
+
+
+
+
