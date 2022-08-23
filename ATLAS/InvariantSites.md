@@ -106,6 +106,39 @@ dim(data[which(data$V2>4),])
 #1885/2650155*100 = 0.07%
 ```
 
+And for E3 MODC (based on 3411637 of the 5891970 sites specified in the A.hyperantus_LR76only.bed file)
+```
+/SAN/ugi/LepGenomics/E3_Aphantopus_hyperantus/02a_mapped_MODC.unmerged/RG1
+
+$bcftools mpileup --fasta-ref ../../RefGenome/GCA_902806685.1_iAphHyp1.1_genomic.fna RG1.merged.bam -a INFO/AD -R A.hyperantus_LR76only.bed > RG1.merged.mpileup 
+
+## In R
+dim(data)
+[1] 3411917       3
+
+summary(data)
+       V1               V2                V3         
+ Min.   :  0.00   Min.   : 0.0000   Min.   :0        
+ 1st Qu.: 12.00   1st Qu.: 0.0000   1st Qu.:0        
+ Median : 15.00   Median : 0.0000   Median :0        
+ Mean   : 14.86   Mean   : 0.0231   Mean   :0        
+ 3rd Qu.: 17.00   3rd Qu.: 0.0000   3rd Qu.:0        
+ Max.   :235.00   Max.   :59.0000   Max.   :5        
+ NA's   :1379     NA's   :1659      NA's   :3360481  
+
+#We can see there are a lot of alt alleles called:
+dim(data[which(data$V2>0),])
+[1] 51436     3
+#51436/3411637=1.5%  of the loci have alt alleles
+
+#How many of these could be true variants?
+
+dim(data[which(data$V2>4),])
+[1] 2724    3
+#2724/3411637*100 = 0.08%
+
+#We conclude that 1.42% are errors introduced by Illumina sequencing. Why are there so many more errors in the museum data? 
+```
 
 
 
