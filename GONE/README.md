@@ -43,6 +43,24 @@ grep LR ../../RefGenome/*fai | awk '{print $1, $1, sep="\t"}' > E3.chrom-map.txt
 ## Delete the Z chromosome. For E3 this is LR761650.1
 
 vcftools --gzvcf MODC_filtered_Qual20_Autosomes.vcf.gz --recode --plink --chrom-map E3.chrom-map.txt --out MODC_filtered_forGONE
+
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf MODC_filtered_Qual20_Autosomes.vcf.gz
+	--chrom-map E3.chrom-map.txt
+	--out MODC_filtered_forGONE
+	--plink
+
+Using zlib version: 1.2.7
+After filtering, kept 38 out of 38 Individuals
+Writing PLINK PED and MAP files ... 
+	Read 29 chromosome mapping file entries.
+Done.
+After filtering, kept 12060531 out of a possible 12060531 Sites
+Run Time = 409.00 seconds
+
 ```
 
 
