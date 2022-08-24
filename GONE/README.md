@@ -37,19 +37,29 @@ Run Time = 94.00 seconds
 ##Or if we want to filter any genotypes where individuals have a GQ<20 and DP<8: 
 bcftools filter -O z -o MODC_filtered_Qual20_DP8.vcf.gz -i 'FMT/GQ>20 & FMT/DP>7' MODC_filtered_Qual20_Autosomes.vcf.gz
 
+vcftools --gzvcf MODC_filtered_Qual20_DP8.vcf.gz
 
-##Or a minimum of 5x
+VCFtools - 0.1.16
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf MODC_filtered_Qual20_DP8.vcf.gz
+
+Using zlib version: 1.2.7
+After filtering, kept 38 out of 38 Individuals
+After filtering, kept 10671495 out of a possible 10671495 Sites
+Run Time = 61.00 seconds
+
+## Delete the Z chromosome. For E3 this is LR761650.1. We're also excluding all the non-chromosome contigs/scaffolds. 
+
+vcftools --gzvcf MODC_filtered_Qual20_DP8.vcf.gz --chr LR761647.1 --chr LR761648.1 --chr LR761649.1 --chr LR761651.1 --chr LR761652.1 --chr LR761653.1 --chr LR761654.1 --chr LR761655.1 --chr LR761656.1 --chr LR761657.1 --chr LR761658.1 --chr LR761659.1 --chr LR761660.1 --chr LR761661.1 --chr LR761662.1 --chr LR761663.1 --chr LR761664.1 --chr LR761665.1 --chr LR761666.1 --chr LR761667.1 --chr LR761668.1 --chr LR761669.1 --chr LR761670.1 --chr LR761671.1 --chr LR761672.1 --chr LR761673.1 --chr LR761674.1 --chr LR761675.1 --recode --recode-INFO-all --stdout | gzip -c > MODC_filtered_Qual20_DP8_Autosomes.vcf.gz
 
 
 
-
-vcftools --gzvcf MODC_filtered_Qual20.vcf.gz --chr LR761647.1 --chr LR761648.1 --chr LR761649.1 --chr LR761651.1 --chr LR761652.1 --chr LR761653.1 --chr LR761654.1 --chr LR761655.1 --chr LR761656.1 --chr LR761657.1 --chr LR761658.1 --chr LR761659.1 --chr LR761660.1 --chr LR761661.1 --chr LR761662.1 --chr LR761663.1 --chr LR761664.1 --chr LR761665.1 --chr LR761666.1 --chr LR761667.1 --chr LR761668.1 --chr LR761669.1 --chr LR761670.1 --chr LR761671.1 --chr LR761672.1 --chr LR761673.1 --chr LR761674.1 --chr LR761675.1 --recode --recode-INFO-all --stdout | gzip -c > MODC_filtered_Qual20_Autosomes.vcf.gz
-
-
+## The final dataset needs to be in plink format
 ## Create a chromosome map file
 grep LR ../../RefGenome/*fai | awk '{print $1, $1, sep="\t"}' > E3.chrom-map.txt
 
-## Delete the Z chromosome. For E3 this is LR761650.1
 
 vcftools --gzvcf MODC_filtered_Qual20_Autosomes.vcf.gz --recode --plink --chrom-map E3.chrom-map.txt --out MODC_filtered_forGONE
 
@@ -72,7 +82,14 @@ Run Time = 409.00 seconds
 
 ```
 
-The maximum number of SNPs allowed is 10Mil, and 1Mil per chromosome. We have about 2Mil too many. Too see how many we have per chr: 
+The maximum number of SNPs allowed is 10Mil, and 1Mil per chromosome. We have about 2Mil too many. We can randomly select 10Mil SNPs in plink: 
+
+
+
+
+
+
+Too see how many we have per chr: 
 ```
 for i in $(cat Chr.map); do echo $i && grep $i MODC_filtered_forGONE.map |wc -l; done
 
