@@ -191,10 +191,12 @@ Choosing a recombination rate:
 
 We don't have species specific estimates of recombination for any of the species, but we have estimates for other Lepidoptera. 
 
-1. 
+1. 2.97 - 4.0 cM / Mb in the silkmoth (Yamamoto et al., 2008; Yasukochi, 1998) 
 
-2. 
+2. 5.5 - 6.0 cM / Mb in different Heliconius species (Jiggins et al., 2005; Tobler et al., 2005).
 
-3. [Vanessa cardui](https://www.biorxiv.org/content/10.1101/2022.04.14.488360v1.full.pdf): 
+3. 3.81-4.05 cM / Mb in [Vanessa cardui](https://www.biorxiv.org/content/10.1101/2022.04.14.488360v1.full.pdf)
+
+We'll use the average: ~4.5 cM/Mb
 
 
