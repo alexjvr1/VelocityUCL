@@ -34,6 +34,15 @@ After filtering, kept 12454911 out of a possible 12454911 Sites
 Run Time = 94.00 seconds
 
 
+##Or if we want to filter any genotypes where individuals have a GQ<20 and DP<8: 
+bcftools filter -O z -o MODC_filtered_Qual20_DP8.vcf.gz -i 'FMT/GQ>20 & FMT/DP>7' MODC_filtered_Qual20_Autosomes.vcf.gz
+
+
+##Or a minimum of 5x
+
+
+
+
 vcftools --gzvcf MODC_filtered_Qual20.vcf.gz --chr LR761647.1 --chr LR761648.1 --chr LR761649.1 --chr LR761651.1 --chr LR761652.1 --chr LR761653.1 --chr LR761654.1 --chr LR761655.1 --chr LR761656.1 --chr LR761657.1 --chr LR761658.1 --chr LR761659.1 --chr LR761660.1 --chr LR761661.1 --chr LR761662.1 --chr LR761663.1 --chr LR761664.1 --chr LR761665.1 --chr LR761666.1 --chr LR761667.1 --chr LR761668.1 --chr LR761669.1 --chr LR761670.1 --chr LR761671.1 --chr LR761672.1 --chr LR761673.1 --chr LR761674.1 --chr LR761675.1 --recode --recode-INFO-all --stdout | gzip -c > MODC_filtered_Qual20_Autosomes.vcf.gz
 
 
