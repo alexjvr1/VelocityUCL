@@ -55,6 +55,10 @@ Run Time = 61.00 seconds
 vcftools --gzvcf MODC_filtered_Qual20_DP8.vcf.gz --chr LR761647.1 --chr LR761648.1 --chr LR761649.1 --chr LR761651.1 --chr LR761652.1 --chr LR761653.1 --chr LR761654.1 --chr LR761655.1 --chr LR761656.1 --chr LR761657.1 --chr LR761658.1 --chr LR761659.1 --chr LR761660.1 --chr LR761661.1 --chr LR761662.1 --chr LR761663.1 --chr LR761664.1 --chr LR761665.1 --chr LR761666.1 --chr LR761667.1 --chr LR761668.1 --chr LR761669.1 --chr LR761670.1 --chr LR761671.1 --chr LR761672.1 --chr LR761673.1 --chr LR761674.1 --chr LR761675.1 --recode --recode-INFO-all --stdout | gzip -c > MODC_filtered_Qual20_DP8_Autosomes.vcf.gz
 
 
+## Autosomes for D3
+
+vcftools --gzvcf MODC_filtered_Qual20_DP8.vcf.gz --chr NC_053180.1 --chr NC_053181.1 --chr NC_053182.1 --chr NC_053183.1 --chr NC_053184.1 --chr NC_053185.1 --chr NC_053186.1 --chr NC_053187.1 --chr NC_053188.1 --chr NC_053189.1 --chr NC_053190.1 --chr NC_053191.1 --chr NC_053192.1 --chr NC_053193.1 --chr NC_053194.1 --chr NC_053195.1 --chr NC_053196.1 --chr NC_053197.1 --chr NC_053198.1 --chr NC_053199.1 --chr NC_053200.1 --chr NC_053201.1 --chr NC_053202.1 --chr NC_053203.1 --chr NC_053204.1 --chr NC_053205.1 --chr NC_053206.1 --recode --recode-INFO-all --stdout | gzip -c > MODC_filtered_Qual20_DP8_Autosomes.vcf.gz
+
 
 ## The final dataset needs to be in plink format
 ## Create a chromosome map file
