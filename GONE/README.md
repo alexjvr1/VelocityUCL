@@ -88,8 +88,29 @@ Run Time = 409.00 seconds
 
 The maximum number of SNPs allowed is 10Mil, and 1Mil per chromosome. We have about 2Mil too many. We can randomly select 10Mil SNPs in plink: 
 
+First we need to convert our vcf file to plink
+```
+#Create chrom-map file
+#We need to map the chromosome names to integers 
 
+C3_2Chrs.chrom-map
+LR990257.1	1
+LR990258.1	2
 
+vcftools --vcf MODC_filtered_Qual20_DP8_2Chrs.recode.vcf --chrom-map C3_2Chrs.chrom-map --plink-tped --out MODC_filtered_2Chrs
+
+D3_2Chrs.chrom-map
+NC_053180.1     1
+NC_053181.1     2
+
+vcftools --gzvcf MODC_filtered_2Chrs.vcf.gz --chrom-map D3_2Chrs.chrom-map --plink-tped --out MODC_filtered_2Chrs
+```
+
+Once we have plink files, we can subset the SNPs randomly to our desired final value: 
+```
+--thin-count 2000000
+
+```
 
 
 
