@@ -112,6 +112,8 @@ plink2 --vcf MODC_filtered_Qual20_DP8_2Chrs.recode.vcf --make-bed --allow-extra-
 
 plink2 --bfile MODC_filtered_2Chrs --thin-count 2000000 --make-bed --allow-extra-chr --out  MODC_filtered_2Chrs_2MilSNPS
 
+/share/apps/genomics/plink-1.9/plink --bfile MODC_filtered_2Chrs.2Mil --recode --tab --out forGONE
+
 ```
 
 
