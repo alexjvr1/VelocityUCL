@@ -108,7 +108,9 @@ vcftools --gzvcf MODC_filtered_2Chrs.vcf.gz --chrom-map D3_2Chrs.chrom-map --pli
 
 Once we have plink files, we can subset the SNPs randomly to our desired final value: 
 ```
---thin-count 2000000
+plink2 --vcf MODC_filtered_Qual20_DP8_2Chrs.recode.vcf --make-bed --allow-extra-chr --out MODC_2Chrs
+
+plink2 --bfile MODC_filtered_2Chrs --thin-count 2000000 --make-bed --allow-extra-chr --out  MODC_filtered_2Chrs_2MilSNPS
 
 ```
 
