@@ -61,17 +61,34 @@ We also need to provide a text file containing all the RGs to be pooled for the 
 ### Results: 
 
 Recal outputs a line of numbers for each RG and each read mate (first and second). To plot these we do the following: 
-```
-#1. Concatenate all the individual outputs together
 
+#1. Concatenate all the individual outputs together
+```
+cat PA*EM.txt > D3_concat_EM.txt
+```
 
 #2. Add the pooled estimate at the end of the concatenated file
+```
+#Check that this adds a header line + the recal scores for one sample. 
+#Recal scores are printed out for each RG in the merged recal file, but they are the same for each RG. 
+head -n 3 D3_MODC.merged_mergedReads_recalibrationEM.txt >> D3_concat_EM.txt
+
+#Remove all header lines
+sed -i '/^readGroup/d' D3_concat_EM.txt
+
+#replace all commas with white space
+sed -i 's:,: :g' D3_concat_EM.txt
+```
+
 
 #3. Download to the local computer
 
+```
+/Users/alexjvr/2022ResearchAssoc/Velocity/Velocity/ATLAS/recal.tests
+```
 
 #4. Plot in R
-
+```
 library(ggplot2)
 library(tidyr)
 
@@ -125,7 +142,7 @@ colnames(D3.data) <- c("readGroup", "mate", "model", "quality1", "quality2", "po
 
 
 ## Pivot to long format
-data_long <- gather(D3.data, variable, number, quality1:quality2, position1:position2, context1:context20, factor_key=T)
+D3.data_long <- gather(D3.data, variable, number, quality1:quality2, position1:position2, context1:context20, factor_key=T)
 
 data_long
     readGroup   mate                  model  variable     number
@@ -139,8 +156,9 @@ data_long
 
 ## Plot
 ## If needed subset to exclude the last three variables as they show high variance. 
+pdf("D3_recal_variance.pdf")
 ggplot(data_long[1:168,], aes(x=variable, y=number, colour=mate))+geom_boxplot()+geom_point(position=position_dodge(width=0.75), aes(shape=factor(readGroup)))
-
+dev.off()
 ```
 
 
@@ -162,6 +180,17 @@ ggplot(data_long[1:168,], aes(x=variable, y=number, colour=mate))+geom_boxplot()
 
 #### E3 modc 
 
+E3 modc was run across several lanes. Thus we have the opportunity to compare variance between runs within a modern population. 
+
+Results: 
+
+E3_MODC_RG1_recal_variance.pdf
+
+
+##### RG1
+![alt_txt][RG1_MODC]
+
+[RG1_MODC]:https://user-images.githubusercontent.com/12142475/219434612-c4c4691d-b9c6-418e-9214-a157e39794e1.png
 
 
 #### E3 mus
