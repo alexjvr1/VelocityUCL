@@ -47,5 +47,5 @@ Based on discussions with Vivian and Daniel, we've decided to test pooling sampl
 
 I'm estimating pooled and mean recal from the modern populations for C3, D3 and E3. 
 
-
+Individual runs are submitted as an array using modifications of the script:[04_ATLAS_LR.recal_ARRAY.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04_ATLAS_LR.recal_ARRAY.sh)
 
