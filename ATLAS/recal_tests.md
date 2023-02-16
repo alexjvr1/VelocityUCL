@@ -41,3 +41,11 @@ Based on discussions with Vivian and Daniel, we've decided to test pooling sampl
 3. How does variance in recal estimates within population compare between museum and modern populations of the same species? 
 
 4. How does variance in recal compare between species? 
+
+
+## 1. Is the pooled recal comparable to the mean individually estimated recal within species? 
+
+I'm estimating pooled and mean recal from the modern populations for C3, D3 and E3. 
+
+
+
