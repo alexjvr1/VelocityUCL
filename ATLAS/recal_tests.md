@@ -233,7 +233,16 @@ E3.mus.recal_variance_excl_outliers.pdf
 [E3.mus.plot1]:https://user-images.githubusercontent.com/12142475/219616406-9ca03652-ff4a-41dd-959e-657a760a35bb.png
 
 
-Oultiers found in second mate of these samples: 
+
+
+##### Outliers removed
+
+![alt_txt][E3.mus.plot2]
+
+[E3.mus.plot2]:https://user-images.githubusercontent.com/12142475/219616368-96c9b90b-083a-4d84-9493-2f3c8a7bab4e.png
+
+
+Outliers found in second mate of these samples: 
 
 AH-01-1900-17.RG1_recalibrationEM.txt
 
@@ -244,9 +253,6 @@ AH-01-1900-26.RG1_recalibrationEM.txt
 AH-01-1900-44.RG1_recalibrationEM.txt
 
 
+Tried to pool 5 of the samples that did not have outliesr (AH17 and AH18 were included in all previous subsets). 
 
-##### Outliers removed
 
-![alt_txt][E3.mus.plot2]
-
-[E3.mus.plot2]:https://user-images.githubusercontent.com/12142475/219616368-96c9b90b-083a-4d84-9493-2f3c8a7bab4e.png
