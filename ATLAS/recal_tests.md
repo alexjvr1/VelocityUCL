@@ -233,6 +233,18 @@ E3.mus.recal_variance_excl_outliers.pdf
 [E3.mus.plot1]:https://user-images.githubusercontent.com/12142475/219616406-9ca03652-ff4a-41dd-959e-657a760a35bb.png
 
 
+Oultiers found in second mate of these samples: 
+
+AH-01-1900-17.RG1_recalibrationEM.txt
+
+AH-01-1900-18.RG1_recalibrationEM.txt
+
+AH-01-1900-26.RG1_recalibrationEM.txt
+
+AH-01-1900-44.RG1_recalibrationEM.txt
+
+
+
 ##### Outliers removed
 
 ![alt_txt][E3.mus.plot2]
