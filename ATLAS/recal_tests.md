@@ -188,7 +188,36 @@ D3_MODC.recal_variance.pdf
 
 #### D3 mus
 
+##### RG1
 
+Some big outliers
+
+![alt_txt][D3.MUS.RG1]
+
+[D3.MUS.RG1]:https://user-images.githubusercontent.com/12142475/219655688-0a1692a4-2bfb-419e-b5a6-4a475f12501b.png
+
+
+Without outliers
+
+![alt_txt][D3.MUS.RG1_nooutliers]
+
+[D3.MUS.RG1_nooutliers]:https://user-images.githubusercontent.com/12142475/219655883-fb8431f5-1c88-4ee5-b1b9-2016b6d3dd5d.png
+
+
+
+##### RG2
+
+![alt_txt][D3.MUS.RG2]
+
+[D3.MUS.RG2]:https://user-images.githubusercontent.com/12142475/219656951-618971dc-10a0-4bbc-afee-35182ee86402.png
+
+
+
+No outliers
+
+![alt_txt][D3.MUS.RG2_nooutliers]
+
+[D3.MUS.RG2_nooutliers]:https://user-images.githubusercontent.com/12142475/219656998-f7a1c120-caad-4878-9cee-f8057792f96b.png
 
 
 
