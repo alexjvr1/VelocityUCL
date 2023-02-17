@@ -205,6 +205,23 @@ Without outliers
 
 
 
+Outliers (except for context20) found in these indivs (7/32 successful samples): 
+
+PA-01-1900-10
+
+PA-01-1900-12
+
+PA-01-1900-23
+
+PA-01-1900-30
+
+PA-01-1900-41
+
+PA-01-1900-48
+
+PA-01-1900-52
+
+
 ##### RG2
 
 ![alt_txt][D3.MUS.RG2]
@@ -219,6 +236,28 @@ No outliers
 
 [D3.MUS.RG2_nooutliers]:https://user-images.githubusercontent.com/12142475/219656998-f7a1c120-caad-4878-9cee-f8057792f96b.png
 
+
+Outliers (except for context20) found in these indivs (10/26 successful samples): 
+
+PA-01-1900-11
+
+PA-01-1900-12
+
+PA-01-1900-14
+
+PA-01-1900-21
+
+PA-01-1900-25
+
+PA-01-1900-30
+
+PA-01-1900-33
+
+PA-01-1900-34
+
+PA-01-1900-35
+
+PA-01-1900-52
 
 
 #### E3 modc 
@@ -244,27 +283,7 @@ E3_MODC_RG2_recal_variance.pdf
 [RG2_MODC]: https://user-images.githubusercontent.com/12142475/219437583-a08e57dc-82c6-40d2-9119-74e6e56de567.png
 
 
-Outliers (except for context20) found in these indivs (10/26 successful samples): 
 
-PA-01-1900-11
-
-PA-01-1900-12
-
-PA-01-1900-14
-
-PA-01-1900-21
-
-PA-01-1900-25
-
-PA-01-1900-30
-
-PA-01-1900-33
-
-PA-01-1900-34
-
-PA-01-1900-35
-
-PA-01-1900-52
 
 #### E3 mus
 
