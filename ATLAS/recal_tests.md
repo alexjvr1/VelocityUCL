@@ -174,6 +174,11 @@ dev.off()
 
 D3 pool based on the first 5 samples that worked. I tried to pool 10 samples but this run stopped with an error. 
 
+Results: 
+
+D3_MODC.recal_variance.pdf
+
+
 ![alt_txt][D3.modc.EM]
 
 [D3.modc.EM]:https://user-images.githubusercontent.com/12142475/219612271-674402bf-ffb5-4d79-9572-5f052e6629c1.png
@@ -195,6 +200,8 @@ Results:
 
 E3_MODC_RG1_recal_variance.pdf
 
+E3_MODC_RG2_recal_variance.pdf
+
 
 ##### RG1
 ![alt_txt][RG1_MODC]
@@ -202,6 +209,7 @@ E3_MODC_RG1_recal_variance.pdf
 [RG1_MODC]:https://user-images.githubusercontent.com/12142475/219434612-c4c4691d-b9c6-418e-9214-a157e39794e1.png
 
 
+##### RG2
 ![alt_txt][RG2_MODC]
 
 [RG2_MODC]: https://user-images.githubusercontent.com/12142475/219437583-a08e57dc-82c6-40d2-9119-74e6e56de567.png
