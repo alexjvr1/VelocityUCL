@@ -160,7 +160,7 @@ pdf("D3_MODC.recal_variance.pdf")
 ggplot(D3.data_long[1:1680,], aes(x=variable, y=number, shape=mate))+geom_boxplot()+geom_point(position=position_dodge(width=0.75), aes(colour=factor(readGroup)))
 dev.off()
 ```
-1560 
+
 
 #### C3 modc
  
@@ -219,4 +219,22 @@ E3_MODC_RG2_recal_variance.pdf
 
 Tried to pool various combinations of samples that worked individually but runs either stop without warning or yield 1.000.. results. 
 
+Plotted the results of the samples that did worked individually so that we can get an idea of the variance in recal across samples: 
 
+E3.mus.recal_variance.pdf		
+
+E3.mus.recal_variance_excl_outliers.pdf
+
+
+##### Full plot
+
+![alt_txt][E3.mus.plot1]
+
+[E3.mus.plot1]:https://user-images.githubusercontent.com/12142475/219616406-9ca03652-ff4a-41dd-959e-657a760a35bb.png
+
+
+##### Outliers removed
+
+![alt_txt][E3.mus.plot2]
+
+[E3.mus.plot2]:https://user-images.githubusercontent.com/12142475/219616368-96c9b90b-083a-4d84-9493-2f3c8a7bab4e.png
