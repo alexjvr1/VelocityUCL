@@ -36,14 +36,26 @@ Based on discussions with Vivian and Daniel, we've decided to test pooling sampl
 
 1. Is the pooled recal comparable to the mean individually estimated recal within species? 
 
+-> In most cases yes. But see E3 MODC R1
+
+-> Couldn't verify this for the museum samples because the pooled samples don't run
+
 2. Do runs work if samples that ran to completion as individuals are pooled? (ie we can set up the pipeline to identify poolable samples rather than using trial and error)
+
+-> No. And I tried this after excluding samples with big recal outliers based on the individual runs. 
+
+-> Could the scaffolds with no data be breaking the run? 
 
 3. How does variance in recal estimates within population compare between museum and modern populations of the same species? 
 
+-> Big variance in all poplations
+
 4. How does variance in recal compare between species? 
 
+-> Difficult to compare with only 2 species
 
-## 1. Is the pooled recal comparable to the mean individually estimated recal within species? 
+
+## Estimates of recal: 
 
 I'm estimating pooled and mean recal from the modern populations for C3, D3 and E3. 
 
