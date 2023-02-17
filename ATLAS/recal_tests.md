@@ -55,6 +55,11 @@ Based on discussions with Vivian and Daniel, we've decided to test pooling sampl
 -> Difficult to compare with only 2 species
 
 
+## Conclusion
+
+We'll use the median estimate from any samples that have run as a recal for samples that do not run to completion. We'd like to base this on data from at least 5 samples per lane. 
+
+
 ## Estimates of recal: 
 
 I'm estimating pooled and mean recal from the modern populations for C3, D3 and E3. 
