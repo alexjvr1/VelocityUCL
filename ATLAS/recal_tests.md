@@ -144,7 +144,7 @@ colnames(D3.data) <- c("readGroup", "mate", "model", "quality1", "quality2", "po
 ## Pivot to long format
 D3.data_long <- gather(D3.data, variable, number, quality1:quality2, position1:position2, context1:context20, factor_key=T)
 
-data_long
+D3.data_long
     readGroup   mate                  model  variable     number
 1      D3modc  first qualFuncPosFuncContext  quality1   1.205653
 2      D3modc second qualFuncPosFuncContext  quality1   0.894571
@@ -156,11 +156,11 @@ data_long
 
 ## Plot
 ## If needed subset to exclude the last three variables as they show high variance. 
-pdf("D3_recal_variance.pdf")
-ggplot(data_long[1:168,], aes(x=variable, y=number, colour=mate))+geom_boxplot()+geom_point(position=position_dodge(width=0.75), aes(shape=factor(readGroup)))
+pdf("D3_MODC.recal_variance.pdf")
+ggplot(D3.data_long[1:1680,], aes(x=variable, y=number, shape=mate))+geom_boxplot()+geom_point(position=position_dodge(width=0.75), aes(colour=factor(readGroup)))
 dev.off()
 ```
-
+1560 
 
 #### C3 modc
  
@@ -172,9 +172,18 @@ dev.off()
 
 #### D3 modc
 
+D3 pool based on the first 5 samples that worked. I tried to pool 10 samples but this run stopped with an error. 
+
+![alt_txt][D3.modc.EM]
+
+[D3.modc.EM]:https://user-images.githubusercontent.com/12142475/219612271-674402bf-ffb5-4d79-9572-5f052e6629c1.png
+
+
 
 
 #### D3 mus
+
+
 
 
 
@@ -193,5 +202,13 @@ E3_MODC_RG1_recal_variance.pdf
 [RG1_MODC]:https://user-images.githubusercontent.com/12142475/219434612-c4c4691d-b9c6-418e-9214-a157e39794e1.png
 
 
+![alt_txt][RG2_MODC]
+
+[RG2_MODC]: https://user-images.githubusercontent.com/12142475/219437583-a08e57dc-82c6-40d2-9119-74e6e56de567.png
+
+
 #### E3 mus
+
+Tried to pool various combinations of samples that worked individually but runs either stop without warning or yield 1.000.. results. 
+
 
