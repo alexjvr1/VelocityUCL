@@ -323,6 +323,6 @@ AH-01-1900-26.RG1_recalibrationEM.txt
 AH-01-1900-44.RG1_recalibrationEM.txt
 
 
-Tried to pool 5 of the samples that did not have outliesr (AH17 and AH18 were included in all previous subsets). 
+Tried to pool 5 of the samples that did not have outliers (AH17 and AH18 were included in all previous subsets). However run still terminate with Segmentation Fault. 
 
 
