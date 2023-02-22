@@ -373,6 +373,8 @@ We're estimating GLF separately for modern and museum samples because museum sam
 [04c.1_GLF_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.1_GLF_MUS.sh)
 
 
+#### 10.2 MajorMinor
+
 
 ### 11. ATLAS: Individual heterozygosity
 
