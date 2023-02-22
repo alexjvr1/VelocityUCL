@@ -355,13 +355,22 @@ Find all the samples that this file will apply to and create their median recal 
 ```
 awk -F "_" '{print $1}' worked > bamlist.worked
 diff bamlist bamlist.worked | grep '^<' | sed 's/^<\ //' > samples_with_med_recal
-for i in $(cat samples_with_med_recal); do cp median_recalibrationEM.txt recalFiles/$i"_recalibration.EM.txt"; done
+for i in $(cat samples_with_med_recal); do cp median_recalibrationEM.txt recalFiles/$i"_recalibrationEM.txt"; done
 ```
 
 
 
 ### 10. ATLAS: global diversity
 
+#### 10.1 GLF
+
+Estimate genotype likelihoods for all samples. We do not need to downsample these data to estimate GLFs (as confirmed by developers). We'll downsample later when we're estimating individual diversity (see 11). 
+
+We're estimating GLF separately for modern and museum samples because museum samples need PMD files as well. 
+
+[04c.1_GLF_MODC.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.1_GLF_MODC.sh)
+
+[04c.1_GLF_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.1_GLF_MUS.sh)
 
 
 
