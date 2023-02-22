@@ -303,6 +303,7 @@ sed -i '/^readGroup/d' worked.EM.txt
 
 #replace all commas with white space
 sed -i 's:,:\t:g' worked.EM.txt
+sed -i 's: :\t:g' worked.EM.txt
 
 #split the file into fwd and reverse reads and cut the text columns
 grep first worked.EM.txt |cut -f4-27 > worked.EM_first.txt
@@ -355,7 +356,10 @@ Find all the samples that this file will apply to and create their median recal 
 ```
 awk -F "_" '{print $1}' worked > bamlist.worked
 diff bamlist bamlist.worked | grep '^<' | sed 's/^<\ //' > samples_with_med_recal
+
+mkdir recalFiles
 for i in $(cat samples_with_med_recal); do cp median_recalibrationEM.txt recalFiles/$i"_recalibrationEM.txt"; done
+for i in $(cat bamlist.worked); do cp $i*recalibrationEM.txt recalFiles/; done
 ```
 
 
