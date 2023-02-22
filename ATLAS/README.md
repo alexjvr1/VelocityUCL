@@ -351,15 +351,17 @@ sed -i 's/,/ /2;s/,/ /3' median_recalibrationEM.txt
 
 ```
 
-Find all the samples that this file will apply to
+Find all the samples that this file will apply to and create their median recal files
 ```
 awk -F "_" '{print $1}' worked > bamlist.worked
 diff bamlist bamlist.worked | grep '^<' | sed 's/^<\ //' > samples_with_med_recal
+for i in $(cat samples_with_med_recal); do cp median_recalibrationEM.txt recalFiles/$i"_recalibration.EM.txt"; done
 ```
 
 
 
 ### 10. ATLAS: global diversity
+
 
 
 
