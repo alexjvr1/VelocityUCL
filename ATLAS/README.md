@@ -302,19 +302,62 @@ for i in $(cat worked); do cat $i >> worked.EM.txt; done
 sed -i '/^readGroup/d' worked.EM.txt
 
 #replace all commas with white space
-sed -i 's:,: :g' worked.EM.txt
+sed -i 's:,:\t:g' worked.EM.txt
+
+#split the file into fwd and reverse reads and cut the text columns
+grep first worked.EM.txt |cut -f4-27 > worked.EM_first.txt
+grep second worked.EM.txt |cut -f4-27 > worked.EM_second.txt
 ```
 
-Calculate the median for all columns and write a median.EM.txt file
+Calculate the median for all columns and write a median file
 ```
+#open python and import pandas
+python
+import pandas as pd
+
+##read in files
+df1 = pd.read_csv("worked.EM_first.txt", sep="\t")
+df2 = pd.read_csv("worked.EM_second.txt", sep="\t")
+
+##Find median (50% in the table)
+df1_med = df1.describe()
+df2_med = df2.describe()
+
+##write tables
+df1_med.to_csv("worked.first.describe", sep=",")
+df2_med.to_csv("worked.second.describe", sep=",")
+```
+
+Extract the median values and create a median_recalibrationEM.txt file
+```
+#Extract the median for fwd and reverse
+grep "50%" worked.*.describe |cut -d, -f2-27 > worked.median
+
+#Extract text for first three rows
+cut -f1-3 worked.EM.txt |head -n 2 > worked.rownames
+
+#paste files together
+paste worked.rownames worked.median > median_recalibrationEM_1.txt
+
+#create a colnames file
+nano colnames
+readGroup	mate	model	quality	position	context
+
+#Add headers to EM file
+cat colnames median_recalibrationEM_1.txt > median_recalibrationEM.txt
+
+#replace the comma field separators where expected
+sed -i 's/,/ /2;s/,/ /3' median_recalibrationEM.txt
 
 ```
 
 Find all the samples that this file will apply to
 ```
-
-
+awk -F "_" '{print $1}' worked > bamlist.worked
+diff bamlist bamlist.worked | grep '^<' | sed 's/^<\ //' > samples_with_med_recal
 ```
+
+
 
 ### 10. ATLAS: global diversity
 
