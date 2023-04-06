@@ -18,6 +18,11 @@ See [here](https://hpc.cs.ucl.ac.uk/full-guide/) for a general guide of the CS s
 
 For support email: cluster-support [at] ucl.ac.uk
 
+To apply for access here:  https://hpc.cs.ucl.ac.uk/account-form
+
+You'll need your UCL username and password
+
+
 Login
 ```
 #We're biosciences so we're working on the pchuckle node
@@ -34,10 +39,10 @@ Script examples
 ```
 
 
-Shared storage folder - location of all data and shared scripts
+Shared storage folder - location of all data and shared scripts. Keep an eye on the data storage (see below) as there will be multiple people using the folder. 
 
 ```
-/SAN/ugi/LepGenomics (3Tb)
+/SAN/ugi/LepGenomics (15Tb)
 
 #Scripts for Velocity pipeline (you'll be working with the scripts in the pipeline folder)
 /SAN/ugi/LepGenomics/VelocityPipeline
@@ -49,8 +54,20 @@ chmod g+wr folder
 
 Check space left in shared folder
 ```
-quota -s
+quota -s |grep -A 2 LepGenomics
 ```
+
+
+Any scripts or commands should be submitted to the queue or run in the interactive node - never in the login node. 
+
+Create an interactive node like this:
+```
+qrsh -l tmem=8G, h_vmem=8G
+```
+
+The less resources you ask for, the sooner the node will start. It also depends on how busy the server is in general (check with "top") 
+
+
 
 Copy data to the server from computer
 
@@ -213,7 +230,7 @@ export LD_LIBRARY_PATH=/share/apps/genomics/samtools-1.9/lib:$LD_LIBRARY_PATH
 
 ### Note on renaming files
 
-Liverpool raw data is named with digits and a dash before the sample names. e.g. 33-AH-01-1900-47_191121_L001_R2.fastq.gz
+Liverpool sequenced raw data is named with digits and a dash before the sample names. e.g. 33-AH-01-1900-47_191121_L001_R2.fastq.gz
 The easiest way to rename them is with the Perl rename (note that the native linux rename works the same as mv and is not so useful in this case). 
 Create a copy of the [prename.pl](https://gist.github.com/rocarvaj/6abf7dd1e083963a596430ac43f88e34) script in a folder in your home directory called "scripts". 
 ```
@@ -327,13 +344,6 @@ for i in $(cat museum1.tomove); do cp 00_raw_reads_museum/ALLSAMPLES/$i*gz 00_ra
 
 
 
-## Tools that look interesting
-
-For detecting parallel evolution - a multivariate approach
-
-[AF-vapeR - Whiting et al. 2021 BioRxiv](https://www.biorxiv.org/content/10.1101/2021.09.17.460770v1.full.pdf)
-
-
 
 
 
@@ -363,48 +373,13 @@ For detecting parallel evolution - a multivariate approach
         
    2d. [Downsample modern data to the same depth as the museum data](README.md#2d-downsample-modern-data-to-the-same-coverage-as-in-the-museum-samples)
         
+
 #### 3. [Genetic diversity and Population structure](https://github.com/alexjvr1/Velocity2020#3-angsd)
 
 3.1 ATLAS - Genetic Diversity
 
 
 
-
-3.2 ANGSD - Population Structure
-
-   3.1.a. [ANGSD filters for SFS](README.md#3a-angsd-filters-for-sfs) (ie. no MAF)
-        
-   3.1.b. [ANGSD filters for population genomics]
-        
-   3.1.c. [PCAngsd]
-
-
-
-#### 4. Variant Calling
-
-   4.1  [Call variants with bcftools mpileup and call]()
-
-   4.2  [Filter SNPs]
-   
-
-#### 5. Analysis: Regions under selection (diploSHIC)
-
-   4a. [Between population variables]
-
-   4b. [Within population variables]	
-   
-   4c. [Demographic model - test and validate]
-   
-   4d. [Training model]
-   
-   
-#### 6. Analysis: LD 
-
-   6a. [ANGSD estimate LD across the genome]
-
-
-
-#### 7. Analysis: 
 
 
 
