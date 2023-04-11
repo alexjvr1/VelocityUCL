@@ -53,6 +53,9 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 |J1|Aglais urticae||||||||||||||||||||||||||
 
 
+## File organisation
+
+
 
 
 
@@ -503,10 +506,33 @@ java -jar $PICARD FixMateInformation \
 ```
 
 
+[02b.5_FixMate_modern.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/02b.5_FixMate_modern.sh)
+
+
 Rerun ValidateSam on the final bams to make sure there are no errors. 
 
 
+### Extract information for Museomics MS
 
+1. Create FINALBAMS folder in 02a_mapped_*.unmerged  
+
+```
+mkdir FINALBAMS
+
+#Move all final bams into this folder (*realn.bam or *fixed.bam) 
+mv *realn.bam FINALBAMS
+mv *fixed.bam FINALBAMS
+
+#Index final bams
+for i in $(ls *bam); do samtools index $i; done 
+
+```
+
+2. Extract information for the museomics MS
+
+The bam files I think you'll need are listed [here](https://github.com/alexjvr1/NaturalHistoryDatasetQuality.md/blob/main/Electronic_Lab_Book.md)
+
+3. Delete all the rest of the bam files (or do this at the end of the pipeline) 
 
 
 ## ATLAS
