@@ -738,14 +738,24 @@ We're estimating GLF separately for modern and museum samples because museum sam
 
 #### 10.2 MajorMinor
 
+Call SNPs
+
+[04c.4_MajMin.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.4_MajMin.sh)
+
 
 ### 11. ATLAS: Individual heterozygosity
 
+Individual Theta estimates
+
+[04c.2_IndivTheta_rpts.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.2_IndivTheta_rpts.sh)
 
 
 
 #### 12. ATLAS: Output ANGSD input
 
+Format needed by Mark and Zhangyi
+
+[04c.5_vcf2beagle.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.5_vcf2beagle.sh)
 
 
 
