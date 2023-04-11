@@ -289,7 +289,7 @@ AH-01-1900-01 AH-01-1900-04 AH-01-1900-05 AH-01-1900-06	AH-01-1900-08	AH-01-1900
 
 Run recal independently for each sample. In some populations we find that not all the samples run to completion or the run fails to find an appropriate recalibration score. See [here](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/recal_tests.md) for my exploration of these errors. 
 
-Based on the above results (and based on communication with the developers) we will use the medial recal score for the samples that did work as the recal score for the samples that failed, given that at least 5 samples produced valid recal scores. 
+Based on the above results (and based on communication with the developers) we will use the median recal score for the samples that did work as the recal score for the samples that failed, given that at least 5 samples produced valid recal scores. 
 
 ##### Calculate median recal score
 
