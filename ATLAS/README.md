@@ -9,7 +9,7 @@ Here I'll curate the variant calling pipeline and analyses undertaken using the 
 Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeoflife/darwintreeoflife.data/tree/master/species)
 
 
-## [Skip to pipeline](https://github.com/alexjvr1/VelocityUCL#ATLAS)
+## [Skip to pipeline]([https://github.com/alexjvr1/VelocityUCL#ATLAS](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/README.md#atlas))
 
 
 ## General information for working on the UCL server
