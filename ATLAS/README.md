@@ -8,11 +8,43 @@ Here I'll curate the variant calling pipeline and analyses undertaken using the 
 
 Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeoflife/darwintreeoflife.data/tree/master/species)
 
+## Species and sample info
+
+[Shared folder for Velocity](https://docs.google.com/spreadsheets/d/1G9r50W0VV_ANZ19rIvqZpXWFemy2MW76_iXuyBuCQGA/edit#gid=0) to find general info 
+
+- link to Ref genome if available
+
+- Number of chromosomes expected
+
+- Genome size
+
+- Number of samples for each population
+
+
 ## Species status
 
-|Species||path|
-|--------|--------|--------|
-|AdapterRemoval|2.3.2|/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.2/build/AdapterRemoval|
+|Code|Species|Mus: Concat|Mus: Cutadapt |Mus: Map|Mus: Process bams|Mus: FixMate|Mus: CheckBams|Mus: ATLAS Splitmerge|Mus: ATLAS Split RGs|Mus:ATLAS PMD|Mus: ATLAS recal|Mus: ATLAS GLF|Mus: ATLAS MajMin|Mus: ATLAS theta|Mod: Map|Mod: Process bams|Mod: FixMate|Mod: CheckBams|Mod: ATLAS Splitmerge|Mod: ATLAS Split RGs|Mod: ATLAS recal|Mod: ATLAS GLF|Mod: ATLAS MajMin|Mod: ATLAS theta|
+|--------|--------|--------|--------|--------|--------|--------|
+|C1|Aricia artaxerxes||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
+|Species|||
 
 
 ## [Skip to pipeline](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/README.md#atlas)
