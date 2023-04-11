@@ -8,6 +8,12 @@ Here I'll curate the variant calling pipeline and analyses undertaken using the 
 
 Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeoflife/darwintreeoflife.data/tree/master/species)
 
+
+
+## [Skip to pipeline](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/README.md#atlas)
+
+
+
 ## Species and sample info
 
 [Shared folder for Velocity](https://docs.google.com/spreadsheets/d/1G9r50W0VV_ANZ19rIvqZpXWFemy2MW76_iXuyBuCQGA/edit#gid=0) to find general info 
@@ -47,7 +53,7 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 |J1|Aglais urticae||||||||||||||||||||||||||
 
 
-## [Skip to pipeline](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/README.md#atlas)
+
 
 
 ## General information for working on the UCL server
@@ -74,6 +80,17 @@ ssh -l username -J username@tails.cs.ucl.ac.uk pchuckle
 Script examples
 ```
 /share/apps/examples
+```
+
+
+If scripts depend on each other for completion they can be submitted in a queue by holding the second script until the first is finished. 
+```
+qsub script1.sh
+
+#Use the number of the submitted script to hold script2.sh until script1.sh is completed
+#Find the job id qith qstat
+
+qsub -hold_jid_ad 767225 script2.sh
 ```
 
 
@@ -348,11 +365,23 @@ We're using a script for each population. Run these in the working directory to 
 ./script.sh
 ```
 
-[01a_MUS_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MUS_cutadapt_filtering_trimming.sh)
+This will create the output folder with the submissions script inside. Submit as usual. Eg., for the first museum Trimmomatic run this will be: 
+```
+qsub 01a_Trimmomatic_museum/parallel_trimmomatic.20221017-094905.smsjob.sh
+```
 
-[01a_MODC_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODC_cutadapt_filtering_trimming.sh)
+Step 1: Trimmomatic 
 
-[01a_MODE_cutadapt_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODE_cutadapt_filtering_trimming.sh)
+[01a_MUS_trimmomatic_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MUS_Trimmomatic.sh)
+
+[01a_MODC_trimmomatic_filtering_trimming.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01a_MODC_Trimmomatic.sh)
+
+
+Step 2: AdapterRemover
+
+[01b_AdapterRemoval_museum.unmerged](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01b_AdapterRemover_museum.sh)
+
+[01b_AdapterRemoval_modern.unmerged](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/01b_AdapterRemover_modern.sh)
 
 
 
