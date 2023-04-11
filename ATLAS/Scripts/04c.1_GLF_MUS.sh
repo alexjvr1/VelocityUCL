@@ -1,8 +1,8 @@
 #!/bin/bash
 #$ -S /bin/bash
 #$ -N ESP.GLF  ##job name
-#$ -l tmem=16G #RAM
-#$ -l h_vmem=16G #enforced limit on shell memory usage
+#$ -l tmem=32G #RAM
+#$ -l h_vmem=32G #enforced limit on shell memory usage
 #$ -l h_rt=3:00:00 ##wall time.
 #$ -j y  #concatenates error and output files (with prefix job1)
 #$ -t 1-77
