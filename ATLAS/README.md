@@ -1,4 +1,4 @@
-# VelocityUCL
+# VelocityUCL - ATLAS pipeline
 
 NERC Velocity Project analyses using Sanger genomes 
 
@@ -8,8 +8,14 @@ Here I'll curate the variant calling pipeline and analyses undertaken using the 
 
 Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeoflife/darwintreeoflife.data/tree/master/species)
 
+## Species status
 
-## [Skip to pipeline]([https://github.com/alexjvr1/VelocityUCL#ATLAS](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/README.md#atlas))
+|Species||path|
+|--------|--------|--------|
+|AdapterRemoval|2.3.2|/SAN/ugi/LepGenomics/Software/adapterremoval-2.3.2/build/AdapterRemoval|
+
+
+## [Skip to pipeline](https://github.com/alexjvr1/VelocityUCL#ATLAS](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/README.md#atlas)
 
 
 ## General information for working on the UCL server
