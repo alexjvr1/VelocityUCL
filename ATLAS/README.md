@@ -42,7 +42,7 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 |D2|Maniola jurtina|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|||||||||
 |D3|Pararge aegeria|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|DONE|N/A|DONE||||||
 |E1|Erebia epiphron||||||||||||||||||||||||||||
-|E2|Erebia aethiops||||||||||||||||||||||||||||
+|E2|Erebia aethiops|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
 |E3|Aphantopus hyperantus||||||||||||||||||||||||||||
 |G1|Thymelicus acteon||||||||||||||||||||||||||||
 |G2|Ochlodes sylvanus||||||||||||||||||||||||||||
@@ -55,6 +55,48 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 
 ## File organisation
 
+Shared folder: 
+
+/SAN/ugi/LepGenomics
+
+For each species (use the unmerged folders for the ATLAS pipeline if both merged and unmerged are available):
+```
+SpeciesName
+|
+|_00_raw_reads_modern
+|
+|_00_raw_reads_modern.exp  #If there is an expanding population
+|
+|_00_raw_reads_museum  #First sequencing lane (48 samples)
+|
+|_00_raw_reads_museum2  #Top-up sequencing (33 samples repeated)
+|
+|_00_raw_reads_museum_FINAL  #Concatenated museum raw sequence data
+|
+|_01a_Trimmomatic_MODC   #Trimmomatic is the first step in adapter removal
+|
+|_01a_Trimmomatic_MODE  #If there is an expanding population
+|
+|_01a_Trimmomatic_mus
+|
+|_01b_AdapterRemoval_MODC.unmerged  # AdapterRemoval as the second step in removing adapters. If both merged and unmerged folders are available, you'll need the unmerged data for the ATLAS pipeline
+|
+|_01b_AdapterRemoval_MODE.unmerged
+|
+|_01b_AdapterRemoval_mus.unmerged
+|
+|_02a_mapped_MODC.unmerged  #Mapped samples
+| |_FINALBAMS  #bam files after processing. To be used in the ATLAS pipeline
+|   |_
+|
+|
+|
+|
+|_02a_mapped_MODE.unmerged  
+|
+|_02a_mapped_mus.unmerged  
+
+```
 
 
 
