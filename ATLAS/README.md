@@ -38,9 +38,9 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 |C1|Aricia artaxerxes|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
 |C2|Plebejus argus|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
 |C3|Aricia artaxerxes|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
-|D1|Hipparchia semele|DONE|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE||||||||
-|D2|Maniola jurtina|DONE|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE||||||||
-|D3|Pararge aegeria|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|DONE|N/A|DONE|||||
+|D1|Hipparchia semele|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|||||||||
+|D2|Maniola jurtina|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|||||||||
+|D3|Pararge aegeria|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|DONE|N/A|DONE||||||
 |E1|Erebia epiphron||||||||||||||||||||||||||||
 |E2|Erebia aethiops||||||||||||||||||||||||||||
 |E3|Aphantopus hyperantus||||||||||||||||||||||||||||
