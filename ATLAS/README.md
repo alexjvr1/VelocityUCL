@@ -29,28 +29,28 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 
 ## Species status
 
-|Code|Species|Mus: Concat|Mus: Trim adapters |Mus: Map|Mus: Process bams|Mus: FixMate|Mus: CheckBams|Mus: ATLAS Splitmerge|Mus: ATLAS Split RGs|Mus:ATLAS PMD|Mus: ATLAS recal|Mus: ATLAS GLF|Mus: ATLAS MajMin|Mus: ATLAS theta|Mod: Concat| Mod: Trim adapters | Mod: Map|Mod: Process bams|Mod: FixMate|Mod: CheckBams|Mod: ATLAS Splitmerge|Mod: ATLAS Split RGs|Mod: ATLAS recal|Mod: ATLAS GLF|Mod: ATLAS MajMin|Mod: ATLAS theta|
-|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
-|A1|Lymantria monacha||||||||||||||||||||||||||
-|B1|Cupido minimus||||||||||||||||||||||||||
-|B2|Polyommatus coridon||||||||||||||||||||||||||
-|B3|Polyommatus bellargus||||||||||||||||||||||||||
-|C1|Aricia artaxerxes|DONE|DONE|DONE|DONE|DONE|DONE|||||||||||||||||||||
-|C2|Plebejus argus||||||||||||||||||||||||||
-|C3|Aricia artaxerxes||||||||||||||||||||||||||
-|D1|Hipparchia semele||||||||||||||||||||||||||
-|D2|Maniola jurtina||||||||||||||||||||||||||
-|D3|Pararge aegeria||||||||||||||||||||||||||
-|E1|Erebia epiphron||||||||||||||||||||||||||
-|E2|Erebia aethiops||||||||||||||||||||||||||
-|E3|Aphantopus hyperantus||||||||||||||||||||||||||
-|G1|Thymelicus acteon||||||||||||||||||||||||||
-|G2|Ochlodes sylvanus||||||||||||||||||||||||||
-|G3|Hesperia comma||||||||||||||||||||||||||
-|H2|Miltochrista miniata||||||||||||||||||||||||||
-|H3|Eilema griseola||||||||||||||||||||||||||
-|I1|Xanthorhoe fluctuata||||||||||||||||||||||||||
-|J1|Aglais urticae||||||||||||||||||||||||||
+|Code|Species|Mus: Concat|Mus: Trim adapters |Mus: Map|Mus: Process bams|Mus: FixMate|Mus: CheckBams|Mus: FindRGs |Mus: ATLAS Splitmerge|Mus: ATLAS Split RGs|Mus:ATLAS PMD|Mus: ATLAS recal|Mus: ATLAS GLF|Mus: ATLAS MajMin|Mus: ATLAS theta|Mod: Concat| Mod: Trim adapters | Mod: Map|Mod: Process bams|Mod: FixMate|Mod: CheckBams|Mod: FindRGs|Mod: ATLAS Splitmerge|Mod: ATLAS Split RGs|Mod: ATLAS recal|Mod: ATLAS GLF|Mod: ATLAS MajMin|Mod: ATLAS theta|
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+|A1|Lymantria monacha||||||||||||||||||||||||||||
+|B1|Cupido minimus||||||||||||||||||||||||||||
+|B2|Polyommatus coridon||||||||||||||||||||||||||||
+|B3|Polyommatus bellargus||||||||||||||||||||||||||||
+|C1|Aricia artaxerxes|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE||||||||
+|C2|Plebejus argus||||||||||||||||||||||||||||
+|C3|Aricia artaxerxes||||||||||||||||||||||||||||
+|D1|Hipparchia semele||||||||||||||||||||||||||||
+|D2|Maniola jurtina||||||||||||||||||||||||||||
+|D3|Pararge aegeria||||||||||||||||||||||||||||
+|E1|Erebia epiphron||||||||||||||||||||||||||||
+|E2|Erebia aethiops||||||||||||||||||||||||||||
+|E3|Aphantopus hyperantus||||||||||||||||||||||||||||
+|G1|Thymelicus acteon||||||||||||||||||||||||||||
+|G2|Ochlodes sylvanus||||||||||||||||||||||||||||
+|G3|Hesperia comma||||||||||||||||||||||||||||
+|H2|Miltochrista miniata||||||||||||||||||||||||||||
+|H3|Eilema griseola||||||||||||||||||||||||||||
+|I1|Xanthorhoe fluctuata||||||||||||||||||||||||||||
+|J1|Aglais urticae||||||||||||||||||||||||||||
 
 
 ## File organisation
