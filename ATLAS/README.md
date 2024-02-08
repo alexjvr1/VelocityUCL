@@ -37,7 +37,7 @@ Darwin Tree of Life (DToL) data - [live results](https://github.com/darwintreeof
 |B3|Polyommatus bellargus||||||||||||||||||||||||||||
 |C1|Aricia artaxerxes|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
 |C2|Plebejus argus|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
-|C3|Aricia artaxerxes|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
+|C3|Aricia agestis|DONE|DONE|DONE|DONE|DONE|DONE|||||||||N/A|DONE|DONE|DONE|DONE|DONE|||||||||
 |D1|Hipparchia semele|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|||||||||
 |D2|Maniola jurtina|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|||||||||
 |D3|Pararge aegeria|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE|DONE||||N/A|DONE|DONE|DONE|DONE|DONE|DONE|DONE|N/A|DONE||||||
