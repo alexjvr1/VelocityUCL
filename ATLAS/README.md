@@ -402,7 +402,7 @@ These take ~40minutes to run for E3
 
 
 
-### 1. Remove adapter sequence using Cutadapt
+### 1. Remove adapter sequence using Trimmomatic
 
 We're using a script for each population. Run these in the working directory to create the submission script in each case: 
 
