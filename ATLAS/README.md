@@ -447,7 +447,7 @@ ATLAS has an in-built function to annotate and merge these reads after mapping, 
 
 
 
-### 2b Process bam files before using ATLAS
+### 2b. Process bam files before using ATLAS
 
 Step1. Add Read groups
 
@@ -587,7 +587,7 @@ ATLAS=/share/apps/genomics/atlas-0.9/atlas
 export LD_LIBRARY_PATH=/share/apps/openblas-0.3.6/lib:/share/apps/armadillo-9.100.5/lib64:$LD_LIBRARY_PATH
 ```
 
-### 04a.0a ATLAS: Find all read groups
+### 3. ATLAS: Find all read groups
 
 We need to split all the bam files by read group. 
 
@@ -632,9 +632,17 @@ ATLAS=/share/apps/genomics/atlas-0.9/atlas
 for i in $(ls *realn.bam); do $ATLAS task=splitMerge bam=$i; done
 ```
 
+### 05. ATLAS: PMD - Museum individuals
 
 
-### 04a.1b Split bams into RGs
+Estimate the PMD per sample for each of the museum samples. This needs to be run on the full museum samples (with all RGs combined). Don't filter the reads. 
+
+Modify the [04b_ATLAS_MUS.pmd.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04b_ATLAS_MUS.pmd.sh) script
+
+This will output a pmd correction for each individual.
+
+
+### 06. Split bams into RGs
 
 Split all the individual bam files into different RGs
 
@@ -657,17 +665,10 @@ du -sch *RG1*merged*bam
 If the total bams is <10Gb for a read group, merge the bam files. Use the [MergeBAMS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/MergeBAMS.sh) script
 
 
-### 03a.2 ATLAS: PMD - Museum individuals
 
 
-Estimate the PMD per sample for each of the museum samples. This needs to be run on the full museum samples (with all RGs combined). Don't filter the reads. 
 
-Modify the [04b_ATLAS_MUS.pmd.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04b_ATLAS_MUS.pmd.sh) script
-
-This will output a pmd correction for each individual.
-
-
-### 03a.3 ATLAS: recal - All RGs
+### 07. ATLAS: recal - All RGs
 
 This should be run on each of the read groups within each of the populations. 
 
@@ -765,9 +766,9 @@ for i in $(cat bamlist.worked); do cp $i*recalibrationEM.txt recalFiles/; done
 
 
 
-### 10. ATLAS: global diversity
+### 8. ATLAS: global diversity
 
-#### 10.1 GLF
+#### 8.1 GLF
 
 Estimate genotype likelihoods for all samples. We do not need to downsample these data to estimate GLFs (as confirmed by developers). We'll downsample later when we're estimating individual diversity (see 11). 
 
@@ -778,14 +779,14 @@ We're estimating GLF separately for modern and museum samples because museum sam
 [04c.1_GLF_MUS.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.1_GLF_MUS.sh)
 
 
-#### 10.2 MajorMinor
+#### 8.2 MajorMinor
 
 Call SNPs
 
 [04c.4_MajMin.sh](https://github.com/alexjvr1/VelocityUCL/blob/main/ATLAS/Scripts/04c.4_MajMin.sh)
 
 
-### 11. ATLAS: Individual heterozygosity
+### 9. ATLAS: Individual heterozygosity
 
 Individual Theta estimates
 
@@ -793,7 +794,7 @@ Individual Theta estimates
 
 
 
-#### 12. ATLAS: Output ANGSD input
+#### 10. ATLAS: Output ANGSD input
 
 Format needed by Mark and Zhangyi
 
